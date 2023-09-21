@@ -1,0 +1,29 @@
+# Nonfunctional Specifications
+
+### 1. Usability:
+* App navigation should be self-explanatory (no instruction needed)
+* Text should be large and clear enough to be read easily within 12 inches
+* Color distinctions should be clear to colorblind individuals
+* Scroll capability when reviews or other material cannot fit on the screen
+* 500 character limit for reviews
+
+### 2. Reliability:
+* All info is saved remotely, and is thus recoverable if app is deleted or phone is damaged
+* Accounts info is private and secure
+
+### 3. Performance:
+* Any action will load within 30 seconds or an error message will appear
+  * A buffering / loading signal will appear if loading takes more than a few seconds
+
+### 4. Supportability:
+* Formatting should adjust to slight changes in device dimension ratios
+
+### 5. Implementation:
+* Device must be in portrait mode
+* Software must be written in Java
+* Application must run on Android device
+
+### 6. External interfaces:
+* Must connect to WiFi
+* Asks to connect to Camera Roll app on the device
+* Asks to connect to device location / GPS
