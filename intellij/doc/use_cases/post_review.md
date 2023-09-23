@@ -2,7 +2,7 @@
 
 ## 1. Primary actor and goals
 
-__User__: wants to leave a rating and written review for a restaurant. Wants to be able to share opinion on the restaurant, and for the review to be saved so it can be displayed on the app.
+__User__: Wants to leave a rating and written review for a restaurant. Wants to be able to share opinion on the restaurant, and for the review to be saved so it can be displayed on the app.
 
 ## 2. Other stakeholders and their goals
 
@@ -32,7 +32,6 @@ skin rose
 
 title Review Restaurant (Fully Dressed)
 
-'define the lanes
 |#wheat|User|
 |#pink|App|
 
