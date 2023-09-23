@@ -10,6 +10,7 @@
 ### 2. Reliability:
 * All info is saved remotely, and is thus recoverable if app is deleted or phone is damaged
 * Accounts info is private and secure
+* Passwords must meet certain security standards
 
 ### 3. Performance:
 * Any action will load within 30 seconds or an error message will appear
