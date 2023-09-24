@@ -2,7 +2,7 @@
 
 ## 1. Primary actor and goals
 
-__User__: Wants to see the rating of a specific restaurant and their friends' review of it.
+__User__: Wants to see the rating of a specific restaurant and their friends' reviews of it.
 
 ## 2. Other stakeholders and their goals
 
@@ -18,3 +18,34 @@ __User__: Wants to see the rating of a specific restaurant and their friends' re
 * Nothing will be changed on the user's or restaurant's profile
 
 ## 4. Workflow
+
+```plantuml
+@startuml
+
+skin rose
+
+title Check Restaurant Reviews (Fully Dressed)
+
+|#wheat|User|
+|#pink|App|
+
+|User|
+start
+:Navigate to search page;
+:Enter restaurant name into search box;
+
+|App|
+:Display relevant search results;
+
+|User|
+:Select profile for desired restaurant;
+
+|App|
+:Bring up restaurant's profile;
+
+|User|
+:Scroll down to reviews;
+
+stop
+@enduml
+```
