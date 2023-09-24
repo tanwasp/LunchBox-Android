@@ -11,7 +11,11 @@ __User__: Wants to see the rating of a specific restaurant and their friends' re
 ## 2. Preconditions
 
 * User is logged into a functional account
-* Restaurant profile exists
+* Restaurant profile exists and has reviews
+* Filters include:
+  * Friends only
+  * Most liked (default)
+  * Most recent
 
 ## 4. Postconditions
 
@@ -38,12 +42,19 @@ start
 :Display relevant search results;
 
 |User|
-:Select profile for desired restaurant;
+:Select profile for desired restaurant or friend;
 
 |App|
-:Bring up restaurant's profile;
+:Bring up desired profile;
+
 
 |User|
+
+if (Want to filter reviews?) is (Yes) then 
+:Select a filter;
+else (No)
+endif
+
 :Scroll down to reviews;
 
 stop
