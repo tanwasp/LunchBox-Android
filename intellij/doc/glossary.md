@@ -9,3 +9,4 @@
 * __List__: A collection of restaurants under a given name (e.g. "Best") created by a user.
 * __Follow__: To be able to see each other's full profile (reviews, lists, etc.) with their permission.
 * __Private Account__: When an account is set to private, their activity (reviews, lists, etc.) is only visible to their followers. Their rating will still count towards the public rating of a restaurant, but their specific review will not be visible on any page to people who do not follow them.
+* __Public Account__: An account whose reviews are visible to anyone regardless of whether they are following each other.
