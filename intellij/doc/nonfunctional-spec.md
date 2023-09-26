@@ -5,7 +5,7 @@
 * Text should be large and clear enough to be read easily within 12 inches
 * Color distinctions should be clear to colorblind individuals
 * Scroll capability when reviews or other material cannot fit on the screen
-* 500 character limit for reviews
+* 500-character limit for reviews
 
 ### 2. Reliability:
 * All info is saved remotely, and is thus recoverable if app is deleted or phone is damaged
@@ -26,5 +26,9 @@
 
 ### 6. External interfaces:
 * Must connect to WiFi
+* Must connect to device location / GPS
 * Asks to connect to Camera Roll app on the device
-* Asks to connect to device location / GPS
+
+### 7. Legal:
+* Must gather restaurant database information legally (if outside sources like Google Maps API and web scraping are used)
+* Must not unlawfully infringe of the restaurant's business or copyright
