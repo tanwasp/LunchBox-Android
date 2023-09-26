@@ -16,7 +16,7 @@ __User__: Wants to connect with people they know. Wants to be able to choose whe
 ## 4. Postconditions
 
 * Friend is following User
-* Friend can see User's reviews, lists, and other public account info
+* Friend can see User's reviews, lists, and other public account info (and vice versa)
 
 ## 4. Workflow
 

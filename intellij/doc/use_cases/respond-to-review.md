@@ -4,7 +4,6 @@
 
 __User__: Wants to express their opinion on a review.
 
-
 ## 2. Other stakeholders and their goals
 
 * __Friend__: Wants to engage with their friends and share opinions. Wants their reviews to get support.

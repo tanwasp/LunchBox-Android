@@ -32,7 +32,19 @@ title Send Follow Request (Brief)
 
 |User|
 start
-:Navigate to Friend's profile;
+:Navigate to search page;
+:Type Friend's username into search bar;
+
+|App|
+:Display matching profile results;
+
+|User|
+:Click Friend's profile;
+
+|App|
+:Bring up profile;
+
+|User|
 :Click "Follow";
 
 |App|
