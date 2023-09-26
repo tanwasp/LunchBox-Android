@@ -14,8 +14,8 @@ __User__: Wants to change their account settings. Wants to change their privacy 
 
 ## 4. Postconditions
 
-* If account is set to private, User activity is only visible to followers.
-* If account is set to public, User activity is visible to anyone.
+* If account is changed to private, User activity is only visible to followers.
+* If account is changed to public, User activity is visible to anyone.
 * If name is changed, the new named will be used on profile and all other relevant locations.
 * If account is deleted, the account is no longer visible on the app. All of their activity (reviews) are deleted and no longer influence the restaurant's rating.
 
@@ -40,20 +40,34 @@ start
 :Bring user to Account Settings;
 
 |User|
-switch (Select account change) 
-case (Privacy)
-:;
-case (Name)
+if (Delete Account?) is (No) then
+if (Desired Change?) is (Privacy) then
+if (Account Private?) is (Yes) then
+:Click Public switch icon;
+#pink:Makes activity public;
+else (No)
+:Click Private switch icon;
+#pink:Makes activity private;
+endif
+else (Name)
 |User|
-:Types a name in appropriate text box;
+:Types a name in indicated text box;
+
 
 while (Is valid username?) is (No) 
 |User|
 :Tries another username;
 endwhile (Yes)
-:Click check;
+:Click confirm;
+|App|
+:Saves new name and updates profile;
+endif
+|User|
+:Click Save Account Settings;
+stop
 
-case (Delete)
+else (Yes)
+|User|
 :Select Delete Account;
 |App|
 :Pop up confirmation message;
@@ -62,8 +76,6 @@ case (Delete)
 |App|
 :Delete user account;
 stop
-endswitch
 
-stop
 @enduml
 ```
