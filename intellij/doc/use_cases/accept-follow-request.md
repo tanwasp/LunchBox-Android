@@ -11,11 +11,11 @@ __User__: Wants to connect with people they know. Wants to be able to choose whe
 ## 2. Preconditions
 
 * User is logged into a functional account
-* User recieved request in Notifications
+* User received request in Notifications
 
 ## 4. Postconditions
 
-* Friend is following User
+* Friend is following User and is listed under their Friends
 * Friend can see User's reviews, lists, and other public account info (and vice versa)
 
 ## 4. Workflow
@@ -32,11 +32,12 @@ title Accept Follow Request (Brief)
 
 |User|
 start
-:Navigate to request in Notifications;
+:Navigate to Notifications by clicking the bell icon;
+:Select the request notification;
 :Click "Accept";
 
 |App|
-:Save that Friend follows User;
+:Save that Friend and User follow each other;
 :Delivers acceptance to Friend's Notifications;
 
 stop

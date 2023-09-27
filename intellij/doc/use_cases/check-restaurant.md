@@ -2,12 +2,13 @@
 
 ## 1. Primary actor and goals
 
-__User__: Desires to find and view ratings and reviews for a specific restaurant. They are particularly interested in feedback from their friends.
+__User__: Desires to find and view ratings and reviews for a specific restaurant. 
+They are particularly interested in feedback from their friends.
 
 ## 2. Other stakeholders and their goals
 
 * __Restaurant__: Wants the user to see positive reviews and have a positive impression of their business.
-* __Friend__: Wants to be able to find the user's account using their username so that they can interact.
+* __Friend__: Wants their reviews to be seen, especially by their friends.
 
 ## 2. Preconditions
 
@@ -36,7 +37,7 @@ __User__: Desires to find and view ratings and reviews for a specific restaurant
 ## 4. Postconditions
 
 * Nothing will be changed on the user's or restaurant's profile
-* User will be able to make a decision about whether to visit the restaurant
+* User will be able to make an informed decision about whether to visit the restaurant
 
 ## 5. Workflow
 
@@ -55,67 +56,65 @@ start
 :Navigate to Restaurant search page;
 :Enter name into search box;
 
-if (Sort by) is (default) then
-:most relevant
+if (Sort by) is (Default) then
+:Most relevant
 (algorithm tbd);
-else (other)
-:select
-* nearest
-* highest rating
-* most reviews;
+else (Other)
+:Select:
+* Nearest
+* Highest rating
+* Most reviews;
 endif
 if (Select Filters) is (Yes) then
-:multi-select
-*cuisine
-*price range
-*reviewed by friends;
+:Multi-select category:
+*Cuisine
+*Price range
+*Reviewed by friends;
 
-:Enter appropriate data for each filter;
-while (Is valid data?) is (No)
-:Re-enter data;
-endwhile (Yes)
+:Multi-select tags under given category
+(Ex: Check cuisine and then specific 
+cuisine tags will pop up and user could
+select "Chinese" and "Italian");
+
 else (No)
 endif
 
 |App|
-:Display relevant 
-restaurant results nearby 
-user;
+:Display relevant restaurant results with
+given sorting algorithm and filters;
 |User|
 
 
 |User|
 :Select profile for 
-desired restaurant ;
+desired restaurant;
 
 |App|
 :Bring up desired 
 profile with:
-*profile info
-*reviews;
+*Profile info
+*Reviews;
 
 
 |User|
 :Scroll down to reviews;
-if (Sort by) is (default) then
-:most liked;
-else (other)
+if (Sort reviews by) is (Default) then
+:Most liked;
+else (Other)
 :select
-* most recent;
+* Most recent;
 endif
 
 if (Want to filter reviews?) is (Yes) then 
 :Select a filter
-* friends only
-* time range
-* tags;
+* Friends only
+* Time range
+* Tags;
 
 else (No)
 endif
 
 :Browse reviews and make decision;
-
-
 
 stop
 @enduml

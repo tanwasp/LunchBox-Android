@@ -2,14 +2,13 @@
 
 ## 1. Primary actor and goals
 
-__User__: Wants to create an account so they can use the app. Wants to be able to access their account be accessible to them and only them.
-
+__User__: Wants to create an account so they can use the app. Wants their account be accessible to them and only them.
 
 ## 2. Other stakeholders and their goals
 
 * __Friend__: Wants to be able to find the user's account using their username so that they can interact.
 
-## 2. Preconditions
+## 3. Preconditions
 
 * App is downloaded and opened 
 * Connection to WiFi
@@ -20,7 +19,6 @@ __User__: Wants to create an account so they can use the app. Wants to be able t
 * Established Password Requirements:
   * 6-16 characters
   * Only letters, numbers, periods, and underscores
-  * Not already taken
 
 ## 4. Postconditions
 
@@ -78,7 +76,21 @@ while (Is valid password?) is (No)
 |User|
 :Retypes password;
 endwhile (Yes)
-:Click Create;
+
+|App|
+:Request access to location tracking (GPS);
+
+|User|
+if (Share location?) is (Accept) then
+:Click Accept;
+else (Deny)
+|App|
+:Prompt user to enter default location;
+|User|
+:Enter location and click confirm;
+endif
+
+:Click Create Account;
 stop
 
 @enduml
@@ -95,6 +107,7 @@ title Log In
 |#pink|App|
 
 |App|
+start
 :Bring up log in page;
 
 |User|

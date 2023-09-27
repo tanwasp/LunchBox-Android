@@ -78,5 +78,6 @@ user --> replyReview
 createAcc --> gps
 checkReview --> gps
 review --> photos
+manageReview --> photos
 @enduml
 ```

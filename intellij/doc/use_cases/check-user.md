@@ -21,7 +21,6 @@ connecting with friends and seeing their friends' preferences.
 
 ## 5. Workflow
 
-
 ```plantuml
 @startuml
 
@@ -45,7 +44,7 @@ start
 
 |App|
 :Show selected user's profile including:
-* Basic info (e.g., Name, Profile Pic)
+* Basic info (e.g., name, profile pic)
 * Publicly available restaurant lists
 * Reviews;
 
@@ -53,7 +52,7 @@ start
 if (Want to view a specific list?) is (Yes) then
 :Click on the desired list;
 |App|
-:Show details of the selected list;
+:Show content of the selected list;
 else (No)
 endif
 
@@ -66,7 +65,7 @@ else (No)
 endif
 
 |User|
-:Decide on further actions, such as connecting or following the profile owner;
+:Decide on further actions, such as following the profile owner;
 
 stop
 
