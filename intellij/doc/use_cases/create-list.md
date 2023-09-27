@@ -1,78 +1,89 @@
 # Create Restaurant List
 ## 1. Primary actor and goals
-   __Diner__: Wants to curate and save a list of restaurants based on personal criteria (e.g., cuisine, location, wish list). Desires an easy-to-use interface, the ability to search for and add restaurants, and a seamless saving process.
+   __User__: Wants to curate and save a list of restaurants based on personal criteria (e.g., cuisine, location, wish list). 
+   Desires an easy-to-use interface, the ability to search for and add restaurants, and a seamless saving process.
 
 ## 2. Other stakeholders and their goals
    __Restaurant Owners__: Seek visibility on the platform and hope to be featured in popular lists. They aim for positive reviews and increased patronage.
+   __Friends__: Want to be able to view and interact with the user's list.
 ## 3. Preconditions
-   Diner is registered and authenticated on the platform.
+   User is registered and authenticated on the platform.
    There is an available database of restaurants that can be searched and added to the list.
-## 4. Postconditions
-   New restaurant list is saved under the diner's profile.
-   The list is available for viewing, editing, or sharing based on user preferences.
-   Notification or update is sent if the list is made public or shared.
+## 4. Post conditions
+   New restaurant list is saved under the User's profile.
+   The list is available for viewing, editing and is either private or public based on user preferences.
 ## 5. Workflow
-
-   ```plantuml
+```plantuml
 @startuml
 
-skinparam backgroundColor #EEEBDC
-skinparam shadowing false
+skin rose
 
-title Create Restaurant List
+title Create Restaurant List (Fully Dressed)
 
+|#wheat|User|
+|#pink|App|
+
+|User|
 start
+:Navigate to 'Create List' section;
+:Input a name for the list;
+|App|
+while (Is list name unique for user?) is (No)
+  |User|
+  :Provide a different name for the list;
+endwhile (Yes)
 
-:Diner is registered and logged in.;
+|User|
+:Optionally provide a description for the list;
+:Optionally add tags to the list;
+:Begins searching for restaurants;
 
-:Diner navigates to the 'Create List' section.;
+if (Sort by) is (default) then
+:most relevant
+(algorithm tbd);
+else (other)
+:select
+* nearest
+* highest rating
+* most reviews;
+endif
+if (Select Filters) is (Yes) then
+:multi-select
+*cuisine
+*price range
+*reviewed by friends
+*location;
 
-:Diner enters a unique name for the list;
-
-:Diner optionally adds a description for the list.;
-
-:Diner selects a criterion for the list, e.g., cuisine type or location;
-
-:Diner searches for restaurants to add to the list;
-
-:Display search results based on the diner's inputs;
-
-:Diner selects one or multiple restaurants from results to add;
-
-:System confirms each restaurant added.;
-
-:Diner sets the visibility of the list;
-
-:Diner finalizes and saves the list;
-
-if (Is list name unique?) then (Yes)
-:List saved successfully;
 else (No)
-:Prompt diner to choose a different name or edit the existing list;
 endif
 
-if (Is restaurant already in the list?) then (Yes)
-:Notify diner that restaurant is already on the list;
-else (No)
-:Add the restaurant to the list;
-endif
 
-if (Wants to remove a restaurant?) then (Yes)
-:Diner removes a restaurant from the list;
-else (No)
-:Proceed;
-endif
 
-if (Is list empty?) then (Yes)
-:Prompt diner to add at least one restaurant;
-else (No)
-:Save the list;
-endif
+while (Add more restaurants?) is (Yes)
+  :Enter restaurant name for search;
+  :Optionally change search parameters 
+  (filters and sorting);
 
-:System confirms list creation and updates user's profile.;
+  |App|
+  :Display search results based on 
+  User's criteria and parameters;
+
+  |User|
+  :Select restaurants from search results;
+  :Add selected restaurants to the list;
+endwhile (No)
+
+:Decide visibility settings:
+* private
+* friends-only
+* public;
+
+|App|
+:Save list based on provided details;
+:Display confirmation message;
 
 stop
 
 @enduml
 
-   ```
+```
