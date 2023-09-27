@@ -1,4 +1,4 @@
-# Check User Profile 
+# Check User Profile (Casual)
 
 ## 1. Primary actor and goals
 __User__: Aims to search for and view another user's profile to see their basic info, 
@@ -6,8 +6,8 @@ public restaurant lists, and reviews. They're particularly interested in
 connecting with friends and seeing their friends' preferences.
 
 ## 2. Other stakeholders and their goals
-* __Profile Owner__: Wishes to gain followers or connections, and wants their public lists and reviews to be seen.
-* __Friends__: Hope to connect with the user and view shared restaurant interests.
+* __Unfollowed Profile Owner__: Wishes to gain followers or connections, and wants their public lists and reviews to be seen.
+* __Followed Friends__: Hope to connect with the user and view shared restaurant interests.
 
 ## 2. Preconditions
 * User is logged into a functional account
@@ -26,7 +26,7 @@ connecting with friends and seeing their friends' preferences.
 
 skin rose
 
-title Check User Profile (Fully Dressed)
+title Check User Profile (Casual)
 
 |#wheat|User|
 |#pink|App|

@@ -1,8 +1,8 @@
-# Use case name, e.g., process sale
+# Create Account (Casual)
 
 ## 1. Primary actor and goals
 
-__User__: Wants to create an account so they can use the app. Wants their account be accessible to them and only them.
+* __User__: Wants to create an account so they can use the app. Wants their account be accessible to them and only them.
 
 ## 2. Other stakeholders and their goals
 
@@ -22,6 +22,7 @@ __User__: Wants to create an account so they can use the app. Wants their accoun
 
 ## 4. Postconditions
 
+* User is brought to their profile in their logged in account
 * Account info is saved under given username
 * User can log into their account from another device using username and password
 * Account is private and secure
@@ -83,6 +84,7 @@ endwhile (Yes)
 |User|
 if (Share location?) is (Accept) then
 :Click Accept;
+#pink:Connects to Phone's GPS feature;
 else (Deny)
 |App|
 :Prompt user to enter default location;

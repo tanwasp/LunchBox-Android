@@ -2,7 +2,7 @@
 
 ## 1. Primary actor and goals
 
-__User__: Desires to find and view ratings and reviews for a specific restaurant. 
+__User__: Wants to find and view ratings/reviews for a specific restaurant. 
 They are particularly interested in feedback from their friends.
 
 ## 2. Other stakeholders and their goals
@@ -13,7 +13,7 @@ They are particularly interested in feedback from their friends.
 ## 2. Preconditions
 
 * User is logged into a functional account
-* Restaurant profile exists in the app's database and has reviews
+* Restaurant profile exists in the app's database and has reviews (with tags)
 * A location is set for the user
   * This can be done automatically using the user's device
   * This can be set or changed manually by the user
@@ -101,12 +101,12 @@ profile with:
 if (Sort reviews by) is (Default) then
 :Most liked;
 else (Other)
-:select
+:Select
 * Most recent;
 endif
 
 if (Want to filter reviews?) is (Yes) then 
-:Select a filter
+:Select
 * Friends only
 * Time range
 * Tags;
@@ -114,6 +114,11 @@ if (Want to filter reviews?) is (Yes) then
 else (No)
 endif
 
+|App|
+:Organize and filter reviews based
+on selected criteria;
+
+|User|
 :Browse reviews and make decision;
 
 stop

@@ -1,4 +1,4 @@
-# Accept Follow Request
+# Accept Follow Request (Brief)
 
 ## 1. Primary actor and goals
 
@@ -16,7 +16,7 @@ __User__: Wants to connect with people they know. Wants to be able to choose whe
 ## 4. Postconditions
 
 * Friend is following User and is listed under their Friends
-* Friend can see User's reviews, lists, and other public account info (and vice versa)
+* Friend can see User's reviews, lists, and other account info (and vice versa)
 
 ## 4. Workflow
 
