@@ -24,13 +24,11 @@ Our app addresses user needs that other reviewing platforms do not:
 * Search restaurants using filters
 
 ## Constraints
-
 * Dependency on robust, accurate restaurant data
 * Ideal functionality relies on user location and connecting to Maps
 * Maintaining user privacy and data security
 
 ## Stakeholder Goals
-
 * For Diners: Find trusted restaurant recommendations, log experiences, and connect with friends.
 * For Restaurant Owners: Gain visibility, receive feedback, and attract more patrons.
 
