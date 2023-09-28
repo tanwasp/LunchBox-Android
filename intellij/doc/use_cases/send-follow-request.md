@@ -1,4 +1,4 @@
-# Send Follow Request
+# Send Follow Request (Brief)
 
 ## 1. Primary actor and goals
 

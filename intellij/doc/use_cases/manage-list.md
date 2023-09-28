@@ -1,17 +1,17 @@
-# Manage (Edit) Restaurant List (Casual)
+# Manage/Edit Restaurant List (Casual)
 ## 1. Primary actor and goals
-__User__ : Wants to efficiently manage and organize their restaurant lists. This includes adding new restaurants, removing restaurants, editing list details, and controlling the visibility of their lists.
+* __User__: Wants to efficiently manage and organize their restaurant lists. This includes adding new restaurants, removing restaurants, editing list details, and controlling the visibility of their lists.
 
 ## 2. Other stakeholders and their goals
-   __Restaurant Owners__: Hope to remain featured in popular and frequently viewed lists
-   __Friends__: May want to view and interact with the user's restaurant lists, depending on the list's visibility settings.
+* __Restaurant Owners__: Hope to remain featured in popular and frequently viewed lists
+* __Friends__: May want to view and interact with the user's restaurant lists, depending on the list's visibility settings.
 ## 3. Preconditions
-   Diner is registered and logged in.
-   Diner has already created at least one restaurant list.
+* Diner is registered and logged in.
+* Diner has already created at least one restaurant list.
 ## 4. Postconditions
-   Modifications to the list are saved.
-   The updated list reflects all the diner's changes.
-   The list remains available based on its set visibility criteria.
+* Modifications to the list are saved.
+* The updated list reflects all the diner's changes.
+* The list remains available based on its set visibility criteria.
 
 ## 5. Workflow
 ````plantuml
@@ -33,7 +33,7 @@ start
 :Select the restaurant list to manage;
 
 |App|
-:Display the selected restaurant list with option to edit;
+:Display the selected list with option to edit;
 
 |User|
     :Select an edit action:
@@ -45,7 +45,9 @@ start
     switch (Action)
         case (Edit List Details)
             |User|
-            :Edit the list name and description if desired;
+            #pink:Bring up current list info form;
+            :Edit the list name and
+             description if desired;
             :Update the list privacy setting if desired;
             :Click Save Changes;
             |App|

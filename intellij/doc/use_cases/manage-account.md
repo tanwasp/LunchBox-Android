@@ -1,8 +1,8 @@
-# Manage Account
+# Manage Account (Casual)
 
 ## 1. Primary actor and goals
 
-__User__: Wants to change their account settings. Wants to change their privacy setting, change their displayed name, set a profile picture, or delete their account.
+* __User__: Wants to change their account settings. Wants to change their privacy setting, change their displayed name, set a profile picture, or delete their account.
 
 ## 2. Other stakeholders and their goals
 

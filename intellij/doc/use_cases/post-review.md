@@ -1,8 +1,8 @@
-# Post Review
+# Post Review (Fully Dressed)
 
 ## 1. Primary actor and goals
 
-__User__: Wants to leave a rating and written review for a restaurant. Wants to be able to share opinion on the restaurant, and for the review to be saved so it can be displayed on the app.
+* __User__: Wants to leave a rating and written review for a restaurant. Wants to be able to share opinion on the restaurant, and for the review to be saved so it can be displayed on the app.
 
 ## 2. Other stakeholders and their goals
 
@@ -73,6 +73,10 @@ if (Wants to add photo?) is (Yes) then
 :Select photos to add;
 else (No)
 endif
+if (Wants to add tags?) is (Yes) then
+:Click desired tags;
+else (No)
+endif
 
 :Click "Post";
 
@@ -112,6 +116,9 @@ else (No)
 endif
 
 :Clicks save;
+
+|App|
+:Save new restaurant to the app;
 
 stop
 @enduml

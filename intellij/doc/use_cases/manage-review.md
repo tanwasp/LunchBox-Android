@@ -2,7 +2,7 @@
 
 ## 1. Primary actor and goals
 
-__User__: Wants to edit or delete a review they made. Wants the content they post on the app to be correct and for the process to be flexible.
+* __User__: Wants to edit or delete a review they made. Wants the content they post on the app to be correct and for the process to be flexible.
 
 ## 2. Other stakeholders and their goals
 

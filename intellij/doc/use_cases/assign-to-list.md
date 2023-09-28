@@ -13,7 +13,7 @@
 * There is an available database of restaurants that can be searched.
 
 ## 4. Postconditions
-The selected restaurant is added to the user's chosen list.
+* The selected restaurant is added to the user's chosen list.
 
 ## 5. Workflow
 
@@ -28,15 +28,9 @@ title Assign to List Restaurant (Brief)
 |#wheat|User|
 |#pink|App|
 
-|App|
-start
-:Display search box. While box is blank, 
-recently reviewed restaurants are suggested
-below with + marks next to them;
-if (Want recommended restaurant?) is (Yes) then
-else (No)
-
 |User|
+start
+:Navigate to restaurant search box;
 :Enter name into search box;
 
 if (Sort by) is (Default) then
@@ -64,12 +58,12 @@ endif
 given sorting algorithm and filters;
 
 |User|
-endif
-:Click the options button to view options;
+:Select desired restaurant profile;
+:Click the Options button to view options;
 |App|
-:Display option to add to list;
+:Display option to 'Add to List';
 |User|
-if (Add to list) is (Yes) then
+if (Add to list?) is (Yes) then
 |App|
 :Display list of lists;
 |User|
