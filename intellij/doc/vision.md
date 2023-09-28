@@ -13,7 +13,7 @@ Our app addresses user needs that other reviewing platforms do not:
 * Ability to connect with friends and follow their activity
   * Can filter to only reviews of people you know
 * Ability to make shareable lists of associated restaurants
-* It isolates restaurant reviews from other sorts of establishments, unlike platforms like Yelp and Google Reviews
+* Isolates restaurant reviews from other sorts of establishments, unlike platforms like Yelp and Google Reviews
 
 ## Main Features
 * Rate and review restaurants
@@ -25,6 +25,7 @@ Our app addresses user needs that other reviewing platforms do not:
 ## Constraints
 
 * Dependency on restaurant data accuracy
+* Ideal functionality relies on user location
 * Maintaining user privacy and data security
 
 ## Stakeholder Goals
@@ -75,9 +76,13 @@ user --> assignList
 user --> sendFollow
 user --> acceptFollow
 user --> replyReview
+makeList --> gps
+manageList --> gps
+assignList --> gps
 createAcc --> gps
 checkReview --> gps
 review --> photos
+manageAcc --> photos
 manageReview --> photos
 @enduml
 ```
