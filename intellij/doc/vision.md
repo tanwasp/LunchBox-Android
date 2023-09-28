@@ -2,11 +2,13 @@
 
 ## Introduction
 
-Our restaurant reviewing app empowers users to track, rate, and share their restaurant experiences while discovering restaurants approved by their trusted circle of friends.
+Our restaurant reviewing app allows users to record, rate, and share their dining experiences while discovering new restaurants approved by other users. 
+They can connect with their friends and make lists to categorize restaurants, save their favorites, and make wish lists.
 
 ## Target Audience
 
-This app is ideal for food enthusiasts, travelers, social diners, and individuals looking to explore new dining experiences. It is intended for people 13+ years old in the United States.
+This app is intended for people 13+ years old in the United States with Android devices.
+It is is ideal for food enthusiasts, travelers, and individuals looking to explore new dining experiences.
 
 ## Value Proposition
 Our app addresses user needs that other reviewing platforms do not:
@@ -19,13 +21,12 @@ Our app addresses user needs that other reviewing platforms do not:
 * Rate and review restaurants
 * Connect with friends and view their ratings
 * Create and share curated restaurant lists
-* Restaurant search with filters
-* Trace past visits and experiences
+* Search restaurants using filters
 
 ## Constraints
 
-* Dependency on restaurant data accuracy
-* Ideal functionality relies on user location
+* Dependency on robust, accurate restaurant data
+* Ideal functionality relies on user location and connecting to Maps
 * Maintaining user privacy and data security
 
 ## Stakeholder Goals
