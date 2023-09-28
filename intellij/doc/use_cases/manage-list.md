@@ -51,7 +51,8 @@ start
             |App|
             :Save list details;
             :Display confirmation message;
-            stop
+            |User|
+            :Finishes managing the list;
         case (Add Restaurants)
             |User|
             while (Add more restaurants?) is (Yes)
@@ -64,7 +65,8 @@ start
                 |App|
                 :Confirm the removal action;
                 :Remove selected restaurants from the list;
-                stop
+                |User|
+            :Finishes managing the list;
      endswitch
 
 
