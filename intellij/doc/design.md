@@ -1,4 +1,4 @@
-# Design Class Diagram
+# Sequence Diagram
 
 ```plantuml
 @startuml
@@ -10,60 +10,67 @@ participant " : UI" as ui
 
 # Design Class Diagram
 
-
-
 ```plantuml
 @startuml
-hide circle
-hide empty methods
-' classes
-class Payment{
-amount
-}
-class Sale{
-date
-time
-}
-' associations
-Payment  -  Sale : \tPays-for\t\t
-@enduml
-```
-
-```plantuml
-@startuml
-hide circle
-hide empty methods
-' classes
+skin rose
+'skinparam classAttributeIconSize 0
 
 class Restaurant{
-    restaurantId: String
+    -restaurantId: String
     --
     getRestaurantInfo(): RestaurantInfo
 }
 
 class RestaurantInfo{
-    name: String
-    location: Location
-    rating: number
-    review_list: ArrayList<String>
-    description: String
-    cuisines: Array<String>
-    attributes: Map<Number, Boolean>
-    hours: Map<String>
-    is_open: Boolean
+    -name: String
+    -location: Location
+    -rating: number
+    -review_list: ArrayList<String>
+    -description: String
+    -cuisines: Array<String>
+    -attributes: Map<Number, Boolean>
+    -hours: Map<String>
+    -is_open: Boolean
 }
 
 class Location{
-    address: String
-    city: String
-    state: String
-    country: String
-    postalCode: String
-    coords: Geopoint
+    -address: String
+    -city: String
+    -state: String
+    -country: String
+    -postalCode: String
 }
 
-class ReviewInfo
+class Review{
+    -reviewId: String
+    -rating: float
+    -reviewInfo: ReviewInfo
+    -reviewText: String
+}
+
+class ReviewInfo{
+    -username: String
+    -restaurantId: String
+    -date: DateTime
+}
+
+class User{
+    -userName: String
+    -joinedDateTime: DateTime
+}
+
+class RestaurantLibrary{
+    -allRestaurants: ArrayList<Restaurant>
+}
+
+class Navigator{
+    -currentUser: User
+    --
+    search(criteria: String): List<Restaurant>
+    postReview(user: User, restaurant: Restaurant, rating: float, reviewText: string): Review
+}
+
 ' associations
-Payment  -  Sale : \tPays-for\t\t
+Restaurant  -  RestaurantInfo : \tIs-described-by\t\t
 @enduml
 ```
