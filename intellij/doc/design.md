@@ -28,9 +28,6 @@ class RestaurantInfo{
     -review_list: ArrayList<String>
     -description: String
     -cuisines: Array<String>
-    -attributes: Map<Number, Boolean>
-    -hours: Map<String>
-    -is_open: Boolean
 }
 
 class Location{
@@ -71,6 +68,12 @@ class Navigator{
 }
 
 ' associations
-Restaurant  -  RestaurantInfo : \tIs-described-by\t\t
+Navigator "1" -- "1" RestaurantLibrary : Accesses\t
+RestaurantLibrary "1" - "1..*" Restaurant : \tIs-information-expert-of\t\t
+Restaurant "1" - "1" RestaurantInfo : \tIs-described-by\t\t
+RestaurantInfo "1" - "1" Location : \tContains\t\t
+Review "*" -- "1" RestaurantInfo : \tIs-part-of\t\t
+Review "1" - "1" ReviewInfo : \tIs-described-by\t\t
+User "1" - "*" Review : \tCreates\t\t
 @enduml
 ```
