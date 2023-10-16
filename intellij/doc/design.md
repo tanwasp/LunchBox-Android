@@ -9,6 +9,7 @@ actor User as user
 participant " : TextUI" as ui
 participant " : Controller" as controller
 participant " : RestaurantLibrary" as lib
+participant "IFilter" as filter
 
 ui -> user : Display search prompt
 user -> ui : Enter search term (name)
@@ -19,7 +20,8 @@ user -> ui : Enter desired price filter
 ui -> user : Want location filter?
 user -> ui : Enter desired location filter
 ui -> controller : filter(filters)
-controller -> IFilter : filteredResults = filter(results, filters)
+controller -> lib : filteredResults = filter(results, filters)
+lib -> filter : filter(results, filters)
 ui -> user : Which sorting algorithm?
 user -> ui : Indicate desired sort
 ui -> controller : sortBy(sort)
@@ -43,8 +45,6 @@ class Restaurant{
     -location: Location
     -rating: number
     -review_list: ArrayList<String>
-    -description: String
-    -cuisines: Array<String>
     --
     getRestaurantInfo(): RestaurantInfo
 }
