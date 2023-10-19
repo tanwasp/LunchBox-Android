@@ -2,10 +2,10 @@
 
 ```plantuml
 @startuml
+hide footbox
+skin rose
+
 actor User as user
-<<<<<<< HEAD
-participant " : UI" as ui
-=======
 participant " : TextUI" as ui
 participant " : Controller" as controller
 participant " : RestaurantLibrary" as lib
@@ -26,7 +26,6 @@ ui -> controller : sortBy(sort)
 controller -> lib : sortedResults = sortBy(filteredResults, sort)
 controller -> lib : finalResults = toString(sortedResults)
 controller -> ui : showResults(finalResults)
->>>>>>> 1fe70e343b7b1c937a6d396b5378341820086cb1
 
 @enduml
 ```
@@ -40,17 +39,14 @@ skin rose
 
 class Restaurant{
     -restaurantId: String
-    --
-    getRestaurantInfo(): RestaurantInfo
-}
-
-class RestaurantInfo{
     -name: String
     -location: Location
     -rating: number
     -review_list: ArrayList<String>
     -description: String
     -cuisines: Array<String>
+    --
+    getRestaurantInfo(): RestaurantInfo
 }
 
 class Location{
@@ -66,9 +62,6 @@ class Review{
     -rating: float
     -reviewInfo: ReviewInfo
     -reviewText: String
-}
-
-class ReviewInfo{
     -username: String
     -restaurantId: String
     -date: DateTime
@@ -85,10 +78,8 @@ class RestaurantLibrary{
 
 ' associations
 RestaurantLibrary "1" - "1..*" Restaurant : \tIs-information-expert-of\t\t
-Restaurant "1" - "1" RestaurantInfo : \tIs-described-by\t\t
-RestaurantInfo "1" - "1" Location : \tContains\t\t
-Review "*" -- "1" RestaurantInfo : \tIs-part-of\t\t
-Review "1" - "1" ReviewInfo : \tIs-described-by\t\t
+Restaurant "1" - "1" Location : \tContains\t\t
+Review "*" -- "1" Restaurant : \tIs-part-of\t\t
 User "1" - "*" Review : \tCreates\t\t
 @enduml
 ```
