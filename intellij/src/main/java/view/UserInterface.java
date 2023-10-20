@@ -1,3 +1,5 @@
+package view;
+import java.util.Scanner;
 public class UserInterface{
     public String[] getSearchData(){
         System.out.println("Welcome to Lunch Box!");
@@ -6,9 +8,9 @@ public class UserInterface{
         System.out.println("Please enter a search term to find a restaurant by name.");
         String term = in.nextLine();
 
-        priceFilt = askPriceFilter();
-        locFilt = askLocationFilter();
-        sort = askSort();
+        String priceFilt = askPriceFilter();
+        String locFilt = askLocationFilter();
+        String sort = askSort();
 
         String[] res = {term, priceFilt, locFilt, sort};
         return res;
@@ -20,7 +22,7 @@ public class UserInterface{
             System.out.println("Would you like to filter by price? (y,n)");
             String resp = in.nextLine();
             if (resp.equals("y")) {
-                ("Please enter a valid price category: $, $$, or $$$");
+                System.out.println("Please enter a valid price category: $, $$, or $$$");
                 String price = in.nextLine();
                 if (price.equals("$") || price.equals("$$") || price.equals("$$$")){
                     return price;
@@ -38,7 +40,7 @@ public class UserInterface{
             System.out.println("Would you like to filter by distance? (y,n)");
             String resp = in.nextLine();
             if (resp.equals("y")) {
-                ("Please enter the max distance (in miles) the restaurant can be from you.");
+                System.out.println("Please enter the max distance (in miles) the restaurant can be from you.");
                 String dist = in.nextLine();
                 try{
                     Float.parseFloat(dist);
@@ -57,7 +59,7 @@ public class UserInterface{
             System.out.println("Would you like to sort your results? (y,n)");
             String resp = in.nextLine();
             if (resp.equals("y")) {
-                ("How would you like to sort? (proximity, rating)");
+                System.out.println("How would you like to sort? (proximity, rating)");
                 String sort = in.nextLine();
                 if (sort.equalsIgnoreCase("proximity")){
                     return "prox";
