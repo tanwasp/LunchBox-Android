@@ -34,8 +34,28 @@ public class Restaurant {
         this.priceRange = priceRange;
     }
 
-    public float distToUser(){
-        return -1;
+    public float distToUser(User u){
+        return haversine(u.lat, u.lon, this.lat, this.lon);
+    }
+
+    // help source: https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
+    public float haversine(float long1, float lat1, float long2, float lat2){
+        double earthRadius = 6371.0;
+
+        // Convert latitude and longitude from degrees to radians
+        double lat1Rad = Math.toRadians(lat1);
+        double long1Rad = Math.toRadians(long1);
+        double lat2Rad = Math.toRadians(lat2);
+        double long2Rad = Math.toRadians(long2);
+
+        // Haversine formula
+        double dlong = long2Rad - long1Rad;
+        double dlat = lat2Rad - lat1Rad;
+        double a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.pow(Math.sin(dlong / 2), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = earthRadius * c;
+
+        return (float) distance;
     }
 
     // Constructor, getters, setters, and other methods can be added as needed

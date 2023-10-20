@@ -6,7 +6,8 @@ public class User {
     public String username;
     public String email;
     public Date joinedDate;
-    public String coords;  // Represented as "lat,long"
+    public float lat;
+    public float lon;
 
     // Constructor, getters, setters, and other methods can be added as needed
 }
