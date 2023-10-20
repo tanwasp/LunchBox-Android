@@ -1,4 +1,8 @@
 package view;
+import model.Restaurant;
+import model.RestaurantLibrary;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 public class UserInterface{
     public String[] getSearchData(){
@@ -8,12 +12,11 @@ public class UserInterface{
         System.out.println("Please enter a search term to find a restaurant by name.");
         String term = in.nextLine();
 
-        String priceFilt = askPriceFilter();
-        String locFilt = askLocationFilter();
+        String priceFilter = askPriceFilter();
+        String locFilter = askLocationFilter();
         String sort = askSort();
 
-        String[] res = {term, priceFilt, locFilt, sort};
-
+        String[] res = {term, priceFilter, locFilter, sort};
         return res;
     }
 
@@ -74,7 +77,7 @@ public class UserInterface{
         }
     }
 
-    public void printResults(){
-
+    public void printResults(RestaurantLibrary results){
+        System.out.println(results.toString());
     }
 }

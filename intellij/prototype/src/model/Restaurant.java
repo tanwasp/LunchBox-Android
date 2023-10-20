@@ -1,13 +1,14 @@
 package model;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
 
 public class Restaurant {
-    
     public String restaurantId;
     public String name;
+    public Location location;
     public float rating;
     public String address;
     public String city;

@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class RestaurantLibrary {
 
@@ -12,31 +13,26 @@ public class RestaurantLibrary {
         this.data = new HashMap<>();
     }
 
+        public String toString(){
+            StringBuilder output = new StringBuilder();
 
-//    public void print(){
-//        for (String restaurantId : this.data.keySet()) {
-//            System.out.println("Restaurant ID: " + restaurantId + ", Name: " + this.data.get(restaurantId).name);
-//        }
-        public void print() {
             if (data.isEmpty()) {
-                System.out.println("No restaurants available.");
-                return;
+                return "No restaurants available.";
             }
 
-            System.out.println("=====================================");
-            System.out.println("           RESTAURANT LIST           ");
-            System.out.println("=====================================");
+            output.append("=====================================\n");
+            output.append("           RESTAURANT LIST           \n");
+            output.append("=====================================\n");
 
             for (String restaurantId : this.data.keySet()) {
                 Restaurant restaurant = this.data.get(restaurantId);
-                System.out.println("Restaurant ID: " + restaurantId);
-                System.out.println("Name: " + restaurant.name);
-                System.out.println("Rating: " + restaurant.rating);
-                System.out.println("Address: " + restaurant.address + ", " + restaurant.city + ", " + restaurant.state + ", " + restaurant.country + ", " + restaurant.postalCode);
-                System.out.println("Coordinates: Lat - " + restaurant.lat + ", Lon - " + restaurant.lon);
-                System.out.println("Price Range: " + getDollarSigns(restaurant.priceRange));
-                System.out.println("-------------------------------------");
+                output.append("Name: ").append(restaurant.name).append("\n");
+                output.append("Rating: ").append(restaurant.rating).append("\n");
+                output.append("Price Range: ").append(getDollarSigns(restaurant.priceRange)).append("\n");
+                output.append("-------------------------------------\n");
             }
+
+            return output.toString();
         }
 
         private String getDollarSigns(int priceRange) {
@@ -50,43 +46,19 @@ public class RestaurantLibrary {
     public static void main (String[] args){
         RestaurantLibrary test1 = new RestaurantLibrary();
         test1.loadRestaurants();
-        test1.print();
+        String restaurantList = test1.toString();
+        System.out.println(restaurantList);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    public Restaurant getRestaurant(String restaurantId) {
-        return this.data.get(restaurantId);
-    }
-
-
-
-
-
-    public HashMap<String, Restaurant> getAllRestaurants() {
-        return this.data;
-    }
-
-    public ArrayList<Restaurant> search(String criteria) {
+    public RestaurantLibrary search(String term, HashSet<IFilter> filters, String sort) {
         // Implement search logic here, for now, return an empty list
-        return new ArrayList<Restaurant>();
+        return new RestaurantLibrary();
     }
 
     public Review postReview(User user, Restaurant restaurant, float rating, String reviewText) {
         // Implement review posting logic here, for now, return a dummy review
         return new Review();
     }
-
 
      public void loadRestaurants() {
 
@@ -151,5 +123,3 @@ public class RestaurantLibrary {
         this.data.put("restaurant20", restaurant_restaurant20);
     }
 }
-
-

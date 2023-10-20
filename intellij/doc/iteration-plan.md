@@ -1,4 +1,4 @@
-# Next Iteration Plan
+# 1st Iteration Plan
 
 | Rank   | Feature                                              | Comments                                                                                                                                                     |
 |--------|------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -22,4 +22,6 @@ Nonetheless, these use cases are integral for expanding user interaction and
 enhancing the overall functionality of the platform. Other features that 
 further customize the user experience and increase ease of use but are not 
 necessary for app core functionality will come last.
+
+# 2nd Iteration Plan
 
