@@ -1,4 +1,3 @@
-
 package model;
 
 import java.util.ArrayList;
@@ -14,13 +13,13 @@ public class Restaurant {
     public String city;
     public String state;
     public String country;
-    public int postalCode;
+    public String postalCode;
     public float lat;
     public float lon;
     public ArrayList<String> reviewList = new ArrayList<>();
     public int priceRange;
 
-    public Restaurant(String restaurantId, String name, float rating, String address, String city, String state, String country, int postalCode, float lat, float lon, ArrayList<String> reviewList, int priceRange) {
+    public Restaurant(String restaurantId, String name, float rating, String address, String city, String state, String country, String postalCode, float lat, float lon, ArrayList<String> reviewList, int priceRange) {
         this.restaurantId = restaurantId;
         this.name = name;
         this.rating = rating;
