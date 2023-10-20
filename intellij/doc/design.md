@@ -5,7 +5,7 @@
 hide footbox
 skin rose
 
-actor User as userFi
+actor User as user
 participant " : TextUI" as ui
 participant " : Controller" as controller
 participant " : RestaurantLibrary" as lib
