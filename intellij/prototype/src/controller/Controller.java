@@ -20,7 +20,9 @@ public class Controller{
             try {
                 LocFilter lf = new LocFilter(Integer.parseInt(searchParams[2]));
                 filters.add(lf);
-            } catch (NumberFormatException e){}
+            } catch (NumberFormatException e){
+                System.out.println("Something went wrong. Invalid integer.");
+            }
         }
         String sort = searchParams[3];
 

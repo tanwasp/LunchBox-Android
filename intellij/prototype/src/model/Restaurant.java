@@ -9,7 +9,6 @@ import java.util.HashMap;
 public class Restaurant {
     public String restaurantId;
     public String name;
-    public Location location;
     public float rating;
     public String address;
     public String city;
@@ -34,6 +33,10 @@ public class Restaurant {
         this.lon = lon;
         this.reviewList = reviewList;
         this.priceRange = priceRange;
+    }
+
+    public float distToUser(){
+        return -1;
     }
 
     // Constructor, getters, setters, and other methods can be added as needed
