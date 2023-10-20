@@ -13,6 +13,7 @@ public class UserInterface{
         String sort = askSort();
 
         String[] res = {term, priceFilt, locFilt, sort};
+
         return res;
     }
 
