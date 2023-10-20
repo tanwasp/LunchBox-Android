@@ -8,13 +8,13 @@ public class Review {
     public Date date;
     public String body;
 
-    public Review(){
-        this.reviewId = "";
-        this.username = "";
-        this.restaurantId = "";
-        this.rating = 0;
+    public Review(String reviewId, String username, String restaurantId, Float rating, String body) {
+        this.reviewId = reviewId;
+        this.username = username;
+        this.restaurantId = restaurantId;
+        this.rating = rating;
         this.date = new Date();
-        this.body = "";
+        this.body = body;
     }
 
 //    reviewId: 	- string
@@ -26,3 +26,4 @@ public class Review {
 
     // Constructor, getters, setters, and other methods can be added as needed
 }
+
