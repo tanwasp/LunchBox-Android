@@ -1,4 +1,8 @@
 package view;
+import model.Restaurant;
+import model.RestaurantLibrary;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 public class UserInterface{
     public String[] getSearchData(){
@@ -73,7 +77,7 @@ public class UserInterface{
         }
     }
 
-    public void printResults(){
-
+    public void printResults(RestaurantLibrary results){
+        System.out.println(results.toString());
     }
 }

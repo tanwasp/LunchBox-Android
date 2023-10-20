@@ -22,6 +22,9 @@ public class Controller{
                 filters.add(lf);
             } catch (NumberFormatException e){}
         }
+        String sort = searchParams[3];
+
+        ui.printResults(lib.search(key, filters, sort));
 
     }
 }

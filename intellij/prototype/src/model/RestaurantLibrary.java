@@ -1,17 +1,20 @@
 
 package model;
-
+import java.util.HashSet;
 import java.util.ArrayList;
 
 public class RestaurantLibrary {
     public ArrayList<Restaurant> allRestaurants = new ArrayList<Restaurant>();
 
-    public ArrayList<Restaurant> search(String criteria) {
+    public RestaurantLibrary search(String term, HashSet<IFilter> filters, String sort) {
         // Implement search logic here, for now, return an empty list
-        return new ArrayList<Restaurant>();
+        return new RestaurantLibrary();
     }
 
-
+    public String toString(){
+        // needs implementation of how to print the array of restaurants
+        return "";
+    }
 
     public Review postReview(User user, Restaurant restaurant, float rating, String reviewText) {
         // Implement review posting logic here, for now, return a dummy review
