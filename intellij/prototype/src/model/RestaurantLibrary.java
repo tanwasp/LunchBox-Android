@@ -28,7 +28,7 @@ public class RestaurantLibrary {
                 Restaurant restaurant = this.data.get(restaurantId);
                 output.append("Name: ").append(restaurant.name).append("\n");
                 output.append("Rating: ").append(restaurant.rating).append("\n");
-                output.append("Price Range: ").append(getDollarSigns(restaurant.priceRange)).append("\n");
+                output.append("Price: ").append(getDollarSigns(restaurant.priceRange)).append("\n");
                 output.append("-------------------------------------\n");
             }
 
