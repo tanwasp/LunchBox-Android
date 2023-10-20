@@ -7,9 +7,8 @@ public class Controller{
         UserInterface ui = new UserInterface();
         RestaurantLibrary lib = new RestaurantLibrary();
 
-        String[] criteria = ui.getSearchData();
-
-
+        String[] searchParams = ui.getSearchData();
+        System.out.println(searchParams);
 
     }
 }
