@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class RestaurantLibrary {
-    public ArrayList<Restaurant> allRestaurants = new ArrayList<>();
+    public ArrayList<Restaurant> allRestaurants = new ArrayList<Restaurant>();
 
     public ArrayList<Restaurant> search(String criteria) {
         // Implement search logic here, for now, return an empty list
