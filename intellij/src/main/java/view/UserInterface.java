@@ -6,9 +6,9 @@ public class UserInterface{
         System.out.println("Please enter a search term to find a restaurant by name.");
         String term = in.nextLine();
 
-        priceFilt = askPriceFilter();
-        locFilt = askLocationFilter();
-        sort = askSort();
+        String priceFilt = askPriceFilter();
+        String locFilt = askLocationFilter();
+        String sort = askSort();
 
         String[] res = {term, priceFilt, locFilt, sort};
         return res;
