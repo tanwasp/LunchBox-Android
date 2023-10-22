@@ -8,6 +8,37 @@ public class ReviewsLibrary {
         this.data = new HashMap<String, Review>();
     }
 
+    public String toString(){
+        StringBuilder output = new StringBuilder();
+
+        if (data.isEmpty()) {
+            return "No reviews available.";
+        }
+
+        output.append("=====================================\n");
+        output.append("           REVIEWS LIST           \n");
+        output.append("=====================================\n");
+
+        for (String reviewId : this.data.keySet()) {
+            Review review = this.data.get(reviewId);
+            output.append("Review ID: ").append(review.reviewId).append("\n");
+            output.append("Username: ").append(review.username).append("\n");
+            output.append("Restaurant ID: ").append(review.restaurantId).append("\n");
+            output.append("Rating: ").append(review.rating).append("\n");
+            output.append("Review: ").append(review.body).append("\n");
+            output.append("-------------------------------------\n");
+        }
+
+        return output.toString();
+    }
+
+    public static void main (String[] args){
+        ReviewsLibrary test1 = new ReviewsLibrary();
+        test1.loadReviews();
+        String reviewsList = test1.toString();
+        System.out.println(reviewsList);
+    }
+
     public void loadReviews() {
 
         Review review_review1 = new Review("review1", "burchdanielle", "restaurant6", 2.5f, "A me try writer off enough. Road hope wall onto foot. Better require until peace. Half official always why who body take. That rate region over task.");
@@ -151,5 +182,7 @@ public class ReviewsLibrary {
         Review review_review67 = new Review("review67", "gibarra", "restaurant16", 3.5f, "Type industry reveal billion. North keep set skin. Girl animal hear television. Shake check story company. Page street land first attention certain soon. Per popular your.");
         this.data.put("review67", review_review67);
     }
+
+
 
 }
