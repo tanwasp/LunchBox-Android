@@ -6,9 +6,11 @@ import java.util.Collection;
 public class LocFilter implements IFilter{
 
     int distance;
+    User u;
 
-    public LocFilter(int dist){
+    public LocFilter(int dist, User u){
         this.distance = dist;
+        this.u = u;
     }
 
     public Collection<Restaurant> filter(Collection<Restaurant> restaurants){

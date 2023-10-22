@@ -51,10 +51,26 @@ public class RestaurantLibrary {
         System.out.println(restaurantList);
     }
 
-    public RestaurantLibrary search(String term, HashSet<IFilter> filters, String sort) {
+    public ArrayList<Restaurant> search(String term, HashSet<IFilter> filters, String sort) {
         // Implement search logic here, for now, return an empty list
-        return new RestaurantLibrary();
+        ArrayList<Restaurant> matches = new ArrayList<Restaurant>();
+        for (Restaurant res : data.values()){
+            if (res.name.contains(term)){
+                matches.add(res);
+            }
+        }
+        for (IFilter f : filters){
+            matches = (ArrayList<Restaurant>) f.filter(matches);
+        }
+        String sortby = "rating";
+        if (sort.equals("prox")){
+            sortby = "distance";
+        }
+        //matches.sort(x, lambda x: allrestaurants.get(x).{sortby})
+
+        return matches;
     }
+
 
     public Review postReview(User user, Restaurant restaurant, float rating, String reviewText) {
         // Implement review posting logic here, for now, return a dummy review
