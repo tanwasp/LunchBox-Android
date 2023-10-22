@@ -21,11 +21,15 @@ public class ReviewsLibrary {
         output.append("=====================================\n");
         for (String reviewId : reviews) {
             Review review = this.data.get(reviewId);
+            if (review == null){
+                continue;
+            }
             output.append("Username: ").append(review.username).append("\n");
             output.append("Rating: ").append(review.rating).append("\n");
             output.append("Review: ").append(review.body).append("\n");
             output.append("-------------------------------------\n");
         }
+        System.out.println(output.toString());  
         return output.toString();
     }
 
