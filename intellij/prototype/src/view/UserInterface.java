@@ -77,7 +77,7 @@ public class UserInterface{
         }
     }
 
-    public void printResults(RestaurantLibrary results){
-        System.out.println(results.toString());
+    public void printResults(ArrayList<Restaurant> results){
+
     }
 }
