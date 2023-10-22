@@ -13,6 +13,7 @@ public class RestaurantLibrary {
         this.data = new HashMap<>();
     }
 
+        @Override
         public String toString(){
             StringBuilder output = new StringBuilder();
 
@@ -55,10 +56,11 @@ public class RestaurantLibrary {
         return new RestaurantLibrary();
     }
 
-//    public Review postReview(User user, Restaurant restaurant, float rating, String reviewText) {
-//        // Implement review posting logic here, for now, return a dummy review
-//        return new Review();
-//    }
+
+    public Review postReview(User user, Restaurant restaurant, float rating, String reviewText) {
+        // Implement review posting logic here, for now, return a dummy review
+        return null;
+    }
 
      public void loadRestaurants() {
 
