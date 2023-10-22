@@ -1,5 +1,7 @@
 package model;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 public class ReviewsLibrary {
     private HashMap<String, Review> data;
@@ -8,35 +10,30 @@ public class ReviewsLibrary {
         this.data = new HashMap<String, Review>();
     }
 
-    public String toString(){
-        StringBuilder output = new StringBuilder();
 
-        if (data.isEmpty()) {
+    public String displayReviews(ArrayList<String> reviews){
+        StringBuilder output = new StringBuilder();
+        if (reviews.isEmpty()) {
             return "No reviews available.";
         }
-
         output.append("=====================================\n");
-        output.append("           REVIEWS LIST           \n");
+        output.append("           REVIEWS               \n");
         output.append("=====================================\n");
-
-        for (String reviewId : this.data.keySet()) {
+        for (String reviewId : reviews) {
             Review review = this.data.get(reviewId);
-            output.append("Review ID: ").append(review.reviewId).append("\n");
             output.append("Username: ").append(review.username).append("\n");
-            output.append("Restaurant ID: ").append(review.restaurantId).append("\n");
             output.append("Rating: ").append(review.rating).append("\n");
             output.append("Review: ").append(review.body).append("\n");
             output.append("-------------------------------------\n");
         }
-
         return output.toString();
     }
 
     public static void main (String[] args){
-        ReviewsLibrary test1 = new ReviewsLibrary();
-        test1.loadReviews();
-        String reviewsList = test1.toString();
-        System.out.println(reviewsList);
+        ReviewsLibrary allReviews = new ReviewsLibrary();
+        allReviews.loadReviews();
+        ArrayList<String> res1Reviews = new ArrayList<>(Arrays.asList("review2", "review21", "review37", "review62", "review64"));
+        allReviews.displayReviews(res1Reviews);
     }
 
     public void loadReviews() {
