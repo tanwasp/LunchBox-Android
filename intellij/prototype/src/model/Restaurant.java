@@ -51,6 +51,8 @@ public class Restaurant {
 
     }
 
+
+
     public void computeDistToUser(User u){
         if (distanceToUser == -1.0f){
             distanceToUser = haversine(u.lat, u.lon, this.lat, this.lon);

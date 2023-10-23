@@ -44,6 +44,10 @@ public class Controller{
         lib.addReviewToRestaurant(restaurantId, newReviewId);
     }
 
+    public void computeRating(Restaurant r){
+
+    }
+
     public static void main (String[] args){
 
         // For this prototype we assume the user's location is known. In the app, this will be collected using the device's GPS.
