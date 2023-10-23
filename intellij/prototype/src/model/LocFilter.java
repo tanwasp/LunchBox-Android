@@ -16,8 +16,9 @@ public class LocFilter implements IFilter{
     public Collection<Restaurant> filter(Collection<Restaurant> restaurants){
         Collection<Restaurant> filtered = new ArrayList<Restaurant>();
         for (Restaurant res : restaurants){
-            if (distance >= res.distToUser(u)){
-//                System.out.println("Restaurant " + res.name + " is within " + distance + " miles of you.");
+            float distanceToUser = res.distToUser(u);
+            if (distance >= distanceToUser){
+                System.out.println("Restaurant " + res.name + " is " + distanceToUser + " away");
                 filtered.add(res);
             }
         }

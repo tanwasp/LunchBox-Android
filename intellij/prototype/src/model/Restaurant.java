@@ -16,7 +16,7 @@ public class Restaurant {
     public String postalCode;
     public float lat;
     public float lon;
-    public ArrayList<String> reviewList = new ArrayList<>();
+    public ArrayList<String> reviewList;
     public int priceRange;
 
     public Restaurant(String restaurantId, String name, float rating, String address, String city, String state, String country, String postalCode, float lat, float lon, ArrayList<String> reviewList, int priceRange) {
