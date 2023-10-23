@@ -37,8 +37,6 @@ public class Controller{
         ReviewsLibrary revLib = new ReviewsLibrary();
 
 
-
-
         while (true){
             Controller c = new Controller();
             c.searchRestaurants(curUser, ui, lib);
