@@ -17,6 +17,7 @@ public class Restaurant {
     public float lat;
     public float lon;
     public ArrayList<String> reviewList;
+    public float distanceToUser;
     public int priceRange;
 
     public Restaurant(String restaurantId, String name, float rating, String address, String city, String state, String country, String postalCode, float lat, float lon, ArrayList<String> reviewList, int priceRange) {
@@ -32,10 +33,13 @@ public class Restaurant {
         this.lon = lon;
         this.reviewList = reviewList;
         this.priceRange = priceRange;
+        distanceToUser = -1.0f;
     }
 
-    public float distToUser(User u){
-        return haversine(u.lat, u.lon, this.lat, this.lon);
+    public void computeDistToUser(User u){
+        if (distanceToUser == -1.0f){
+            distanceToUser = haversine(u.lat, u.lon, this.lat, this.lon);
+        }
     }
 
     // help source: https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
@@ -55,7 +59,7 @@ public class Restaurant {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double distance = earthRadius * c;
 
-        return (float) distance;
+        return (float) distance * 0.621371f;
     }
 
     // Constructor, getters, setters, and other methods can be added as needed

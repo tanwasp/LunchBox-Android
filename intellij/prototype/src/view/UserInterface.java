@@ -5,8 +5,11 @@ import model.RestaurantLibrary;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class UserInterface{
-    public String[] getSearchData(){
+    public void welcome(){
         System.out.println("Welcome to Lunch Box!");
+    }
+    public String[] getSearchData(){
+
 
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter a search term to find a restaurant by name.");
@@ -89,11 +92,28 @@ public class UserInterface{
         output.append("           RESTAURANT LIST           \n");
         output.append("=====================================\n");
 
+        int count = 1;
+
         for (Restaurant restaurant : results) {
+            output.append("Restaurant ").append(count).append("\n");
             output.append("Name: ").append(restaurant.name).append("\n");
             output.append("Rating: ").append(restaurant.rating).append("\n");
             output.append("Price: ").append(getDollarSigns(restaurant.priceRange)).append("\n");
+            output.append("Address: ").append(restaurant.address).append("\n");
+            output.append("City: ").append(restaurant.city).append("\n");
+            output.append("State: ").append(restaurant.state).append("\n");
+            if (restaurant.distanceToUser < 10) {
+                output.append("Distance: ")
+                        .append(String.format("%.1f", restaurant.distanceToUser));
+            } else {
+                output.append("Distance: ")
+                        .append(String.format("%.0f", restaurant.distanceToUser));
+
+            }
+            output.append(" miles\n");
+
             output.append("-------------------------------------\n");
+            count++;
         }
 
         System.out.println(output.toString());
@@ -106,5 +126,21 @@ public class UserInterface{
         }
         return dollarSigns.toString();
 
+    }
+
+    public int selectRestaurant(ArrayList<Restaurant> results){
+        while (true) {
+            Scanner in = new Scanner(System.in);
+            System.out.println("Please enter the number of the restaurant you would like to select.");
+            String resp = in.nextLine();
+            try {
+                int num = Integer.parseInt(resp);
+                if (num > 0 && num <= results.size()) {
+                    return num;
+                }
+            } catch (NumberFormatException e) {
+            }
+            System.out.println("Invalid input. Please try again.");
+        }
     }
 }

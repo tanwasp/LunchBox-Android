@@ -20,6 +20,7 @@ public class RestaurantLibrary {
         // Assuming data is a HashMap<String, Restaurant>
         for (Restaurant res : data.values()){
             if (res.name.toLowerCase().contains(term.toLowerCase())){
+                res.computeDistToUser(curUser);
                 matches.add(res);
             }
 
@@ -28,10 +29,9 @@ public class RestaurantLibrary {
         for (IFilter f : filters){
             matches = (ArrayList<Restaurant>) f.filter(matches);
         }
-
         if ("prox".equals(sort)) {
 //            Collections.sort(matches, Comparator.comparingDouble(r -> (double) r.haversine(r.lat, r.lon, user.lat, user.lon)));
-            Collections.sort(matches, Comparator.comparingDouble(r -> (double) r.distToUser(curUser)));
+            Collections.sort(matches, Comparator.comparingDouble(r -> (double) r.distanceToUser));
         } else {
             Collections.sort(matches, Comparator.comparingDouble(r -> (double) - r.rating));
         }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Controller{
-    public void searchRestaurants(User curUser, UserInterface ui, RestaurantLibrary lib){
+    public ArrayList<Restaurant> searchRestaurants(User curUser, UserInterface ui, RestaurantLibrary lib){
         String[] searchParams = ui.getSearchData();
 
         String key = searchParams[0];
@@ -26,7 +26,7 @@ public class Controller{
         String sort = searchParams[3];
         ArrayList<Restaurant> matches = lib.search(key, filters, sort, curUser);
         ui.displayRestaurants(matches);
-
+        return matches;
     }
     public static void main (String[] args){
 
@@ -36,10 +36,19 @@ public class Controller{
         RestaurantLibrary lib = new RestaurantLibrary();
         ReviewsLibrary revLib = new ReviewsLibrary();
 
+        ui.welcome();
 
         while (true){
             Controller c = new Controller();
-            c.searchRestaurants(curUser, ui, lib);
+            ArrayList<Restaurant> results = c.searchRestaurants(curUser, ui, lib);
+//            if (!results.isEmpty()){
+//                Restaurant selected = ui.selectRestaurant(results);
+//                if (selected != null){
+//                    ui.displayReviews(selected, revLib);
+//                    ui.askReview(selected, curUser, revLib);
+//                }
+//            }
+
         }
 
     }
