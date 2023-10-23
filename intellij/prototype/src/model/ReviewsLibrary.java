@@ -12,6 +12,12 @@ public class ReviewsLibrary {
         this.loadReviews();
     }
 
+    public void addReview(User curUser, String restaurantId, float rating, String reviewText){
+        String reviewId = "review" + (67 + 1);
+        Review newReview = new Review(reviewId, curUser.username, restaurantId, rating, reviewText);
+        this.data.put(reviewId, newReview);
+    }
+
 
     public String displayReviews(ArrayList<String> reviews){
         StringBuilder output = new StringBuilder();

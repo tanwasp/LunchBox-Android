@@ -35,6 +35,21 @@ public class Restaurant {
         this.priceRange = priceRange;
         distanceToUser = -1.0f;
     }
+    @Override
+    public String toString(){
+        StringBuilder output = new StringBuilder();
+        output.append("=====================================\n");
+        output.append("                ").append(name).append("                ").append("\n");
+        output.append("=====================================\n");
+        output.append("Rating: ").append(rating).append("\n");
+        output.append("Price: ").append(priceRange).append("\n");
+        output.append("Address: ").append(address).append("\n");
+        output.append("City: ").append(city).append("\n");
+        output.append("State: ").append(state).append("\n");
+        output.append("Distance: ").append(distanceToUser).append(" miles\n");
+        return output.toString();
+
+    }
 
     public void computeDistToUser(User u){
         if (distanceToUser == -1.0f){

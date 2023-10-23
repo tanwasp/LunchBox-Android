@@ -1,6 +1,5 @@
 package view;
 import model.Restaurant;
-import model.RestaurantLibrary;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -128,6 +127,25 @@ public class UserInterface{
 
     }
 
+    public String[] getReviewData(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Would you like to post a review? (y,n)");
+        String resp = in.nextLine();
+        if (!resp.equals("y")){
+            return null;
+        }
+        System.out.println("Please enter a rating for this restaurant (1-5).");
+        String rating = in.nextLine();
+        System.out.println("Please enter a review for this restaurant.");
+        String reviewText = in.nextLine();
+        String[] res = {rating, reviewText};
+        return res;
+    }
+
+    public void displayRestaurantInfo(Restaurant r){
+        System.out.println(r.toString());
+    }
+
     public int selectRestaurant(ArrayList<Restaurant> results){
         while (true) {
             Scanner in = new Scanner(System.in);
@@ -143,4 +161,6 @@ public class UserInterface{
             System.out.println("Invalid input. Please try again.");
         }
     }
+
+
 }
