@@ -1,16 +1,12 @@
 package controller;
 import view.UserInterface;
 import model.*;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Controller{
-    public static void main (String[] args){
-
-        // For this prototype we assume the user's location is known. In the app, this will be collected using the device's GPS.
-        User curUser  = new User("default", 30, -90);
-        UserInterface ui = new UserInterface();
-        RestaurantLibrary lib = new RestaurantLibrary();
-
+    public void searchRestaurants(User curUser, UserInterface ui, RestaurantLibrary lib){
         String[] searchParams = ui.getSearchData();
 
         String key = searchParams[0];
@@ -28,8 +24,25 @@ public class Controller{
             }
         }
         String sort = searchParams[3];
+        ArrayList<Restaurant> matches = lib.search(key, filters, sort, curUser);
+        ui.displayRestaurants(matches);
 
-        ui.printResults(lib.search(key, filters, sort));
+    }
+    public static void main (String[] args){
+
+        // For this prototype we assume the user's location is known. In the app, this will be collected using the device's GPS.
+        User curUser  = new User("default", 30, -90);
+        UserInterface ui = new UserInterface();
+        RestaurantLibrary lib = new RestaurantLibrary();
+        ReviewsLibrary revLib = new ReviewsLibrary();
+
+
+
+
+        while (true){
+            Controller c = new Controller();
+            c.searchRestaurants(curUser, ui, lib);
+        }
 
     }
 }

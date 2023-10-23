@@ -77,7 +77,34 @@ public class UserInterface{
         }
     }
 
-    public void printResults(ArrayList<Restaurant> results){
+    public void displayRestaurants(ArrayList<Restaurant> results){
+        StringBuilder output = new StringBuilder();
+
+        if (results.isEmpty()) {
+            System.out.println("No restaurants match the given criteria.");
+            return;
+        }
+
+        output.append("=====================================\n");
+        output.append("           RESTAURANT LIST           \n");
+        output.append("=====================================\n");
+
+        for (Restaurant restaurant : results) {
+            output.append("Name: ").append(restaurant.name).append("\n");
+            output.append("Rating: ").append(restaurant.rating).append("\n");
+            output.append("Price: ").append(getDollarSigns(restaurant.priceRange)).append("\n");
+            output.append("-------------------------------------\n");
+        }
+
+        System.out.println(output.toString());
+    }
+
+    private String getDollarSigns(int priceRange) {
+        StringBuilder dollarSigns = new StringBuilder();
+        for (int i = 0; i < priceRange; i++) {
+            dollarSigns.append("$");
+        }
+        return dollarSigns.toString();
 
     }
 }
