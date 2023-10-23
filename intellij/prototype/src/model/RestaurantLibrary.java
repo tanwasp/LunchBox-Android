@@ -12,6 +12,11 @@ public class RestaurantLibrary {
         this.loadRestaurants();
     }
 
+    public void addReviewToRestaurant(String restaurantId, String reviewId) {
+        Restaurant restaurant = data.get(restaurantId);
+        restaurant.reviewList.add(reviewId);
+    }
+
 
     public ArrayList<Restaurant> search(String term, HashSet<IFilter> filters, String sort, User curUser) {
 

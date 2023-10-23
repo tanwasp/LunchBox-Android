@@ -126,15 +126,28 @@ public class UserInterface{
 
     }
 
-    public String[] getReviewData(){
+    public String[] getReviewData() {
         Scanner in = new Scanner(System.in);
         System.out.println("Would you like to post a review? (y,n)");
-        String resp = in.nextLine();
-        if (!resp.equals("y")){
-            return null;
+        while (true) {
+            String resp = in.nextLine();
+            if (resp.equals("y")) {
+                break;
+            } else if (resp.equals("n")) {
+                return null;
+            }
+            System.out.println("Invalid input. Please try again.");
         }
-        System.out.println("Please enter a rating for this restaurant (1-5).");
-        String rating = in.nextLine();
+        System.out.println("Please enter a rating for this restaurant (1-5 only integers).");
+        String rating;
+        while (true) {
+            rating = in.nextLine();
+            if (!(rating.equals("1") || rating.equals("2") || rating.equals("3") || rating.equals("4") || rating.equals("5"))) {
+                System.out.println("Invalid rating. Please try again.");
+            } else {
+                break;
+            }
+        }
         System.out.println("Please enter a review for this restaurant.");
         String reviewText = in.nextLine();
         String[] res = {rating, reviewText};
@@ -156,6 +169,18 @@ public class UserInterface{
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Not a valid number. Please try again.");
+            }
+            System.out.println("Invalid input. Please try again.");
+        }
+    }
+
+    public String getNextAction(){
+        while (true) {
+            Scanner in = new Scanner(System.in);
+            System.out.println("What would you like to do next? (Enter 1 to search again search, Enter 2 to select restaurant)");
+            String resp = in.nextLine();
+            if (resp.equals("1") || resp.equals("2")) {
+                return resp;
             }
             System.out.println("Invalid input. Please try again.");
         }
