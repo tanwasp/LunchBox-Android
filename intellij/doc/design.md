@@ -12,16 +12,16 @@ participant " : RestaurantLibrary" as lib
 
 ui -> user : Display search prompt
 user -> ui : Enter search term (name)
-ui -> controller : search(name)
-controller -> lib : results = search(name)
 ui -> user : Want price filter?
 user -> ui : Enter desired price filter
 ui -> user : Want location filter?
 user -> ui : Enter desired location filter
-ui -> controller : filter(filters)
-controller -> IFilter : filteredResults = filter(results, filters)
 ui -> user : Which sorting algorithm?
 user -> ui : Indicate desired sort
+ui -> controller : search(name)
+controller -> lib : results = search(name)
+ui -> controller : filter(filters)
+controller -> IFilter : filteredResults = filter(results, filters)
 ui -> controller : sortBy(sort)
 controller -> lib : sortedResults = sortBy(filteredResults, sort)
 controller -> lib : finalResults = toString(sortedResults)

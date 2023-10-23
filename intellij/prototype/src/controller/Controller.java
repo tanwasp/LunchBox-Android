@@ -31,7 +31,7 @@ public class Controller{
     public static void main (String[] args){
 
         // For this prototype we assume the user's location is known. In the app, this will be collected using the device's GPS.
-        User curUser  = new User("default", 30, -90);
+        User curUser = new User("Me", 30, -90);
         UserInterface ui = new UserInterface();
         RestaurantLibrary lib = new RestaurantLibrary();
         ReviewsLibrary revLib = new ReviewsLibrary();

@@ -1,15 +1,14 @@
 package view;
 import model.Restaurant;
 import model.RestaurantLibrary;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class UserInterface{
     public void welcome(){
         System.out.println("Welcome to Lunch Box!");
     }
     public String[] getSearchData(){
-
 
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter a search term to find a restaurant by name.");
@@ -132,13 +131,13 @@ public class UserInterface{
         while (true) {
             Scanner in = new Scanner(System.in);
             System.out.println("Please enter the number of the restaurant you would like to select.");
-            String resp = in.nextLine();
             try {
-                int num = Integer.parseInt(resp);
+                int num = in.nextInt();
                 if (num > 0 && num <= results.size()) {
                     return num;
                 }
             } catch (NumberFormatException e) {
+                System.out.println("Not a valid number. Please try again.");
             }
             System.out.println("Invalid input. Please try again.");
         }
