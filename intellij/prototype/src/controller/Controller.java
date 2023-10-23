@@ -28,6 +28,17 @@ public class Controller{
         ui.displayRestaurants(matches);
         return matches;
     }
+
+    public void postReview(User curUser, UserInterface ui, ReviewsLibrary revLib, String restaurantId){
+        String[] reviewParams = ui.getReviewData();
+        if (reviewParams == null){
+            return;
+        }
+        float rating = Float.parseFloat(reviewParams[0]);
+        String reviewText = reviewParams[1];
+        revLib.addReview(curUser, restaurantId, rating, reviewText);
+    }
+
     public static void main (String[] args){
 
         // For this prototype we assume the user's location is known. In the app, this will be collected using the device's GPS.
@@ -41,13 +52,16 @@ public class Controller{
         while (true){
             Controller c = new Controller();
             ArrayList<Restaurant> results = c.searchRestaurants(curUser, ui, lib);
-//            if (!results.isEmpty()){
-//                Restaurant selected = ui.selectRestaurant(results);
-//                if (selected != null){
-//                    ui.displayReviews(selected, revLib);
-//                    ui.askReview(selected, curUser, revLib);
-//                }
-//            }
+            if (!results.isEmpty()){
+                int selected = ui.selectRestaurant(results);
+                Restaurant selectedRes = results.get(selected - 1);
+                ui.displayRestaurantInfo(selectedRes);
+                if (selectedRes != null){
+                    revLib.displayReviews(selectedRes.reviewList);
+                }
+                c.postReview(curUser, ui, revLib, selectedRes.restaurantId);
+
+            }
 
         }
 
