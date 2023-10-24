@@ -65,7 +65,7 @@ public class RestaurantLibrary {
         Restaurant r19 = new Restaurant("restaurant19", "Sushi Train", 3.5f, "94 White Bridge Rd", "Nashville", "TN", "US", "37205", 36.1302006f, -86.853207f, new ArrayList<>(Arrays.asList("review18", "review57", "review63")), 1);
         this.data.put("restaurant19", r19);
 
-        Restaurant r18 = new Restaurant("restaurant18", "WIN Bubble Tea - White Bridge", 4.0f, "99 White Bridge Pike", "Nashville", "TN", "US", "37205", 36.1316071f, -86.8581153f, new ArrayList<>(Arrays.asList("review17", "review28", "review42")), 1);
+        Restaurant r18 = new Restaurant("restaurant18", "WIN Bubble Tea and Sushi", 4.0f, "99 White Bridge Pike", "Nashville", "TN", "US", "37205", 36.1316071f, -86.8581153f, new ArrayList<>(Arrays.asList("review17", "review28", "review42")), 1);
         this.data.put("restaurant18", r18);
 
         Restaurant r17 = new Restaurant("restaurant17", "El Merkury", 4.5f, "2104 Chestnut St", "Philadelphia", "PA", "US", "19103", 39.952185f, -75.1758693f, new ArrayList<>(Arrays.asList("review16", "review45", "review66")), 2);
@@ -86,7 +86,7 @@ public class RestaurantLibrary {
         Restaurant r12 = new Restaurant("restaurant12", "The Sidecar Bar & Grille", 4.0f, "2201 Christian St", "Philadelphia", "PA", "US", "19146", 39.9418939f, -75.1794584f, new ArrayList<>(Arrays.asList("review9", "review48", "review53")), 3);
         this.data.put("restaurant12", r12);
 
-        Restaurant r10 = new Restaurant("restaurant10", "Dingho", 3.5f, "7900 Watson Rd", "Saint Louis", "MO", "US", "63119", 38.5689735f, -90.3378223f, new ArrayList<>(Arrays.asList("review6", "review44", "review50")), 2);
+        Restaurant r10 = new Restaurant("restaurant10", "Dingho Cafe", 3.5f, "7900 Watson Rd", "Saint Louis", "MO", "US", "63119", 38.5689735f, -90.3378223f, new ArrayList<>(Arrays.asList("review6", "review44", "review50")), 2);
         this.data.put("restaurant10", r10);
 
         Restaurant r9 = new Restaurant("restaurant9", "Fat Cat Tavern", 3.5f, "3665 East Bay Dr, Ste 100", "Largo", "FL", "US", "33771", 27.915055f, -82.7491266f, new ArrayList<>(Arrays.asList("review5", "review27", "review59")), 2);
@@ -98,7 +98,7 @@ public class RestaurantLibrary {
         Restaurant r7 = new Restaurant("restaurant7", "Daredevil Brewing", 4.5f, "1151 N Main St", "Speedway", "IN", "US", "46224", 39.7824059f, -86.2405885f, new ArrayList<>(Arrays.asList("review3", "review22", "review26")), 3);
         this.data.put("restaurant7", r7);
 
-        Restaurant r6 = new Restaurant("restaurant6", "The Clubhouse", 4.0f, "9420 Gravois Rd", "Affton", "MO", "US", "63123", 38.5533355784f, -90.3206312656f, new ArrayList<>(Arrays.asList("review1", "review49", "review55")), 1);
+        Restaurant r6 = new Restaurant("restaurant6", "The Clubhouse Cafe", 4.0f, "9420 Gravois Rd", "Affton", "MO", "US", "63123", 38.5533355784f, -90.3206312656f, new ArrayList<>(Arrays.asList("review1", "review49", "review55")), 1);
         this.data.put("restaurant6", r6);
 
         Restaurant r20 = new Restaurant("restaurant20", "Chipotle Mexican Grill", 3.0f, "2618 W Moreland Rd", "Willow Grove", "PA", "US", "19090", 40.1435860245f, -75.1217490172f, new ArrayList<>(Arrays.asList("review19", "review31", "review51")), 3);

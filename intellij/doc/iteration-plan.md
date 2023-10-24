@@ -25,3 +25,11 @@ necessary for app core functionality will come last.
 
 # 2nd Iteration Plan
 
+Since we have established the base function of reading restaurant reviews and making your own, 
+we will now move onto the social aspect of the app. This includes the create account, send
+follow request, and accept follow request use cases. After this iteration is complete, users
+will be able to create a personal account, log into it, connect with their friends on the app, 
+and filter their restaurant search to display only restaurants that have been reviewed by their friends.
+
+These elements are central to the social component of the app, and should be in place before other use
+cases that rely on it, like manage account, or less critical ones, like create list.

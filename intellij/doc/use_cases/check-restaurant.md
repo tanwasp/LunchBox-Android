@@ -17,22 +17,6 @@ They are particularly interested in feedback from their friends.
 * A location is set for the user
   * This can be done automatically using the user's device
   * This can be set or changed manually by the user
-* User has the option to filter restaurant searches:
-  * By cuisine
-  * By price range
-  * By friends
-* User has the option to customize sort restaurant searches:
-  * By most relevant (default)
-  * By nearest
-  * By highest rating
-  * By most reviews
-* User has the option to filter reviews:
-  * By friends only
-  * By time range
-  * By tags
-* User has the option to sort reviews:
-  * By most liked (default)
-  * By most recent
 
 ## 4. Postconditions
 
@@ -124,3 +108,21 @@ on selected criteria;
 stop
 @enduml
 ```
+
+## Notes
+* User has the option to filter restaurant searches:
+  * By cuisine
+  * By price range
+  * By friends
+* User has the option to customize sort restaurant searches:
+  * By most relevant (default)
+  * By nearest
+  * By highest rating
+  * By most reviews
+* User has the option to filter reviews:
+  * By friends only
+  * By time range
+  * By tags
+* User has the option to sort reviews:
+  * By most liked (default)
+  * By most recent

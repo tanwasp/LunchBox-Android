@@ -7,7 +7,6 @@ public class ReviewsLibrary {
     private HashMap<String, Review> data;
 
     public ReviewsLibrary(){
-
         this.data = new HashMap<String, Review>();
         this.loadReviews();
     }
@@ -39,14 +38,6 @@ public class ReviewsLibrary {
         }
         System.out.println(output.toString());  
         return output.toString();
-    }
-
-    public static void main (String[] args){
-        ReviewsLibrary allReviews = new ReviewsLibrary();
-        allReviews.loadReviews();
-        ArrayList<String> res1Reviews = new ArrayList<>(Arrays.asList("review2", "review21", "review37", "review62", "review64"));
-        allReviews.addReview(new User("user1", 30, -90), "restaurant1", 5.0f, "This is a test review.");
-        allReviews.displayReviews(res1Reviews);
     }
 
     private void loadReviews() {
