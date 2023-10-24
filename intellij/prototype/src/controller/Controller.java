@@ -45,16 +45,7 @@ public class Controller{
         return true;
     }
 
-    public void computeRating(Restaurant r){
-        if (r != null) {
-            ArrayList<Review> reviews = revLib.getReviews(r.reviewList);
-            float sum = 0;
-            for (Review rev: reviews){
-                sum += rev.rating;
-            }
-            r.rating = sum / reviews.size();
-        }
-    }
+
 
     public static void main (String[] args){
 
@@ -88,7 +79,7 @@ public class Controller{
                             ui.displayReviews(reviews);
                         }
                         if (c.postReview(curUser, selectedRes.restaurantId)){
-                            c.computeRating(selectedRes);
+                            selectedRes.computeRating(revLib);
                         }
                         ui.displayRestaurants(results);
                     }

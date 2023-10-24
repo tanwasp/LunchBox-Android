@@ -20,6 +20,18 @@ public class Restaurant {
     public float distanceToUser;
     public int priceRange;
 
+    public void computeRating(ReviewsLibrary revLib){
+        if (this != null) {
+            ArrayList<Review> reviews = revLib.getReviews(reviewList);
+            float sum = 0;
+            for (Review rev: reviews){
+                sum += rev.rating;
+            }
+            rating = sum / reviews.size();
+        }
+    }
+
+
     public Restaurant(String restaurantId, String name, float rating, String address, String city, String state, String country, String postalCode, float lat, float lon, ArrayList<String> reviewList, int priceRange) {
         this.restaurantId = restaurantId;
         this.name = name;
