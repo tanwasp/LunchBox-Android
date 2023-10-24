@@ -12,6 +12,7 @@ participant " : TextUI" as ui
 participant " : Controller" as controller
 participant " : RestaurantLibrary" as lib
 
+controller -> ui: getSearchData()
 ui -> user : Display search prompt
 user -> ui : Enter search term (name)
 ui -> user : Want price filter?
@@ -20,7 +21,8 @@ ui -> user : Want location filter?
 user -> ui : Enter desired location filter
 ui -> user : Which sorting algorithm?
 user -> ui : Indicate desired sort
-ui -> controller : search(name)
+ui -> controller: return search data
+
 controller -> lib : results = search(name)
 ui -> controller : filter(filters)
 controller -> IFilter : filteredResults = filter(results, filters)
