@@ -39,7 +39,7 @@ public class Restaurant {
     public String toString(){
         StringBuilder output = new StringBuilder();
         output.append("Name: ").append(name).append("\n");
-        output.append("Rating: ").append(rating).append("\n");
+        output.append("Rating: ").append(String.format("%.1f", rating)).append("\n");
         output.append("Price: ").append(getDollarSigns(priceRange)).append("\n");
         output.append("Address: ").append(address).append("\n");
         output.append("City: ").append(city).append("\n");
@@ -92,6 +92,4 @@ public class Restaurant {
 
         return (float) distance * 0.621371f;
     }
-
-    // Constructor, getters, setters, and other methods can be added as needed
 }
