@@ -11,14 +11,7 @@
 ## 3. Preconditions
 
 * App is downloaded and opened 
-* Connection to WiFi
-* Established Username Requirements:
-  * 1-30 characters
-  * Only letters, numbers, periods, and underscores
-  * Not already taken
-* Established Password Requirements:
-  * 6-16 characters
-  * Only letters, numbers, periods, and underscores
+* Connection to GPS
 
 ## 4. Postconditions
 
@@ -46,37 +39,27 @@ if (Select Log In or Create Account?) is (Log In) then
 end
 else (Create Account)
 |App|
-:Prompt user to enter an email or phone number;
+:Prompt user with account creation form;
 
 |User|
-if (Skip) is (No) then
-:Select which and enters into text box;
-:Click Next;
-else (Yes)
-endif
-
-|App|
-:Prompt user to enter username;
+:Type email in designated text box;
 
 |User|
-:Types a username;
+:Type username in designated text box;
 
 while (Is valid username?) is (No) 
 |User|
 :Tries another username;
 endwhile (Yes)
-:Click next;
-
-|App|
-:Prompt user to enter password;
 
 |User|
-:Types a password;
+:Type password in designated text box;
 
 while (Is valid password?) is (No) 
 |User|
 :Retypes password;
 endwhile (Yes)
+:Click next;
 
 |App|
 :Request access to location tracking (GPS);
@@ -87,12 +70,15 @@ if (Share location?) is (Accept) then
 #pink:Connects to Phone's GPS feature;
 else (Deny)
 |App|
-:Prompt user to enter default location;
+:Prompt user to select default location;
 |User|
-:Enter location and click confirm;
+:Select location and click confirm;
 endif
 
 :Click Create Account;
+
+|App|
+:Saves account with given info;
 stop
 
 @enduml
@@ -124,3 +110,12 @@ endwhile (Yes)
 stop
 @enduml
 ```
+
+## Notes
+* Established Username Requirements:
+  * 1-30 characters
+  * Only letters, numbers, periods, and underscores
+  * Not already taken
+* Established Password Requirements:
+  * 6-16 characters
+  * Only letters, numbers, periods, and underscores

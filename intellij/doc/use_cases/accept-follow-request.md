@@ -1,4 +1,4 @@
-# Accept Follow Request (Brief)
+# Accept Follow Request (Casual)
 
 ## 1. Primary actor and goals
 
@@ -25,7 +25,7 @@ __User__: Wants to connect with people they know. Wants to be able to choose whe
 
 skin rose
 
-title Accept Follow Request (Brief)
+title Accept Follow Request (Casual)
 
 |#wheat|User|
 |#pink|App|
@@ -34,11 +34,15 @@ title Accept Follow Request (Brief)
 start
 :Navigate to Notifications by clicking the bell icon;
 :Select the request notification;
+if (User wants to accept?) is (No) then 
+:Click "Deny";
+else (Yes)
 :Click "Accept";
-
 |App|
 :Save that Friend and User follow each other;
 :Delivers acceptance to Friend's Notifications;
+endif
+:Removes request from User's Notifications;
 
 stop
 @enduml

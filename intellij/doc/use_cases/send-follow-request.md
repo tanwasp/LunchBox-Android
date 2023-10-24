@@ -12,6 +12,7 @@ __User__: Wants to request to follow a profile. Wants to connect with people the
 
 * User is logged into a functional account
 * User knows the username of their intended friend
+* Friend's account exists publicly
 
 ## 4. Postconditions
 
