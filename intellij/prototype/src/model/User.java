@@ -17,6 +17,5 @@ public class User {
         this.lat = lat;
         this.lon = lon;
     }
-
-    // Constructor, getters, setters, and other methods can be added as needed
+    
 }
