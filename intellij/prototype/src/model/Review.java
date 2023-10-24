@@ -8,6 +8,16 @@ public class Review {
     public Date date;
     public String body;
 
+    @Override
+    public String toString(){
+            StringBuilder output = new StringBuilder();
+            output.append("Username: ").append(username).append("\n");
+            output.append("Rating: ").append(rating).append("\n");
+            output.append("Review: ").append(body).append("\n");
+
+        return output.toString();
+    }
+
     public Review(String reviewId, String username, String restaurantId, Float rating, String body) {
         this.reviewId = reviewId;
         this.username = username;
@@ -17,13 +27,6 @@ public class Review {
         this.body = body;
     }
 
-//    reviewId: 	- string
-//    username: 	- string
-//    restaurantId: 	- string
-//    rating: 		- float
-//    date: 		- Date
-//    body	- String
 
-    // Constructor, getters, setters, and other methods can be added as needed
 }
 

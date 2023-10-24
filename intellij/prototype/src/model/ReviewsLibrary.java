@@ -18,26 +18,17 @@ public class ReviewsLibrary {
         return reviewId;
     }
 
-    public String displayReviews(ArrayList<String> reviews){
-        StringBuilder output = new StringBuilder();
-        if (reviews.isEmpty()) {
-            return "No reviews available yet.";
-        }
-        output.append("=====================================\n");
-        output.append("           REVIEWS               \n");
-        output.append("=====================================\n");
+
+    public ArrayList<Review> getReviews(ArrayList<String> reviews){
+        ArrayList<Review> output = new ArrayList<Review>();
         for (String reviewId : reviews) {
             Review review = this.data.get(reviewId);
             if (review == null){
                 continue;
             }
-            output.append("Username: ").append(review.username).append("\n");
-            output.append("Rating: ").append(review.rating).append("\n");
-            output.append("Review: ").append(review.body).append("\n");
-            output.append("-------------------------------------\n");
+            output.add(review);
         }
-        System.out.println(output.toString());  
-        return output.toString();
+        return output;
     }
 
     private void loadReviews() {

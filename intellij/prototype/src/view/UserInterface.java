@@ -94,37 +94,38 @@ public class UserInterface{
 
         for (Restaurant restaurant : results) {
             output.append("Restaurant ").append(count).append("\n");
-            output.append("Name: ").append(restaurant.name).append("\n");
-            output.append("Rating: ").append(restaurant.rating).append("\n");
-            output.append("Price: ").append(getDollarSigns(restaurant.priceRange)).append("\n");
-            output.append("Address: ").append(restaurant.address).append("\n");
-            output.append("City: ").append(restaurant.city).append("\n");
-            output.append("State: ").append(restaurant.state).append("\n");
-            if (restaurant.distanceToUser < 10) {
-                output.append("Distance: ")
-                        .append(String.format("%.1f", restaurant.distanceToUser));
-            } else {
-                output.append("Distance: ")
-                        .append(String.format("%.0f", restaurant.distanceToUser));
-
-            }
-            output.append(" miles\n");
-
+            output.append(restaurant.toString());
             output.append("-------------------------------------\n");
             count++;
+
         }
 
         System.out.println(output);
     }
 
-    private String getDollarSigns(int priceRange) {
-        StringBuilder dollarSigns = new StringBuilder();
-        for (int i = 0; i < priceRange; i++) {
-            dollarSigns.append("$");
-        }
-        return dollarSigns.toString();
+    public void displayReviews(ArrayList<Review> reviews){
+        StringBuilder output = new StringBuilder();
 
+        if (reviews.isEmpty()) {
+            System.out.println("No reviews for this restaurant.");
+            return;
+        }
+
+        output.append("=====================================\n");
+        output.append("           REVIEWS           \n");
+        output.append("=====================================\n");
+
+        int count = 1;
+
+        for (Review review : reviews) {
+            output.append(review.toString());
+            output.append("-------------------------------------\n");
+
+        }
+
+        System.out.println(output);
     }
+
 
     public String[] getReviewData() {
         Scanner in = new Scanner(System.in);
