@@ -7,18 +7,17 @@ public class RestaurantLibrary {
     private HashMap<String, Restaurant> data;
 
     public RestaurantLibrary() {
-
         this.data = new HashMap<>();
         this.loadRestaurants();
     }
 
-    public void addReviewToRestaurant(String restaurantId, String reviewId) {
+    public void addReviewToRest(String restaurantId, String reviewId) {
         Restaurant restaurant = data.get(restaurantId);
         restaurant.reviewList.add(reviewId);
     }
 
 
-    public ArrayList<Restaurant> search(String term, HashSet<IFilter> filters, String sort, User curUser) {
+    public ArrayList<Restaurant> search(String term, Set<IFilter> filters, String sort, User curUser) {
 
         ArrayList<Restaurant> matches = new ArrayList<Restaurant>();
 
@@ -43,13 +42,7 @@ public class RestaurantLibrary {
         return matches;
     }
 
-
-    public Review postReview(User user, Restaurant restaurant, float rating, String reviewText) {
-        // Implement review posting logic here, for now, return a dummy review
-        return null;
-    }
-
-     public void loadRestaurants() {
+     private void loadRestaurants() {
 
         Restaurant r1 = new Restaurant("restaurant1", "Moreno Bakery", 4.0f, "737 W Brandon Blvd", "Brandon", "FL", "US", "33511", 27.9361395886f, -82.2950403264f, new ArrayList<>(Arrays.asList("review2", "review21", "review37", "review62", "review64")), 2);
         this.data.put("restaurant1", r1);

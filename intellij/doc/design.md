@@ -65,8 +65,7 @@ class Restaurant{
 class Review{
     -reviewId: String
     -rating: float
-    -reviewInfo: ReviewInfo
-    -reviewText: String
+    -body: String
     -username: String
     -restaurantId: String
     -date: DateTime
@@ -74,11 +73,27 @@ class Review{
 
 class User{
     -userName: String
-    -joinedDateTime: DateTime
+    -joinedDateTime: Date
+    -lat: float
+    -lon: float
 }
 
 class RestaurantLibrary{
-    -allRestaurants: ArrayList<Restaurant>
+    -data: HashMap<String, Restaurant>
+    --
+    addReviewToRest(restaurantId: String, reviewId: String): void
+    search(term: String, filters: Set<IFilter>, sort: String, curUser: User): ArrayList<Restaurant>
+}
+
+class ReviewsLibrary{
+    -data: HashMap<String, Review>
+    --
+    addReview(curUser: User, restaurantId: String, rating: float, reviewText: String): String
+    displayReviews(reviews : ArrayList<String>): String
+}
+
+class PriceFilter{
+    -
 }
 
 ' associations

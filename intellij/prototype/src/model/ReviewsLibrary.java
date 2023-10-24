@@ -50,7 +50,7 @@ public class ReviewsLibrary {
         allReviews.displayReviews(res1Reviews);
     }
 
-    public void loadReviews() {
+    private void loadReviews() {
 
         Review rev1 = new Review("review1", "burchdanielle", "restaurant6", 2.5f, "A me try writer off enough. Road hope wall onto foot. Better require until peace. Half official always why who body take. That rate region over task.");
         this.data.put("review1", rev1);

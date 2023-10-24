@@ -114,7 +114,7 @@ public class UserInterface{
             count++;
         }
 
-        System.out.println(output.toString());
+        System.out.println(output);
     }
 
     private String getDollarSigns(int priceRange) {

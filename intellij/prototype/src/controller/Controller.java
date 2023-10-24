@@ -41,7 +41,7 @@ public class Controller{
         float rating = Float.parseFloat(reviewParams[0]);
         String reviewText = reviewParams[1];
         String newReviewId = revLib.addReview(curUser, restaurantId, rating, reviewText);
-        lib.addReviewToRestaurant(restaurantId, newReviewId);
+        lib.addReviewToRest(restaurantId, newReviewId);
     }
 
     public void computeRating(Restaurant r){
