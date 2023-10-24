@@ -33,20 +33,19 @@ public class Controller{
         return matches;
     }
 
-    public void postReview(User curUser, String restaurantId){
+    public boolean postReview(User curUser, String restaurantId){
         String[] reviewParams = ui.getReviewData();
         if (reviewParams == null){
-            return;
+            return false;
         }
         float rating = Float.parseFloat(reviewParams[0]);
         String reviewText = reviewParams[1];
         String newReviewId = revLib.addReview(curUser, restaurantId, rating, reviewText);
         lib.addReviewToRest(restaurantId, newReviewId);
+        return true;
     }
 
-    public void computeRating(Restaurant r){
 
-    }
 
     public static void main (String[] args){
 
@@ -56,8 +55,11 @@ public class Controller{
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
 
+
+
         ui.welcome();
         Controller c = new Controller();
+
 
         while (true){
 
@@ -76,11 +78,11 @@ public class Controller{
                             ArrayList<Review> reviews = revLib.getReviews(selectedRes.reviewList);
                             ui.displayReviews(reviews);
                         }
-                        c.postReview(curUser, selectedRes.restaurantId);
+                        if (c.postReview(curUser, selectedRes.restaurantId)){
+                            selectedRes.computeRating(revLib);
+                        }
                         ui.displayRestaurants(results);
                     }
-
-
                 }
             }
 

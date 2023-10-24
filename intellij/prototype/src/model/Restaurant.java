@@ -20,6 +20,18 @@ public class Restaurant {
     public float distanceToUser;
     public int priceRange;
 
+    public void computeRating(ReviewsLibrary revLib){
+        if (this != null) {
+            ArrayList<Review> reviews = revLib.getReviews(reviewList);
+            float sum = 0;
+            for (Review rev: reviews){
+                sum += rev.rating;
+            }
+            rating = sum / reviews.size();
+        }
+    }
+
+
     public Restaurant(String restaurantId, String name, float rating, String address, String city, String state, String country, String postalCode, float lat, float lon, ArrayList<String> reviewList, int priceRange) {
         this.restaurantId = restaurantId;
         this.name = name;
@@ -39,7 +51,7 @@ public class Restaurant {
     public String toString(){
         StringBuilder output = new StringBuilder();
         output.append("Name: ").append(name).append("\n");
-        output.append("Rating: ").append(rating).append("\n");
+        output.append("Rating: ").append(String.format("%.1f", rating)).append("\n");
         output.append("Price: ").append(getDollarSigns(priceRange)).append("\n");
         output.append("Address: ").append(address).append("\n");
         output.append("City: ").append(city).append("\n");
@@ -92,6 +104,4 @@ public class Restaurant {
 
         return (float) distance * 0.621371f;
     }
-
-    // Constructor, getters, setters, and other methods can be added as needed
 }
