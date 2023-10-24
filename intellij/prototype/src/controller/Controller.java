@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Controller{
-    public ArrayList<Restaurant> searchRestaurants(User curUser, UserInterface ui, RestaurantLibrary lib){
+    private static RestaurantLibrary lib;
+    private static ReviewsLibrary revLib;
+    private static UserInterface ui;
+
+    public ArrayList<Restaurant> searchRestaurants(User curUser){
         String[] searchParams = ui.getSearchData();
 
         String key = searchParams[0];
@@ -29,38 +33,54 @@ public class Controller{
         return matches;
     }
 
-    public void postReview(User curUser, UserInterface ui, ReviewsLibrary revLib, String restaurantId){
+    public void postReview(User curUser, String restaurantId){
         String[] reviewParams = ui.getReviewData();
         if (reviewParams == null){
             return;
         }
         float rating = Float.parseFloat(reviewParams[0]);
         String reviewText = reviewParams[1];
-        revLib.addReview(curUser, restaurantId, rating, reviewText);
+        String newReviewId = revLib.addReview(curUser, restaurantId, rating, reviewText);
+        lib.addReviewToRestaurant(restaurantId, newReviewId);
+    }
+
+    public void computeRating(Restaurant r){
+
     }
 
     public static void main (String[] args){
 
         // For this prototype we assume the user's location is known. In the app, this will be collected using the device's GPS.
         User curUser = new User("Me", 30, -90);
-        UserInterface ui = new UserInterface();
-        RestaurantLibrary lib = new RestaurantLibrary();
-        ReviewsLibrary revLib = new ReviewsLibrary();
+        ui = new UserInterface();
+        lib = new RestaurantLibrary();
+        revLib = new ReviewsLibrary();
 
         ui.welcome();
+        Controller c = new Controller();
 
         while (true){
-            Controller c = new Controller();
-            ArrayList<Restaurant> results = c.searchRestaurants(curUser, ui, lib);
-            if (!results.isEmpty()){
-                int selected = ui.selectRestaurant(results);
-                Restaurant selectedRes = results.get(selected - 1);
-                ui.displayRestaurantInfo(selectedRes);
-                if (selectedRes != null){
-                    revLib.displayReviews(selectedRes.reviewList);
-                }
-                c.postReview(curUser, ui, revLib, selectedRes.restaurantId);
 
+            ArrayList<Restaurant> results = c.searchRestaurants(curUser);
+            if (!results.isEmpty()){
+                while(true) {
+                    String nextAction = ui.getNextAction();
+                    if (nextAction.toLowerCase().equals("1")) {
+                        break;
+                    }
+                    else {
+                        int selected = ui.selectRestaurant(results);
+                        Restaurant selectedRes = results.get(selected - 1);
+                        ui.displayRestaurantInfo(selectedRes);
+                        if (selectedRes != null) {
+                            revLib.displayReviews(selectedRes.reviewList);
+                        }
+                        c.postReview(curUser, selectedRes.restaurantId);
+                        ui.displayRestaurants(results);
+                    }
+
+
+                }
             }
 
         }

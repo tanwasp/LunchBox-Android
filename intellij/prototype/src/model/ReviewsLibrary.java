@@ -12,17 +12,18 @@ public class ReviewsLibrary {
         this.loadReviews();
     }
 
-    public void addReview(User curUser, String restaurantId, float rating, String reviewText){
-        String reviewId = "review" + (67 + 1);
+    public String addReview(User curUser, String restaurantId, float rating, String reviewText){
+        String reviewId = "review" + (this.data.size() + 100);
         Review newReview = new Review(reviewId, curUser.username, restaurantId, rating, reviewText);
         this.data.put(reviewId, newReview);
+        return reviewId;
     }
 
 
     public String displayReviews(ArrayList<String> reviews){
         StringBuilder output = new StringBuilder();
         if (reviews.isEmpty()) {
-            return "No reviews available.";
+            return "No reviews available yet.";
         }
         output.append("=====================================\n");
         output.append("           REVIEWS               \n");
@@ -45,6 +46,7 @@ public class ReviewsLibrary {
         ReviewsLibrary allReviews = new ReviewsLibrary();
         allReviews.loadReviews();
         ArrayList<String> res1Reviews = new ArrayList<>(Arrays.asList("review2", "review21", "review37", "review62", "review64"));
+        allReviews.addReview(new User("user1", 30, -90), "restaurant1", 5.0f, "This is a test review.");
         allReviews.displayReviews(res1Reviews);
     }
 
