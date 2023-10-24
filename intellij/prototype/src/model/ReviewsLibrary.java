@@ -19,7 +19,6 @@ public class ReviewsLibrary {
         return reviewId;
     }
 
-
     public String displayReviews(ArrayList<String> reviews){
         StringBuilder output = new StringBuilder();
         if (reviews.isEmpty()) {

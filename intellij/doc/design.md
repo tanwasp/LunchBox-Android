@@ -92,12 +92,27 @@ class ReviewsLibrary{
     displayReviews(reviews : ArrayList<String>): String
 }
 
+interface IFilter { 
+    --
+    filter(restaurants: Collection<Restaurant>): Collection<Restaurant>
+}
+
 class PriceFilter{
-    -
+    +price: int
+}
+
+class LocFilter{
+    +ditance: int
+    +u: User
 }
 
 ' associations
+IFilter <|.. PriceFilter
+IFilter <|.. LocFilter
+PriceFilter "0..1" -- "1" RestaurantLibrary: Helps-filter
+LocFilter "0..1" -- "1" RestaurantLibrary
 RestaurantLibrary "1" - "1..*" Restaurant : \tIs-information-expert-of\t\t
+ReviewsLibrary "1" -- "*" Review : \tManages-all\t\t
 Review "*" -- "1" Restaurant : \tIs-part-of\t\t
 User "1" - "*" Review : \tCreates\t\t
 @enduml
