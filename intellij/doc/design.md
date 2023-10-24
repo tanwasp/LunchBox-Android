@@ -1,5 +1,7 @@
 # Sequence Diagram
 
+## Check Out Restaurant
+
 ```plantuml
 @startuml
 hide footbox
@@ -30,6 +32,8 @@ controller -> ui : showResults(finalResults)
 @enduml
 ```
 
+## Review Restaurant
+
 # Design Class Diagram
 
 ```plantuml
@@ -41,20 +45,21 @@ class Restaurant{
     -restaurantId: String
     -name: String
     -location: Location
-    -rating: number
-    -review_list: ArrayList<String>
-    -description: String
-    -cuisines: Array<String>
-    --
-    getRestaurantInfo(): RestaurantInfo
-}
-
-class Location{
+    -rating: float
     -address: String
     -city: String
     -state: String
     -country: String
     -postalCode: String
+    -lat: float
+    -lon: float
+    -review_list: ArrayList<String>
+    -distanceToUser: float
+    -description: String
+    -priceRange: int
+    --
+    toString(): String
+    setDistToUser(u: User): void
 }
 
 class Review{
@@ -78,7 +83,6 @@ class RestaurantLibrary{
 
 ' associations
 RestaurantLibrary "1" - "1..*" Restaurant : \tIs-information-expert-of\t\t
-Restaurant "1" - "1" Location : \tContains\t\t
 Review "*" -- "1" Restaurant : \tIs-part-of\t\t
 User "1" - "*" Review : \tCreates\t\t
 @enduml

@@ -51,14 +51,14 @@ public class Restaurant {
 
     }
 
-    public void computeDistToUser(User u){
+    public void setDistToUser(User u){
         if (distanceToUser == -1.0f){
             distanceToUser = haversine(u.lat, u.lon, this.lat, this.lon);
         }
     }
 
     // help source: https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
-    public float haversine(float long1, float lat1, float long2, float lat2){
+    private float haversine(float long1, float lat1, float long2, float lat2){
         double earthRadius = 6371.0;
 
         // Convert latitude and longitude from degrees to radians

@@ -20,7 +20,7 @@ public class RestaurantLibrary {
         // Assuming data is a HashMap<String, Restaurant>
         for (Restaurant res : data.values()){
             if (res.name.toLowerCase().contains(term.toLowerCase())){
-                res.computeDistToUser(curUser);
+                res.setDistToUser(curUser);
                 matches.add(res);
             }
 
