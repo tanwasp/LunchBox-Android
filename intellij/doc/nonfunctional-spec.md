@@ -25,7 +25,7 @@
 * Application must run on Android device
 
 ### 6. External interfaces:
-* Must connect to WiFi
+* Device must be able to connect to data
 * Must connect to device location / GPS
 * Asks to connect to Camera Roll app on the device
 

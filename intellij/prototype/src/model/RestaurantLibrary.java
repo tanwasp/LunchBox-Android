@@ -50,7 +50,7 @@ public class RestaurantLibrary {
         Restaurant r2 = new Restaurant("restaurant2", "Britt’s Bakehouse", 3.0f, "137 W Jefferson Ave", "Kirkwood", "MO", "US", "63122", 38.5825641f, -90.4079162f, new ArrayList<>(Arrays.asList("review11", "review30", "review32", "review52", "review58")), 1);
         this.data.put("restaurant2", r2);
 
-        Restaurant r3 = new Restaurant("restaurant3", "Maple Creek Country Club", 4.1665f, "10501 E 21st St", "Indianapolis", "IN", "US", "46229", 39.7963819f, -85.9817333f, new ArrayList<>(Arrays.asList("review7", "review35", "review40", "review46")), 1);
+        Restaurant r3 = new Restaurant("restaurant3", "The Maple Creek Country Club", 4.5f, "10501 E 21st St", "Indianapolis", "IN", "US", "46229", 39.7963819f, -85.9817333f, new ArrayList<>(Arrays.asList("review7", "review35", "review40", "review46")), 1);
         this.data.put("restaurant3", r3);
 
         Restaurant r4 = new Restaurant("restaurant4", "McDonald's", 1.5f, "709 Terry Pkwy", "Gretna", "LA", "US", "70056", 29.8998883024f, -90.0298833754f, new ArrayList<>(Arrays.asList("review12", "review23", "review25", "review41")), 1);
@@ -62,7 +62,7 @@ public class RestaurantLibrary {
         Restaurant r13 = new Restaurant("restaurant13", "Biscuit Love: Hillsboro Village", 3.83f, "2001 Belcourt Ave", "Nashville", "TN", "US", "37212", 36.1367494339f, -86.7997314667f, new ArrayList<>(Arrays.asList("review10", "review43", "review61")), 2);
         this.data.put("restaurant13", r13);
 
-        Restaurant r19 = new Restaurant("restaurant19", "Sushi Train", 4.75f, "94 White Bridge Rd", "Nashville", "TN", "US", "37205", 36.1302006f, -86.853207f, new ArrayList<>(Arrays.asList("review18", "review57", "review63")), 1);
+        Restaurant r19 = new Restaurant("restaurant19", "Sushi Train", 3.5f, "94 White Bridge Rd", "Nashville", "TN", "US", "37205", 35.1302006f, -87.93207f, new ArrayList<>(Arrays.asList("review18", "review57", "review63")), 1);
         this.data.put("restaurant19", r19);
 
         Restaurant r18 = new Restaurant("restaurant18", "WIN Bubble Tea and Sushi", 4.5f, "99 White Bridge Pike", "Nashville", "TN", "US", "37205", 36.1316071f, -86.8581153f, new ArrayList<>(Arrays.asList("review17", "review28", "review42")), 1);
@@ -71,13 +71,13 @@ public class RestaurantLibrary {
         Restaurant r17 = new Restaurant("restaurant17", "El Merkury", 2.5f, "2104 Chestnut St", "Philadelphia", "PA", "US", "19103", 39.952185f, -75.1758693f, new ArrayList<>(Arrays.asList("review16", "review45", "review66")), 2);
         this.data.put("restaurant17", r17);
 
-        Restaurant r16 = new Restaurant("restaurant16", "Sushi Kingdom", 3.5f, "148 NJ-73", "Marlton", "NJ", "US", "08053", 39.8973486233f, -74.9302179453f, new ArrayList<>(Arrays.asList("review15", "review36", "review67")), 1);
+        Restaurant r16 = new Restaurant("restaurant16", "Sushi Kingdom", 3.5f, "148 NJ-73", "Marlton", "NJ", "US", "08053", 39.8973486233f, -74.9302179453f, new ArrayList<>(Arrays.asList("review15", "review36", "review67")), 3);
         this.data.put("restaurant16", r16);
 
         Restaurant r15 = new Restaurant("restaurant15", "Hot Dogs on Main", 3.75f, "505 Main St", "Dunedin", "FL", "US", "34698", 28.0124356f, -82.7855034f, new ArrayList<>(Arrays.asList("review14", "review47", "review60")), 3);
         this.data.put("restaurant15", r15);
 
-        Restaurant r14 = new Restaurant("restaurant14", "Truckee Bagel Company - Midtown", 4.33f, "538 S Virginia St, Ste B", "Reno", "NV", "US", "89501", 39.5202401f, -119.810022f, new ArrayList<>(Arrays.asList("review13", "review54", "review65")), 3);
+        Restaurant r14 = new Restaurant("restaurant14", "The Truckee Bagel Company - Midtown", 3.5f, "538 S Virginia St, Ste B", "Reno", "NV", "US", "89501", 39.5202401f, -119.810022f, new ArrayList<>(Arrays.asList("review13", "review54", "review65")), 3);
         this.data.put("restaurant14", r14);
 
         Restaurant r11 = new Restaurant("restaurant11", "Hunters Station", 1.25f, "975 Main St", "Nashville", "TN", "US", "37206", 36.1782943f, -86.7522834f, new ArrayList<>(Arrays.asList("review8", "review34", "review56")), 2);
