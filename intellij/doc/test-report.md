@@ -221,11 +221,11 @@ The goal of the second test run is to evaluate the functionality of the location
 
 ## System Test #3
 
-The goal of this test run is to make a search with no
+The goal of this test run is to make a search with no filters and default sorting. The user should be able to select a restaurant and
+leave a review, and the review will be visible when they go back to the restaurant profile.
 
 ## System Test #4
 
 The goal of this test run is to evaluate what happens when you enter a term that does not match any of the restaurant's names. 
 The desired outcome is that a message will appear indicating no results, and the user will be prompted to search again.
 
-**Transcript:**
