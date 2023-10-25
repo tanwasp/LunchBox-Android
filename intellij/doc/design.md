@@ -36,7 +36,7 @@ ui -> user : Display selected restaurant info
 @enduml
 ```
 
-## Review Restaurant
+## Review Restaurant (picks up directly after Check Out Restaurant)
 
 ```plantuml
 @startuml
@@ -52,6 +52,10 @@ participant "lib : RestaurantLibrary" as lib
 ui -> user : Ask user how to proceed
 user -> ui : Indicate Review Restaurant
 controller -> ui : reviewParams = getReviewData()
+ui -> user : Asks for desired rating
+user -> ui : Enter rating
+ui -> user : Asks for desired message
+user -> ui : Enter message
 controller -> revLib : newReviewId = addReview(curUser, restaurantId, rating, reviewText)
 controller -> lib : addReviewToRest(restaurantId, newReviewId)
 
