@@ -5,8 +5,8 @@
 The goal of the first test run is to evaluate the functionality of the price filter and location sorting of search results.
 It should show how these components respond when you give them valid and invalid input. When given invalid input, the program
 should alert the user and prompt them to try again. Once valid data is entered, the user should be able to select a restaurant 
-using its labeled number. The desired outcome is that the user will be able to view a restaurant profile (complete with restaurant
-info and reviews) based on their search.
+using its labeled number. The desired outcome is that the user will be able to view matching restaurants based on their search,
+and select a restaurant in order to see its details and reviews.
 
 **TRANSCRIPT :**
 
@@ -82,6 +82,24 @@ RESTAURANT LIST
 
 Restaurant 1
 
+Name: Sushi Train
+
+Rating: 3.5
+
+Price: $
+
+Address: 94 White Bridge Rd
+
+City: Nashville
+
+State: TN
+
+Distance: 143 miles
+
+-------------------------------------
+
+Restaurant 2
+
 Name: WIN Bubble Tea and Sushi
 
 Rating: 4.0
@@ -98,24 +116,6 @@ Distance: 217 miles
 
 -------------------------------------
 
-Restaurant 2
-
-Name: Sushi Train
-
-Rating: 3.5
-
-Price: $
-
-Address: 94 White Bridge Rd
-
-City: Nashville
-
-State: TN
-
-Distance: 217 miles
-
--------------------------------------
-
 
 What would you like to do next? (Enter 1 to search again search, Enter 2 to select restaurant)
 
@@ -123,7 +123,7 @@ What would you like to do next? (Enter 1 to search again search, Enter 2 to sele
 
 Please enter the number of the restaurant you would like to select.
 
-1
+2
 
 Name: WIN Bubble Tea and Sushi
 
@@ -217,7 +217,7 @@ in descending closeness (143 before 217 miles), showing the proximity sorting.
 ## System Test #2
 
 The goal of the second test run is to evaluate the functionality of the location filter and rating sorting of search results.
-The desired outcome is that the user will be able to view a restaurant profile (complete with restaurant info and reviews) based on their search.
+The desired outcome is that the user will be able to view restaurants matching their search parameters.
 
 **TRANSCRIPT :**
 
@@ -301,7 +301,7 @@ These results make sense because all results contain the word cafe, are within 5
 
 ## System Test #3
 
-The goal of this test run is to make a search with no filters and default sorting. The user should be able to select a restaurant and
+The goal of the third test run is to make a search with no filters and with default sorting. The user should be able to select a restaurant and
 leave a review, and the review will be visible when they go back to the restaurant profile.
 
 **TRANSCRIPT :**
