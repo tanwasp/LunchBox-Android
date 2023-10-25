@@ -1,8 +1,6 @@
 package model;
 
         import java.util.ArrayList;
-        import java.util.Map;
-        import java.util.HashMap;
 
 /**
  * Represents a restaurant with its details and reviews.
@@ -12,67 +10,67 @@ public class Restaurant {
     /**
      * Unique identifier for the restaurant.
      */
-    public String restaurantId;
+    private String restaurantId;
 
     /**
      * Name of the restaurant.
      */
-    public String name;
+    private String name;
 
     /**
      * Average rating of the restaurant.
      */
-    public float rating;
+    private float rating;
 
     /**
      * Address of the restaurant.
      */
-    public String address;
+    private String address;
 
     /**
      * City where the restaurant is located.
      */
-    public String city;
+    private String city;
 
     /**
      * State where the restaurant is located.
      */
-    public String state;
+    private String state;
 
     /**
      * Country where the restaurant is located.
      */
-    public String country;
+    private String country;
 
     /**
      * Postal code of the restaurant.
      */
-    public String postalCode;
+    private String postalCode;
 
     /**
      * Latitude of the restaurant's location.
      */
-    public float lat;
+    private float lat;
 
     /**
      * Longitude of the restaurant's location.
      */
-    public float lon;
+    private float lon;
 
     /**
      * List of review IDs associated with the restaurant.
      */
-    public ArrayList<String> reviewList;
+    private ArrayList<String> reviewList;
 
     /**
      * Distance of the restaurant from the user.
      */
-    public float distanceToUser;
+    private float distanceToUser;
 
     /**
      * Price range of the restaurant (represented by the number of dollar signs).
      */
-    public int priceRange;
+    private int priceRange;
 
     /**
      * Computes the average rating of the restaurant based on its reviews.
@@ -157,7 +155,7 @@ public class Restaurant {
      *
      * @return A string of dollar signs representing the price range.
      */
-    public String getDollarSigns(int priceRange) {
+    private String getDollarSigns(int priceRange) {
         StringBuilder dollarSigns = new StringBuilder();
         for (int i = 0; i < priceRange; i++) {
             dollarSigns.append("$");

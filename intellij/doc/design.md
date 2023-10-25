@@ -11,6 +11,7 @@ actor User as user
 participant "ui : TextUI" as ui
 participant " : Controller" as controller
 participant "lib : RestaurantLibrary" as lib
+participant "revLib : ReviewsLibrary" as revLib
 
 controller -> ui: searchParams = getSearchData()
 ui -> user : Display search prompt
@@ -19,7 +20,7 @@ ui -> user : Want price filter?
 user -> ui : Enter desired price filter
 ui -> user : Want location filter?
 user -> ui : Enter desired location filter
-ui -> user : Which sorting algorithm?
+ui -> user : Want sorting algorithm?
 user -> ui : Indicate desired sort
 controller -> lib : results = search(term, filters, sort, curUser)
 controller -> ui : displayRestaurants(results)
@@ -32,6 +33,9 @@ ui -> user : Ask which restaurant
 user -> ui : Indicate which restaurant
 controller -> ui : displayRestaurantInfo(selectedResult)
 ui -> user : Display selected restaurant info
+controller -> revLib : reviews = getReviews(selectedResult)
+controller -> ui : displayReviews(reviews)
+ui -> user : Display selected restaurant reviews
 
 @enduml
 ```
@@ -48,6 +52,7 @@ participant "ui : TextUI" as ui
 participant " : Controller" as controller
 participant "revLib : ReviewsLibrary" as revLib
 participant "lib : RestaurantLibrary" as lib
+participant " : Restaurant" as restaurant
 
 ui -> user : Ask user if they want to leave review
 user -> ui : Indicate yes
@@ -58,6 +63,7 @@ ui -> user : Asks for desired message
 user -> ui : Enter message
 controller -> revLib : newReviewId = addReview(curUser, restaurantId, rating, reviewText)
 controller -> lib : addReviewToRest(restaurantId, newReviewId)
+controller -> restaurant: computeRating(revLib)
 
 @enduml
 ```
@@ -89,6 +95,8 @@ class Restaurant{
     --
     toString(): String
     setDistToUser(u: User): void
+    computeRating(revLib: ReviewsLibrary): void
+    getDollarSigns(priceRange: int): String
 }
 
 class Review{
@@ -98,6 +106,8 @@ class Review{
     -username: String
     -restaurantId: String
     -date: DateTime
+    -- 
+    toString(): String
 }
 
 class User{
@@ -127,12 +137,12 @@ interface IFilter {
 }
 
 class PriceFilter{
-    +price: int
+    -price: int
 }
 
 class LocFilter{
-    +ditance: int
-    +u: User
+    -distance: int
+    -u: User
 }
 
 ' associations
