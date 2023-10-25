@@ -49,8 +49,8 @@ participant " : Controller" as controller
 participant "revLib : ReviewsLibrary" as revLib
 participant "lib : RestaurantLibrary" as lib
 
-ui -> user : Ask user how to proceed
-user -> ui : Indicate Review Restaurant
+ui -> user : Ask user if they want to leave review
+user -> ui : Indicate yes
 controller -> ui : reviewParams = getReviewData()
 ui -> user : Asks for desired rating
 user -> ui : Enter rating
