@@ -4,12 +4,20 @@ import model.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-
+/**
+ * This class is the controller for the prototype. It is responsible for creating the user interface, the restaurant library, and the reviews library.
+ * It also handles the flow of the program, calling the appropriate methods in the user interface and libraries.
+ */
 public class Controller{
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
     private static UserInterface ui;
 
+    /**
+     * This method is called when the user wants to search for restaurants. It gets the search parameters from the user interface, and calls the search method in the restaurant library.
+     * @param curUser The user who is searching for restaurants.
+     * @return An ArrayList of restaurants that match the search parameters.
+     */
     public ArrayList<Restaurant> searchRestaurants(User curUser){
         String[] searchParams = ui.getSearchData();
 
@@ -33,6 +41,12 @@ public class Controller{
         return matches;
     }
 
+    /**
+     * This method is called when the user wants to post a review. It gets the review parameters from the user interface, and calls the addReview method in the reviews library.
+     * @param curUser The user who is posting the review.
+     * @param restaurantId The id of the restaurant that the review is for.
+     * @return True if the review was successfully posted, false otherwise.
+     */
     public boolean postReview(User curUser, String restaurantId){
         String[] reviewParams = ui.getReviewData();
         if (reviewParams == null){
@@ -44,8 +58,7 @@ public class Controller{
         lib.addReviewToRest(restaurantId, newReviewId);
         return true;
     }
-
-
+    
 
     public static void main (String[] args){
 

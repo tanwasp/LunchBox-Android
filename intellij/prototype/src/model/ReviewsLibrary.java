@@ -1,16 +1,33 @@
 package model;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+/**
+ * Represents a library of reviews.
+ */
 public class ReviewsLibrary {
     private HashMap<String, Review> data;
 
+    /**
+     * Constructor for ReviewsLibrary.
+     * Initializes the data map and loads reviews.
+     */
     public ReviewsLibrary(){
         this.data = new HashMap<String, Review>();
         this.loadReviews();
     }
 
+    /**
+     * Adds a new review to the library.
+     *
+     * @param curUser The user posting the review.
+     * @param restaurantId The ID of the restaurant being reviewed.
+     * @param rating The rating given by the user.
+     * @param reviewText The text of the review.
+     * @return The ID of the newly added review.
+     */
     public String addReview(User curUser, String restaurantId, float rating, String reviewText){
         String reviewId = "review" + (this.data.size() + 100);
         Review newReview = new Review(reviewId, curUser.username, restaurantId, rating, reviewText);
@@ -18,7 +35,12 @@ public class ReviewsLibrary {
         return reviewId;
     }
 
-
+    /**
+     * Retrieves a list of reviews based on their IDs.
+     *
+     * @param reviews A list of review IDs.
+     * @return A list of Review objects.
+     */
     public ArrayList<Review> getReviews(ArrayList<String> reviews){
         ArrayList<Review> output = new ArrayList<Review>();
         for (String reviewId : reviews) {
@@ -31,7 +53,11 @@ public class ReviewsLibrary {
         return output;
     }
 
+    /**
+     * Loads a set of sample reviews into the library.
+     */
     private void loadReviews() {
+        // Sample reviews are added here
 
         Review rev1 = new Review("review1", "burchdanielle", "restaurant6", 2.5f, "A me try writer off enough. Road hope wall onto foot. Better require until peace. Half official always why who body take. That rate region over task.");
         this.data.put("review1", rev1);
