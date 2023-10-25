@@ -34,7 +34,6 @@ public class RestaurantLibrary {
             matches = (ArrayList<Restaurant>) f.filter(matches);
         }
         if ("prox".equals(sort)) {
-//            Collections.sort(matches, Comparator.comparingDouble(r -> (double) r.haversine(r.lat, r.lon, user.lat, user.lon)));
             Collections.sort(matches, Comparator.comparingDouble(r -> (double) r.distanceToUser));
         } else {
             Collections.sort(matches, Comparator.comparingDouble(r -> (double) - r.rating));
