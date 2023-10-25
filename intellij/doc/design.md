@@ -8,11 +8,11 @@ hide footbox
 skin rose
 
 actor User as user
-participant " : TextUI" as ui
+participant "ui : TextUI" as ui
 participant " : Controller" as controller
-participant " : RestaurantLibrary" as lib
+participant "lib : RestaurantLibrary" as lib
 
-controller -> ui: getSearchData()
+controller -> ui: searchParams = getSearchData()
 ui -> user : Display search prompt
 user -> ui : Enter search term (name)
 ui -> user : Want price filter?
@@ -21,20 +21,47 @@ ui -> user : Want location filter?
 user -> ui : Enter desired location filter
 ui -> user : Which sorting algorithm?
 user -> ui : Indicate desired sort
-ui -> controller: return search data
-
-controller -> lib : results = search(name)
-ui -> controller : filter(filters)
-controller -> IFilter : filteredResults = filter(results, filters)
-ui -> controller : sortBy(sort)
-controller -> lib : sortedResults = sortBy(filteredResults, sort)
-controller -> lib : finalResults = toString(sortedResults)
-controller -> ui : showResults(finalResults)
+controller -> lib : results = search(term, filters, sort, curUser)
+controller -> ui : displayRestaurants(results)
+ui -> user : Display restaurants matching criteria
+controller -> ui : getNextAction()
+ui -> user : Ask user how to proceed
+user -> ui : Indicate Select Restaurant
+controller -> ui : selectRestaurant(results)
+ui -> user : Ask which restaurant
+user -> ui : Indicate which restaurant
+controller -> ui : displayRestaurantInfo(selectedResult)
+ui -> user : Display selected restaurant info
 
 @enduml
 ```
 
-## Review Restaurant
+## Review Restaurant (picks up directly after Check Out Restaurant)
+
+```plantuml
+@startuml
+hide footbox
+skin rose
+
+actor User as user
+participant "ui : TextUI" as ui
+participant " : Controller" as controller
+participant "revLib : ReviewsLibrary" as revLib
+participant "lib : RestaurantLibrary" as lib
+
+ui -> user : Ask user if they want to leave review
+user -> ui : Indicate yes
+controller -> ui : reviewParams = getReviewData()
+ui -> user : Asks for desired rating
+user -> ui : Enter rating
+ui -> user : Asks for desired message
+user -> ui : Enter message
+controller -> revLib : newReviewId = addReview(curUser, restaurantId, rating, reviewText)
+controller -> lib : addReviewToRest(restaurantId, newReviewId)
+
+@enduml
+```
+
 
 # Design Class Diagram
 

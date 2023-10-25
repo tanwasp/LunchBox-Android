@@ -1,4 +1,4 @@
-# Vision Document
+# CMPU-203 F23 - Team 2I 
 
 ## Introduction
 
@@ -41,57 +41,3 @@ Our app addresses user needs that other reviewing platforms do not:
 
 * For Diners: Find trusted restaurant recommendations, log experiences, and connect with friends.
 * For Restaurant Owners: Gain visibility, receive feedback, and attract more patrons.
-
-## UML Use Case Diagram
-
-```plantuml
-@startuml
-
-skin rose
-
-' human actors
-actor "User" as user
-
-' system actors
-actor "GPS" <<system>> as gps
-actor "Camera Roll" <<system>> as photos
-
-' list all use cases in package 
-package "Restaurant App" {
-usecase "Create Account" as createAcc
-usecase "Manage Account" as manageAcc
-usecase "Check Restaurant Reviews" as checkReview
-usecase "Check User Profile" as checkPerson
-usecase "Review Restaurant" as review
-usecase "Manage Reviews" as manageReview
-usecase "Create List" as makeList
-usecase "Manage Lists" as manageList
-usecase "Assign Restaurant to List" as assignList
-usecase "Send Follow Request" as sendFollow
-usecase "Accept Follow Request" as acceptFollow
-usecase "Respond to Review" as replyReview
-}
-
-' list relationships between actors and use cases 
-user --> createAcc
-user --> manageAcc
-user --> checkReview
-user --> checkPerson
-user --> review
-user --> manageReview
-user --> makeList
-user --> manageList
-user --> assignList
-user --> sendFollow
-user --> acceptFollow
-user --> replyReview
-makeList --> gps
-manageList --> gps
-assignList --> gps
-createAcc --> gps
-checkReview --> gps
-review --> photos
-manageAcc --> photos
-manageReview --> photos
-@enduml
-```
