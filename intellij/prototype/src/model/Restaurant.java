@@ -151,9 +151,10 @@ public class Restaurant {
     }
 
     /**
-     * Converts the price range of the restaurant to a string of dollar signs.
+     * Converts the price range of the restaurant to a string of dollar signs to increase readability.
      *
      * @param priceRange Price range of the restaurant.
+     *
      * @return A string of dollar signs representing the price range.
      */
     public String getDollarSigns(int priceRange) {
@@ -182,6 +183,7 @@ public class Restaurant {
          * @param lat1  Latitude of the first point.
          * @param long2 Longitude of the second point.
          * @param lat2  Latitude of the second point.
+         *
          * @return The distance between the two points in miles.
          */
         private float haversine(float long1, float lat1, float long2, float lat2){

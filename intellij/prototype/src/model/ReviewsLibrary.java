@@ -26,6 +26,7 @@ public class ReviewsLibrary {
      * @param restaurantId The ID of the restaurant being reviewed.
      * @param rating The rating given by the user.
      * @param reviewText The text of the review.
+     *
      * @return The ID of the newly added review.
      */
     public String addReview(User curUser, String restaurantId, float rating, String reviewText){
@@ -39,6 +40,7 @@ public class ReviewsLibrary {
      * Retrieves a list of reviews based on their IDs.
      *
      * @param reviews A list of review IDs.
+     *
      * @return A list of Review objects.
      */
     public ArrayList<Review> getReviews(ArrayList<String> reviews){
