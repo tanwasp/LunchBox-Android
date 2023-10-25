@@ -4,7 +4,7 @@ import java.util.*;
 
 public class RestaurantLibrary {
 
-    public HashMap<String, Restaurant> data;
+    private HashMap<String, Restaurant> data;
 
     public RestaurantLibrary() {
         this.data = new HashMap<>();

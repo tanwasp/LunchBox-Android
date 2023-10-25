@@ -5,8 +5,8 @@ import java.util.Collection;
 
 public class LocFilter implements IFilter{
 
-    int distance;
-    User u;
+    private int distance;
+    private User u;
 
     public LocFilter(int dist, User u){
         this.distance = dist;
