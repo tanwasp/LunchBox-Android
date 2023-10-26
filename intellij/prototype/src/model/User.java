@@ -9,16 +9,16 @@ import java.util.Date;
 public class User {
 
     /** The username of the user. */
-    private String username;
+    public String username;
 
     /** The date the user joined. */
     private Date joinedDate;
 
     /** The latitude of the user's location. */
-    private float lat;
+    public float lat;
 
     /** The longitude of the user's location. */
-    private float lon;
+    public float lon;
 
     /**
      * Constructs a new User with the given name and location.
