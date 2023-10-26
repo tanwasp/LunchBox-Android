@@ -1,43 +1,17 @@
 # CMPU-203 F23 - Team 2I 
 
-## Introduction
+# LunchBox Prototype #1
 
-Our restaurant reviewing app allows users to record, rate, and share their dining experiences while discovering new restaurants approved by other users.
-They can connect with their friends and make lists to categorize restaurants, save their favorites, and make wish lists.
-Users can also search for restaurants based on location, cuisine, and other filters.
+This prototype focuses on the main functionality of the app, which is the ability to search and view a restaurant's profile (including its reviews) and leave your own review (which will then be saved and displayed on the restaurant's page).
 
-## Target Audience
+## Limitations and Simplifications 
+Limitations include the lack of persistent state and storage. The filters are also limited to the name, price range, and proximity of the restaurant. 
+The sorting algorithm is also limited to sorting by rating and proximity. This is because for the prototype, we wanted to demonstrate the functionality of the filters and sorts, making it much easier to 
+add additional filters and sorts in the future.
 
-This app is intended for people 13+ years old in the United States with Android devices.
-It is ideal for food enthusiasts, travelers, and individuals looking to explore new dining experiences.
+Some simplifications we made are the built-in inclusion of very limited set of existing restaurants and fake reviews, and existing knowledge of the user's location.
+Additionally, information that will be sourced from reviews, like price range, are assumed in the simulated restaurants.
 
+## Running the Prototype
+The prototype can be run using the main() method in the Controller class. The input options are explained with each prompt.
 
-## Value Proposition
-
-Our app addresses user needs that other reviewing platforms do not:
-* Ability to connect with friends and follow their activity
-    * Can filter to only reviews of people you know
-* Ability to make shareable lists of associated restaurants
-* Isolates restaurant reviews from other sorts of establishments, unlike platforms like Yelp and Google Reviews
-
-## Main Features
-
-* Rate and review restaurants
-* Connect with friends and view their ratings
-* Create and share curated restaurant lists
-* Search restaurants using filters
-* View restaurant profiles with photos, ratings, and reviews
-
-## Constraints
-
-* Dependency on robust, accurate restaurant data
-* Ideal functionality relies on user location and connecting to Maps
-* Maintaining user privacy and data security
-* Limited document reads and writes with Firestore on free tier
-* Limited storage space for photos on free tier
-* Limited number of API calls on free tier with Google Maps API
-
-## Stakeholder Goals
-
-* For Diners: Find trusted restaurant recommendations, log experiences, and connect with friends.
-* For Restaurant Owners: Gain visibility, receive feedback, and attract more patrons.
