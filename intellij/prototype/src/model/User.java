@@ -35,4 +35,40 @@ public class User {
         this.lon = lon;
     }
 
+    /**
+     * Gets the username of the user.
+     *
+     * @return The username of the user.
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Gets the date the user joined.
+     *
+     * @return The date the user joined.
+     */
+    public Date getJoinedDate() {
+        return joinedDate;
+    }
+
+    /**
+     * Gets the latitude of the user's location.
+     *
+     * @return The latitude of the user's location.
+     */
+    public float getLat() {
+        return lat;
+    }
+
+    /**
+     * Gets the longitude of the user's location.
+     *
+     * @return The longitude of the user's location.
+     */
+    public float getLon() {
+        return lon;
+    }
+
 }

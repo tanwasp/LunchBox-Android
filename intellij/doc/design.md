@@ -91,9 +91,14 @@ class Restaurant{
     +review_list: ArrayList<String>
     +distanceToUser: float
     +description: String
+
     +priceRange: int
     --
     toString(): String
+    getRating(): float
+    getName(): String
+    getRestaurantId(): String
+    getReviewList(): ArrayList<String>
     setDistToUser(u: User): void
     computeRating(revLib: ReviewsLibrary): void
     getDollarSigns(priceRange: int): String
@@ -111,10 +116,15 @@ class Review{
 }
 
 class User{
-    +userName: String
+    -userName: String
     -joinedDateTime: Date
-    +lat: float
-    +lon: float
+    -lat: float
+    -lon: float
+    --
+    getUsername(): String
+    getJoinedDate(): Date
+    getLat(): float
+    getLon(): float
 }
 
 class RestaurantLibrary{

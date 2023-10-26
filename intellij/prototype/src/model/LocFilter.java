@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Represents a location filter
+ */
 public class LocFilter implements IFilter{
 
     private int distance;

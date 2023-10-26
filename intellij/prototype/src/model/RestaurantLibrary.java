@@ -2,28 +2,51 @@ package model;
 
 import java.util.*;
 
+/**
+ * Represents all restaurants stored in the app
+ */
 public class RestaurantLibrary {
 
     private HashMap<String, Restaurant> data;
 
+    /**
+     * Constructor for RestaurantLibrary.
+     * Initializes the data map and loads restaurants.
+     */
     public RestaurantLibrary() {
         this.data = new HashMap<>();
         this.loadRestaurants();
     }
 
+    /**
+     * Adds a review to a specific restaurant's review list.
+     *
+     * @param restaurantId The ID of the restaurant to add the review to
+     * @param reviewId     The ID of the review to be added from the ReviewsLibrary
+     */
     public void addReviewToRest(String restaurantId, String reviewId) {
         Restaurant restaurant = data.get(restaurantId);
-        restaurant.reviewList.add(reviewId);
+        restaurant.getReviewList().add(reviewId);
     }
 
 
+    /**
+     * Searches the Restaurant Library for restaurants that match a given search term, applying filters and sorting
+     *
+     * @param term     The search term to match against restaurant names
+     * @param filters  The filters to apply to the search results
+     * @param sort     The sorting method
+     * @param curUser  The current user to consider for distance calculations
+     *
+     * @return An ArrayList of Restaurant objects that match the search criteria, filtered and sorted as specified.
+     */
     public ArrayList<Restaurant> search(String term, Set<IFilter> filters, String sort, User curUser) {
 
         ArrayList<Restaurant> matches = new ArrayList<Restaurant>();
 
         // Assuming data is a HashMap<String, Restaurant>
         for (Restaurant res : data.values()){
-            if (res.name.toLowerCase().contains(term.toLowerCase())){
+            if (res.getName().toLowerCase().contains(term.toLowerCase())){
                 res.setDistToUser(curUser);
                 matches.add(res);
             }
@@ -36,11 +59,14 @@ public class RestaurantLibrary {
         if ("prox".equals(sort)) {
             Collections.sort(matches, Comparator.comparingDouble(r -> (double) r.distanceToUser));
         } else {
-            Collections.sort(matches, Comparator.comparingDouble(r -> (double) - r.rating));
+            Collections.sort(matches, Comparator.comparingDouble(r -> (double) - r.getRating()));
         }
         return matches;
     }
 
+    /**
+     * Loads a set of sample restaurants into the library.
+     */
      private void loadRestaurants() {
 
         Restaurant r1 = new Restaurant("restaurant1", "Moreno Bakery", 3.25f, "737 W Brandon Blvd", "Brandon", "FL", "US", "33511", 27.9361395886f, -82.2950403264f, new ArrayList<>(Arrays.asList("review2", "review21", "review37", "review62", "review64")), 2);

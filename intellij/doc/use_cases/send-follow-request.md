@@ -13,6 +13,7 @@ __User__: Wants to request to follow a profile. Wants to connect with people the
 * User is logged into a functional account
 * User knows the username of their intended friend
 * Friend's account exists publicly
+* User is currently on the search page
 
 ## 4. Postconditions
 
@@ -33,7 +34,6 @@ title Send Follow Request (Brief)
 
 |User|
 start
-:Navigate to search page;
 :Type Friend's username into search bar;
 
 |App|

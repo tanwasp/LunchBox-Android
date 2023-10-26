@@ -12,6 +12,7 @@ __User__: Wants to connect with people they know. Wants to be able to choose whe
 
 * User is logged into a functional account
 * User received request in Notifications
+* User is currently on their Notifications page
 
 ## 4. Postconditions
 
@@ -32,7 +33,6 @@ title Accept Follow Request (Casual)
 
 |User|
 start
-:Navigate to Notifications by clicking the bell icon;
 :Select the request notification;
 if (User wants to accept?) is (No) then 
 :Click "Deny";

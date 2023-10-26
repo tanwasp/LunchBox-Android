@@ -149,9 +149,10 @@ public class Restaurant {
     }
 
     /**
-     * Converts the price range of the restaurant to a string of dollar signs.
+     * Converts the price range of the restaurant to a string of dollar signs to increase readability.
      *
      * @param priceRange Price range of the restaurant.
+     *
      * @return A string of dollar signs representing the price range.
      */
     private String getDollarSigns(int priceRange) {
@@ -169,7 +170,7 @@ public class Restaurant {
      */
     public void setDistToUser(User u) {
         if (distanceToUser == -1.0f) {
-            distanceToUser = haversine(u.lat, u.lon, this.lat, this.lon);
+            distanceToUser = haversine(u.getLat(), u.getLon(), this.lat, this.lon);
         }
     }
 
@@ -180,6 +181,7 @@ public class Restaurant {
          * @param lat1  Latitude of the first point.
          * @param long2 Longitude of the second point.
          * @param lat2  Latitude of the second point.
+         *
          * @return The distance between the two points in miles.
          */
         private float haversine(float long1, float lat1, float long2, float lat2){
@@ -202,6 +204,42 @@ public class Restaurant {
             // Convert distance from kilometers to miles
             return (float) distance * 0.621371f;
         }
+
+    /**
+     * Gets the average rating of the restaurant.
+     *
+     * @return The average rating of the restaurant.
+     */
+    public float getRating() {
+        return rating;
     }
+
+    /**
+     * Gets the name of the restaurant.
+     *
+     * @return The name of the restaurant.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Gets the unique identifier of the restaurant.
+     *
+     * @return The unique identifier of the restaurant.
+     */
+    public String getRestaurantId() {
+        return restaurantId;
+    }
+
+    /**
+     * Gets the list of review IDs associated with the restaurant.
+     *
+     * @return The list of review IDs associated with the restaurant.
+     */
+    public ArrayList<String> getReviewList() {
+        return reviewList;
+    }
+}
 
 

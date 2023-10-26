@@ -14,7 +14,9 @@ public class Controller{
     private static UserInterface ui;
 
     /**
-     * This method is called when the user wants to search for restaurants. It gets the search parameters from the user interface, and calls the search method in the restaurant library.
+     * This method is called when the user wants to search for restaurants. It gets the search parameters from the user interface,
+     * formats them to the correct data types, and calls the search method in the restaurant library.
+     *
      * @param curUser The user who is searching for restaurants.
      * @return An ArrayList of restaurants that match the search parameters.
      */
@@ -42,7 +44,9 @@ public class Controller{
     }
 
     /**
-     * This method is called when the user wants to post a review. It gets the review parameters from the user interface, and calls the addReview method in the reviews library.
+     * This method is called when the user wants to post a review. It gets the review parameters from the user interface, and calls
+     * the addReview method in the reviews library.
+     *
      * @param curUser The user who is posting the review.
      * @param restaurantId The id of the restaurant that the review is for.
      * @return True if the review was successfully posted, false otherwise.
@@ -88,10 +92,10 @@ public class Controller{
                         Restaurant selectedRes = results.get(selected - 1);
                         ui.displayRestaurantInfo(selectedRes);
                         if (selectedRes != null) {
-                            ArrayList<Review> reviews = revLib.getReviews(selectedRes.reviewList);
+                            ArrayList<Review> reviews = revLib.getReviews(selectedRes.getReviewList());
                             ui.displayReviews(reviews);
                         }
-                        if (c.postReview(curUser, selectedRes.restaurantId)){
+                        if (c.postReview(curUser, selectedRes.getRestaurantId())){
                             selectedRes.computeRating(revLib);
                         }
                         ui.displayRestaurants(results);

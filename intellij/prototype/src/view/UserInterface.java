@@ -2,15 +2,19 @@ package view;
 import model.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 /**
  * Represents the user interface for the Lunch Box app.
  */
 public class UserInterface{
+
     public void welcome(){
         System.out.println("Welcome to Lunch Box!");
     }
+
     /**
      * Gets the search parameters from the user.
+     *
      * @return an array of strings containing the search parameters
      */
     public String[] getSearchData(){
@@ -26,9 +30,10 @@ public class UserInterface{
         String[] res = {term, priceFilter, locFilter, sort};
         return res;
     }
-/**
-     * Gets the search parameters from the user.
-     * @return an array of strings containing the search parameters
+    /**
+     * Gets the desired price filter from the user.
+     *
+     * @return a String representing the price filter (null if none desired)
      */
     public String askPriceFilter(){
         while (true) {
@@ -47,9 +52,11 @@ public class UserInterface{
             System.out.println("Invalid input. Please try again.");
         }
     }
-/**
-     * Gets the search parameters from the user.
-     * @return an array of strings containing the search parameters
+
+    /**
+     * Gets the desired location filter from the user.
+     *
+     * @return a String representing the location filter (null if none desired)
      */
     public String askLocationFilter(){
         while (true) {
@@ -69,9 +76,11 @@ public class UserInterface{
             System.out.println("Invalid input. Please try again.");
         }
     }
-/**
-     * Gets the search parameters from the user.
-     * @return an array of strings containing the search parameters
+
+    /**
+     * Gets the desired sorting algorithm from the user.
+     *
+     * @return a String representing the sort type
      */
     public String askSort(){
         while (true) {
@@ -92,8 +101,10 @@ public class UserInterface{
             System.out.println("Invalid input. Please try again.");
         }
     }
-/**
+
+    /**
      * Displays the results of the search.
+     *
      * @param results an array of restaurants that match the search criteria
      */
     public void displayRestaurants(ArrayList<Restaurant> results){
@@ -120,8 +131,10 @@ public class UserInterface{
 
         System.out.println(output);
     }
-/**
+
+    /**
      * Displays the reviews of a restaurant.
+     *
      * @param reviews an array of reviews for a restaurant
      */
     public void displayReviews(ArrayList<Review> reviews){
@@ -146,11 +159,12 @@ public class UserInterface{
 
         System.out.println(output);
     }
-/**
+
+    /**
      * Gets the review parameters from the user.
+     *
      * @return an array of strings containing the review parameters
      */
-
     public String[] getReviewData() {
         Scanner in = new Scanner(System.in);
         System.out.println("Would you like to post a review? (y,n)");
@@ -178,16 +192,20 @@ public class UserInterface{
         String[] res = {rating, reviewText};
         return res;
     }
-/**
+
+    /**
      * Displays the information for a restaurant.
+     *
      * @param r the restaurant to display
      */
     public void displayRestaurantInfo(Restaurant r){
         System.out.println(r.toString());
     }
-/**
-     * Gets the user's location.
-     * @return an array of floats containing the user's location
+
+    /**
+     * Gets desired restaurant selection from the user
+     *
+     * @return the number corresponding to the desired restaurant
      */
     public int selectRestaurant(ArrayList<Restaurant> results){
         while (true) {
@@ -204,9 +222,11 @@ public class UserInterface{
             System.out.println("Invalid input. Please try again.");
         }
     }
-/**
-     * Gets the user's location.
-     * @return an array of floats containing the user's location
+
+    /**
+     * Gets the user's next action after searching
+     *
+     * @return a String representing what the user wants to do next
      */
     public String getNextAction(){
         while (true) {

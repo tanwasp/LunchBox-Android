@@ -2,6 +2,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Represents a price filter
+ */
 public class PriceFilter implements IFilter{
     private int price;
 
