@@ -31,7 +31,7 @@ public class ReviewsLibrary {
      */
     public String addReview(User curUser, String restaurantId, float rating, String reviewText){
         String reviewId = "review" + (this.data.size() + 100);
-        Review newReview = new Review(reviewId, curUser.username, restaurantId, rating, reviewText);
+        Review newReview = new Review(reviewId, curUser.getUsername(), restaurantId, rating, reviewText);
         this.data.put(reviewId, newReview);
         return reviewId;
     }

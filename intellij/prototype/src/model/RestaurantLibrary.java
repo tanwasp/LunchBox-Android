@@ -26,7 +26,7 @@ public class RestaurantLibrary {
      */
     public void addReviewToRest(String restaurantId, String reviewId) {
         Restaurant restaurant = data.get(restaurantId);
-        restaurant.reviewList.add(reviewId);
+        restaurant.getReviewList().add(reviewId);
     }
 
 
@@ -46,7 +46,7 @@ public class RestaurantLibrary {
 
         // Assuming data is a HashMap<String, Restaurant>
         for (Restaurant res : data.values()){
-            if (res.name.toLowerCase().contains(term.toLowerCase())){
+            if (res.getName().toLowerCase().contains(term.toLowerCase())){
                 res.setDistToUser(curUser);
                 matches.add(res);
             }
@@ -59,7 +59,7 @@ public class RestaurantLibrary {
         if ("prox".equals(sort)) {
             Collections.sort(matches, Comparator.comparingDouble(r -> (double) r.distanceToUser));
         } else {
-            Collections.sort(matches, Comparator.comparingDouble(r -> (double) - r.rating));
+            Collections.sort(matches, Comparator.comparingDouble(r -> (double) - r.getRating()));
         }
         return matches;
     }

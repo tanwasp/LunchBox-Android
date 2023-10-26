@@ -92,10 +92,10 @@ public class Controller{
                         Restaurant selectedRes = results.get(selected - 1);
                         ui.displayRestaurantInfo(selectedRes);
                         if (selectedRes != null) {
-                            ArrayList<Review> reviews = revLib.getReviews(selectedRes.reviewList);
+                            ArrayList<Review> reviews = revLib.getReviews(selectedRes.getReviewList());
                             ui.displayReviews(reviews);
                         }
-                        if (c.postReview(curUser, selectedRes.restaurantId)){
+                        if (c.postReview(curUser, selectedRes.getRestaurantId())){
                             selectedRes.computeRating(revLib);
                         }
                         ui.displayRestaurants(results);

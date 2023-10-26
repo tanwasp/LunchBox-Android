@@ -65,12 +65,12 @@ public class Restaurant {
     /**
      * Distance of the restaurant from the user.
      */
-    private float distanceToUser;
+    public float distanceToUser;
 
     /**
      * Price range of the restaurant (represented by the number of dollar signs).
      */
-    private int priceRange;
+    public int priceRange;
 
     /**
      * Computes the average rating of the restaurant based on its reviews.
@@ -170,7 +170,7 @@ public class Restaurant {
      */
     public void setDistToUser(User u) {
         if (distanceToUser == -1.0f) {
-            distanceToUser = haversine(u.lat, u.lon, this.lat, this.lon);
+            distanceToUser = haversine(u.getLat(), u.getLon(), this.lat, this.lon);
         }
     }
 
@@ -204,6 +204,42 @@ public class Restaurant {
             // Convert distance from kilometers to miles
             return (float) distance * 0.621371f;
         }
+
+    /**
+     * Gets the average rating of the restaurant.
+     *
+     * @return The average rating of the restaurant.
+     */
+    public float getRating() {
+        return rating;
     }
+
+    /**
+     * Gets the name of the restaurant.
+     *
+     * @return The name of the restaurant.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Gets the unique identifier of the restaurant.
+     *
+     * @return The unique identifier of the restaurant.
+     */
+    public String getRestaurantId() {
+        return restaurantId;
+    }
+
+    /**
+     * Gets the list of review IDs associated with the restaurant.
+     *
+     * @return The list of review IDs associated with the restaurant.
+     */
+    public ArrayList<String> getReviewList() {
+        return reviewList;
+    }
+}
 
 
