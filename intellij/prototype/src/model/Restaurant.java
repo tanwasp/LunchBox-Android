@@ -9,57 +9,57 @@ public class Restaurant {
     /**
      * Unique identifier for the restaurant.
      */
-    public String restaurantId;
+    private String restaurantId;
 
     /**
      * Name of the restaurant.
      */
-    public String name;
+    private String name;
 
     /**
      * Average rating of the restaurant.
      */
-    public float rating;
+    private float rating;
 
     /**
      * Address of the restaurant.
      */
-    public String address;
+    private String address;
 
     /**
      * City where the restaurant is located.
      */
-    public String city;
+    private String city;
 
     /**
      * State where the restaurant is located.
      */
-    public String state;
+    private String state;
 
     /**
      * Country where the restaurant is located.
      */
-    public String country;
+    private String country;
 
     /**
      * Postal code of the restaurant.
      */
-    public String postalCode;
+    private String postalCode;
 
     /**
      * Latitude of the restaurant's location.
      */
-    public float lat;
+    private float lat;
 
     /**
      * Longitude of the restaurant's location.
      */
-    public float lon;
+    private float lon;
 
     /**
      * List of review IDs associated with the restaurant.
      */
-    public ArrayList<String> reviewList;
+    private ArrayList<String> reviewList;
 
     /**
      * Distance of the restaurant from the user.

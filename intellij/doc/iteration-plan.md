@@ -32,4 +32,5 @@ will be able to create a personal account, log into it, connect with their frien
 and filter their restaurant search to display only restaurants that have been reviewed by their friends.
 
 These elements are central to the social component of the app, and should be in place before other use
-cases that rely on it, like manage account and manage following, or less critical ones, like create list.
+cases that rely on it, like manage account and manage following, or less critical ones, like create list 
+that provide an additional feature but are not essential to the core functionality of the app.
