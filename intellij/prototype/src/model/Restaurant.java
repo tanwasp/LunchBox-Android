@@ -6,7 +6,7 @@ package model;
  * Represents a restaurant with its details and reviews.
  */
 public class Restaurant {
-
+ 
     /**
      * Unique identifier for the restaurant.
      */
