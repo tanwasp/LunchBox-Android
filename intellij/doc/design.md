@@ -77,21 +77,19 @@ skin rose
 'skinparam classAttributeIconSize 0
 
 class Restaurant{
-    +restaurantId: String
-    +name: String
-    +location: Location
-    +rating: float
-    +address: String
-    +city: String
-    +state: String
-    +country: String
-    +postalCode: String
-    +lat: float
-    +lon: float
-    +review_list: ArrayList<String>
+    -restaurantId: String
+    -name: String
+    -location: Location
+    -rating: float
+    -address: String
+    -city: String
+    -state: String
+    -country: String
+    -postalCode: String
+    -lat: float
+    -lon: float
+    -review_list: ArrayList<String>
     +distanceToUser: float
-    +description: String
-
     +priceRange: int
     --
     toString(): String
@@ -111,7 +109,7 @@ class Review{
     -username: String
     -restaurantId: String
     -date: DateTime
-    -- 
+    --
     toString(): String
 }
 
