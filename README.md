@@ -1,4 +1,4 @@
-# CMPU-203 F23 - Team 2I 
+# LunchBox
 
 ## Introduction
 
