@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LunchBox</string>
+    <string name="rest_name">Restaurant Name</string>
+    <string name="rest_rating">0.0</string>
 </resources>
