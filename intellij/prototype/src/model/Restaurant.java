@@ -1,11 +1,12 @@
 package model;
-import java.util.ArrayList;
+
+        import java.util.ArrayList;
 
 /**
  * Represents a restaurant with its details and reviews.
  */
 public class Restaurant {
- 
+
     /**
      * Unique identifier for the restaurant.
      */
