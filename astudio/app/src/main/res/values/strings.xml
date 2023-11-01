@@ -2,4 +2,7 @@
     <string name="app_name">LunchBox</string>
     <string name="rest_name">Restaurant Name</string>
     <string name="rest_rating">0.0</string>
+    <string name="rest_price">$$$</string>
+    <string name="address">Address Unknown</string>
+    <string name="reviews_label">Reviews</string>
 </resources>
