@@ -37,8 +37,7 @@ title Review Restaurant (Fully Dressed)
 
 |User|
 start
-:Navigate to search screen;
-:Type desired restaurant name into the search bar;
+:Execute __Check Restaurant__;
 
 |App|
 if (Restaurant profile exists?) is  ( Yes ) then
@@ -85,42 +84,3 @@ endif
 stop
 @enduml
 ```
-
-```plantuml
-@startuml
-
-skin rose
-
-title Add Restaurant
-
-'define the lanes
-|#wheat|User|
-|#pink|App|
-
-|User|
-start
-:Selects "Add Restaurant";
-
-|App|
-:Prompts the user to enter restaurant's Google Maps link;
-
-|User|
-if (Has link?) is (Yes) then
-:Pastes link into text box;
-else (No)
-:Selects "Enter Manually";
-|App|
-:Brings up a restaurant adding page;
-|User|
-:Enters restaurant info where prompted;
-endif
-
-:Clicks save;
-
-|App|
-:Save new restaurant to the app;
-
-stop
-@enduml
-```
-
