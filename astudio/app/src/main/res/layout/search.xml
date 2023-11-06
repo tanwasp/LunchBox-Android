@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".SearchActivity">
+
+    <!-- Search Bar -->
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:hint="Search..."
+
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+<!--    &lt;!&ndash; Filters Label &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/filtersLabel"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+
+<!--        android:text="Filters:"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/searchEditText" />-->
+
+<!--    &lt;!&ndash; Filter Option 1 &ndash;&gt;-->
+<!--    <CheckBox-->
+<!--        android:id="@+id/filterOption1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Filter Option 1"-->
+
+<!--        app:layout_constraintTop_toBottomOf="@id/filtersLabel"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--    &lt;!&ndash; Filter Option 2 &ndash;&gt;-->
+<!--    <CheckBox-->
+<!--        android:id="@+id/filterOption2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Filter Option 2"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/filterOption1"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!-- Add more filters and constraints as needed -->
+
+    <!-- ... existing layout ... -->
+
+    <!-- Price Filter Dropdown -->
+    <Spinner
+        android:id="@+id/priceFilterSpinner"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:entries="@array/price_filter_options"
+        app:layout_constraintTop_toBottomOf="@id/searchEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Distance Filter Input -->
+    <EditText
+        android:id="@+id/distanceFilterEditText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:hint="Max distance (in miles)"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/priceFilterSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Sorting Options -->
+    <RadioGroup
+        android:id="@+id/sortRadioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/distanceFilterEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <RadioButton
+            android:id="@+id/proximityRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort by Proximity" />
+
+        <RadioButton
+            android:id="@+id/ratingRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort by Rating" />
+
+    </RadioGroup>
+
+    <!-- Search Button -->
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        app:layout_constraintTop_toBottomOf="@id/sortRadioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
