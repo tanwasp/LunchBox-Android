@@ -25,7 +25,18 @@ necessary for app core functionality will come last.
 
 # 2nd Iteration Plan
 
-Since we have established the base function of reading restaurant reviews and making your own, 
+For the second iteration of the app, we will resolve some of the simplifications we made in the last iteration.
+In particular, we will be addressing the situation of the user's desired restaurant not having
+a profile existing on the app. To fulfill this, we will be implementing the Add Restaraunt use case.
+This is important so that users can manually enter their new restaurants, utilizing crowd-sourcing to produce 
+a more complete and up-to-date data set.
+
+We will also improve some aspects from the previous iteration, such as incorporating price range as part of users'
+reviews and using a restaurant's reviews to assign them a price category on their profile.
+
+# 3rd Iteration Plan
+
+Since we have established the base function of reading restaurant profiles, adding restaurants, and leaving reviews, 
 we will now move onto the social aspect of the app. This includes the create account, send
 follow request, and accept follow request use cases. After this iteration is complete, users
 will be able to create a personal account, log into it, connect with their friends on the app, 

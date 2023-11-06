@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="674e0bb9-66e5-44f1-a098-d5f7f45d2da8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/intellij/doc/use_cases/add-restaurant.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/intellij/doc/use_cases/check-restaurant.md" beforeDir="false" afterPath="$PROJECT_DIR$/intellij/doc/use_cases/check-restaurant.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/intellij/doc/use_cases/post-review.md" beforeDir="false" afterPath="$PROJECT_DIR$/intellij/doc/use_cases/post-review.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij/doc/iteration-plan.md" beforeDir="false" afterPath="$PROJECT_DIR$/intellij/doc/iteration-plan.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij/doc/use_cases/add-restaurant.md" beforeDir="false" afterPath="$PROJECT_DIR$/intellij/doc/use_cases/add-restaurant.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
