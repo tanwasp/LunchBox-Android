@@ -2,7 +2,7 @@
 
 ## 1. Primary actor and goals
 
-__User__: Wants to find and view ratings/reviews for a specific restaurant. 
+* __User__: Wants to find and view ratings/reviews for a specific restaurant. 
 They are particularly interested in feedback from their friends.
 
 ## 2. Other stakeholders and their goals

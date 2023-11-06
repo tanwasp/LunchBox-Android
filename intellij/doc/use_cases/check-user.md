@@ -1,7 +1,7 @@
-# Check User Profile (Casual)
+# Check User Profile
 
 ## 1. Primary actor and goals
-__User__: Aims to search for and view another user's profile to see their basic info, 
+* __User__: Aims to search for and view another user's profile to see their basic info, 
 public restaurant lists, and reviews. They're particularly interested in 
 connecting with friends and seeing their friends' preferences.
 
@@ -43,10 +43,7 @@ start
 :Select desired user profile;
 
 |App|
-:Show selected user's profile including:
-* Basic info (e.g., name, profile pic)
-* Publicly available restaurant lists
-* Reviews;
+:Show selected user's profile;
 
 |User|
 if (Want to view a specific list?) is (Yes) then
@@ -70,5 +67,11 @@ endif
 stop
 
 @enduml
-
 ```
+
+## Notes
+
+A user's profile includes:
+* Basic info (e.g. name, profile pic)
+* Publicly available restaurant lists
+* Reviews

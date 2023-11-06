@@ -24,7 +24,7 @@
 
 skin rose
 
-title Add Restaurant
+title Add Restaurant (Fully Dressed)
 
 'define the lanes
 |#wheat|User|

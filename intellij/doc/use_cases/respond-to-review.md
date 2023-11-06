@@ -1,8 +1,8 @@
-# Respond to Review (Fully Dressed)
+# Respond to Review
 
 ## 1. Primary actor and goals
 
-__User__: Wants to express their opinion on a review.
+* __User__: Wants to express their opinion on a review.
 
 ## 2. Other stakeholders and their goals
 

@@ -1,4 +1,4 @@
-# Manage Account (Casual)
+# Manage Account
 
 ## 1. Primary actor and goals
 
@@ -28,7 +28,7 @@
 
 skin rose
 
-title Manage Account (Casual)
+title Manage Account (Fully Dressed)
 
 |#wheat|User|
 |#pink|App|

@@ -25,7 +25,7 @@
 
 skin rose
 
-title Manage Existing Review (Brief)
+title Manage Existing Review (Fully Dressed)
 
 |#wheat|User|
 |#pink|App|

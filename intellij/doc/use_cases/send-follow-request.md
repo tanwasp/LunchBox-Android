@@ -1,8 +1,8 @@
-# Send Follow Request (Brief)
+# Send Follow Request
 
 ## 1. Primary actor and goals
 
-__User__: Wants to request to follow a profile. Wants to connect with people they know and be able to see their reviews.
+* __User__: Wants to request to follow a profile. Wants to connect with people they know and be able to see their reviews.
 
 ## 2. Other stakeholders and their goals
 
@@ -27,7 +27,7 @@ __User__: Wants to request to follow a profile. Wants to connect with people the
 
 skin rose
 
-title Send Follow Request (Brief)
+title Send Follow Request (Fully Dressed)
 
 |#wheat|User|
 |#pink|App|
@@ -46,11 +46,16 @@ start
 :Bring up profile;
 
 |User|
+if (Already following?) is (No) then
 :Click "Follow";
 
 |App|
 :Delivers request to friend's Notifications;
-
 stop
+
+else (Yes)
+:Follow button says "Following";
+stop
+
 @enduml
 ```

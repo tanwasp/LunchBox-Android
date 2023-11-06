@@ -1,4 +1,4 @@
-# Assign to List (Brief)
+# Assign to List
 
 ## 1. Primary actor and goals
 * __User__: Wants to add a restaurant to a list. Desires an easy-to-use interface and a seamless saving process.
@@ -23,41 +23,13 @@
 
 skin rose
 
-title Assign to List Restaurant (Brief)
+title Assign to List Restaurant (Casual)
 
 |#wheat|User|
 |#pink|App|
 
 |User|
-start
-:Navigate to restaurant search box;
-:Enter name into search box;
-
-if (Sort by) is (Default) then
-:Most relevant
-(algorithm tbd);
-else (Other)
-:Select:
-* Nearest
-* Highest rating
-* Most reviews;
-  endif
-  if (Select Filters) is (Yes) then
-  :Multi-select category:
-  *Cuisine
-  *Price range
-  *Reviewed by friends;
-
-:Multi-select tags under given category;
-
-else (No)
-endif
-
-|App|
-:Display relevant restaurant results with
-given sorting algorithm and filters;
-
-|User|
+:Execute __Check Restaurant__;
 :Select desired restaurant profile;
 :Click the Options button to view options;
 |App|
@@ -67,9 +39,9 @@ if (Add to list?) is (Yes) then
 |App|
 :Display list of lists;
 |User|
-:Select list to add to;
+:Select lists to add to;
 |App|
-:Add restaurant to list;
+:Add restaurant to lists;
 :Display confirmation message;
 else (No)
 endif
