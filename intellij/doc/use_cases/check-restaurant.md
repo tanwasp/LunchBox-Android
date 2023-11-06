@@ -1,4 +1,4 @@
-# Check Restaurant Review (Fully Dressed)
+# Check Restaurant Review
 
 ## 1. Primary actor and goals
 
