@@ -6,15 +6,16 @@ import edu.vassar.cmpu203.lunchbox.model.RestaurantLibrary;
 import edu.vassar.cmpu203.lunchbox.model.ReviewsLibrary;
 import edu.vassar.cmpu203.lunchbox.model.User;
 import edu.vassar.cmpu203.lunchbox.view.HomeView;
-import edu.vassar.cmpu203.lunchbox.view.SearchView;
+import edu.vassar.cmpu203.lunchbox.view.IMainView;
+import edu.vassar.cmpu203.lunchbox.view.MainView;
+import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
 
-public class MainActivity extends AppCompatActivity implements HomeView.Listener, SearchView.Listener {
+public class MainActivity extends AppCompatActivity implements HomeView.Listener, SearchFragment.Listener {
 
     private RestaurantLibrary lib;
     private ReviewsLibrary revLib;
     private User curUser;
-    private HomeView homeView;
-    private SearchView searchView;
+    IMainView mainView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +27,7 @@ public class MainActivity extends AppCompatActivity implements HomeView.Listener
         revLib = new ReviewsLibrary();
 
         // Initialize HomeView and SearchView
-        homeView = new HomeView(findViewById(R.id.homeViewContainer), this);
-        searchView = new SearchView(findViewById(R.id.searchViewContainer), this);
+        this.mainView = new MainView(this);
     }
 
     // HomeView.Listener methods
