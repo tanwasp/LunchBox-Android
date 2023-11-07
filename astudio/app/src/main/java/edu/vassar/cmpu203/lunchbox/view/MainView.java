@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import edu.vassar.cmpu203.lunchbox.databinding.ActivityMainBinding;
+import edu.vassar.cmpu203.lunchbox.databinding.MainBinding;
 
 
 public class MainView implements IMainView{
 
     FragmentManager fmanager; // lets us perform fragment transactions
-    ActivityMainBinding binding; // gives us access to all the graphical components in res/layout/main.xml
+    MainBinding binding; // gives us access to all the graphical components in res/layout/main.xml
 
     /**
      * Constructor method.
@@ -21,7 +20,7 @@ public class MainView implements IMainView{
      */
     public MainView(FragmentActivity activity){
         this.fmanager = activity.getSupportFragmentManager();
-        this.binding = ActivityMainBinding.inflate(activity.getLayoutInflater());
+        this.binding = MainBinding.inflate(activity.getLayoutInflater());
     }
 
     /**
