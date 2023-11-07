@@ -26,7 +26,7 @@ connecting with friends and seeing their friends' preferences.
 
 skin rose
 
-title Check User Profile (Casual)
+title Check User Profile (Fully Dressed)
 
 |#wheat|User|
 |#pink|App|
