@@ -10,6 +10,7 @@ import edu.vassar.cmpu203.lunchbox.view.IHomeView;
 import edu.vassar.cmpu203.lunchbox.view.IMainView;
 import edu.vassar.cmpu203.lunchbox.view.MainView;
 import edu.vassar.cmpu203.lunchbox.view.ISearchView;
+import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
 
 public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchView.Listener {
 
@@ -29,13 +30,16 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         // Initialize HomeView and SearchView
         this.mainView = new MainView(this);
         HomeFragment homeFragment = new HomeFragment(this);
+        this.mainView.displayFragment(homeFragment, false, "home");
+
         setContentView(this.mainView.getRootView());
     }
 
     // HomeView.Listener methods
     @Override
     public void onNavigateToSearch() {
-
+        SearchFragment searchFragment = new SearchFragment(this);
+        this.mainView.displayFragment(searchFragment, false, "search");
     }
 
     // SearchView.Listener methods
