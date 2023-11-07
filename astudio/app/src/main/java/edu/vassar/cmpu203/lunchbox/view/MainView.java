@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import edu.vassar.cmpu203.lunchbox.databinding.MainBinding;
 
-
 public class MainView implements IMainView{
 
     FragmentManager fmanager; // lets us perform fragment transactions

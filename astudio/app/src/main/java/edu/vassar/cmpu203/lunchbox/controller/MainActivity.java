@@ -7,11 +7,13 @@ import edu.vassar.cmpu203.lunchbox.model.ReviewsLibrary;
 import edu.vassar.cmpu203.lunchbox.model.User;
 import edu.vassar.cmpu203.lunchbox.view.HomeFragment;
 import edu.vassar.cmpu203.lunchbox.view.HomeView;
+import edu.vassar.cmpu203.lunchbox.view.IHomeView;
 import edu.vassar.cmpu203.lunchbox.view.IMainView;
 import edu.vassar.cmpu203.lunchbox.view.MainView;
 import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
+import edu.vassar.cmpu203.lunchbox.view.ISearchView;
 
-public class MainActivity extends AppCompatActivity implements HomeView.Listener, SearchFragment.Listener {
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchView.Listener {
 
     private RestaurantLibrary lib;
     private ReviewsLibrary revLib;
@@ -21,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements HomeView.Listener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         curUser = new User("Me", 30, -90);
         lib = new RestaurantLibrary();

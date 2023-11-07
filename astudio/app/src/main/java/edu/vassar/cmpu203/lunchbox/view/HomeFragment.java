@@ -18,10 +18,10 @@ import com.google.android.material.snackbar.Snackbar;
 
 
 import edu.vassar.cmpu203.lunchbox.R;
-import edu.vassar.cmpu203.lunchbox.databinding.FragmentHomeBinding
+import edu.vassar.cmpu203.lunchbox.databinding.FragmentHomeBinding;
 
 
-public class HomeFragment implements IHomeView{
+public class HomeFragment extends Fragment implements IHomeView{
     FragmentHomeBinding binding;
     Listener listener;
 
