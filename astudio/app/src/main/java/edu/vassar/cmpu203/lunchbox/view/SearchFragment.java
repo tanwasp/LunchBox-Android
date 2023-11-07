@@ -6,8 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import androidx.annotation.NonNull;
@@ -58,9 +61,29 @@ public class SearchFragment extends Fragment implements ISearchView {
         return this.binding.getRoot();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        this.binding.searchButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
 
+                String term = SearchFragment.this.binding.searchTermText.getText().toString();
+                String price = SearchFragment.this.binding.priceFilterSpinner.getSelectedItem().toString();
+                String distance = SearchFragment.this.binding.distanceFilterEditText.getText().toString();
 
+                String sort;
+                int buttonID = SearchFragment.this.binding.sortRadioGroup.getCheckedRadioButtonId();
+                if (buttonID != -1) {
+                    sort = findViewById(buttonID).getText().toString();
+                } else {
+                    sort = "Sort by Rating";
+                }
 
+                listener.onPerformSearch(term, price, distance, sort);
+            }
+        });
+    }
 
     @Override
     public void displaySearchResults(List<Restaurant> searchResults) {
