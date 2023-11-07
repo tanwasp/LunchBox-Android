@@ -2,6 +2,13 @@ package edu.vassar.cmpu203.lunchbox.controller;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
+import edu.vassar.cmpu203.lunchbox.model.IFilter;
+import edu.vassar.cmpu203.lunchbox.model.LocFilter;
+import edu.vassar.cmpu203.lunchbox.model.PriceFilter;
+import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.model.RestaurantLibrary;
 import edu.vassar.cmpu203.lunchbox.model.ReviewsLibrary;
 import edu.vassar.cmpu203.lunchbox.model.User;
@@ -44,6 +51,26 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     // SearchView.Listener methods
     @Override
     public void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption) {
-        // Perform search and update UI
+        HashSet<IFilter> filters = new HashSet<IFilter>();
+        if(priceFilter != null){
+            PriceFilter pf = new PriceFilter(priceFilter);
+            filters.add(pf);
+        }
+        if(distanceFilter != null){
+            try {
+                LocFilter lf = new LocFilter(Integer.parseInt(distanceFilter), curUser);
+                filters.add(lf);
+            } catch (NumberFormatException e){
+                System.out.println("Something went wrong. Invalid integer.");
+            }
+        }
+        ArrayList<Restaurant> matches = lib.search(searchTerm, filters, sortOption, curUser);
+//        TODO
+
+//        ui.displayRestaurants(matches);
+//        return matches;
+
+
+
     }
 }

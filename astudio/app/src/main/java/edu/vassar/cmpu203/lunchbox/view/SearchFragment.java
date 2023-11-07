@@ -54,13 +54,12 @@ public class SearchFragment extends Fragment implements ISearchView {
         this.listener = listener;
     }
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         this.binding = FragmentSearchBinding.inflate(inflater);
         return this.binding.getRoot();
     }
-    
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
@@ -75,7 +74,7 @@ public class SearchFragment extends Fragment implements ISearchView {
                 String sort;
                 int buttonID = SearchFragment.this.binding.sortRadioGroup.getCheckedRadioButtonId();
                 if (buttonID != -1) {
-                    sort = findViewById(buttonID).getText().toString();
+                    sort = getView().findViewById(buttonID).getText().toString();
                 } else {
                     sort = "Sort by Rating";
                 }
