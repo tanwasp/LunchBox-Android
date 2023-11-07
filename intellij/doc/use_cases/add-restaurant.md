@@ -15,7 +15,7 @@
 
 ## 4. Postconditions
 
-* Any added restaurant profile is be saved and visible to all viewers when searched
+* Added restaurant profile is be saved and visible to all viewers when searched
 
 ## 4. Workflow
 
@@ -24,7 +24,7 @@
 
 skin rose
 
-title Add Restaurant
+title Add Restaurant (Fully Dressed)
 
 'define the lanes
 |#wheat|User|
@@ -32,26 +32,20 @@ title Add Restaurant
 
 |User|
 start
-:Selects "Add Restaurant";
+:Select "Add Restaurant";
 
 |App|
-:Prompts the user to enter restaurant's Google Maps link;
+:Brings up restaurant addition form;
 
 |User|
-if (Has link?) is (Yes) then
-:Pastes link into text box;
-else (No)
-:Selects "Enter Manually";
-|App|
-:Brings up a restaurant adding page;
-|User|
-:Enters restaurant info where prompted;
-endif
-
+while (All data complete?) is (No)
+:Enter restaurant name into appropriate text box;
+:Enter restaurant location info into appropriate text boxes;
 :Clicks save;
+endwhile (Yes)
 
 |App|
-:Save new restaurant to the app;
+:Save new restaurant to app;
 
 stop
 @enduml

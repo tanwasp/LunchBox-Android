@@ -1,4 +1,4 @@
-# Post Review (Fully Dressed)
+# Post Review
 
 ## 1. Primary actor and goals
 

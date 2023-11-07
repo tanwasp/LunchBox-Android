@@ -1,8 +1,8 @@
-# Accept Follow Request (Casual)
+# Accept Follow Request
 
 ## 1. Primary actor and goals
 
-__User__: Wants to connect with people they know. Wants to be able to choose whether or not to be followed by someone.
+* __User__: Wants to connect with people they know. Wants to be able to choose whether or not to be followed by someone.
 
 ## 2. Other stakeholders and their goals
 
@@ -26,7 +26,7 @@ __User__: Wants to connect with people they know. Wants to be able to choose whe
 
 skin rose
 
-title Accept Follow Request (Casual)
+title Accept Follow Request (Fully Dressed)
 
 |#wheat|User|
 |#pink|App|

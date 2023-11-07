@@ -1,4 +1,4 @@
-# Create Account (Casual)
+# Create Account
 
 ## 1. Primary actor and goals
 
@@ -27,7 +27,7 @@
 
 skin rose
 
-title Create Account (Casual)
+title Create Account (Fully Dressed)
 
 |#wheat|User|
 |#pink|App|
@@ -119,3 +119,4 @@ stop
 * Established Password Requirements:
   * 6-16 characters
   * Only letters, numbers, periods, and underscores
+

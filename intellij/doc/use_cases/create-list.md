@@ -1,4 +1,4 @@
-# Create Restaurant List (Fully Dressed)
+# Create Restaurant List
 
 ## 1. Primary actor and goals
 * __User__: Wants to curate and save a list of restaurants based on personal criteria (e.g., cuisine, location, favorites, wish list). 

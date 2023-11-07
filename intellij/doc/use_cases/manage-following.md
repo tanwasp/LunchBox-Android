@@ -1,8 +1,8 @@
-# Manage Following (Brief)
+# Manage Following 
 
 ## 1. Primary actor and goals
 
-__User__: Wants to manage who is following them and unfollow people they not longer want to connect with.
+* __User__: Wants to manage who is following them and unfollow people they no longer want to connect with.
 
 ## 2. Other stakeholders and their goals
 
@@ -24,7 +24,7 @@ __User__: Wants to manage who is following them and unfollow people they not lon
 
 skin rose
 
-title Manage Following (Brief)
+title Manage Following (Casual)
 
 |#wheat|User|
 |#pink|App|

@@ -1,4 +1,4 @@
-# Manage/Edit Restaurant List (Casual)
+# Manage/Edit Restaurant List
 ## 1. Primary actor and goals
 * __User__: Wants to efficiently manage and organize their restaurant lists. This includes adding new restaurants, removing restaurants, editing list details, and controlling the visibility of their lists.
 
