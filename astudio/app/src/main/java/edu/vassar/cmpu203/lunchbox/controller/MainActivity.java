@@ -13,7 +13,6 @@ import edu.vassar.cmpu203.lunchbox.view.ISearchView;
 import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
 
 public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchView.Listener {
-
     private RestaurantLibrary lib;
     private ReviewsLibrary revLib;
     private User curUser;

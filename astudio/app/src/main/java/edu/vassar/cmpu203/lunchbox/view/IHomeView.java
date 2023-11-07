@@ -4,6 +4,4 @@ public interface IHomeView {
     interface Listener{
         void onNavigateToSearch();
     }
-
-    // Other methods related to the home UI
 }

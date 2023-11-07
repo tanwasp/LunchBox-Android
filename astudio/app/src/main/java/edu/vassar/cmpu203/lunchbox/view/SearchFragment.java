@@ -58,10 +58,6 @@ public class SearchFragment extends Fragment implements ISearchView {
         return this.binding.getRoot();
     }
 
-
-
-
-
     @Override
     public void displaySearchResults(List<Restaurant> searchResults) {
         // Update the RecyclerView with the results
