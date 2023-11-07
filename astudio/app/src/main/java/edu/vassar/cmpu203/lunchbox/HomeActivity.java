@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
         import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
