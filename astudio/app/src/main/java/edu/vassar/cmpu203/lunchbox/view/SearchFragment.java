@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import androidx.fragment.app.Fragment;
 
 import androidx.annotation.NonNull;
 
@@ -17,7 +18,7 @@ import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentSearchBinding;
 
-public class SearchFragment implements ISearchView {
+public class SearchFragment extends Fragment implements ISearchView {
     private FragmentSearchBinding binding;
     private final Listener listener;
     private View rootView;
@@ -56,6 +57,8 @@ public class SearchFragment implements ISearchView {
         this.binding = FragmentSearchBinding.inflate(inflater);
         return this.binding.getRoot();
     }
+
+
 
 
 
