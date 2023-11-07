@@ -22,5 +22,6 @@
     <string name="rest_price">$$$</string>
     <string name="address">Address Unknown</string>
     <string name="reviews_label">Reviews</string>
+    <string name="welcome_msg">Welcome to LunchBox!</string>
 
 </resources>

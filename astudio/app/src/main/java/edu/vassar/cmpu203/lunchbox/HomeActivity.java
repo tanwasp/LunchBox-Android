@@ -13,7 +13,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.fragment_home);
 
         Button btnNavigateToSearch = findViewById(R.id.btnNavigateToSearch);
         btnNavigateToSearch.setOnClickListener(new View.OnClickListener() {
