@@ -1,5 +1,4 @@
 package edu.vassar.cmpu203.lunchbox.controller;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import edu.vassar.cmpu203.lunchbox.R;

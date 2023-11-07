@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="674e0bb9-66e5-44f1-a098-d5f7f45d2da8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/intellij/doc/use_cases/check-user.md" beforeDir="false" afterPath="$PROJECT_DIR$/intellij/doc/use_cases/check-user.md" afterDir="false" />
-    </list>
+    <list default="true" id="674e0bb9-66e5-44f1-a098-d5f7f45d2da8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,9 +16,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2XOk1ICqNGDTypb8wSrjfx3WhlC" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />

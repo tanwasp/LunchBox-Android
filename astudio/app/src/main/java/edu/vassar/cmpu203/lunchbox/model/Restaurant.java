@@ -50,12 +50,7 @@ public class Restaurant {
     /**
      * Latitude of the restaurant's location.
      */
-    private float lat;
-
-    /**
-     * Longitude of the restaurant's location.
-     */
-    private float lon;
+    private Location loc;
 
     /**
      * List of review IDs associated with the restaurant.
@@ -113,8 +108,7 @@ public class Restaurant {
         this.state = state;
         this.country = country;
         this.postalCode = postalCode;
-        this.lat = lat;
-        this.lon = lon;
+        this.loc = new Location (lat, lon);
         this.reviewList = reviewList;
         this.priceRange = priceRange;
         distanceToUser = -1.0f;
@@ -170,40 +164,9 @@ public class Restaurant {
      */
     public void setDistToUser(User u) {
         if (distanceToUser == -1.0f) {
-            distanceToUser = haversine(u.getLat(), u.getLon(), this.lat, this.lon);
+            distanceToUser = u.getLoc().haversine(this.loc);
         }
     }
-
-        /**
-         * Computes the distance between two points using the Haversine formula.
-         *
-         * @param long1 Longitude of the first point.
-         * @param lat1  Latitude of the first point.
-         * @param long2 Longitude of the second point.
-         * @param lat2  Latitude of the second point.
-         *
-         * @return The distance between the two points in miles.
-         */
-        private float haversine(float long1, float lat1, float long2, float lat2){
-
-            double earthRadius = 6371.0;
-
-            // Convert latitude and longitude from degrees to radians
-            double lat1Rad = Math.toRadians(lat1);
-            double long1Rad = Math.toRadians(long1);
-            double lat2Rad = Math.toRadians(lat2);
-            double long2Rad = Math.toRadians(long2);
-
-            // Haversine formula
-            double dlong = long2Rad - long1Rad;
-            double dlat = lat2Rad - lat1Rad;
-            double a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.pow(Math.sin(dlong / 2), 2);
-            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            double distance = earthRadius * c;
-
-            // Convert distance from kilometers to miles
-            return (float) distance * 0.621371f;
-        }
 
     /**
      * Gets the average rating of the restaurant.

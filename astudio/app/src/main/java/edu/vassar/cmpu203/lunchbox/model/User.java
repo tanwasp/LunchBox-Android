@@ -14,11 +14,7 @@ public class User {
     /** The date the user joined. */
     private Date joinedDate;
 
-    /** The latitude of the user's location. */
-    public float lat;
-
-    /** The longitude of the user's location. */
-    public float lon;
+    private Location loc;
 
     /**
      * Constructs a new User with the given name and location.
@@ -31,8 +27,7 @@ public class User {
         this.username = name;
         long millis = System.currentTimeMillis();
         this.joinedDate = new java.sql.Date(millis);
-        this.lat = lat;
-        this.lon = lon;
+        this.loc = new Location(lat, lon);
     }
 
     /**
@@ -54,21 +49,12 @@ public class User {
     }
 
     /**
-     * Gets the latitude of the user's location.
+     * Gets the user's location.
      *
-     * @return The latitude of the user's location.
+     * @return The Location object representing the user's location
      */
-    public float getLat() {
-        return lat;
-    }
-
-    /**
-     * Gets the longitude of the user's location.
-     *
-     * @return The longitude of the user's location.
-     */
-    public float getLon() {
-        return lon;
+    public Location getLoc() {
+        return loc;
     }
 
 }
