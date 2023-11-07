@@ -38,9 +38,10 @@ public class HomeFragment extends Fragment implements IHomeView{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        this.binding.searchButton.setOnClickListener(new View.OnClickListener(){
+        this.binding.btnNavigateToSearch.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
                 listener.onNavigateToSearch();
             }
         });

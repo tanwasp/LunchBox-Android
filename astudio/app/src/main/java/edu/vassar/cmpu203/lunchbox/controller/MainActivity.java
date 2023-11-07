@@ -1,16 +1,14 @@
 package edu.vassar.cmpu203.lunchbox.controller;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import edu.vassar.cmpu203.lunchbox.R;
+
 import edu.vassar.cmpu203.lunchbox.model.RestaurantLibrary;
 import edu.vassar.cmpu203.lunchbox.model.ReviewsLibrary;
 import edu.vassar.cmpu203.lunchbox.model.User;
 import edu.vassar.cmpu203.lunchbox.view.HomeFragment;
-import edu.vassar.cmpu203.lunchbox.view.HomeView;
 import edu.vassar.cmpu203.lunchbox.view.IHomeView;
 import edu.vassar.cmpu203.lunchbox.view.IMainView;
 import edu.vassar.cmpu203.lunchbox.view.MainView;
-import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
 import edu.vassar.cmpu203.lunchbox.view.ISearchView;
 
 public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchView.Listener {
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     // HomeView.Listener methods
     @Override
     public void onNavigateToSearch() {
-        // Switch to SearchView
+
     }
 
     // SearchView.Listener methods
