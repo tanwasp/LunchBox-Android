@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                 System.out.println("Something went wrong. Invalid integer.");
             }
         }
-        ArrayList<Restaurant> matches = lib.search(searchTerm, filters, sortOption, curUser);
+//        ArrayList<Restaurant> matches = lib.search(searchTerm, filters, sortOption, curUser);
+        System.out.println(searchTerm, sortOption);
 //        TODO
 
 //        ui.displayRestaurants(matches);
