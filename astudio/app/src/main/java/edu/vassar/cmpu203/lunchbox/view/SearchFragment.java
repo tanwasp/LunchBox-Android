@@ -76,6 +76,7 @@ public class SearchFragment extends Fragment implements ISearchView {
                 int buttonID = SearchFragment.this.binding.sortRadioGroup.getCheckedRadioButtonId();
                 if (buttonID != -1) {
                     sort = findViewById(buttonID).getText().toString();
+                    //try going through each button and seeing if it's checked
                 } else {
                     sort = "Sort by Rating";
                 }
