@@ -30,8 +30,6 @@ public class SearchFragment extends Fragment implements ISearchView {
     private RadioGroup sortRadioGroup;
     private Button searchButton;
 
-
-
 //    public SearchFragment(View rootView, @NonNull Listener listener) {
 //        this.rootView = rootView;
 //        this.listener = listener;
@@ -54,7 +52,6 @@ public class SearchFragment extends Fragment implements ISearchView {
         this.listener = listener;
     }
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         this.binding = FragmentSearchBinding.inflate(inflater);
@@ -73,10 +70,10 @@ public class SearchFragment extends Fragment implements ISearchView {
                 String distance = SearchFragment.this.binding.distanceFilterEditText.getText().toString();
 
                 String sort;
-                int buttonID = SearchFragment.this.binding.sortRadioGroup.getCheckedRadioButtonId();
+                int buttonID = binding.sortRadioGroup.getCheckedRadioButtonId();
                 if (buttonID != -1) {
-                    sort = findViewById(buttonID).getText().toString();
-                    //try going through each button and seeing if it's checked
+                    RadioButton radioButton = binding.getRoot().findViewById(buttonID);
+                    sort = radioButton.getText().toString();
                 } else {
                     sort = "Sort by Rating";
                 }
