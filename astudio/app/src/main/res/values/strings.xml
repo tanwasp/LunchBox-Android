@@ -7,6 +7,11 @@
         <item>$$</item>
         <item>$$$</item>
     </string-array>
+    <string name="distance_hint">Max distance (in miles)</string>
+    <string name="search_hint">Search...</string>
+    <string name="prox_sort_label">Sort by Proximity</string>
+    <string name="rate_sort_label">Sort by Rating</string>
+    <string name="search_button_label">Search</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
