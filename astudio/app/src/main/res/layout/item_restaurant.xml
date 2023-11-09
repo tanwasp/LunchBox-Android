@@ -3,13 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/restaurantNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text = "Restaurant Name"/>
+
+    <TextView
+        android:id="@+id/ratingTextView"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        tools:text="Rating" />
+
+    <TextView
+        android:id="@+id/priceRangeTextView"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        tools:text="Price Range" />
+
+    <TextView
+        android:id="@+id/locationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        tools:text="Location" />
 
 </LinearLayout>

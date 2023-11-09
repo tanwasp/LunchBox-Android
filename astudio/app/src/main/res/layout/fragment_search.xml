@@ -20,10 +20,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <!-- Add more filters and constraints as needed -->
-
-    <!-- ... existing layout ... -->
-
     <!-- Price Filter Dropdown -->
     <Spinner
         android:id="@+id/priceFilterSpinner"

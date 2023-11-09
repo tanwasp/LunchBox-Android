@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     @Override
     public void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption) {
         HashSet<IFilter> filters = new HashSet<IFilter>();
-        if(priceFilter != null){
+        if(priceFilter != null && !priceFilter.equals("Price")){
             PriceFilter pf = new PriceFilter(priceFilter);
             filters.add(pf);
         }
@@ -64,13 +64,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                 System.out.println("Something went wrong. Invalid integer.");
             }
         }
-//        ArrayList<Restaurant> matches = lib.search(searchTerm, filters, sortOption, curUser);
-        System.out.println(searchTerm, sortOption);
-//        TODO
-
-//        ui.displayRestaurants(matches);
-//        return matches;
-
+        ArrayList<Restaurant> matches = lib.search(searchTerm, filters, sortOption, curUser);
 
 
     }

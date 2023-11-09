@@ -203,6 +203,18 @@ public class Restaurant {
     public ArrayList<String> getReviewList() {
         return reviewList;
     }
+
+    /**
+     * Gets the price range of the restaurant.
+     *
+     * @return The price range of the restaurant.
+     */
+    public int getPriceRange() {
+        return priceRange;
+    }
+    public String getAddress() {
+        return address;
+    }
 }
 
 

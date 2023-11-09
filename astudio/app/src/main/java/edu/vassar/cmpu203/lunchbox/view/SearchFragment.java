@@ -30,23 +30,6 @@ public class SearchFragment extends Fragment implements ISearchView {
     private RadioGroup sortRadioGroup;
     private Button searchButton;
 
-//    public SearchFragment(View rootView, @NonNull Listener listener) {
-//        this.rootView = rootView;
-//        this.listener = listener;
-//        searchEditText = rootView.findViewById(R.id.searchEditText);
-//        priceFilterSpinner = rootView.findViewById(R.id.priceFilterSpinner);
-//        distanceFilterEditText = rootView.findViewById(R.id.distanceFilterEditText);
-//        sortRadioGroup = rootView.findViewById(R.id.sortRadioGroup);
-//        searchButton = rootView.findViewById(R.id.searchButton);
-//
-//        searchButton.setOnClickListener(v -> {
-//            String searchTerm = searchEditText.getText().toString();
-//            String priceFilter = priceFilterSpinner.getSelectedItem().toString();
-//            String distanceFilter = distanceFilterEditText.getText().toString();
-//            String sortOption = sortRadioGroup.getCheckedRadioButtonId() == R.id.proximityRadioButton ? "prox" : "rating";
-//            listener.onPerformSearch(searchTerm, priceFilter, distanceFilter, sortOption);
-//        });
-//    }
 
     public SearchFragment(@NonNull Listener listener){
         this.listener = listener;
@@ -68,7 +51,6 @@ public class SearchFragment extends Fragment implements ISearchView {
                 String term = SearchFragment.this.binding.searchTermText.getText().toString();
                 String price = SearchFragment.this.binding.priceFilterSpinner.getSelectedItem().toString();
                 String distance = SearchFragment.this.binding.distanceFilterEditText.getText().toString();
-
                 String sort;
                 int buttonID = binding.sortRadioGroup.getCheckedRadioButtonId();
                 if (buttonID != -1) {
