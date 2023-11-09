@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import java.util.ArrayList;
+
 import edu.vassar.cmpu203.lunchbox.databinding.MainBinding;
+import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 
 public class MainView implements IMainView{
 
@@ -38,11 +42,22 @@ public class MainView implements IMainView{
      * @param addToStack true if this transaction should be reversible, false otherwise
      * @param name the name this transaction can be referred by.
      */
+
     @Override
-    public void displayFragment(Fragment fragment, boolean addToStack, String name) {
+    public void displayFragment(Fragment fragment, boolean addToStack, String tag) {
         FragmentTransaction ft = fmanager.beginTransaction();
-        ft.replace(this.binding.fragmentContainer.getId(), fragment);
-        if (addToStack)  ft.addToBackStack(name);
+        ft.replace(this.binding.fragmentContainer.getId(), fragment, tag);
+        if (addToStack) ft.addToBackStack(tag);
         ft.commit();
     }
+
+    public void displaySearchResults(ArrayList<Restaurant> searchResults) {
+        // Assuming SearchFragment is currently displayed and has a method to update its RecyclerView
+        Fragment currentFragment = fmanager.findFragmentByTag("search");
+        if (currentFragment instanceof SearchFragment) {
+            ((SearchFragment) currentFragment).updateSearchResults(searchResults);
+        }
+
+    }
+
 }

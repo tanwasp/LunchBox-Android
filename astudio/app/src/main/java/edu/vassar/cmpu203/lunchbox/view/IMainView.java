@@ -3,6 +3,10 @@ package edu.vassar.cmpu203.lunchbox.view;
 import android.view.View;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+
+import edu.vassar.cmpu203.lunchbox.model.Restaurant;
+
 /**
  * An interface for the application screen template.
  */
@@ -23,4 +27,6 @@ public interface IMainView {
      * @param name the name this transaction can be referred by.
      */
     void displayFragment(Fragment fragment, boolean reversible, String name);
+
+    void displaySearchResults(ArrayList<Restaurant> searchResults);
 }

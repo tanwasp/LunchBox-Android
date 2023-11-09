@@ -14,12 +14,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentSearchBinding;
+import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
 
 public class SearchFragment extends Fragment implements ISearchView {
     private FragmentSearchBinding binding;
@@ -30,6 +34,8 @@ public class SearchFragment extends Fragment implements ISearchView {
     private RadioGroup sortRadioGroup;
     private Button searchButton;
 
+    private RestaurantAdapter restaurantAdapter;
+    private RecyclerView searchResultsRecyclerView;
 
     public SearchFragment(@NonNull Listener listener){
         this.listener = listener;
@@ -44,6 +50,14 @@ public class SearchFragment extends Fragment implements ISearchView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+
+        // Set up the RecyclerView
+        searchResultsRecyclerView = view.findViewById(R.id.searchResultsRecyclerView);
+        searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        // Initialize your adapter with an empty list or null
+        restaurantAdapter = new RestaurantAdapter(view.getContext(), new ArrayList<>());
+        searchResultsRecyclerView.setAdapter(restaurantAdapter);
         this.binding.searchButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -66,7 +80,9 @@ public class SearchFragment extends Fragment implements ISearchView {
     }
 
     @Override
-    public void displaySearchResults(List<Restaurant> searchResults) {
-        // Update the RecyclerView with the results
+    public void updateSearchResults(List<Restaurant> searchResults) {
+        // Update the adapter with the new search results and refresh the RecyclerView
+        restaurantAdapter.setRestaurants(searchResults); // Make sure you have a method in your adapter to update the data
+        restaurantAdapter.notifyDataSetChanged();
     }
 }

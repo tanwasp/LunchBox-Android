@@ -19,6 +19,6 @@ public interface ISearchView {
         void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption);
     }
 
-    void displaySearchResults(List<Restaurant> searchResults);
+    void updateSearchResults(List<Restaurant> searchResults);
     // Other methods related to the search UI
 }

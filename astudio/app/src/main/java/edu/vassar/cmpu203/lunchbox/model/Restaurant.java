@@ -149,7 +149,7 @@ public class Restaurant {
      *
      * @return A string of dollar signs representing the price range.
      */
-    private String getDollarSigns(int priceRange) {
+    public String getDollarSigns(int priceRange) {
         StringBuilder dollarSigns = new StringBuilder();
         for (int i = 0; i < priceRange; i++) {
             dollarSigns.append("$");

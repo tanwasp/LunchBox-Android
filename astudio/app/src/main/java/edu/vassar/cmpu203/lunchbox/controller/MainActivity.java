@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
             }
         }
         ArrayList<Restaurant> matches = lib.search(searchTerm, filters, sortOption, curUser);
-
-
+        this.mainView.displaySearchResults(matches);
     }
 }
