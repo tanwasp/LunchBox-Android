@@ -7,10 +7,10 @@
         <item>$$</item>
         <item>$$$</item>
     </string-array>
-    <string name="distance_hint">Max distance (in miles)</string>
-    <string name="search_hint">Search...</string>
-    <string name="prox_sort_label">Sort by Proximity</string>
-    <string name="rate_sort_label">Sort by Rating</string>
+    <string name="distance_hint">Max distance (miles)</string>
+    <string name="search_hint">Search</string>
+    <string name="prox_sort_label">Proximity</string>
+    <string name="rate_sort_label">Rating</string>
     <string name="search_button_label">Search</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
@@ -30,5 +30,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome_to_lunchbox">Welcome to LunchBox!!</string>
+    <string name="sort_label">Sort by</string>
+    <string name="no_results_message">Sorry, no restaurants match the given criteria</string>
+    <string name="navigateToPostReview_button_label">Post Review</string>
 
 </resources>

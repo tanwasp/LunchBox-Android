@@ -40,7 +40,7 @@ public class MainView implements IMainView{
      *
      * @param fragment The fragment to be displayed.
      * @param addToStack true if this transaction should be reversible, false otherwise
-     * @param name the name this transaction can be referred by.
+     * @param tag the name this transaction can be referred by.
      */
 
     @Override
@@ -56,8 +56,11 @@ public class MainView implements IMainView{
         Fragment currentFragment = fmanager.findFragmentByTag("search");
         if (currentFragment instanceof SearchFragment) {
             ((SearchFragment) currentFragment).updateSearchResults(searchResults);
+            ((SearchFragment)currentFragment).showNoResultsMessage(searchResults.isEmpty());
         }
-
     }
+
+
+
 
 }

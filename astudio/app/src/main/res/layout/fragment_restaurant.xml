@@ -7,6 +7,13 @@
     android:visibility="visible"
     tools:context=".MainActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
@@ -21,7 +28,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/restaurantTitle_linearLayout"
             android:orientation="horizontal">
+
 
             <TextView
                 android:id="@+id/restaurantName"
@@ -40,7 +49,18 @@
                 android:layout_marginTop="37sp"
                 android:text="@string/rest_rating"
                 android:textSize="25sp" />
+
+
         </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnNavigateToPostReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/navigateToPostReview_button_label"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/restaurantTitle_linearLayout" />
 
         <TextView
             android:id="@+id/priceRange"
@@ -63,7 +83,13 @@
             android:layout_height="1dp"
             android:background="@color/black" />
 
+
+
     </LinearLayout>
+
+
+
+
 
     <TextView
         android:id="@+id/reviewsLabel"

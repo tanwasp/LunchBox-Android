@@ -25,7 +25,7 @@ import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentSearchBinding;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
 
-public class SearchFragment extends Fragment implements ISearchView {
+public class SearchFragment extends Fragment implements ISearchView, RestaurantAdapter.OnItemClickListener {
     private FragmentSearchBinding binding;
     private final Listener listener;
     private View rootView;
@@ -56,8 +56,10 @@ public class SearchFragment extends Fragment implements ISearchView {
         searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         // Initialize your adapter with an empty list or null
-        restaurantAdapter = new RestaurantAdapter(view.getContext(), new ArrayList<>());
+        // Inside SearchFragment onViewCreated method
+        restaurantAdapter = new RestaurantAdapter(view.getContext(), new ArrayList<>(), this);
         searchResultsRecyclerView.setAdapter(restaurantAdapter);
+
         this.binding.searchButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -67,11 +69,17 @@ public class SearchFragment extends Fragment implements ISearchView {
                 String distance = SearchFragment.this.binding.distanceFilterEditText.getText().toString();
                 String sort;
                 int buttonID = binding.sortRadioGroup.getCheckedRadioButtonId();
+                System.out.println(buttonID);
                 if (buttonID != -1) {
                     RadioButton radioButton = binding.getRoot().findViewById(buttonID);
                     sort = radioButton.getText().toString();
+                    if (sort.equals("Proximity")){
+                        sort = "prox";
+                    } else if (sort.equals("Rating")){
+                        sort = "rating";
+                    }
                 } else {
-                    sort = "Sort by Rating";
+                    sort = "rating";
                 }
 
                 listener.onPerformSearch(term, price, distance, sort);
@@ -84,5 +92,17 @@ public class SearchFragment extends Fragment implements ISearchView {
         // Update the adapter with the new search results and refresh the RecyclerView
         restaurantAdapter.setRestaurants(searchResults); // Make sure you have a method in your adapter to update the data
         restaurantAdapter.notifyDataSetChanged();
+    }
+
+    public void showNoResultsMessage(boolean show) {
+        if (show) {
+            binding.noResultsTextView.setVisibility(View.VISIBLE);
+        } else {
+            binding.noResultsTextView.setVisibility(View.GONE);
+        }
+    }
+    @Override
+    public void onItemClick(Restaurant restaurant){
+        System.out.println("Clicked on " + restaurant.getName() + " in SearchFragment");
     }
 }
