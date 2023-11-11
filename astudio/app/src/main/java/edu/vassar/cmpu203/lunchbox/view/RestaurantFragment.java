@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentRestaurantBinding;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
@@ -16,6 +17,7 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
     private final Listener listener;
     private FragmentRestaurantBinding binding;
     private final Restaurant restaurant;
+    private RecyclerView reviewsRecyclerView;
 
     public RestaurantFragment(@NonNull Listener listener, Restaurant restaurant){
         this.listener = listener;
@@ -28,8 +30,7 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
         return this.binding.getRoot();
     }
 
-
-    public void OnViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         binding.restaurantName.setText(restaurant.getName());
         binding.restaurantRating.setText(String.valueOf(restaurant.getRating()));

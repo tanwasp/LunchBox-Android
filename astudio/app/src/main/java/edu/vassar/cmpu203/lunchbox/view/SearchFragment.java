@@ -41,6 +41,7 @@ public class SearchFragment extends Fragment implements ISearchView, RestaurantA
         this.listener = listener;
     }
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         this.binding = FragmentSearchBinding.inflate(inflater);
