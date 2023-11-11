@@ -16,8 +16,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="144dp"
+        android:layout_width="394dp"
+        android:layout_height="191dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,9 +26,9 @@
         app:layout_constraintVertical_bias="0.024">
 
         <LinearLayout
+            android:id="@+id/restaurantTitle_linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/restaurantTitle_linearLayout"
             android:orientation="horizontal">
 
 
@@ -56,8 +56,9 @@
 
         <Button
             android:id="@+id/btnNavigateToPostReview"
-            android:layout_width="match_parent"
+            android:layout_width="166dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="100sp"
             android:text="@string/navigateToPostReview_button_label"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/restaurantTitle_linearLayout" />
@@ -78,23 +79,24 @@
             android:text="@string/address"
             tools:layout_marginBottom="10sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black" />
-
-
 
     </LinearLayout>
 
 
-
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="2dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/reviewsLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
         android:id="@+id/reviewsLabel"
-        android:layout_width="131dp"
-        android:layout_height="41dp"
+        android:layout_width="97dp"
+        android:layout_height="33dp"
         android:text="@string/reviews_label"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -102,17 +104,17 @@
         app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.024" />
+        app:layout_constraintVertical_bias="0.005" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reviewRecycler"
-        android:layout_width="391dp"
-        android:layout_height="587dp"
+        android:layout_width="395dp"
+        android:layout_height="557dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reviewsLabel"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
