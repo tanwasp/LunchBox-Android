@@ -1,14 +1,12 @@
 package edu.vassar.cmpu203.lunchbox.view;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +20,7 @@ public class AddReviewFragment extends Fragment implements IAddReviewView {
 
     private RatingBar ratingBar;
     private EditText commentEditText;
-    private RadioGroup priceRadioGroup;
+    private Spinner priceSpinner;
     private Button addReviewButton;
 
     public AddReviewFragment(Listener listener) {

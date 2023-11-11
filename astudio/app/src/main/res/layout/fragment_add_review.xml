@@ -1,5 +1,3 @@
-<!-- res/layout/fragment_add_review.xml -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +8,7 @@
         android:id="@+id/textViewHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Review"
+        android:text="@string/add_review_heading"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -20,7 +18,7 @@
         android:id="@+id/textViewRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rating (1-5)"
+        android:text="@string/rating_label"
         android:textSize="18sp"
         android:layout_marginBottom="8dp"/>
 
@@ -39,27 +37,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
-        android:text="Review"
+        android:text="@string/review_label"
         android:textSize="18sp" />
 
     <EditText
         android:id="@+id/editTextComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your review here" />
+        android:hint="@string/comment_hint" />
 
     <TextView
         android:id="@+id/textViewPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price Symbol"
+        android:text="@string/price_symbol_label"
         android:textSize="18sp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"/>
 
     <Spinner
         android:id="@+id/spinnerPrice"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:entries="@array/price_filter_options" />
@@ -70,5 +68,5 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100sp"
         android:layout_marginTop="32dp"
-        android:text="Add Review" />
+        android:text="@string/add_review_button" />
 </LinearLayout>

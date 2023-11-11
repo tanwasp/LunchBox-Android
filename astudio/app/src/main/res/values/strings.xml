@@ -34,4 +34,11 @@
     <string name="no_results_message">Sorry, no restaurants match the given criteria</string>
     <string name="navigateToPostReview_button_label">Post Review</string>
 
+    <string name="add_review_heading">Add Review</string>
+    <string name="rating_label">Rating</string>
+    <string name="review_label">Review</string>
+    <string name="comment_hint">Enter your review here</string>
+    <string name="price_symbol_label">Price Symbol</string>
+    <string name="add_review_button">Add Review</string>
+
 </resources>
