@@ -16,7 +16,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantViewHolder
     private List<Restaurant> restaurants;
     private OnItemClickListener listener;
     public interface OnItemClickListener {
-        void onItemClick(Restaurant restaurant);
+        void onNavigateToRestaurant(Restaurant restaurant);
     }
 
     public RestaurantAdapter(Context context, List<Restaurant> restaurants, OnItemClickListener listener) {
@@ -39,7 +39,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantViewHolder
             public void onClick(View v) {
                 // Make sure the listener is not null before invoking it
                 if (listener != null) {
-                    listener.onItemClick(restaurant);
+                    listener.onNavigateToRestaurant(restaurant);
                 }
             }
         });

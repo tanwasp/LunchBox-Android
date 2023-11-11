@@ -102,7 +102,7 @@ public class SearchFragment extends Fragment implements ISearchView, RestaurantA
         }
     }
     @Override
-    public void onItemClick(Restaurant restaurant){
-        System.out.println("Clicked on " + restaurant.getName() + " in SearchFragment");
+    public void onNavigateToRestaurant(Restaurant restaurant){
+        listener.onNavigateToRestaurant(restaurant);
     }
 }

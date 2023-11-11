@@ -10,13 +10,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentRestaurantBinding;
+import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 
 public class RestaurantFragment extends Fragment implements IRestaurantView{
     private final Listener listener;
     private FragmentRestaurantBinding binding;
+    private final Restaurant restaurant;
 
-    public RestaurantFragment(Listener listener){
+    public RestaurantFragment(@NonNull Listener listener, Restaurant restaurant){
         this.listener = listener;
+        this.restaurant = restaurant;
     }
 
     @Override
@@ -25,9 +28,13 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
         return this.binding.getRoot();
     }
 
-    @Override
+
     public void OnViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+        binding.restaurantName.setText(restaurant.getName());
+        binding.restaurantRating.setText(String.valueOf(restaurant.getRating()));
+        binding.priceRange.setText(restaurant.getDollarSigns(restaurant.getPriceRange()));
+        binding.address.setText(restaurant.getAddress());
         this.binding.btnNavigateToPostReview.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

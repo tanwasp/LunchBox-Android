@@ -17,6 +17,7 @@ public interface ISearchView {
          */
 //        void onCashTendered(double amount, ICashPaymentView view);
         void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption);
+        void onNavigateToRestaurant(Restaurant restaurant);
     }
 
     void updateSearchResults(List<Restaurant> searchResults);

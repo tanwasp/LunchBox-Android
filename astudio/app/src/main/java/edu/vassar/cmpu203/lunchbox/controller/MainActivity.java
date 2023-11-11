@@ -15,11 +15,14 @@ import edu.vassar.cmpu203.lunchbox.model.User;
 import edu.vassar.cmpu203.lunchbox.view.HomeFragment;
 import edu.vassar.cmpu203.lunchbox.view.IHomeView;
 import edu.vassar.cmpu203.lunchbox.view.IMainView;
+import edu.vassar.cmpu203.lunchbox.view.IRestaurantView;
 import edu.vassar.cmpu203.lunchbox.view.MainView;
 import edu.vassar.cmpu203.lunchbox.view.ISearchView;
+import edu.vassar.cmpu203.lunchbox.view.RestaurantFragment;
 import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
+import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
 
-public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchView.Listener {
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchView.Listener, RestaurantAdapter.OnItemClickListener, IRestaurantView.Listener {
     private RestaurantLibrary lib;
     private ReviewsLibrary revLib;
     private User curUser;
@@ -66,5 +69,16 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
         ArrayList<Restaurant> matches = lib.search(searchTerm, filters, sortOption, curUser);
         this.mainView.displaySearchResults(matches);
+    }
+
+    @Override
+    public void onNavigateToRestaurant(Restaurant restaurant) {
+        RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant);
+        this.mainView.displayFragment(restaurantFragment, true, "restaurant");
+    }
+
+    @Override
+    public void onNavigateToPostReview() {
+        // Implement the action for navigating to post review
     }
 }
