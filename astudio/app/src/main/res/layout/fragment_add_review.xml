@@ -57,30 +57,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"/>
 
-    <RadioGroup
-        android:id="@+id/radioGroupPrice"
+    <Spinner
+        android:id="@+id/spinnerPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$"/>
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$$"/>
-
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$$$"/>
-    </RadioGroup>
+        android:layout_marginTop="16dp"
+        android:entries="@array/price_filter_options" />
 
     <Button
         android:id="@+id/buttonAddReview"

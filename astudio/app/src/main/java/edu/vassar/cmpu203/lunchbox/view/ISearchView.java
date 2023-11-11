@@ -15,7 +15,6 @@ public interface ISearchView {
 //         * @param amount the amount of cash provided
 //         * @param view the view the event originated from
          */
-//        void onCashTendered(double amount, ICashPaymentView view);
         void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption);
         void onNavigateToRestaurant(Restaurant restaurant);
     }
