@@ -1,4 +1,4 @@
-# Sequence Diagram
+# Sequence Diagrams
 
 ## Check Out Restaurant
 
@@ -8,7 +8,7 @@ hide footbox
 skin rose
 
 actor User as user
-participant "ui : TextUI" as ui
+participant "ui : AppUI" as ui
 participant " : Controller" as controller
 participant "lib : RestaurantLibrary" as lib
 participant "revLib : ReviewsLibrary" as revLib
@@ -17,20 +17,15 @@ controller -> ui: searchParams = getSearchData()
 ui -> user : Display search prompt
 user -> ui : Enter search term (name)
 ui -> user : Want price filter?
-user -> ui : Enter desired price filter
+user -> ui : Select desired price filter
 ui -> user : Want location filter?
 user -> ui : Enter desired location filter
 ui -> user : Want sorting algorithm?
 user -> ui : Indicate desired sort
 controller -> lib : results = search(term, filters, sort, curUser)
-controller -> ui : displayRestaurants(results)
+controller -> ui : displaySearchResults(results)
 ui -> user : Display restaurants matching criteria
-controller -> ui : getNextAction()
-ui -> user : Ask user how to proceed
-user -> ui : Indicate Select Restaurant
-controller -> ui : selectRestaurant(results)
-ui -> user : Ask which restaurant
-user -> ui : Indicate which restaurant
+user -> ui : Select desired restaurant
 controller -> ui : displayRestaurantInfo(selectedResult)
 ui -> user : Display selected restaurant info
 controller -> revLib : reviews = getReviews(selectedResult)
@@ -40,7 +35,8 @@ ui -> user : Display selected restaurant reviews
 @enduml
 ```
 
-## Review Restaurant (picks up directly after Check Out Restaurant)
+## Review Restaurant
+Picks up directly after Check Out Restaurant:
 
 ```plantuml
 @startuml
@@ -48,7 +44,7 @@ hide footbox
 skin rose
 
 actor User as user
-participant "ui : TextUI" as ui
+participant "ui : AppUI" as ui
 participant " : Controller" as controller
 participant "revLib : ReviewsLibrary" as revLib
 participant "lib : RestaurantLibrary" as lib
@@ -61,6 +57,8 @@ ui -> user : Asks for desired rating
 user -> ui : Enter rating
 ui -> user : Asks for desired message
 user -> ui : Enter message
+ui -> user : Asks for desired price tag
+user -> ui : Select price tag
 controller -> revLib : newReviewId = addReview(curUser, restaurantId, rating, reviewText)
 controller -> lib : addReviewToRest(restaurantId, newReviewId)
 controller -> restaurant: computeRating(revLib)
@@ -68,6 +66,29 @@ controller -> restaurant: computeRating(revLib)
 @enduml
 ```
 
+## Add Restaurant
+Picks up directly after "Display restaurants matching criteria":
+
+```plantuml
+@startuml
+hide footbox
+skin rose
+
+actor User as user
+participant "ui : AppUI" as ui
+participant " : Controller" as controller
+participant "lib : RestaurantLibrary" as lib
+
+user -> ui : Select Add Restaurant
+controller -> ui : displayAddForm()
+ui -> user : Asks for restaurant name
+user -> ui : Enter name
+ui -> user : Asks for location info
+user -> ui : Enter location indo
+controller -> lib : addRestaurant(name,address,city,state,lat,lon);
+
+@enduml
+```
 
 # Design Class Diagram
 
@@ -86,8 +107,7 @@ class Restaurant{
     -state: String
     -country: String
     -postalCode: String
-    -lat: float
-    -lon: float
+    -loc: Location
     -review_list: ArrayList<String>
     +distanceToUser: float
     +priceRange: int
@@ -116,8 +136,7 @@ class Review{
 class User{
     -userName: String
     -joinedDateTime: Date
-    -lat: float
-    -lon: float
+    -loc: Location
     --
     getUsername(): String
     getJoinedDate(): Date
@@ -153,6 +172,13 @@ class LocFilter{
     -u: User
 }
 
+class Location{
+    -lat: float
+    -lon: float
+    --
+    haversine(loc: Location) : float
+}
+
 ' associations
 IFilter <|.. PriceFilter
 IFilter <|.. LocFilter
@@ -161,6 +187,8 @@ LocFilter "0..1" -- "1" RestaurantLibrary
 RestaurantLibrary "1" - "1..*" Restaurant : \tIs-information-expert-of\t\t
 ReviewsLibrary "1" -- "*" Review : \tManages-all\t\t
 Review "*" -- "1" Restaurant : \tIs-part-of\t\t
-User "1" - "*" Review : \tCreates\t\t
+User "1" -left- "*" Review : \tIs created by\t\t
+Restaurant "1" - "*" Location : \tHas a \t
+User "1" -down- "*" Location : \tHas a \t
 @enduml
 ```

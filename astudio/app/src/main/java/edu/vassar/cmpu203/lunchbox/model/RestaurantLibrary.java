@@ -29,6 +29,9 @@ public class RestaurantLibrary {
         restaurant.getReviewList().add(reviewId);
     }
 
+    public void addRestaurant(String name, String address, String city, String state, float lat, float lon){
+        //TODO
+    }
 
     /**
      * Searches the Restaurant Library for restaurants that match a given search term, applying filters and sorting
