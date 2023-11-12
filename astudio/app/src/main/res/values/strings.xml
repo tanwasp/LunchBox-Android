@@ -41,4 +41,11 @@
     <string name="price_symbol_label">Price Symbol</string>
     <string name="add_review_button">Add Review</string>
 
+    <string name="add_restaurant_heading">Add Restaurant</string>
+    <string name="restaurant_name_label">Restaurant Name</string>
+    <string name="address_label">Address</string>
+    <string name="city_state_label">City, State</string>
+    <string name="latitude_longitude_label">Latitude, Longitude</string>
+    <string name="add_restaurant_button">Add Restaurant</string>
+
 </resources>
