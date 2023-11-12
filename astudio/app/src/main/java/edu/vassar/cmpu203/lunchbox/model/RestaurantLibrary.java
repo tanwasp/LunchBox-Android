@@ -67,6 +67,10 @@ public class RestaurantLibrary {
         return matches;
     }
 
+    public Restaurant getRestaurant(String id){
+        return data.get(id);
+    }
+
     /**
      * Loads a set of sample restaurants into the library.
      */

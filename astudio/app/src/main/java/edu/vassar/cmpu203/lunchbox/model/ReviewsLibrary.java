@@ -1,5 +1,7 @@
 package edu.vassar.cmpu203.lunchbox.model;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -51,6 +53,7 @@ public class ReviewsLibrary {
             }
             output.add(review);
         }
+//        Collections.sort(output, Comparator.comparingDate(r -> (double) r.distanceToUser));
         return output;
     }
 

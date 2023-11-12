@@ -90,7 +90,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol){
-        revLib.addReview(curUser, restaurantId, rating, comment, priceSymbol);
+        String reviewId = revLib.addReview(curUser, restaurantId, rating, comment, priceSymbol);
+        lib.addReviewToRest(restaurantId, reviewId);
+        onNavigateToRestaurant(lib.getRestaurant(restaurantId));
     }
 
 
