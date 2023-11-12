@@ -11,14 +11,16 @@ public class Review {
     public float rating;
     public Date date;
     public String body;
+    public int priceRange;
 
-    public Review(String reviewId, String username, String restaurantId, Float rating, String body) {
+    public Review(String reviewId, String username, String restaurantId, float rating, String body, int price) {
         this.reviewId = reviewId;
         this.username = username;
         this.restaurantId = restaurantId;
         this.rating = rating;
         this.date = new Date();
         this.body = body;
+        this.priceRange = price;
     }
 
     public String getUsername() {

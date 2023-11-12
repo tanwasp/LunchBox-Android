@@ -17,14 +17,17 @@ import edu.vassar.cmpu203.lunchbox.databinding.FragmentAddReviewBinding;
 public class AddReviewFragment extends Fragment implements IAddReviewView {
     private FragmentAddReviewBinding binding;
     private Listener listener;
+    private String restId;
 
     private RatingBar ratingBar;
     private EditText commentEditText;
     private Spinner priceSpinner;
     private Button addReviewButton;
 
-    public AddReviewFragment(Listener listener) {
+    public AddReviewFragment(Listener listener, String restId) {
+
         this.listener = listener;
+        this.restId = restId;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class AddReviewFragment extends Fragment implements IAddReviewView {
         super.onViewCreated(view, savedInstanceState);
 
         // Set up click listener for the "Add Review" button
-        addReviewButton.setOnClickListener(new View.OnClickListener() {
+        this.binding.buttonAddReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Retrieve values from UI elements
@@ -47,7 +50,7 @@ public class AddReviewFragment extends Fragment implements IAddReviewView {
                 String priceSymbol = AddReviewFragment.this.binding.spinnerPrice.getSelectedItem().toString();
 
                 // Pass data to the listener
-                listener.onAddReview(rating, comment, priceSymbol);
+                listener.onAddReview(rating, comment, restId, priceSymbol.length());
             }
         });
     }

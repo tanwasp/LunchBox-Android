@@ -7,7 +7,7 @@ import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 public interface IAddReviewView {
 
     interface Listener{
-        void onAddReview(float rating, String comment, String priceSymbol);
+        void onAddReview(float rating, String comment, String id, int priceSymbol);
     }
 
 }
