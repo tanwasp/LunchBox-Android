@@ -32,7 +32,7 @@
     <string name="welcome_to_lunchbox">Welcome to LunchBox!!</string>
     <string name="sort_label">Sort by</string>
     <string name="no_results_message">Sorry, no restaurants match the given criteria</string>
-    <string name="navigateToPostReview_button_label">Post Review</string>
+    <string name="navigateToPostReview_button_label">Add Review</string>
 
     <string name="add_review_heading">Add Review</string>
     <string name="rating_label">Rating</string>
