@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import edu.vassar.cmpu203.lunchbox.databinding.MainBinding;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
+import edu.vassar.cmpu203.lunchbox.model.Review;
 
 public class MainView implements IMainView{
 
@@ -52,11 +53,17 @@ public class MainView implements IMainView{
     }
 
     public void displaySearchResults(ArrayList<Restaurant> searchResults) {
-        // Assuming SearchFragment is currently displayed and has a method to update its RecyclerView
         Fragment currentFragment = fmanager.findFragmentByTag("search");
         if (currentFragment instanceof SearchFragment) {
             ((SearchFragment) currentFragment).updateSearchResults(searchResults);
             ((SearchFragment)currentFragment).showNoResultsMessage(searchResults.isEmpty());
+        }
+    }
+
+    public void displayReviews(ArrayList<Review> reviewsList) {
+        Fragment currentFragment = fmanager.findFragmentByTag("restaurant");
+        if (currentFragment instanceof RestaurantFragment) {
+            ((RestaurantFragment) currentFragment).displayReviews(reviewsList);
         }
     }
 
