@@ -30,5 +30,5 @@ public interface IMainView {
     void displayFragment(Fragment fragment, boolean reversible, String name);
 
     void displaySearchResults(ArrayList<Restaurant> searchResults);
-    void displayReviews(ArrayList<Review> reviewsList);
+//    void displayReviews(ArrayList<Review> reviewsList);
 }

@@ -60,12 +60,13 @@ public class MainView implements IMainView{
         }
     }
 
-    public void displayReviews(ArrayList<Review> reviewsList) {
-        Fragment currentFragment = fmanager.findFragmentByTag("restaurant");
-        if (currentFragment instanceof RestaurantFragment) {
-            ((RestaurantFragment) currentFragment).displayReviews(reviewsList);
-        }
-    }
+//    public void displayReviews(ArrayList<Review> reviewsList) {
+//        Fragment currentFragment = fmanager.findFragmentByTag("restaurant");
+//        if (currentFragment instanceof RestaurantFragment) {
+//            ((RestaurantFragment) currentFragment).displayReviews(reviewsList);
+//            System.out.println("displayReviews called from MainView");
+//        }
+//    }
 
 
 
