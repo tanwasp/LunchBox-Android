@@ -22,9 +22,11 @@ import edu.vassar.cmpu203.lunchbox.view.MainView;
 import edu.vassar.cmpu203.lunchbox.view.ISearchView;
 import edu.vassar.cmpu203.lunchbox.view.RestaurantFragment;
 import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
+import edu.vassar.cmpu203.lunchbox.view.IAddReviewView;
+import edu.vassar.cmpu203.lunchbox.view.AddReviewFragment;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
 
-public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchView.Listener, RestaurantAdapter.OnItemClickListener, IRestaurantView.Listener {
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener, IAddReviewView.Listener, ISearchView.Listener, RestaurantAdapter.OnItemClickListener, IRestaurantView.Listener {
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
     private User curUser;
@@ -82,8 +84,13 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     @Override
-    public void onNavigateToPostReview() {
-        // Implement the action for navigating to post review
+    public void onNavigateToPostReview(String restaurantId) {
+        AddReviewFragment addRevFragment = new AddReviewFragment(this, restaurantId);
+        this.mainView.displayFragment(addRevFragment, true, "review form");
+    }
+
+    public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol){
+        revLib.addReview(curUser, restaurantId, rating, comment, priceSymbol);
     }
 
 

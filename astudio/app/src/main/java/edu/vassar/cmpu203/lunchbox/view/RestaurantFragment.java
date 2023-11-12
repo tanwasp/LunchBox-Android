@@ -59,22 +59,17 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
         this.binding.btnNavigateToPostReview.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                listener.onNavigateToPostReview();
+                listener.onNavigateToPostReview(restaurant.getRestaurantId());
             }
         });
 
         if (reviewsList != null) {
             reviewAdapter.setReviews(reviewsList);
             reviewAdapter.notifyDataSetChanged();
-            System.out.println("reviews data obtained and displayed");
+
         }
     }
 
-//    public void displayReviews(List<Review> reviewsList) {
-//        // Update the adapter with the new search results and refresh the RecyclerView
-//        reviewAdapter.setReviews(reviewsList);
-//        reviewAdapter.notifyDataSetChanged();
-//        System.out.println("displayReviews called from RestaurantFragment");
-//    }
+
 
 }
