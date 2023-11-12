@@ -4,12 +4,14 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.model.IFilter;
 import edu.vassar.cmpu203.lunchbox.model.LocFilter;
 import edu.vassar.cmpu203.lunchbox.model.PriceFilter;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.model.RestaurantLibrary;
+import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.model.ReviewsLibrary;
 import edu.vassar.cmpu203.lunchbox.model.User;
 import edu.vassar.cmpu203.lunchbox.view.HomeFragment;
@@ -23,8 +25,8 @@ import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
 
 public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchView.Listener, RestaurantAdapter.OnItemClickListener, IRestaurantView.Listener {
-    private RestaurantLibrary lib;
-    private ReviewsLibrary revLib;
+    private static RestaurantLibrary lib;
+    private static ReviewsLibrary revLib;
     private User curUser;
     IMainView mainView;
 
@@ -75,10 +77,14 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onNavigateToRestaurant(Restaurant restaurant) {
         RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant);
         this.mainView.displayFragment(restaurantFragment, true, "restaurant");
+        ArrayList<Review> reviewsList = revLib.getReviews(restaurant.getReviewList());
+        this.mainView.displayReviews(reviewsList);
     }
 
     @Override
     public void onNavigateToPostReview() {
         // Implement the action for navigating to post review
     }
+
+
 }

@@ -21,6 +21,30 @@ public class Review {
         this.body = body;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getReviewId() {
+        return reviewId;
+    }
+
+    public String getRestaurantId() {
+        return restaurantId;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
     /**
      * Generates a string representation of the review for UI to print
      *
