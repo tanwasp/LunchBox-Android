@@ -75,10 +75,10 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     @Override
     public void onNavigateToRestaurant(Restaurant restaurant) {
-        RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant);
-        this.mainView.displayFragment(restaurantFragment, true, "restaurant");
         ArrayList<Review> reviewsList = revLib.getReviews(restaurant.getReviewList());
-        this.mainView.displayReviews(reviewsList);
+        RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant, reviewsList);
+        this.mainView.displayFragment(restaurantFragment, true, "restaurant");
+        System.out.println("Getting Reviews" + reviewsList.size());
     }
 
     @Override

@@ -26,10 +26,12 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
     private final Restaurant restaurant;
     private RecyclerView reviewsRecyclerView;
     private ReviewAdapter reviewAdapter;
+    private List<Review> reviewsList;
 
-    public RestaurantFragment(@NonNull Listener listener, Restaurant restaurant){
+    public RestaurantFragment(@NonNull Listener listener, Restaurant restaurant, List<Review> reviewsList){
         this.listener = listener;
         this.restaurant = restaurant;
+        this.reviewsList = reviewsList;
     }
 
     @Override
@@ -60,12 +62,19 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
                 listener.onNavigateToPostReview();
             }
         });
+
+        if (reviewsList != null) {
+            reviewAdapter.setReviews(reviewsList);
+            reviewAdapter.notifyDataSetChanged();
+            System.out.println("reviews data obtained and displayed");
+        }
     }
 
-    public void displayReviews(List<Review> reviewsList) {
-        // Update the adapter with the new search results and refresh the RecyclerView
-        reviewAdapter.setReviews(reviewsList); // Make sure you have a method in your adapter to update the data
-        reviewAdapter.notifyDataSetChanged();
-    }
+//    public void displayReviews(List<Review> reviewsList) {
+//        // Update the adapter with the new search results and refresh the RecyclerView
+//        reviewAdapter.setReviews(reviewsList);
+//        reviewAdapter.notifyDataSetChanged();
+//        System.out.println("displayReviews called from RestaurantFragment");
+//    }
 
 }
