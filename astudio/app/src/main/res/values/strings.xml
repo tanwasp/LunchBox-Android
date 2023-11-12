@@ -43,9 +43,15 @@
 
     <string name="add_restaurant_heading">Add Restaurant</string>
     <string name="restaurant_name_label">Restaurant Name</string>
+    <string name="enter_restaurant_name">Enter restaurant name</string>
     <string name="address_label">Address</string>
+    <string name="enter_address">Enter address</string>
     <string name="city_state_label">City, State</string>
+    <string name="enter_city">Enter City</string>
+    <string name="enter_state">Enter State</string>
     <string name="latitude_longitude_label">Latitude, Longitude</string>
+    <string name="enter_latitude">Enter Latitude</string>
+    <string name="enter_longitude">Enter Longitude</string>
     <string name="add_restaurant_button">Add Restaurant</string>
 
 </resources>
