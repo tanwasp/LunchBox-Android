@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/priceRangeTextView"
-        android:layout_width="88dp"
+        android:layout_width="88sp"
         android:layout_height="wrap_content"
         android:textSize="14sp"
         tools:text="Price Range" />

@@ -1,6 +1,7 @@
 <!-- res/layout/fragment_add_restaurant.xml -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -27,8 +28,9 @@
     <EditText
         android:id="@+id/editTextRestaurantName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter restaurant name"/>
+        android:layout_height="48dp"
+        android:hint="@string/enter_restaurant_name"
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/textViewAddress"
@@ -42,8 +44,9 @@
     <EditText
         android:id="@+id/editTextAddress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter address"/>
+        android:layout_height="48dp"
+        android:hint="@string/enter_address"
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/textViewCityState"
@@ -64,16 +67,18 @@
         <EditText
             android:id="@+id/editTextCity"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:hint="City"/>
+            android:hint="@string/enter_city"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/editTextState"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:hint="State"/>
+            android:hint="@string/enter_state"
+            android:inputType="text" />
     </LinearLayout>
 
     <TextView
@@ -95,16 +100,18 @@
         <EditText
             android:id="@+id/editTextLatitude"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:hint="Latitude"/>
+            android:hint="@string/enter_latitude"
+            android:inputType="number|numberDecimal" />
 
         <EditText
             android:id="@+id/editTextLongitude"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:hint="Longitude"/>
+            android:hint="@string/enter_longitude"
+            android:inputType="number|numberDecimal" />
     </LinearLayout>
 
     <Button

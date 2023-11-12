@@ -43,7 +43,7 @@
     <EditText
         android:id="@+id/editTextComment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:hint="@string/comment_hint" />
 
     <TextView
@@ -58,8 +58,7 @@
     <Spinner
         android:id="@+id/spinnerPrice"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="48dp"
         android:entries="@array/price_filter_options" />
 
     <Button
