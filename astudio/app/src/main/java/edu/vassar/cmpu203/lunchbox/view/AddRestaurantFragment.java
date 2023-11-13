@@ -38,8 +38,8 @@ public class AddRestaurantFragment extends Fragment implements IAddRestaurantVie
             @Override
             public void onClick(View v){
 
-                String name = AddRestaurantFragment.this.binding.textViewRestaurantName.getText().toString();
-                String address = AddRestaurantFragment.this.binding.textViewAddress.getText().toString();
+                String name = AddRestaurantFragment.this.binding.editTextRestaurantName.getText().toString();
+                String address = AddRestaurantFragment.this.binding.editTextAddress.getText().toString();
                 String city = AddRestaurantFragment.this.binding.editTextCity.getText().toString();
                 String state = AddRestaurantFragment.this.binding.editTextState.getText().toString();
                 String country = AddRestaurantFragment.this.binding.editTextCountry.getText().toString();

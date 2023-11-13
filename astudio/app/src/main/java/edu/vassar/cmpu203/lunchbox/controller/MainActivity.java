@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     @Override
     public void onNavigateToSearch() {
         SearchFragment searchFragment = new SearchFragment(this);
-        this.mainView.displayFragment(searchFragment, false, "search");
+        this.mainView.displayFragment(searchFragment, true, "search");
     }
 
     // SearchView.Listener methods
@@ -78,10 +78,10 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     @Override
-    public void onNavigateToRestaurant(Restaurant restaurant) {
+    public void onNavigateToRestaurant(Restaurant restaurant, Boolean reversible) {
         ArrayList<Review> reviewsList = revLib.getReviews(restaurant.getReviewList());
         RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant, reviewsList);
-        this.mainView.displayFragment(restaurantFragment, true, "restaurant");
+        this.mainView.displayFragment(restaurantFragment, reversible, "restaurant");
     }
 
     @Override
@@ -93,7 +93,10 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol){
         String reviewId = revLib.addReview(curUser, restaurantId, rating, comment, priceSymbol);
         lib.addReviewToRest(restaurantId, reviewId);
-        onNavigateToRestaurant(lib.getRestaurant(restaurantId));
+        Restaurant restaurant = lib.getRestaurant(restaurantId);
+        restaurant.computeRating(revLib);
+        restaurant.computePriceRange(revLib);
+        onNavigateToRestaurant(lib.getRestaurant(restaurantId), true);
     }
 
     @Override
@@ -105,10 +108,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void addRestaurant(String name, String address, String city, String state, String country, String postalCode, String lat, String lon){
         float floatLat = Float.parseFloat(lat);
         float floatLon = Float.parseFloat(lon);
-
-
+        
         Restaurant r = lib.addRestaurant(name, address, city, state, country, postalCode, floatLat, floatLon);
-        onNavigateToRestaurant(r);
+        onNavigateToRestaurant(r, true);
     }
 
 

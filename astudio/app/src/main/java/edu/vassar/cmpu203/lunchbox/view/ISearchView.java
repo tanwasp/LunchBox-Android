@@ -16,7 +16,7 @@ public interface ISearchView {
 //         * @param view the view the event originated from
          */
         void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption);
-        void onNavigateToRestaurant(Restaurant restaurant);
+        void onNavigateToRestaurant(Restaurant restaurant, Boolean reversible);
 
         void onNavigateToAddRestaurant();
     }

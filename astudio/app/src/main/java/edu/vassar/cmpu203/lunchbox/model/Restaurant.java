@@ -84,6 +84,27 @@ public class Restaurant {
     }
 
     /**
+     * Computes the average price range of the restaurant based on its reviews.
+     *
+     * @param revLib The reviews library containing all reviews.
+     */
+
+    public void computePriceRange(ReviewsLibrary revLib){
+        if (this != null){
+            ArrayList<Review> reviews = revLib.getReviews(reviewList);
+            int sum = 0;
+            int count = 0;
+            for (Review rev : reviews){
+                if (rev.priceRange != 0){
+                    count++;
+                }
+                sum += rev.priceRange;
+            }
+            priceRange = sum / count;
+        }
+    }
+
+    /**
      * Constructs a new Restaurant with the given parameters.
      *
      * @param restaurantId Unique identifier for the restaurant.
@@ -228,6 +249,20 @@ public class Restaurant {
     }
     public String getAddress() {
         return address;
+    }
+
+    public int getPriceRangeDisplay(){
+        if (priceRange  < 1.5 ){
+            return 1;
+        } else if (priceRange < 2.5){
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+
+    public String getRatingDisplay(){
+        return String.format("%.1f", rating);
     }
 }
 

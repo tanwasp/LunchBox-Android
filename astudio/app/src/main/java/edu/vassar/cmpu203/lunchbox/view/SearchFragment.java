@@ -108,7 +108,7 @@ public class SearchFragment extends Fragment implements ISearchView, RestaurantA
     }
     @Override
     public void onNavigateToRestaurant(Restaurant restaurant){
-        listener.onNavigateToRestaurant(restaurant);
+        listener.onNavigateToRestaurant(restaurant, true);
     }
 
     @Override

@@ -53,8 +53,8 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
 
 
         binding.restaurantName.setText(restaurant.getName());
-        binding.restaurantRating.setText(String.valueOf(restaurant.getRating()));
-        binding.priceRange.setText(restaurant.getDollarSigns(restaurant.getPriceRange()));
+        binding.restaurantRating.setText(String.valueOf(restaurant.getRatingDisplay()));
+        binding.priceRange.setText(restaurant.getDollarSigns(restaurant.getPriceRangeDisplay()));
         binding.address.setText(restaurant.getAddress());
         this.binding.btnNavigateToPostReview.setOnClickListener(new View.OnClickListener(){
             @Override
