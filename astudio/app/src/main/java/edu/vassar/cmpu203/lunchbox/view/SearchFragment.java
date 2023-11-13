@@ -9,6 +9,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.content.Context;
+import android.view.inputmethod.InputMethodManager;
+
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -84,6 +87,7 @@ public class SearchFragment extends Fragment implements ISearchView, RestaurantA
                 }
 
                 listener.onPerformSearch(term, price, distance, sort);
+                hideKeyboard(v);
             }
         });
     }
@@ -106,4 +110,17 @@ public class SearchFragment extends Fragment implements ISearchView, RestaurantA
     public void onNavigateToRestaurant(Restaurant restaurant){
         listener.onNavigateToRestaurant(restaurant);
     }
+
+    @Override
+    public void onNavigateToAddRestaurant(){
+        listener.onNavigateToAddRestaurant();
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null && view != null) {
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
 }

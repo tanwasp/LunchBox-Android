@@ -37,7 +37,17 @@ public class AddRestaurantFragment extends Fragment implements IAddRestaurantVie
         this.binding.buttonAddRestaurant.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                listener.AddRestaurant();
+
+                String name = AddRestaurantFragment.this.binding.textViewRestaurantName.getText().toString();
+                String address = AddRestaurantFragment.this.binding.textViewAddress.getText().toString();
+                String city = AddRestaurantFragment.this.binding.editTextCity.getText().toString();
+                String state = AddRestaurantFragment.this.binding.editTextState.getText().toString();
+                String country = AddRestaurantFragment.this.binding.editTextCountry.getText().toString();
+                String postalCode = AddRestaurantFragment.this.binding.editTextPostalCode.getText().toString();
+                String lat = AddRestaurantFragment.this.binding.editTextLatitude.getText().toString();
+                String lon = AddRestaurantFragment.this.binding.editTextLongitude.getText().toString();
+
+                listener.addRestaurant(name, address, city, state, country, postalCode, lat, lon);
             }
         });
     }

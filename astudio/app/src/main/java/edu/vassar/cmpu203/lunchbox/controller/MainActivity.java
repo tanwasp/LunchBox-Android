@@ -14,7 +14,9 @@ import edu.vassar.cmpu203.lunchbox.model.RestaurantLibrary;
 import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.model.ReviewsLibrary;
 import edu.vassar.cmpu203.lunchbox.model.User;
+import edu.vassar.cmpu203.lunchbox.view.AddRestaurantFragment;
 import edu.vassar.cmpu203.lunchbox.view.HomeFragment;
+import edu.vassar.cmpu203.lunchbox.view.IAddRestaurantView;
 import edu.vassar.cmpu203.lunchbox.view.IHomeView;
 import edu.vassar.cmpu203.lunchbox.view.IMainView;
 import edu.vassar.cmpu203.lunchbox.view.IRestaurantView;
@@ -26,7 +28,7 @@ import edu.vassar.cmpu203.lunchbox.view.IAddReviewView;
 import edu.vassar.cmpu203.lunchbox.view.AddReviewFragment;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
 
-public class MainActivity extends AppCompatActivity implements IHomeView.Listener, IAddReviewView.Listener, ISearchView.Listener, RestaurantAdapter.OnItemClickListener, IRestaurantView.Listener {
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener,  IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener {
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
     private User curUser;
@@ -80,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         ArrayList<Review> reviewsList = revLib.getReviews(restaurant.getReviewList());
         RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant, reviewsList);
         this.mainView.displayFragment(restaurantFragment, true, "restaurant");
-        System.out.println("Getting Reviews" + reviewsList.size());
     }
 
     @Override
@@ -93,6 +94,21 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         String reviewId = revLib.addReview(curUser, restaurantId, rating, comment, priceSymbol);
         lib.addReviewToRest(restaurantId, reviewId);
         onNavigateToRestaurant(lib.getRestaurant(restaurantId));
+    }
+
+    @Override
+    public void onNavigateToAddRestaurant(){
+        AddRestaurantFragment addRestaurantFragment = new AddRestaurantFragment(this);
+        this.mainView.displayFragment(addRestaurantFragment, true, "add restaurant");
+    }
+
+    public void addRestaurant(String name, String address, String city, String state, String country, String postalCode, String lat, String lon){
+        float floatLat = Float.parseFloat(lat);
+        float floatLon = Float.parseFloat(lon);
+
+
+        Restaurant r = lib.addRestaurant(name, address, city, state, country, postalCode, floatLat, floatLon);
+        onNavigateToRestaurant(r);
     }
 
 

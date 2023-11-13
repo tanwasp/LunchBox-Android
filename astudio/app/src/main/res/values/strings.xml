@@ -47,8 +47,11 @@
     <string name="address_label">Address</string>
     <string name="enter_address">Enter address</string>
     <string name="city_state_label">City, State</string>
+    <string name="country_postalcode_label">Country, Postal Code</string>
     <string name="enter_city">Enter City</string>
     <string name="enter_state">Enter State</string>
+    <string name="enter_country">Enter Country</string>
+    <string name="enter_postalcode">Enter Postal Code</string>
     <string name="latitude_longitude_label">Latitude, Longitude</string>
     <string name="enter_latitude">Enter Latitude</string>
     <string name="enter_longitude">Enter Longitude</string>

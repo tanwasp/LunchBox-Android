@@ -23,6 +23,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public interface OnItemClickListener {
         void onNavigateToRestaurant(Restaurant restaurant);
+
+        void onNavigateToAddRestaurant();
     }
 
     public RestaurantAdapter(Context context, List<Restaurant> restaurants, OnItemClickListener listener) {
@@ -61,6 +63,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             restaurantHolder.ratingView.setText(String.valueOf(restaurant.getRating()));
             restaurantHolder.priceRangeView.setText(restaurant.getDollarSigns(restaurant.getPriceRange()));
             restaurantHolder.addressView.setText(restaurant.getAddress());
+        }
+        else {
+            RestaurantFooterViewHolder footerHolder = (RestaurantFooterViewHolder) holder;
+            footerHolder.addRestaurantFooterButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onNavigateToAddRestaurant();
+                    }
+                }
+            });
         }
 
     }

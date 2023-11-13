@@ -29,8 +29,11 @@ public class RestaurantLibrary {
         restaurant.getReviewList().add(reviewId);
     }
 
-    public void addRestaurant(String name, String address, String city, String state, float lat, float lon){
-        //TODO
+    public Restaurant addRestaurant(String name, String address, String city, String state, String country, String postalCode, float lat, float lon){
+        String id = "restaurant" + (data.size() + 1);
+        Restaurant r = new Restaurant(id,name, address, city, state, country, postalCode, lat, lon);
+        data.put(id, r);
+        return r;
     }
 
     /**
@@ -69,6 +72,10 @@ public class RestaurantLibrary {
 
     public Restaurant getRestaurant(String id){
         return data.get(id);
+    }
+
+    public int getNumRestaurants(){
+        return data.size();
     }
 
     /**

@@ -72,8 +72,6 @@ public class Controller{
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
 
-
-
         ui.welcome();
         Controller c = new Controller();
 

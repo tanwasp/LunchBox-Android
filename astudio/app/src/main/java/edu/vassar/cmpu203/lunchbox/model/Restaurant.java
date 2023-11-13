@@ -114,6 +114,20 @@ public class Restaurant {
         distanceToUser = -1.0f;
     }
 
+    public Restaurant(String restaurantId, String name, String address, String city, String state, String country, String postalCode, float lat, float lon){
+        this.restaurantId = restaurantId;
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.loc = new Location(lat, lon);
+        this.reviewList = new ArrayList<String>();
+        this.priceRange = 0;
+        distanceToUser = -1.0f;
+    }
+
     /**
      * Returns a string representation of the restaurant.
      *

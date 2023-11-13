@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:layout_marginTop="2dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="10dp"
     tools:context=".view.SearchFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -104,6 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:paddingBottom="16dp"
         android:text="@string/no_results_message"
         android:textSize="16sp"
         android:visibility="gone"
@@ -123,7 +127,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchButton"
+        app:layout_constraintTop_toBottomOf="@id/noResultsTextView"
         app:layout_constraintVertical_bias="0.0" />
 
 
