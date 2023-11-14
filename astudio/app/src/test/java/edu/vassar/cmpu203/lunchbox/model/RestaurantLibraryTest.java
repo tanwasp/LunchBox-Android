@@ -12,22 +12,42 @@ public class RestaurantLibraryTest {
 
     @Test
     public void testAddReviewToRest() {
-        RestaurantLibrary restaurantLibrary = new RestaurantLibrary();
+        RestaurantLibrary restLib = new RestaurantLibrary();
+        ReviewsLibrary revLib = new ReviewsLibrary();
+        User testUser = new User("default", 30, -90);
 
-        restaurantLibrary.addReviewToRest("restaurant1", reviewId);
+        String reviewId = revLib.addReview(testUser, "restaurant1", 1.0f, "Bad", 1);
+        restLib.addReviewToRest("restaurant1", reviewId);
 
         // Retrieve the restaurant and check if the review is added to its review list
-        Restaurant restaurant = restaurantLibrary.getRestaurant(restaurantId);
-        assertNotNull(restaurant);
+        Restaurant restaurant = restLib.getRestaurant("restaurant1");
         assertTrue(restaurant.getReviewList().contains(reviewId));
+    }
+
+    @Test
+    public void testAddRestaurant() {
+        RestaurantLibrary restLib = new RestaurantLibrary();
+        int currSize = restLib.getNumRestaurants();
+
+        Restaurant addedRest = restLib.addRestaurant("name", "address", "city", "state", "country", "00000", 0.0f, 0.0f);
+
+        //test return value
+        assertEquals(0.0, addedRest.getRating(), 0.01f);
+        assertEquals("name", addedRest.getName());
+        assertEquals("address", addedRest.getAddress());
+        assertEquals(0, addedRest.getPriceRange());
+        //test side effects
+        assertEquals(currSize+1, restLib.getNumRestaurants());
+        assertNotNull(restLib.getRestaurant(addedRest.getRestaurantId()));
+
     }
 
     @Test
     public void testSearch() {
         RestaurantLibrary restaurantLibrary = new RestaurantLibrary();
 
-        // Create a sample user for distance calculations
-        User testUser = new User("testuser", "Test User");
+        // create a sample user
+        User testUser = new User("default", 30, -90);
 
         // Search for restaurants with a specific term and no filters
         String searchTerm = "Bakehouse";
@@ -36,17 +56,14 @@ public class RestaurantLibraryTest {
         ArrayList<Restaurant> searchResults = restaurantLibrary.search(searchTerm, filters, sort, testUser);
 
         // Assert that search results are not null and contain the expected restaurant
-        assertNotNull(searchResults);
-        assertFalse(searchResults.isEmpty());
-
-        boolean found = false;
-        for (Restaurant restaurant : searchResults) {
-            if (restaurant.getName().toLowerCase().contains(searchTerm.toLowerCase())) {
-                found = true;
-                break;
+        assertTrue(searchResults.size() == 1);
+        boolean match = true;
+        for (int i = 0; i < searchResults.size(); i++){
+            if (searchResults.get(i).getName().contains("Bakehouse") == false){
+                match = false;
             }
         }
+        assertTrue(match);
 
-        assertTrue(found);
     }
 }
