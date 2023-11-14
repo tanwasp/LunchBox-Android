@@ -7,6 +7,13 @@
         <item>$$</item>
         <item>$$$</item>
     </string-array>
+
+    <string-array name="usa_state_options">
+        <item>Select</item>
+        <item>New York</item>
+        <item>Washington</item>
+
+    </string-array>
     <string name="distance_hint">Max distance (miles)</string>
     <string name="search_hint">Search</string>
     <string name="prox_sort_label">Proximity</string>
