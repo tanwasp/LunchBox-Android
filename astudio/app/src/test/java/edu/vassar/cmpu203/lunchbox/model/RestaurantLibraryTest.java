@@ -4,7 +4,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,6 +35,7 @@ public class RestaurantLibraryTest {
         assertEquals("name", addedRest.getName());
         assertEquals("address", addedRest.getAddress());
         assertEquals(0, addedRest.getPriceRange());
+
         //test side effects
         assertEquals(currSize+1, restLib.getNumRestaurants());
         assertNotNull(restLib.getRestaurant(addedRest.getRestaurantId()));
