@@ -53,7 +53,7 @@ public class ReviewsLibrary {
             }
             output.add(review);
         }
-//        Collections.sort(output, Comparator.comparingDate(r -> (double) r.distanceToUser));
+        Collections.sort(output, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
         return output;
     }
 

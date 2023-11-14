@@ -9,7 +9,7 @@ public class Review {
     public String username;
     public String restaurantId;
     public float rating;
-    public Date date;
+    private Date date;
     public String body;
     public int priceRange;
 

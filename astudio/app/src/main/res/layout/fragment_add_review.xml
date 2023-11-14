@@ -69,4 +69,18 @@
         android:layout_marginHorizontal="100sp"
         android:layout_marginTop="32dp"
         android:text="@string/add_review_button" />
+
+<!--    <DatePicker-->
+<!--        android:id="@+id/datePicker"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"/>-->
+
+<!--    <CalendarView-->
+<!--        android:id="@+id/calendarView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"/>-->
+
+
 </LinearLayout>
