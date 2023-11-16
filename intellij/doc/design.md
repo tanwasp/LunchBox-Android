@@ -181,6 +181,21 @@ class Location{
     haversine(loc: Location) : float
 }
 
+class ControllerActivity{
+    {static} -lib: RestaurantLibrary
+    {static} -revLib: ReviewsLibrary
+    -curUser: User
+    -mainView: IMainView
+    --
+    onNavigateToSearch(): void
+    onPerformSearch(searchTerm: String, priceFilter: String, distanceFilter: String, sortOption: String): void
+    onNavigateToRestaurant(restaurant: Restaurant, reversible: Boolean): void
+    onNavigateToPostReview(restaurantId:String): void
+    onAddReview(rating: float, comment: String, restaurantId: String, priceSymbol: int): void
+    onNavigateToAddRestaurant(): void
+    addRestaurant(name: String, address: String, city: String, state: String, country: String, postalCode: String, lat: String, lon: String): void
+}
+
 package view{
 
 }
@@ -191,10 +206,14 @@ IFilter <|.. LocFilter
 PriceFilter "0..1" -- "1" RestaurantLibrary: Helps-filter
 LocFilter "0..1" -- "1" RestaurantLibrary
 RestaurantLibrary "1" - "1..*" Restaurant : \tIs-information-expert-of\t\t
-ReviewsLibrary "1" -- "*" Review : \tManages-all\t\t
-Review "*" -- "1" Restaurant : \tIs-part-of\t\t
-User "1" -left- "*" Review : \tIs created by\t\t
-Restaurant "1" - "*" Location : \tHas a \t
-User "1" -down- "*" Location : \tHas a \t
+Review "*" -down- "1" ReviewsLibrary: \tIs managed by\t\t
+Review "*" -left- "1" Restaurant : Is-part-of\t\t
+User "1" -down- "*" Review : Creates\t\t
+Location "1" - "1" Restaurant : Is an attribute of\t
+Location "1" - "1" User: \tIs an attribute of\t
+RestaurantLibrary "1" -down- "1" ControllerActivity: Provides information to\t
+ReviewsLibrary "1" -down- "1" ControllerActivity: \tProvides information to\t
+ControllerActivity "1" -down- "1" view: "Communicates with user using"
+
 @enduml
 ```
