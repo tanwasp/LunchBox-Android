@@ -45,9 +45,11 @@ public class MainView implements IMainView{
      */
 
     @Override
-    public void displayFragment(Fragment fragment, boolean addToStack, String tag) {
+    public void displayFragment(Fragment fragment, boolean addToStack, String tag, int popCount) {
         FragmentTransaction ft = fmanager.beginTransaction();
         ft.replace(this.binding.fragmentContainer.getId(), fragment, tag);
+        for (int count = 0; count < popCount; count++) fmanager.popBackStack();
+
         if (addToStack) ft.addToBackStack(tag);
         ft.commit();
     }

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         // Initialize HomeView and SearchView
         this.mainView = new MainView(this);
         HomeFragment homeFragment = new HomeFragment(this);
-        this.mainView.displayFragment(homeFragment, false, "home");
+        this.mainView.displayFragment(homeFragment, false, "home", 0);
 
         setContentView(this.mainView.getRootView());
     }
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     @Override
     public void onNavigateToSearch() {
         SearchFragment searchFragment = new SearchFragment(this);
-        this.mainView.displayFragment(searchFragment, true, "search");
+        this.mainView.displayFragment(searchFragment, true, "search", 0);
     }
 
     // SearchView.Listener methods
@@ -78,16 +78,16 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     @Override
-    public void onNavigateToRestaurant(Restaurant restaurant, Boolean reversible) {
+    public void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount) {
         ArrayList<Review> reviewsList = revLib.getReviews(restaurant.getReviewList());
         RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant, reviewsList);
-        this.mainView.displayFragment(restaurantFragment, reversible, "restaurant");
+        this.mainView.displayFragment(restaurantFragment, reversible, "restaurant", popCount);
     }
 
     @Override
     public void onNavigateToPostReview(String restaurantId) {
         AddReviewFragment addRevFragment = new AddReviewFragment(this, restaurantId);
-        this.mainView.displayFragment(addRevFragment, true, "review form");
+        this.mainView.displayFragment(addRevFragment, true, "review form", 0);
     }
 
     public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol){
@@ -96,13 +96,13 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         Restaurant restaurant = lib.getRestaurant(restaurantId);
         restaurant.computeRating(revLib);
         restaurant.computePriceRange(revLib);
-        onNavigateToRestaurant(lib.getRestaurant(restaurantId), true);
+        onNavigateToRestaurant(lib.getRestaurant(restaurantId), true, 2);
     }
 
     @Override
     public void onNavigateToAddRestaurant(){
         AddRestaurantFragment addRestaurantFragment = new AddRestaurantFragment(this);
-        this.mainView.displayFragment(addRestaurantFragment, true, "add restaurant");
+        this.mainView.displayFragment(addRestaurantFragment, true, "add restaurant", 0);
     }
 
     public void addRestaurant(String name, String address, String city, String state, String country, String postalCode, String lat, String lon){
@@ -110,8 +110,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         float floatLon = Float.parseFloat(lon);
         
         Restaurant r = lib.addRestaurant(name, address, city, state, country, postalCode, floatLat, floatLon);
-        onNavigateToRestaurant(r, true);
+        onNavigateToRestaurant(r, true, 1);
     }
-
-
 }
