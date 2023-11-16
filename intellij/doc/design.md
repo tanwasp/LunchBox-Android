@@ -8,22 +8,26 @@ hide footbox
 skin rose
 
 actor User as user
-participant "ui : AppUI" as ui
+participant " : SearchFragment" as searchFrag
+participant " : HomeFragment" as homeFrag
+participant " : MainView" as mainView
 participant " : Controller" as controller
 participant "lib : RestaurantLibrary" as lib
 participant "revLib : ReviewsLibrary" as revLib
 
-controller -> ui: onNavigateToSearch()
-ui -> user : Display search fragment
-user -> ui : Enter search parameters
-ui -> controller : onPerformSearch(term, priceFilter, distanceFilter, sort)
+homeFrag -> controller : onNavigateToSearch()
+controller -> mainView : displayFragment(searchFragment)
+mainView -> user : Display search page
+user -> searchFrag : Enter search parameters
+searchFrag -> controller : onPerformSearch(term, priceFilter, distanceFilter, sort)
 controller -> lib : matches = search(term, filters, sort, curUser)
-controller -> ui : displaySearchResults(matches)
-ui -> user : Display restaurants matching criteria
-user -> ui : Select desired restaurant
+controller -> mainView : displaySearchResults(matches)
+mainView -> user : Display restaurants matching criteria
+user -> searchFrag : Select desired restaurant
+searchFrag -> controller : onNavigateToRestaurant(desiredRestaurant)
 controller -> revLib : getReviews(selectedResult)
-controller -> ui : onNavigateToRestaurant(selectedResult)
-ui -> user : Display selected restaurant info
+controller -> mainView : displayFragment(restaurantFragment)
+mainView -> user : Display selected restaurant info
 @enduml
 ```
 
@@ -36,28 +40,32 @@ hide footbox
 skin rose
 
 actor User as user
-participant "ui : AppUI" as ui
+participant " : AddReviewFragment" as addRevFrag
+participant " : RestaurantFragment" as restFrag
+participant " : MainView" as mainView
 participant " : Controller" as controller
 participant "revLib : ReviewsLibrary" as revLib
 participant "lib : RestaurantLibrary" as lib
 participant " : Restaurant" as restaurant
 
-user -> ui : Select Add Review
-ui -> controller : onNavigateToPostReview
-ui -> user : Display add review form
-user -> ui : Enter review information
-ui -> controller :onAddReview (reviewInfo)
+user -> restFrag : Select Add Review
+restFrag -> controller : onNavigateToPostReview(restaurant)
+controller -> mainView : displayFragment(addRevFragment)
+mainView -> user : Display add review form
+user ->  addRevFrag : Enter review information
+addRevFrag -> controller : onAddReview(rating, comment, id, price)
 controller -> revLib : newReviewId = addReview(curUser, restaurantId, rating, reviewText)
 controller -> lib : addReviewToRest(restaurantId, newReviewId)
 controller -> restaurant: computeRating(revLib)
+controller -> restaurant: computePriceRange(revLib)
+controller -> mainView : displayFragment(restaurantFragment)
+mainView -> user : Display selected restaurant info
 
 @enduml
 ```
 
-some fragment is calling on onX. That points to controller. Controller points to mainView using displayFragment
-
 ## Add Restaurant
-Picks up directly after "Display restaurants matching criteria":
+Picks up directly after "Display restaurants matching criteria" step in Check Out Restaurant:
 
 ```plantuml
 @startuml
@@ -65,17 +73,21 @@ hide footbox
 skin rose
 
 actor User as user
-participant "ui : AppUI" as ui
+participant " : SearchFragment" as searchFrag
+participant " : AddRestaurantFragment" as addRestFrag
+participant " : MainView" as mainView
 participant " : Controller" as controller
 participant "lib : RestaurantLibrary" as lib
 
-user -> ui : Select Add Restaurant
-controller -> ui : displayAddForm()
-ui -> user : Asks for restaurant name
-user -> ui : Enter name
-ui -> user : Asks for location info
-user -> ui : Enter location indo
-controller -> lib : addRestaurant(name,address,city,state,lat,lon);
+user -> searchFrag : Select Add Restaurant
+searchFrag -> controller : onNavigateToAddRestaurant()
+controller -> mainView : displayFragment(addRestaurantFragment)
+mainView -> user : Display add restaurant form
+user -> addRestFrag : Enter location info
+addRestFrag -> controller : addRestaurant(name, address, city, state, country, postalCode, lat, lon){
+controller -> lib : addRestaurant(name,address,city,state,lat,lon)
+controller -> mainView : displayFragment(restaurantFragment)
+mainView -> user : Display new restaurant profile
 
 @enduml
 ```
@@ -169,6 +181,21 @@ class Location{
     haversine(loc: Location) : float
 }
 
+class ControllerActivity{
+    {static} -lib: RestaurantLibrary
+    {static} -revLib: ReviewsLibrary
+    -curUser: User
+    -mainView: IMainView
+    --
+    onNavigateToSearch(): void
+    onPerformSearch(searchTerm: String, priceFilter: String, distanceFilter: String, sortOption: String): void
+    onNavigateToRestaurant(restaurant: Restaurant, reversible: Boolean): void
+    onNavigateToPostReview(restaurantId:String): void
+    onAddReview(rating: float, comment: String, restaurantId: String, priceSymbol: int): void
+    onNavigateToAddRestaurant(): void
+    addRestaurant(name: String, address: String, city: String, state: String, country: String, postalCode: String, lat: String, lon: String): void
+}
+
 package view{
 
 }
@@ -179,10 +206,14 @@ IFilter <|.. LocFilter
 PriceFilter "0..1" -- "1" RestaurantLibrary: Helps-filter
 LocFilter "0..1" -- "1" RestaurantLibrary
 RestaurantLibrary "1" - "1..*" Restaurant : \tIs-information-expert-of\t\t
-ReviewsLibrary "1" -- "*" Review : \tManages-all\t\t
-Review "*" -- "1" Restaurant : \tIs-part-of\t\t
-User "1" -left- "*" Review : \tIs created by\t\t
-Restaurant "1" - "*" Location : \tHas a \t
-User "1" -down- "*" Location : \tHas a \t
+Review "*" -down- "1" ReviewsLibrary: \tIs managed by\t\t
+Review "*" -left- "1" Restaurant : Is-part-of\t\t
+User "1" -down- "*" Review : Creates\t\t
+Location "1" - "1" Restaurant : Is an attribute of\t
+Location "1" - "1" User: \tIs an attribute of\t
+RestaurantLibrary "1" -down- "1" ControllerActivity: Provides information to\t
+ReviewsLibrary "1" -down- "1" ControllerActivity: \tProvides information to\t
+ControllerActivity "1" -down- "1" view: "Communicates with user using"
+
 @enduml
 ```
