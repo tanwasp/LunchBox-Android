@@ -8,24 +8,29 @@ hide footbox
 skin rose
 
 actor User as user
-participant "ui : AppUI" as ui
+participant " : SearchFragment" as searchFrag
+participant " : MainFragment" as homeFrag
+participant " : MainView" as mainView
 participant " : Controller" as controller
 participant "lib : RestaurantLibrary" as lib
 participant "revLib : ReviewsLibrary" as revLib
 
-controller -> ui: onNavigateToSearch()
-ui -> user : Display search fragment
-user -> ui : Enter search parameters
-ui -> controller : onPerformSearch(term, priceFilter, distanceFilter, sort)
+homeFrag -> controller : onNavigateToSearch()
+controller -> mainView : displayFragment(searchFragment)
+mainView -> user : Display search page
+user -> searchFrag : Enter search parameters
+searchFrag -> controller : onPerformSearch(term, priceFilter, distanceFilter, sort)
 controller -> lib : matches = search(term, filters, sort, curUser)
-controller -> ui : displaySearchResults(matches)
-ui -> user : Display restaurants matching criteria
+controller -> mainView : displaySearchResults(matches)
+mainView -> user : Display restaurants matching criteria
 user -> ui : Select desired restaurant
 controller -> revLib : getReviews(selectedResult)
 controller -> ui : onNavigateToRestaurant(selectedResult)
 ui -> user : Display selected restaurant info
 @enduml
 ```
+
+some fragment is calling on onDoThis. That points to controller. Controller points to mainView using displayFragment
 
 ## Review Restaurant
 Picks up directly after Check Out Restaurant:
@@ -53,8 +58,6 @@ controller -> restaurant: computeRating(revLib)
 
 @enduml
 ```
-
-some fragment is calling on onX. That points to controller. Controller points to mainView using displayFragment
 
 ## Add Restaurant
 Picks up directly after "Display restaurants matching criteria":
