@@ -52,15 +52,15 @@ public class Review {
      *
      * @return A string representing the review
      */
-    @Override
-    public String toString(){
-        StringBuilder output = new StringBuilder();
-        output.append("Username: ").append(username).append("\n");
-        output.append("Rating: ").append(rating).append("\n");
-        output.append("Review: ").append(body).append("\n");
-
-        return output.toString();
-    }
+//    @Override
+//    public String toString(){
+//        StringBuilder output = new StringBuilder();
+//        output.append("Username: ").append(username).append("\n");
+//        output.append("Rating: ").append(rating).append("\n");
+//        output.append("Review: ").append(body).append("\n");
+//
+//        return output.toString();
+//    }
 
 }
 

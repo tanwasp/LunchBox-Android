@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="674e0bb9-66e5-44f1-a098-d5f7f45d2da8" name="Changes" comment="" />
+    <list default="true" id="674e0bb9-66e5-44f1-a098-d5f7f45d2da8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/astudio/app/src/test/java/edu/vassar/cmpu203/lunchbox/model/RestaurantTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/astudio/app/src/main/java/edu/vassar/cmpu203/lunchbox/model/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/astudio/app/src/main/java/edu/vassar/cmpu203/lunchbox/model/Restaurant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/astudio/app/src/main/java/edu/vassar/cmpu203/lunchbox/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/astudio/app/src/main/java/edu/vassar/cmpu203/lunchbox/model/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/astudio/app/src/test/java/edu/vassar/cmpu203/lunchbox/model/RestaurantLibraryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/astudio/app/src/test/java/edu/vassar/cmpu203/lunchbox/model/RestaurantLibraryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intellij/doc/design.md" beforeDir="false" afterPath="$PROJECT_DIR$/intellij/doc/design.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

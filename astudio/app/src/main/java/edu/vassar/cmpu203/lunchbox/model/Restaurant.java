@@ -68,43 +68,6 @@ public class Restaurant {
     public int priceRange;
 
     /**
-     * Computes the average rating of the restaurant based on its reviews.
-     *
-     * @param revLib The reviews library containing all reviews.
-     */
-    public void computeRating(ReviewsLibrary revLib) {
-        if (this != null) {
-            ArrayList<Review> reviews = revLib.getReviews(reviewList);
-            float sum = 0;
-            for (Review rev : reviews) {
-                sum += rev.rating;
-            }
-            rating = sum / reviews.size();
-        }
-    }
-
-    /**
-     * Computes the average price range of the restaurant based on its reviews.
-     *
-     * @param revLib The reviews library containing all reviews.
-     */
-
-    public void computePriceRange(ReviewsLibrary revLib){
-        if (this != null){
-            ArrayList<Review> reviews = revLib.getReviews(reviewList);
-            int sum = 0;
-            int count = 0;
-            for (Review rev : reviews){
-                if (rev.priceRange != 0){
-                    count++;
-                }
-                sum += rev.priceRange;
-            }
-            priceRange = sum / count;
-        }
-    }
-
-    /**
      * Constructs a new Restaurant with the given parameters.
      *
      * @param restaurantId Unique identifier for the restaurant.
@@ -150,32 +113,69 @@ public class Restaurant {
     }
 
     /**
+     * Computes the average rating of the restaurant based on its reviews.
+     *
+     * @param revLib The reviews library containing all reviews.
+     */
+    public void computeRating(ReviewsLibrary revLib) {
+        if (this != null) {
+            ArrayList<Review> reviews = revLib.getReviews(reviewList);
+            float sum = 0;
+            for (Review rev : reviews) {
+                sum += rev.rating;
+            }
+            rating = sum / reviews.size();
+        }
+    }
+
+    /**
+     * Computes the average price range of the restaurant based on its reviews.
+     *
+     * @param revLib The reviews library containing all reviews.
+     */
+
+    public void computePriceRange(ReviewsLibrary revLib){
+        if (this != null){
+            ArrayList<Review> reviews = revLib.getReviews(reviewList);
+            int sum = 0;
+            int count = 0;
+            for (Review rev : reviews){
+                if (rev.priceRange != 0){
+                    count++;
+                }
+                sum += rev.priceRange;
+            }
+            priceRange = sum / count;
+        }
+    }
+
+    /**
      * Returns a string representation of the restaurant.
      *
      * @return A formatted string containing restaurant details.
      */
-    @Override
-    public String toString() {
-        StringBuilder output = new StringBuilder();
-        output.append("Name: ").append(name).append("\n");
-        output.append("Rating: ").append(String.format("%.1f", rating)).append("\n");
-        output.append("Price: ").append(getDollarSigns(priceRange)).append("\n");
-        output.append("Address: ").append(address).append("\n");
-        output.append("City: ").append(city).append("\n");
-        output.append("State: ").append(state).append("\n");
-        if (distanceToUser < 10) {
-            output.append("Distance: ")
-                    .append(String.format("%.1f", distanceToUser));
-        } else {
-            output.append("Distance: ")
-                    .append(String.format("%.0f", distanceToUser));
-
-        }
-        output.append(" miles\n");
-
-
-        return output.toString();
-    }
+//    @Override
+//    public String toString() {
+//        StringBuilder output = new StringBuilder();
+//        output.append("Name: ").append(name).append("\n");
+//        output.append("Rating: ").append(String.format("%.1f", rating)).append("\n");
+//        output.append("Price: ").append(getDollarSigns(priceRange)).append("\n");
+//        output.append("Address: ").append(address).append("\n");
+//        output.append("City: ").append(city).append("\n");
+//        output.append("State: ").append(state).append("\n");
+//        if (distanceToUser < 10) {
+//            output.append("Distance: ")
+//                    .append(String.format("%.1f", distanceToUser));
+//        } else {
+//            output.append("Distance: ")
+//                    .append(String.format("%.0f", distanceToUser));
+//
+//        }
+//        output.append(" miles\n");
+//
+//
+//        return output.toString();
+//    }
 
     /**
      * Converts the price range of the restaurant to a string of dollar signs to increase readability.

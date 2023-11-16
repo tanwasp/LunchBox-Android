@@ -13,25 +13,17 @@ participant " : Controller" as controller
 participant "lib : RestaurantLibrary" as lib
 participant "revLib : ReviewsLibrary" as revLib
 
-controller -> ui: searchParams = getSearchData()
-ui -> user : Display search prompt
-user -> ui : Enter search term (name)
-ui -> user : Want price filter?
-user -> ui : Select desired price filter
-ui -> user : Want location filter?
-user -> ui : Enter desired location filter
-ui -> user : Want sorting algorithm?
-user -> ui : Indicate desired sort
-controller -> lib : results = search(term, filters, sort, curUser)
-controller -> ui : displaySearchResults(results)
+controller -> ui: onNavigateToSearch()
+ui -> user : Display search fragment
+user -> ui : Enter search parameters
+ui -> controller : onPerformSearch(term, priceFilter, distanceFilter, sort)
+controller -> lib : matches = search(term, filters, sort, curUser)
+controller -> ui : displaySearchResults(matches)
 ui -> user : Display restaurants matching criteria
 user -> ui : Select desired restaurant
-controller -> ui : displayRestaurantInfo(selectedResult)
+controller -> revLib : getReviews(selectedResult)
+controller -> ui : onNavigateToRestaurant(selectedResult)
 ui -> user : Display selected restaurant info
-controller -> revLib : reviews = getReviews(selectedResult)
-controller -> ui : displayReviews(reviews)
-ui -> user : Display selected restaurant reviews
-
 @enduml
 ```
 
@@ -50,21 +42,19 @@ participant "revLib : ReviewsLibrary" as revLib
 participant "lib : RestaurantLibrary" as lib
 participant " : Restaurant" as restaurant
 
-ui -> user : Ask user if they want to leave review
-user -> ui : Indicate yes
-controller -> ui : reviewParams = getReviewData()
-ui -> user : Asks for desired rating
-user -> ui : Enter rating
-ui -> user : Asks for desired message
-user -> ui : Enter message
-ui -> user : Asks for desired price tag
-user -> ui : Select price tag
+user -> ui : Select Add Review
+ui -> controller : onNavigateToPostReview
+ui -> user : Display add review form
+user -> ui : Enter review information
+ui -> controller :onAddReview (reviewInfo)
 controller -> revLib : newReviewId = addReview(curUser, restaurantId, rating, reviewText)
 controller -> lib : addReviewToRest(restaurantId, newReviewId)
 controller -> restaurant: computeRating(revLib)
 
 @enduml
 ```
+
+some fragment is calling on onX. That points to controller. Controller points to mainView using displayFragment
 
 ## Add Restaurant
 Picks up directly after "Display restaurants matching criteria":
@@ -177,6 +167,10 @@ class Location{
     -lon: float
     --
     haversine(loc: Location) : float
+}
+
+package view{
+
 }
 
 ' associations
