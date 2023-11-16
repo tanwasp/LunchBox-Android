@@ -9,7 +9,7 @@ skin rose
 
 actor User as user
 participant " : SearchFragment" as searchFrag
-participant " : MainFragment" as homeFrag
+participant " : HomeFragment" as homeFrag
 participant " : MainView" as mainView
 participant " : Controller" as controller
 participant "lib : RestaurantLibrary" as lib
@@ -23,14 +23,13 @@ searchFrag -> controller : onPerformSearch(term, priceFilter, distanceFilter, so
 controller -> lib : matches = search(term, filters, sort, curUser)
 controller -> mainView : displaySearchResults(matches)
 mainView -> user : Display restaurants matching criteria
-user -> ui : Select desired restaurant
+user -> searchFrag : Select desired restaurant
+searchFrag -> controller : onNavigateToRestaurant(desiredRestaurant)
 controller -> revLib : getReviews(selectedResult)
-controller -> ui : onNavigateToRestaurant(selectedResult)
-ui -> user : Display selected restaurant info
+controller -> mainView : displayFragment(restaurantFragment)
+mainView -> user : Display selected restaurant info
 @enduml
 ```
-
-some fragment is calling on onDoThis. That points to controller. Controller points to mainView using displayFragment
 
 ## Review Restaurant
 Picks up directly after Check Out Restaurant:
@@ -41,26 +40,32 @@ hide footbox
 skin rose
 
 actor User as user
-participant "ui : AppUI" as ui
+participant " : AddReviewFragment" as addRevFrag
+participant " : RestaurantFragment" as restFrag
+participant " : MainView" as mainView
 participant " : Controller" as controller
 participant "revLib : ReviewsLibrary" as revLib
 participant "lib : RestaurantLibrary" as lib
 participant " : Restaurant" as restaurant
 
-user -> ui : Select Add Review
-ui -> controller : onNavigateToPostReview
-ui -> user : Display add review form
-user -> ui : Enter review information
-ui -> controller :onAddReview (reviewInfo)
+user -> restFrag : Select Add Review
+restFrag -> controller : onNavigateToPostReview(restaurant)
+controller -> mainView : displayFragment(addRevFragment)
+mainView -> user : Display add review form
+user ->  addRevFrag : Enter review information
+addRevFrag -> controller : onAddReview(rating, comment, id, price)
 controller -> revLib : newReviewId = addReview(curUser, restaurantId, rating, reviewText)
 controller -> lib : addReviewToRest(restaurantId, newReviewId)
 controller -> restaurant: computeRating(revLib)
+controller -> restaurant: computePriceRange(revLib)
+controller -> mainView : displayFragment(restaurantFragment)
+mainView -> user : Display selected restaurant info
 
 @enduml
 ```
 
 ## Add Restaurant
-Picks up directly after "Display restaurants matching criteria":
+Picks up directly after "Display restaurants matching criteria" step in Check Out Restaurant:
 
 ```plantuml
 @startuml
@@ -68,17 +73,21 @@ hide footbox
 skin rose
 
 actor User as user
-participant "ui : AppUI" as ui
+participant " : SearchFragment" as searchFrag
+participant " : AddRestaurantFragment" as addRestFrag
+participant " : MainView" as mainView
 participant " : Controller" as controller
 participant "lib : RestaurantLibrary" as lib
 
-user -> ui : Select Add Restaurant
-controller -> ui : displayAddForm()
-ui -> user : Asks for restaurant name
-user -> ui : Enter name
-ui -> user : Asks for location info
-user -> ui : Enter location indo
-controller -> lib : addRestaurant(name,address,city,state,lat,lon);
+user -> searchFrag : Select Add Restaurant
+searchFrag -> controller : onNavigateToAddRestaurant()
+controller -> mainView : displayFragment(addRestaurantFragment)
+mainView -> user : Display add restaurant form
+user -> addRestFrag : Enter location info
+addRestFrag -> controller : addRestaurant(name, address, city, state, country, postalCode, lat, lon){
+controller -> lib : addRestaurant(name,address,city,state,lat,lon)
+controller -> mainView : displayFragment(restaurantFragment)
+mainView -> user : Display new restaurant profile
 
 @enduml
 ```
