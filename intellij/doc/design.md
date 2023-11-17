@@ -83,8 +83,8 @@ user -> searchFrag : Select Add Restaurant
 searchFrag -> controller : onNavigateToAddRestaurant()
 controller -> mainView : displayFragment(addRestaurantFragment)
 mainView -> user : Display add restaurant form
-user -> addRestFrag : Enter location info
-addRestFrag -> controller : addRestaurant(name, address, city, state, country, postalCode, lat, lon){
+user -> addRestFrag : Enter restaurant info
+addRestFrag -> controller : addRestaurant(name, address, city, state, country, postalCode, lat, lon)
 controller -> lib : addRestaurant(name,address,city,state,lat,lon)
 controller -> mainView : displayFragment(restaurantFragment)
 mainView -> user : Display new restaurant profile
@@ -93,6 +93,8 @@ mainView -> user : Display new restaurant profile
 ```
 
 # Design Class Diagram
+
+Model and Controller Package:
 
 ```plantuml
 @startuml
@@ -207,13 +209,129 @@ PriceFilter "0..1" -- "1" RestaurantLibrary: Helps-filter
 LocFilter "0..1" -- "1" RestaurantLibrary
 RestaurantLibrary "1" - "1..*" Restaurant : \tIs-information-expert-of\t\t
 Review "*" -down- "1" ReviewsLibrary: \tIs managed by\t\t
-Review "*" -left- "1" Restaurant : Is-part-of\t\t
+Restaurant "1" -right- "*" Review: Can have\t\t
 User "1" -down- "*" Review : Creates\t\t
 Location "1" - "1" Restaurant : Is an attribute of\t
 Location "1" - "1" User: \tIs an attribute of\t
 RestaurantLibrary "1" -down- "1" ControllerActivity: Provides information to\t
 ReviewsLibrary "1" -down- "1" ControllerActivity: \tProvides information to\t
-ControllerActivity "1" -down- "1" view: "Communicates with user using"
+ControllerActivity "1" -down- "1" view: \tCommunicates with user using
+
+@enduml
+```
+
+
+View Package:
+```plantuml
+@startuml
+skin rose
+'skinparam classAttributeIconSize 0
+
+interface IAddRestaurantView { 
+    --
+    void addRestaurant(String name, String address, String city, String state, String country, String postalCode, String lat, String lon) in Listener Interface
+}
+
+interface IAddReviewView { 
+    --
+    void onAddReview(float rating, String comment, String id, int priceSymbol) in Listener Interface
+}
+
+interface IHomeView { 
+    --
+    void onNavigateToSearch() in Listener Interface
+}
+
+interface IMainView { 
+    --
+    View getRootView()
+    void displayFragment(Fragment fragment, boolean reversible, String name, int popCount)
+    void displaySearchResults(ArrayList<Restaurant> searchResults)
+    
+}
+
+interface IRestaurantView { 
+    --
+    void onNavigateToPostReview(String restaurantId) in Listener Interface
+}
+
+interface ISearchView { 
+    --
+    void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption) in Listener Interface
+    void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount) in Listener Interface
+    void onNavigateToAddRestaurant() in Listener Interface
+    void updateSearchResults(List<Restaurant> searchResults)
+    void showNoResultsMessage(boolean show)
+    void showNoResultsMessage(boolean show)
+}
+
+class AddRestaurantFragment{
+    -binding: FragmentAddRestaurantBinding 
+    -listener: Listener
+}
+
+class AddReviewFragment{
+    -binding: FragmentAddReviewBinding
+    -listener: Listener
+    -restId: String
+    -ratingBar: RatingBar
+    -commentEditText: EditText
+    -priceSpinner: Spinner
+    -addReviewButton: Button
+}
+
+class HomeFragment{
+    -binding: FragmentHomeBinding 
+    -listener: Listener
+}
+
+class RestaurantFragment{
+    -binding: FragmentRestaurantBinding 
+    -listener: Listener
+    -restaurant: Resstaurant
+    -reviewsRecyclerView: RecyclerView
+    -reviewAdapter: ReviewAdapter
+    -reviewsList: List<Review>
+}
+
+class SearchFragment{
+    -binding: FragmentSearchBinding 
+    -listener: Listener
+    -rootView: View
+    -searchEditText: EditText
+    -distanceFilterEditText: EditText
+    -searchResultsRecyclerView: RecyclerView
+    -priceFilterSpinner: Spinner
+    -sortRadioGroup: RadioGroup
+    -searchButton: Button
+    -restaurantAdapter: RestaurantAdapter
+    --
+    void onNavigateToRestaurant(Restaurant restaurant)
+    void onNavigateToAddRestaurant()
+}
+
+class MainView{
+    -binding: MainBinding
+    -fmanager: FragmentManager
+}
+
+package ModelAndController {
+
+}
+
+ISearchView <|.. SearchFragment
+IRestaurantView <|.. RestaurantFragment
+IHomeView <|.. HomeFragment
+IAddRestaurantView <|.. AddRestaurantFragment
+IAddReviewView <|.. AddReviewFragment
+IMainView <|.. MainView
+
+SearchFragment "1" -down- "1" MainView : \tIs displayed by\t\t
+RestaurantFragment "1" -down- "1" MainView : \tIs displayed by\t\t
+HomeFragment "1" -down- "1" MainView : \tIs displayed by\t\t
+AddRestaurantFragment "1" -down- "1" MainView : \tIs displayed by\t\t
+AddReviewFragment "1" -down- "1" MainView : \tIs displayed by\t\t
+MainView "1" -down- "1" ModelAndController : \tReceives commands from\t\t
 
 @enduml
 ```
