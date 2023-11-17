@@ -14,4 +14,11 @@ on unverified user input. The Add Restaurant form itself is also not very practi
 Some simplifications we made are the built-in inclusion of very limited set of existing restaurants and fake reviews, and existing knowledge of the user's location.
 
 ## Running the App
+* Clone the repository
+* Start Android Studio
+* Open /astudio
+* Build and run in android studio
+* Enjoy!
+
 The app can be navigated using the screen-specific buttons and Android's back arrow button.
+
