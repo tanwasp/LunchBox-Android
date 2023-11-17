@@ -37,6 +37,9 @@ public class SearchRestaurantTest {
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
+    /**
+     * Tests the search restaurants functionality of the app
+     */
     @Test
     public void testSearchFunctionality() {
         // Assuming you have a search input field and a search button in your SearchFragment
@@ -48,16 +51,24 @@ public class SearchRestaurantTest {
         onView(withId(R.id.searchButton)).perform(click());
         onView(withId(R.id.searchResultsRecyclerView)).check(matches(isDisplayed()));
     }
+
+    /**
+     * Tests the search restaurants functionality of the app by searching for the restaurant by the search term "Sushi"
+     */
     @Test
     public void testSpecificSearchFunctionality(){
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
         onView(withId(R.id.searchTermText)).perform(typeText("SUSHI"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
+//        Check if all the sushi restaurants appear
         onView(withText("Sushi Train")).check(matches(isDisplayed()));
         onView(withText("WIN Bubble Tea and Sushi")).check(matches(isDisplayed()));
         onView(withText("Sushi Kingdom")).check(matches(isDisplayed()));
     }
 
+    /**
+     * Tests the empty search functionality of the app by searching for the restaurant by the search term "" which should return all restaurants
+     */
     @Test
     public void testEmptySearchFunctionality(){
         Espresso.onView(ViewMatchers.withId(R.id.btnNavigateToSearch)).perform(ViewActions.click());
@@ -65,14 +76,22 @@ public class SearchRestaurantTest {
         onView(withId(R.id.searchResultsRecyclerView)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Tests the no results message functionality of the app by searching for the restaurant by the search term "I just really really like food, dude"
+     */
+
     @Test
     public void testNoResultsSearchFunctionality(){
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
         onView(withId(R.id.searchTermText)).perform(typeText("I just really really like food, dude"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
+        //    Testing for no results message
         onView(withText("Sorry, no restaurants match the given criteria")).check(matches(isDisplayed()));
     }
 
+    /**
+     * Tests the search by price functionality of the app
+     */
     @Test
     public void testSearchByPrice() {
         // Navigate to search
@@ -93,6 +112,9 @@ public class SearchRestaurantTest {
         onView(withId(R.id.searchResultsRecyclerView)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Tests the search by distance functionality of the app
+     */
     @Test
     public void testSearchByDistance(){
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
@@ -104,6 +126,9 @@ public class SearchRestaurantTest {
         onView(withText("WIN Bubble Tea and Sushi")).check(matches(isDisplayed()));
     }
 
+    /**
+     * Tests the sort by proximity functionality of the app
+     */
     @Test
     public void testSearchSortByProximity(){
         onView(withId(R.id.btnNavigateToSearch)).perform(click());

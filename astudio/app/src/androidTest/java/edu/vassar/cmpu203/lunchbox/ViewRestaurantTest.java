@@ -33,6 +33,9 @@ public class ViewRestaurantTest {
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
+    /**
+     * Tests that the restaurant details are displayed when a restaurant is clicked on
+     */
     @Test
     public void testViewRestaurantDetails() {
         // Navigate to Search
@@ -53,6 +56,9 @@ public class ViewRestaurantTest {
 
     }
 
+    /**
+     * Tests that the add review button is displayed when a restaurant is clicked on
+     */
     @Test
     public void testNavigateToPostReview() {
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
@@ -64,6 +70,9 @@ public class ViewRestaurantTest {
         onView(withId(R.id.btnNavigateToPostReview)).check(matches(isClickable()));
     }
 
+    /**
+     * Checks that the specific restaurant details are displayed when a restaurant is clicked on
+     */
     @Test
     public void testTextViewDisplays() {
         onView(withId(R.id.btnNavigateToSearch)).perform(click());

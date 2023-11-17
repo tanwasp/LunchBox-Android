@@ -31,6 +31,9 @@ public class AddRestaurantTest {
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
+    /**
+     * Tests the functionality of adding a restaurant.
+     */
     @Test
     public void testAddRestaurantFunctionality() {
         // Navigate to Add Restaurant
@@ -57,6 +60,8 @@ public class AddRestaurantTest {
 
         onView(withId(R.id.searchTermText)).perform(typeText("magic"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
+
+//        // Check that the restaurant was added
         onView(withText("Magic Bowl")).check(matches(isDisplayed()));
     }
 }
