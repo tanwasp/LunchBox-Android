@@ -19,8 +19,8 @@ import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentAddRestaurantBinding;
 
 public class AddRestaurantFragment extends Fragment implements IAddRestaurantView{
-    FragmentAddRestaurantBinding binding;
-    Listener listener;
+    private FragmentAddRestaurantBinding binding;
+    private Listener listener;
     public AddRestaurantFragment(@NonNull Listener listener){
         this.listener = listener;
     }

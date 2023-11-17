@@ -38,5 +38,10 @@ public interface ISearchView {
      * @param searchResults
      */
     void updateSearchResults(List<Restaurant> searchResults);
-    // Other methods related to the search UI
+
+    /**
+     * informs user if no results match
+     * @param show
+     */
+    void showNoResultsMessage(boolean show);
 }

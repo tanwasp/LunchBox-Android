@@ -22,8 +22,8 @@ import edu.vassar.cmpu203.lunchbox.databinding.FragmentHomeBinding;
 
 
 public class HomeFragment extends Fragment implements IHomeView{
-    FragmentHomeBinding binding;
-    Listener listener;
+    private FragmentHomeBinding binding;
+    private Listener listener;
 
     public HomeFragment(@NonNull Listener listener){
         this.listener = listener;
