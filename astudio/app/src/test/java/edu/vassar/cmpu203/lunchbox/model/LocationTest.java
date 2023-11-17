@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 public class LocationTest {
 
+    /**
+     * Tests the distance calculator in the Location class
+     */
     @Test
     public void testHaversine() {
         Location location1 = new Location(40.7128f, -74.006f);

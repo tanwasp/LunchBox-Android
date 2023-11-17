@@ -9,6 +9,9 @@ import java.util.Set;
 
 public class RestaurantLibraryTest {
 
+    /**
+     * Tests class's ability to add a review to a restaurant
+     */
     @Test
     public void testAddReviewToRest() {
         RestaurantLibrary restLib = new RestaurantLibrary();
@@ -23,6 +26,9 @@ public class RestaurantLibraryTest {
         assertTrue(restaurant.getReviewList().contains(reviewId));
     }
 
+    /**
+     * Tests class's ability to add a new restaurant
+     */
     @Test
     public void testAddRestaurant() {
         RestaurantLibrary restLib = new RestaurantLibrary();
@@ -42,6 +48,9 @@ public class RestaurantLibraryTest {
 
     }
 
+    /**
+     * Tests class's ability search restaurants and return only those matching the given criteria
+     */
     @Test
     public void testSearch() {
         RestaurantLibrary restaurantLibrary = new RestaurantLibrary();

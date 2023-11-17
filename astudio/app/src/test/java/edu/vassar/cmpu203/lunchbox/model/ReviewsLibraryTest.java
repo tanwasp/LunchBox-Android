@@ -7,6 +7,9 @@ import static org.junit.Assert.*;
 
 public class ReviewsLibraryTest {
 
+    /**
+     * Tests class's ability to add a review (to the review library and corresponding restaurant)
+     */
     @Test
     public void testAddReview() {
         ReviewsLibrary revLib= new ReviewsLibrary();
@@ -29,6 +32,9 @@ public class ReviewsLibraryTest {
         assertEquals(2, addedReview.priceRange);
     }
 
+    /**
+     * Tests class's ability get reviews for a specific restaurant
+     */
     @Test
     public void testGetReviews() {
         ReviewsLibrary revLib = new ReviewsLibrary();

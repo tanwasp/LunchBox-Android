@@ -10,6 +10,10 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public class PriceFilterTest {
+
+    /**
+     * Tests filtering by price option
+     */
     @Test
     public void testFilter() {
         Restaurant r1 = new Restaurant("restaurant1", "Restaurant 1", 3.0f, "Address 1", "City 1", "State 1", "Country 1", "11111", 30.0f, -90.0f, new ArrayList<>(Arrays.asList("review1")), 1); // 0 miles away
