@@ -1,17 +1,17 @@
-# LunchBox
+# LunchBox Prototype #2
 
-# LunchBox Prototype #1
-
-This prototype focuses on the main functionality of the app, which is the ability to search and view a restaurant's profile (including its reviews) and leave your own review (which will then be saved and displayed on the restaurant's page).
+The second iteration prototype focuses on expanding on the main functionality of the app.
+In addition to searching, viewing a restaurant's profile, and leaving your own review,
+the user can now add their own restaurant if it doesn't exist on the app yet. We also improved some aspects 
+from the previous iteration, such as incorporating price range as part of users' reviews and using a restaurant's 
+reviews to assign them a price category on their profile. We also record the dates the reviews are made and sort them on the restaurant's profile by recency.
 
 ## Limitations and Simplifications 
-Limitations include the lack of persistent state and storage. The filters are also limited to the name, price range, and proximity of the restaurant. 
-The sorting algorithm is also limited to sorting by rating and proximity. This is because for the prototype, we wanted to demonstrate the functionality of the filters and sorts, making it much easier to 
-add additional filters and sorts in the future.
+Limitations include the lack of persistent state and storage. Additionally, the accuracy of the restaurant data is limited because it relies
+on unverified user input. The Add Restaurant form itself is also not very practical because it is rather extensive and requires information (like coordinates) that the user
+ that the user would not have easy access to.
 
 Some simplifications we made are the built-in inclusion of very limited set of existing restaurants and fake reviews, and existing knowledge of the user's location.
-Additionally, information that will be sourced from reviews, like price range, are assumed in the simulated restaurants.
 
-## Running the Prototype
-The prototype can be run using the main() method in the Controller class. The input options are explained with each prompt.
-
+## Running the App
+The app can be navigated using the screen-specific buttons and Android's back arrow button.
