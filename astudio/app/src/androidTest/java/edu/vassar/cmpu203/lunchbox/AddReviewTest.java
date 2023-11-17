@@ -32,11 +32,18 @@ public class AddReviewTest {
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
+    /**
+     * Tests adding a review to a restaurant.
+     */
     @Test
     public void testAddReview() {
+        // Navigate to the search page
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
+
+        // Search for a restaurant
         onView(withId(R.id.searchTermText)).perform(typeText("McDonald"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
+//        Click on the top restaurant that appears
         onView(withId(R.id.searchResultsRecyclerView)) .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         SystemClock.sleep(1000);
 

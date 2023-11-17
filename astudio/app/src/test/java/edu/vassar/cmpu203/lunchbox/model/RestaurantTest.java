@@ -7,12 +7,39 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class RestaurantTest {
+User testUser;
+Location loc;
+Restaurant r;
+RestaurantLibrary lib;
+ReviewsLibrary revLib;
 
+    public Restaurant setupDatabase(){
+        testUser = new User("default", 30f, -90f);
+        loc = new Location(40.7128f, -74.006f);
+        lib = new RestaurantLibrary();
+        revLib = new ReviewsLibrary();
+
+        r = new Restaurant("restaurant1", "Moreno Bakery", 3.25f, "737 W Brandon Blvd", "Brandon", "FL", "US", "33511", 40.7128f, -74.006f, new ArrayList<>(Arrays.asList("review2", "review21", "review37", "review62", "review64")), 2);
+
+        float floatLat = Float.parseFloat("123");
+        float floatLon = Float.parseFloat("123");
+        Restaurant r = lib.addRestaurant("Gordon Commons", "124 Raymond Ave", "Poughkeepsie", "NY", "India", "12604", floatLat, floatLon);
+
+
+        String reviewId = revLib.addReview(testUser, r.getRestaurantId(), 3.0f, "Okay", 1);
+        lib.addReviewToRest(r.getRestaurantId(), reviewId);
+        reviewId = revLib.addReview(testUser, r.getRestaurantId(), 4.0f, "Good", 2);
+        lib.addReviewToRest(r.getRestaurantId(), reviewId);
+        reviewId = revLib.addReview(testUser, r.getRestaurantId(), 5.0f, "Excellent", 3);
+        lib.addReviewToRest(r.getRestaurantId(), reviewId);
+        return r;
+
+    }
     @Test
     public void testSetDistToUser(){
-        User testUser = new User("default", 30f, -90f);
-        Location loc = new Location(40.7128f, -74.006f);
-        Restaurant r = new Restaurant("restaurant1", "Moreno Bakery", 3.25f, "737 W Brandon Blvd", "Brandon", "FL", "US", "33511", 40.7128f, -74.006f, new ArrayList<>(Arrays.asList("review2", "review21", "review37", "review62", "review64")), 2);
+        testUser = new User("default", 30f, -90f);
+        loc = new Location(40.7128f, -74.006f);
+        r = new Restaurant("restaurant1", "Moreno Bakery", 3.25f, "737 W Brandon Blvd", "Brandon", "FL", "US", "33511", 40.7128f, -74.006f, new ArrayList<>(Arrays.asList("review2", "review21", "review37", "review62", "review64")), 2);
 
         // find distance between locations
         float expected = loc.haversine(testUser.getLoc());
@@ -24,39 +51,23 @@ public class RestaurantTest {
 
     @Test
     public void testComputePriceRange(){
-        ReviewsLibrary revLib = new ReviewsLibrary();
-        User testUser = new User("default", 30f, -90f);
-
-        Restaurant r = new Restaurant("restaurant0", "Moreno Bakery", 3.25f, "737 W Brandon Blvd", "Brandon", "FL", "US", "33511", 40.7128f, -74.006f, new ArrayList<>(Arrays.asList()), 2);
-
-        // add reviews to restaurant
-        revLib.addReview(testUser, "restaurant0", 3.0f, "Okay", 1);
-        revLib.addReview(testUser, "restaurant0", 4.0f, "Good", 2);
-        revLib.addReview(testUser, "restaurant0", 5.0f, "Excellent", 3);
+        Restaurant restaurant = setupDatabase();
 
         // compute the price assignment for restaurant
-        r.computePriceRange(revLib);
+        restaurant.computePriceRange(revLib);
 
         // check if the correct price category is computed
-        assertEquals(2, r.getPriceRange());
+        assertEquals(2, restaurant.getPriceRange());
     }
 
     @Test
     public void testComputeRating(){
-        ReviewsLibrary revLib = new ReviewsLibrary();
-        User testUser = new User("default", 30f, -90f);
-
-        Restaurant r = new Restaurant("restaurant0", "Moreno Bakery", 3.25f, "737 W Brandon Blvd", "Brandon", "FL", "US", "33511", 40.7128f, -74.006f, new ArrayList<>(Arrays.asList()), 2);
-
-        // add reviews to restaurant
-        revLib.addReview(testUser, "restaurant0", 3.0f, "Okay", 1);
-        revLib.addReview(testUser, "restaurant0", 4.0f, "Good", 2);
-        revLib.addReview(testUser, "restaurant0", 5.0f, "Excellent", 3);
+        Restaurant restaurant = setupDatabase();
 
         // compute the rating
-        r.computeRating(revLib);
+        restaurant.computeRating(revLib);
 
         // check if the correct rating is computed
-        assertEquals(4.0f, r.getRating(), 0.01f);
+        assertEquals(4.0f, restaurant.getRating(), 0.01f);
     }
 }

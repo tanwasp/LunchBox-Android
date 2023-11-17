@@ -135,25 +135,27 @@ public class Restaurant {
      */
 
     public void computePriceRange(ReviewsLibrary revLib){
-        if (this != null){
-            ArrayList<Review> reviews = revLib.getReviews(reviewList);
-            int sum = 0;
-            int count = 0;
-            for (Review rev : reviews){
-                if (rev.priceRange != 0){
-                    count++;
-                }
-                sum += rev.priceRange;
+        ArrayList<Review> reviews = revLib.getReviews(reviewList);
+        int sum = 0;
+        int count = 0;
+        for (Review rev : reviews){
+            if (rev.priceRange != 0){
+                count++;
             }
-            priceRange = sum / count;
+            sum += rev.priceRange;
         }
+        if (count == 0){
+            priceRange = 0;
+        }
+        else
+        priceRange = sum / count;
     }
 
-    /**
-     * Returns a string representation of the restaurant.
-     *
-     * @return A formatted string containing restaurant details.
-     */
+//    /**
+//     * Returns a string representation of the restaurant.
+//     *
+//     * @return A formatted string containing restaurant details.
+//     */
 //    @Override
 //    public String toString() {
 //        StringBuilder output = new StringBuilder();
@@ -252,7 +254,10 @@ public class Restaurant {
     }
 
     public int getPriceRangeDisplay(){
-        if (priceRange  < 1.5 ){
+        if (priceRange == 0){
+            return 0;
+        }
+        else if (priceRange  < 1.5 ){
             return 1;
         } else if (priceRange < 2.5){
             return 2;
