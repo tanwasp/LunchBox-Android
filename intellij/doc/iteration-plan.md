@@ -31,21 +31,12 @@ an existing profile on the app. To fulfill this, we will be implementing the Add
 This is important so that users can manually enter new restaurants, utilizing crowd-sourcing to produce 
 a more complete and up-to-date data set.
 
-We will also implement a simplified version of the Create Account use case which will start the personalization aspect of the app.
-This will allow the users to set a username that will appear when they leave a review, and view their own account profile with 
-all their reviews.
-
-Lastly, we will improve some aspects from the previous iteration, such as incorporating price range as part of users'
-reviews and using a restaurant's reviews to assign them a price category on their profile. We will also display reviews'
-creation dates, which will be collected automatically when the review is made.
-
 # 3rd Iteration Plan
 
 Since we have established the base function of reading restaurant profiles, adding restaurants, and leaving reviews, 
-we will now move onto the social aspect of the app. This includes the send
-follow request and accept follow request use cases. After this iteration is complete, users
-will be able to create a personal account, log into it, connect with their friends on the app, 
-and filter their restaurant search to display only restaurants that have been reviewed by their friends.
+we will now move onto the social aspect of the app. This includes the create account, send follow request, and accept follow 
+request use cases. After this iteration is complete, users will be able to create a personal account, connect with their
+friends on the app, and filter their restaurant search to display only restaurants that have been reviewed by their friends.
 
 These elements are central to the social component of the app, and should be in place before other use
 cases that rely on it, like manage account and manage following, or less critical ones, like create list 

@@ -153,6 +153,7 @@ class RestaurantLibrary{
     --
     addReviewToRest(restaurantId: String, reviewId: String): void
     search(term: String, filters: Set<IFilter>, sort: String, curUser: User): ArrayList<Restaurant>
+    addRestaurant(name: String, address: String, city: String, state: String, country: String, postalCode: String, lat: float, lon: float): Restaurant
 }
 
 class ReviewsLibrary{
