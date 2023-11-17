@@ -92,6 +92,10 @@ public class SearchFragment extends Fragment implements ISearchView, RestaurantA
         });
     }
 
+    /**
+     * Updates the search results
+     * @param searchResults
+     */
     @Override
     public void updateSearchResults(List<Restaurant> searchResults) {
         // Update the adapter with the new search results and refresh the RecyclerView
@@ -99,6 +103,10 @@ public class SearchFragment extends Fragment implements ISearchView, RestaurantA
         restaurantAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Shows or hides the no results message
+     * @param show
+     */
     public void showNoResultsMessage(boolean show) {
         if (show) {
             binding.noResultsTextView.setVisibility(View.VISIBLE);
@@ -106,16 +114,27 @@ public class SearchFragment extends Fragment implements ISearchView, RestaurantA
             binding.noResultsTextView.setVisibility(View.GONE);
         }
     }
+    /**
+     * Navigates to the restaurant fragment
+     * @param restaurant
+     */
     @Override
     public void onNavigateToRestaurant(Restaurant restaurant){
         listener.onNavigateToRestaurant(restaurant, true, 0);
     }
 
+    /**
+     * Navigates to the add restaurant fragment
+     */
     @Override
     public void onNavigateToAddRestaurant(){
         listener.onNavigateToAddRestaurant();
     }
 
+    /**
+     * Hides the keyboard
+     * @param view
+     */
     private void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (inputMethodManager != null && view != null) {

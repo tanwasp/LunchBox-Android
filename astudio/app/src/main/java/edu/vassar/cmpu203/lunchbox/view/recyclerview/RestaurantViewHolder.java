@@ -12,6 +12,10 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder{
     TextView priceRangeView;
     TextView addressView;
 
+    /**
+     * Constructor for RestaurantViewHolder
+     * @param itemView
+     */
     public RestaurantViewHolder(@NonNull View itemView) {
         super(itemView);
         nameView = (TextView) itemView.findViewById(R.id.restaurantNameTextView);

@@ -7,6 +7,10 @@ android {
     namespace = "edu.vassar.cmpu203.lunchbox"
     compileSdk = 34
 
+        testOptions {
+            animationsDisabled = true
+        }
+
     defaultConfig {
         applicationId = "edu.vassar.cmpu203.lunchbox"
         minSdk = 27
@@ -72,4 +76,6 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+
 }

@@ -10,6 +10,10 @@ import edu.vassar.cmpu203.lunchbox.R;
 public class RestaurantFooterViewHolder extends RecyclerView.ViewHolder {
     public Button addRestaurantFooterButton;
 
+    /**
+     * Constructor for RestaurantFooterViewHolder
+     * @param view
+     */
     public RestaurantFooterViewHolder(View view) {
         super(view);
         addRestaurantFooterButton = view.findViewById(R.id.addRestaurantFooterButton);

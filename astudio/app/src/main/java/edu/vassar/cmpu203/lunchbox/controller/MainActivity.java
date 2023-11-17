@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     // HomeView.Listener methods
+    /**
+     * navigates to search fragment
+     */
     @Override
     public void onNavigateToSearch() {
         SearchFragment searchFragment = new SearchFragment(this);
@@ -58,6 +61,14 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     // SearchView.Listener methods
+
+    /**
+     * performs search based on search term, price filter, distance filter, and sort option
+     * @param searchTerm - they key word or phrase to search by with string contains
+     * @param priceFilter - the price range to filter by
+     * @param distanceFilter - the distance to filter by
+     * @param sortOption - sort by proximity to the user or highest to lowest rating of the restaurants
+     */
     @Override
     public void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption) {
         HashSet<IFilter> filters = new HashSet<IFilter>();
@@ -77,6 +88,14 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         this.mainView.displaySearchResults(matches);
     }
 
+    // RestaurantAdapter.OnItemClickListener methods
+
+    /**
+     * navigates to restaurant fragment
+     * @param restaurant
+     * @param reversible
+     * @param popCount
+     */
     @Override
     public void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount) {
         ArrayList<Review> reviewsList = revLib.getReviews(restaurant.getReviewList());
@@ -84,12 +103,25 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         this.mainView.displayFragment(restaurantFragment, reversible, "restaurant", popCount);
     }
 
+    // RestaurantView.Listener methods
+
+    /**
+     * navigates to add review fragment
+     * @param restaurantId
+     */
     @Override
     public void onNavigateToPostReview(String restaurantId) {
         AddReviewFragment addRevFragment = new AddReviewFragment(this, restaurantId);
         this.mainView.displayFragment(addRevFragment, true, "review form", 0);
     }
 
+    /**
+     * adds review to review library and adds review to restaurant
+     * @param rating
+     * @param comment
+     * @param restaurantId
+     * @param priceSymbol
+     */
     public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol){
         String reviewId = revLib.addReview(curUser, restaurantId, rating, comment, priceSymbol);
         lib.addReviewToRest(restaurantId, reviewId);
@@ -99,12 +131,27 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         onNavigateToRestaurant(lib.getRestaurant(restaurantId), true, 2);
     }
 
+    /**
+     * adds review to review library and adds review to restaurant
+     */
+
     @Override
     public void onNavigateToAddRestaurant(){
         AddRestaurantFragment addRestaurantFragment = new AddRestaurantFragment(this);
         this.mainView.displayFragment(addRestaurantFragment, true, "add restaurant", 0);
     }
 
+    /**
+     * adds restaurant to restaurant library
+     * @param name
+     * @param address
+     * @param city
+     * @param state
+     * @param country
+     * @param postalCode
+     * @param lat
+     * @param lon
+     */
     public void addRestaurant(String name, String address, String city, String state, String country, String postalCode, String lat, String lon){
         float floatLat = Float.parseFloat(lat);
         float floatLon = Float.parseFloat(lon);

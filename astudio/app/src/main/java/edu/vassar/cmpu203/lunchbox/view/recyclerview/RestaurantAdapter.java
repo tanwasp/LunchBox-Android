@@ -27,12 +27,26 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         void onNavigateToAddRestaurant();
     }
 
+    /**
+     * Constructor for RestaurantAdapter
+     * @param context
+     * @param restaurants
+     * @param listener
+     */
     public RestaurantAdapter(Context context, List<Restaurant> restaurants, OnItemClickListener listener) {
         this.inflater = LayoutInflater.from(context);
         this.restaurants = restaurants;
         this.listener = listener;
     }
 
+    /**
+     * Creates a new RecyclerView.ViewHolder and initializes some private fields to be used by RecyclerView.
+     * @param parent The ViewGroup into which the new View will be added after it is bound to
+     *               an adapter position.
+     * @param viewType The view type of the new View.
+     *
+     * @return
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_FOOTER) {
@@ -44,6 +58,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    /**
+     * Called by RecyclerView to display the data at the specified position.
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     *        item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_ITEM) {
@@ -78,17 +98,29 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     }
 
+    /**
+     * Returns the total number of items in the data set held by the adapter.
+     */
     @Override
     public int getItemCount() {
         return restaurants.size()+1;
     }
 
+    /**
+     * Sets the restaurants list to the new list of restaurants and notifies the adapter to refresh the RecyclerView.
+     * @param newRestaurants
+     */
     public void setRestaurants(List<Restaurant> newRestaurants) {
         this.restaurants = newRestaurants;
         notifyDataSetChanged(); // Notify the adapter to refresh the RecyclerView
     }
 
 
+    /**
+     * Returns the view type of the item at position for the purposes of view recycling.
+     * @param position position to query
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         if (position == restaurants.size()) {

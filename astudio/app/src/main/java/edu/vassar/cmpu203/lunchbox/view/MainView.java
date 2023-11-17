@@ -42,6 +42,7 @@ public class MainView implements IMainView{
      * @param fragment The fragment to be displayed.
      * @param addToStack true if this transaction should be reversible, false otherwise
      * @param tag the name this transaction can be referred by.
+     * @param popCount the number of times the the fragment should pop
      */
 
     @Override
@@ -54,6 +55,10 @@ public class MainView implements IMainView{
         ft.commit();
     }
 
+    /**
+     * Displays the restaurant details screen.
+     * @param searchResults
+     */
     public void displaySearchResults(ArrayList<Restaurant> searchResults) {
         Fragment currentFragment = fmanager.findFragmentByTag("search");
         if (currentFragment instanceof SearchFragment) {

@@ -36,12 +36,22 @@ public class AddReviewFragment extends Fragment implements IAddReviewView {
         return this.binding.getRoot();
     }
 
+    /**
+     * Called immediately after {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
+     * @param view The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         // Set up click listener for the "Add Review" button
         this.binding.buttonAddReview.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when the "Add Review" button is clicked.
+             * @param v The view that was clicked.
+             */
             @Override
             public void onClick(View v) {
                 // Retrieve values from UI elements
