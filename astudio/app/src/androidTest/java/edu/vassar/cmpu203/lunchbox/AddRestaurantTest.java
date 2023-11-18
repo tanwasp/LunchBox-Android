@@ -39,7 +39,7 @@ public class AddRestaurantTest {
         // Navigate to Add Restaurant
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
 
-        onView(withId(R.id.searchResultsRecyclerView)) .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.searchResultsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         SystemClock.sleep(1000);
 
         // Input restaurant details
@@ -61,7 +61,7 @@ public class AddRestaurantTest {
         onView(withId(R.id.searchTermText)).perform(typeText("magic"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
 
-//        // Check that the restaurant was added
+      // Check that the restaurant was added
         onView(withText("Magic Bowl")).check(matches(isDisplayed()));
     }
 }

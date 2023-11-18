@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public class LocFilterTest {
+
+    /**
+     * Tests filtering by location option
+     */
     @Test
     public void testFilter() {
         User testUser = new User("default", 30f, -90f);

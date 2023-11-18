@@ -60,7 +60,7 @@ public class SearchRestaurantTest {
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
         onView(withId(R.id.searchTermText)).perform(typeText("SUSHI"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
-//        Check if all the sushi restaurants appear
+        // Check if all the sushi restaurants appear
         onView(withText("Sushi Train")).check(matches(isDisplayed()));
         onView(withText("WIN Bubble Tea and Sushi")).check(matches(isDisplayed()));
         onView(withText("Sushi Kingdom")).check(matches(isDisplayed()));
@@ -73,6 +73,7 @@ public class SearchRestaurantTest {
     public void testEmptySearchFunctionality(){
         Espresso.onView(ViewMatchers.withId(R.id.btnNavigateToSearch)).perform(ViewActions.click());
         onView(withId(R.id.searchButton)).perform(click());
+
         onView(withId(R.id.searchResultsRecyclerView)).check(matches(isDisplayed()));
     }
 
@@ -85,7 +86,7 @@ public class SearchRestaurantTest {
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
         onView(withId(R.id.searchTermText)).perform(typeText("I just really really like food, dude"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
-        //    Testing for no results message
+        // Testing for no results message
         onView(withText("Sorry, no restaurants match the given criteria")).check(matches(isDisplayed()));
     }
 
@@ -134,6 +135,7 @@ public class SearchRestaurantTest {
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
         onView(withId(R.id.proximityRadioButton)).perform(click());
         onView(withId(R.id.searchButton)).perform(click());
+
         onView(withText("McDonald's")).check(matches(isDisplayed()));
         onView(withText("Sushi Train")).check(matches(isDisplayed()));
     }

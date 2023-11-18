@@ -9,6 +9,9 @@ import java.util.Set;
 
 public class RestaurantLibraryTest {
 
+    /**
+     * Tests class's ability to add a review to a restaurant
+     */
     @Test
     public void testAddReviewToRest() {
         RestaurantLibrary restLib = new RestaurantLibrary();
@@ -23,6 +26,9 @@ public class RestaurantLibraryTest {
         assertTrue(restaurant.getReviewList().contains(reviewId));
     }
 
+    /**
+     * Tests class's ability to add a new restaurant
+     */
     @Test
     public void testAddRestaurant() {
         RestaurantLibrary restLib = new RestaurantLibrary();
@@ -42,6 +48,9 @@ public class RestaurantLibraryTest {
 
     }
 
+    /**
+     * Tests class's ability search restaurants and return only those matching the given criteria
+     */
     @Test
     public void testSearch() {
         RestaurantLibrary restaurantLibrary = new RestaurantLibrary();
@@ -49,17 +58,36 @@ public class RestaurantLibraryTest {
         // create a sample user
         User testUser = new User("default", 30, -90);
 
-        // Search for restaurants with a specific term and no filters
+        // search for restaurants with a specific term and no filters
         String searchTerm = "Bakehouse";
         Set<IFilter> filters = new HashSet<>();
         String sort = "prox";
         ArrayList<Restaurant> searchResults = restaurantLibrary.search(searchTerm, filters, sort, testUser);
 
-        // Assert that search results are not null and contain the expected restaurant
+        // assert that search results contain the expected restaurant
         assertTrue(searchResults.size() == 1);
         boolean match = true;
         for (int i = 0; i < searchResults.size(); i++){
             if (searchResults.get(i).getName().contains("Bakehouse") == false){
+                match = false;
+            }
+        }
+        assertTrue(match);
+
+        // search for restaurants with a no specific term but apply filters
+        searchTerm = "";
+        PriceFilter pf = new PriceFilter("$$");
+        LocFilter lf = new LocFilter(500, testUser);
+        filters = new HashSet<IFilter>();
+        filters.add(pf);
+        filters.add(lf);
+        sort = "rating";
+        ArrayList<Restaurant> searchResults2 = restaurantLibrary.search(searchTerm, filters, sort, testUser);
+
+        assertTrue(searchResults2.size() == 4); // there are 4 restaurants within 500 miles with a $$ price tag
+        match = true;
+        for (int i = 0; i < searchResults2.size(); i++){
+            if (searchResults2.get(i).getPriceRange() != 2 || searchResults2.get(i).distanceToUser > 500){
                 match = false;
             }
         }

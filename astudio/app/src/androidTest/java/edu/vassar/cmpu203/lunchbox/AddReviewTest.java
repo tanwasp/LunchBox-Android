@@ -48,8 +48,8 @@ public class AddReviewTest {
         // Search for a restaurant
         onView(withId(R.id.searchTermText)).perform(typeText("McDonald"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
-//        Click on the top restaurant that appears
-        onView(withId(R.id.searchResultsRecyclerView)) .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        // Click on the top restaurant that appears
+        onView(withId(R.id.searchResultsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         SystemClock.sleep(1000);
 
         onView(withId(R.id.btnNavigateToPostReview)).perform(click());

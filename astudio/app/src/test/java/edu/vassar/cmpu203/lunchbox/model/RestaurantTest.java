@@ -13,6 +13,9 @@ Restaurant r;
 RestaurantLibrary lib;
 ReviewsLibrary revLib;
 
+    /**
+     * Sets up the libraries for use in the tests
+     */
     public Restaurant setupDatabase(){
         testUser = new User("default", 30f, -90f);
         loc = new Location(40.7128f, -74.006f);
@@ -35,6 +38,10 @@ ReviewsLibrary revLib;
         return r;
 
     }
+
+    /**
+     * Test calculating restaurant's distance to the user
+     */
     @Test
     public void testSetDistToUser(){
         testUser = new User("default", 30f, -90f);
@@ -49,6 +56,9 @@ ReviewsLibrary revLib;
         assertEquals(expected, r.distanceToUser, 0.05f);
     }
 
+    /**
+     * Test calculating all restaurants' price tag
+     */
     @Test
     public void testComputePriceRange(){
         Restaurant restaurant = setupDatabase();
@@ -60,6 +70,9 @@ ReviewsLibrary revLib;
         assertEquals(2, restaurant.getPriceRange());
     }
 
+    /**
+     * Test calculating all restaurants' rating
+     */
     @Test
     public void testComputeRating(){
         Restaurant restaurant = setupDatabase();
