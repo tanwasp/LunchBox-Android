@@ -44,7 +44,7 @@ public class ViewRestaurantTest {
         onView(withId(R.id.searchTermText)).perform(typeText("Moreno"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
 
-        onView(withId(R.id.searchResultsRecyclerView)) .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.searchResultsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         SystemClock.sleep(1000);
 
         onView(withId(R.id.restaurantName)).check(matches(withText("Moreno Bakery")));
@@ -65,7 +65,7 @@ public class ViewRestaurantTest {
 
         onView(withId(R.id.searchTermText)).perform(typeText("Moreno"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
-        onView(withId(R.id.searchResultsRecyclerView)) .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.searchResultsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         SystemClock.sleep(1000);
         onView(withId(R.id.btnNavigateToPostReview)).check(matches(isClickable()));
     }
@@ -79,7 +79,7 @@ public class ViewRestaurantTest {
         onView(withId(R.id.searchTermText)).perform(typeText("Moreno"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
 
-        onView(withId(R.id.searchResultsRecyclerView)) .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.searchResultsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         SystemClock.sleep(1000);
 
         onView(withText("Moreno Bakery")).check(matches(isDisplayed()));
