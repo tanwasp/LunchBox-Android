@@ -12,6 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
@@ -19,6 +20,10 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.instanceOf;
 
 import android.os.SystemClock;
 
@@ -52,6 +57,8 @@ public class AddReviewTest {
         // Fill in the review details
         onView(withId(R.id.editTextComment)).perform(typeText("I absolutely hate the food here!!"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.ratingBar)).perform(ViewActions.click());
+        onView(withId(R.id.spinnerPrice)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("$$"))).perform(click());
 
         // Submit the review
         onView(withId(R.id.buttonAddReview)).perform(click());
@@ -62,5 +69,6 @@ public class AddReviewTest {
         onView(withId(R.id.searchButton)).perform(click());
         onView(withId(R.id.searchResultsRecyclerView)) .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withText("I absolutely hate the food here!!")).check(matches(isDisplayed()));
+        onView(withText("$$")).check(matches(isDisplayed()));
     }
 }
