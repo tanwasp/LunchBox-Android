@@ -147,8 +147,8 @@ public class Restaurant {
         if (count == 0){
             priceRange = 0;
         }
-        else
-        priceRange = sum / count;
+        else{
+        priceRange = sum / count;}
     }
 
 //    /**
