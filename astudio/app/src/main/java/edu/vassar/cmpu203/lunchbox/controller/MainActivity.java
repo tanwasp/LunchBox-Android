@@ -1,19 +1,32 @@
 package edu.vassar.cmpu203.lunchbox.controller;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import android.location.Location;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+//import edu.vassar.cmpu203.lunchbox.Manifest;
+import android.Manifest;
 import edu.vassar.cmpu203.lunchbox.model.IFilter;
 import edu.vassar.cmpu203.lunchbox.model.LocFilter;
 import edu.vassar.cmpu203.lunchbox.model.PriceFilter;
@@ -41,23 +54,55 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     private static ReviewsLibrary revLib;
     private User curUser;
     IMainView mainView;
-    private static final int LOGIN_REQUEST_CODE = 1;
-    ActivityResultLauncher<Intent> loginActivityResultLauncher;
+    String email;
+    String firebaseUid;
+    String username;
+    float latitude;
+    float longitude;
 
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    ActivityResultLauncher<Intent> loginActivityResultLauncher;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        // Check if user is already signed in
-//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//        if (currentUser != null) {
-//            // User is signed in
-//            String username = currentUser.getDisplayName();
-//            String email = currentUser.getEmail();
-//            String firebaseUid = currentUser.getUid();
-//            curUser = new User(username, firebaseUid, email);
+        // Check for location permission
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION); // Replace with your request code
+        }
+
+        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location androidLocation) {
+                        if (androidLocation != null) {
+                            latitude = (float) androidLocation.getLatitude();
+                            longitude = (float) androidLocation.getLongitude();
+                            // Use the latitude and longitude as needed
+                        }
+                    }
+                });
+
+
+        // Check if user is already signed in
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            // User is signed in
+            username = currentUser.getDisplayName();
+            email = currentUser.getEmail();
+            firebaseUid = currentUser.getUid();
+
+        } else {
+            // User is not signed in
+            System.out.println("User is not signed in");
+        }
 
         // Initialize login launcher
 
@@ -66,11 +111,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        String email = data.getStringExtra("email");
-                        String firebaseUid = data.getStringExtra("firebaseUid");
-                        String username = data.getStringExtra("username");
-
-                        curUser = new User(username, firebaseUid, email);
+                        email = data.getStringExtra("email");
+                        firebaseUid = data.getStringExtra("firebaseUid");
+                        username = data.getStringExtra("username");
 
                         SearchFragment searchFragment = new SearchFragment(this);
                         this.mainView.displayFragment(searchFragment, false, "search", 0);
@@ -78,9 +121,11 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                     System.out.println("Sign up failed in Main Activity");
                 }
         );
-
+        curUser = new User(username, firebaseUid, email, latitude, longitude);
+        System.out.println((curUser));
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
+
 
         // Initialize HomeView and SearchView
         this.mainView = new MainView(this);
@@ -89,6 +134,20 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
         setContentView(this.mainView.getRootView());
 
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission was granted
+            } else {
+                // Permission denied, handle the denial
+            }
+        }
     }
 
     // HomeView.Listener methods
@@ -100,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         SearchFragment searchFragment = new SearchFragment(this);
         this.mainView.displayFragment(searchFragment, true, "search", 0);
     }
+
 
     // SearchView.Listener methods
 

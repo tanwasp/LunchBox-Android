@@ -19,6 +19,14 @@ public class Location {
         this.lon = lon;
     }
 
+    public float getLat(){
+        return this.lat;
+    }
+
+    public float getLon(){
+        return this.lon;
+    }
+
     /**
      * Computes the distance between two points using the Haversine formula.
      *

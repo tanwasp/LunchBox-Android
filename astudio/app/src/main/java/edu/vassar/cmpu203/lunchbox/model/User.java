@@ -100,4 +100,12 @@ public class User {
     public Location getLoc() {
         return loc;
     }
+
+    public String toString(){
+        return "Username: " + this.username + "\n" +
+                "Firebase UID: " + this.firebaseUid + "\n" +
+                "Email: " + this.email + "\n" +
+                "Latitude: " + this.loc.getLat() + "\n" +
+                "Longitude: " + this.loc.getLon() + "\n";
+    }
 }
