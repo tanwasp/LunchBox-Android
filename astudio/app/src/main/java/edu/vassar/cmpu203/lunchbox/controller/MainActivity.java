@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
 
         FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
@@ -85,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                         if (androidLocation != null) {
                             latitude = (float) androidLocation.getLatitude();
                             longitude = (float) androidLocation.getLongitude();
-                            // Use the latitude and longitude as needed
                         }
                     }
                 });
@@ -98,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
             username = currentUser.getDisplayName();
             email = currentUser.getEmail();
             firebaseUid = currentUser.getUid();
+            curUser = new User(username, firebaseUid, email, latitude, longitude);
 
         } else {
             // User is not signed in
@@ -114,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                         email = data.getStringExtra("email");
                         firebaseUid = data.getStringExtra("firebaseUid");
                         username = data.getStringExtra("username");
+                        curUser = new User(username, firebaseUid, email, latitude, longitude);
 
                         SearchFragment searchFragment = new SearchFragment(this);
                         this.mainView.displayFragment(searchFragment, false, "search", 0);
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                     System.out.println("Sign up failed in Main Activity");
                 }
         );
-        curUser = new User(username, firebaseUid, email, latitude, longitude);
+
         System.out.println((curUser));
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
@@ -133,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         this.mainView.displayFragment(homeFragment, false, "home", 0);
 
         setContentView(this.mainView.getRootView());
-
     }
 
 
@@ -270,12 +269,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         Intent signupIntent = new Intent(this, LoginActivity.class);
         signupIntent.putExtra("action", "signup");
         loginActivityResultLauncher.launch(signupIntent);
-    }
-
-
-    public void onLogin(String username, String password){
-        curUser = new User(username, 30, -90);
-        onNavigateToHome();
     }
 
     public void onNavigateToHome(){

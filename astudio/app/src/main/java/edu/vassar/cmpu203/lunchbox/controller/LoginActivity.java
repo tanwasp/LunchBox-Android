@@ -51,25 +51,18 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
     }
 
     public void onSignup(String username, String email, String password) {
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Authentication succeeded
                         FirebaseUser user = task.getResult().getUser();
                         String firebaseUserId = user.getUid();
 
                         // Update Firebase profile with username
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(username)
-                                .build();
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(username).build();
 
-                        user.updateProfile(profileUpdates)
-                                .addOnCompleteListener(profileTask -> {
+                        user.updateProfile(profileUpdates).addOnCompleteListener(profileTask -> {
                                     if (profileTask.isSuccessful()) {
-                                        // Firebase profile updated successfully
                                         Log.d("Profile Update", "User profile updated.");
 
-                                        // Continue with storing additional data in Firestore
                                         storeUserDataInFirestore(user, username, email, firebaseUserId);
                                     } else {
                                         // Handle failure in updating Firebase profile
@@ -96,7 +89,6 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
 
                         resultData.putExtra("email", user.getEmail());
                         resultData.putExtra("firebaseUserId", firebaseUserId);
-
 
                         setResult(Activity.RESULT_OK, resultData);
                         finish();
