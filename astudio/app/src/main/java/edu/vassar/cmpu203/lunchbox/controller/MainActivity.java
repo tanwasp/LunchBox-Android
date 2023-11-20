@@ -1,8 +1,16 @@
 package edu.vassar.cmpu203.lunchbox.controller;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -33,12 +41,44 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     private static ReviewsLibrary revLib;
     private User curUser;
     IMainView mainView;
+    private static final int LOGIN_REQUEST_CODE = 1;
+    ActivityResultLauncher<Intent> loginActivityResultLauncher;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        curUser = new User("Me", 30, -90);
+//        // Check if user is already signed in
+//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+//        if (currentUser != null) {
+//            // User is signed in
+//            String username = currentUser.getDisplayName();
+//            String email = currentUser.getEmail();
+//            String firebaseUid = currentUser.getUid();
+//            curUser = new User(username, firebaseUid, email);
+
+        // Initialize login launcher
+
+        loginActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        String email = data.getStringExtra("email");
+                        String firebaseUid = data.getStringExtra("firebaseUid");
+                        String username = data.getStringExtra("username");
+
+                        curUser = new User(username, firebaseUid, email);
+
+                        SearchFragment searchFragment = new SearchFragment(this);
+                        this.mainView.displayFragment(searchFragment, false, "search", 0);
+                    }
+                    System.out.println("Sign up failed in Main Activity");
+                }
+        );
+
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
 
@@ -48,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         this.mainView.displayFragment(homeFragment, false, "home", 0);
 
         setContentView(this.mainView.getRootView());
+
     }
 
     // HomeView.Listener methods
@@ -159,4 +200,27 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         Restaurant r = lib.addRestaurant(name, address, city, state, country, postalCode, floatLat, floatLon);
         onNavigateToRestaurant(r, true, 1);
     }
+
+    public void onNavigateToLogin() {
+        Intent loginIntent = new Intent(this, LoginActivity.class);
+        loginIntent.putExtra("action", "login");
+        loginActivityResultLauncher.launch(loginIntent);
+    }
+    public void onNavigateToSignup() {
+        Intent signupIntent = new Intent(this, LoginActivity.class);
+        signupIntent.putExtra("action", "signup");
+        loginActivityResultLauncher.launch(signupIntent);
+    }
+
+
+    public void onLogin(String username, String password){
+        curUser = new User(username, 30, -90);
+        onNavigateToHome();
+    }
+
+    public void onNavigateToHome(){
+        HomeFragment homeFragment = new HomeFragment(this);
+        this.mainView.displayFragment(homeFragment, false, "home", 0);
+    }
+
 }
