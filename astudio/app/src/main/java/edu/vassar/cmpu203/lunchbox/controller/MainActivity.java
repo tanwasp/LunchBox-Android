@@ -28,30 +28,11 @@ import java.util.HashSet;
 import java.util.List;
 
 import android.Manifest;
-import edu.vassar.cmpu203.lunchbox.model.IFilter;
-import edu.vassar.cmpu203.lunchbox.model.LocFilter;
-import edu.vassar.cmpu203.lunchbox.model.PriceFilter;
-import edu.vassar.cmpu203.lunchbox.model.Restaurant;
-import edu.vassar.cmpu203.lunchbox.model.RestaurantLibrary;
-import edu.vassar.cmpu203.lunchbox.model.Review;
-import edu.vassar.cmpu203.lunchbox.model.ReviewsLibrary;
-import edu.vassar.cmpu203.lunchbox.model.User;
+import edu.vassar.cmpu203.lunchbox.model.*;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.FirestoreCsvImporter;
-import edu.vassar.cmpu203.lunchbox.view.AddRestaurantFragment;
-import edu.vassar.cmpu203.lunchbox.view.HomeFragment;
-import edu.vassar.cmpu203.lunchbox.view.IAddRestaurantView;
-import edu.vassar.cmpu203.lunchbox.view.IHomeView;
-import edu.vassar.cmpu203.lunchbox.view.IMainView;
-import edu.vassar.cmpu203.lunchbox.view.IRestaurantView;
-import edu.vassar.cmpu203.lunchbox.view.MainView;
-import edu.vassar.cmpu203.lunchbox.view.ISearchView;
-import edu.vassar.cmpu203.lunchbox.view.RestaurantFragment;
-import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
-import edu.vassar.cmpu203.lunchbox.view.IAddReviewView;
-import edu.vassar.cmpu203.lunchbox.view.AddReviewFragment;
-import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
+import edu.vassar.cmpu203.lunchbox.view.*;
 
-public class MainActivity extends AppCompatActivity implements IHomeView.Listener,  IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener {
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener,  IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileFragment.Listener {
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
     private User curUser;
@@ -276,6 +257,11 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onNavigateToHome(){
         HomeFragment homeFragment = new HomeFragment(this);
         this.mainView.displayFragment(homeFragment, false, "home", 0);
+    }
+
+    public void onNavigateToMyProfile() {
+        UserProfileFragment profileFragment = new UserProfileFragment(this, curUser);
+        this.mainView.displayFragment(profileFragment, true, "search", 0);
     }
 
 }
