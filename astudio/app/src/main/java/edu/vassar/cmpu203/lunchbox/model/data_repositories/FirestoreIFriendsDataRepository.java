@@ -4,7 +4,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import edu.vassar.cmpu203.lunchbox.model.FirestoreSingleton;
 
-public class FirestoreFriendsDataRepository implements FriendsDataRepository{
+public class FirestoreIFriendsDataRepository implements IFriendsDataRepository {
 
     @Override
     public void getLatestActivity() {

@@ -7,8 +7,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +14,7 @@ import edu.vassar.cmpu203.lunchbox.model.FirestoreSingleton;
 
 public class FirestoreUserDataRepository implements UserDataRepository {
     @Override
-    public void createUser(String username, String email, String password, DataRepositoryCallback callback) {
+    public void createUser(String username, String email, String password, IDataRepositoryCallback callback) {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 FirebaseUser user = task.getResult().getUser();
@@ -44,7 +42,7 @@ public class FirestoreUserDataRepository implements UserDataRepository {
     }
 
     @Override
-    public void loginUser(String email, String password, DataRepositoryCallback callback) {
+    public void loginUser(String email, String password, IDataRepositoryCallback callback) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 FirebaseUser user = task.getResult().getUser();
@@ -55,7 +53,7 @@ public class FirestoreUserDataRepository implements UserDataRepository {
         });
     }
 
-    private void storeUserDataInFirestore(String username, String email, String firebaseUserId, DataRepositoryCallback callback) {
+    private void storeUserDataInFirestore(String username, String email, String firebaseUserId, IDataRepositoryCallback callback) {
         Map<String, Object> userData = new HashMap<>();
         userData.put("username", username);
         userData.put("email", email);

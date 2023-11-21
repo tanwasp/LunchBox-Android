@@ -19,14 +19,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import android.location.Location;
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+//import edu.vassar.cmpu203.lunchbox.Manifest;
 import android.Manifest;
 import edu.vassar.cmpu203.lunchbox.model.IFilter;
 import edu.vassar.cmpu203.lunchbox.model.LocFilter;
@@ -69,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
         // Check for location permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
