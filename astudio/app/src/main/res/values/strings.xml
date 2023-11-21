@@ -64,4 +64,10 @@
     <string name="enter_longitude">Enter Longitude</string>
     <string name="add_restaurant_button">Add Restaurant</string>
 
+    <string name="profile_username">Username</string>
+    <string name="profile_date">Date Joined</string>
+    <string name="profile_friends_button">Friends</string>
+
+    <string name="notifications_label">Notifications</string>
+
 </resources>
