@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.vassar.cmpu203.lunchbox.model.FirestoreSingleton;
+
 public class FirestoreUserDataRepository implements UserDataRepository {
     @Override
     public void createUser(String username, String email, String password, DataRepositoryCallback callback) {
@@ -58,7 +60,7 @@ public class FirestoreUserDataRepository implements UserDataRepository {
         userData.put("username", username);
         userData.put("email", email);
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
         db.collection("users").document(firebaseUserId).set(userData).addOnSuccessListener(aVoid -> {
             callback.onSuccess(firebaseUserId);
         }).addOnFailureListener(e -> {

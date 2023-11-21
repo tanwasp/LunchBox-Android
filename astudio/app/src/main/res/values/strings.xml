@@ -64,5 +64,6 @@
     <string name="enter_longitude">Enter Longitude</string>
     <string name="add_restaurant_button">Add Restaurant</string>
     <string name="action_login">Log in</string>
+    <string name="search_friends">search friends icon\n</string>
 
 </resources>

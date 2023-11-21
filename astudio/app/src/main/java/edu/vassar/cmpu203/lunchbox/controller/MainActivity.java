@@ -84,24 +84,10 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                         if (androidLocation != null) {
                             latitude = (float) androidLocation.getLatitude();
                             longitude = (float) androidLocation.getLongitude();
+                            initializeUser();
                         }
                     }
                 });
-
-
-        // Check if user is already signed in
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            // User is signed in
-            username = currentUser.getDisplayName();
-            email = currentUser.getEmail();
-            firebaseUid = currentUser.getUid();
-            curUser = new User(username, firebaseUid, email, latitude, longitude);
-
-        } else {
-            // User is not signed in
-            System.out.println("User is not signed in");
-        }
 
         // Initialize login launcher
 
@@ -134,6 +120,19 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         this.mainView.displayFragment(homeFragment, false, "home", 0);
 
         setContentView(this.mainView.getRootView());
+    }
+
+    private void initializeUser() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            username = currentUser.getDisplayName();
+            email = currentUser.getEmail();
+            firebaseUid = currentUser.getUid();
+            curUser = new User(username, firebaseUid, email, latitude, longitude);
+            System.out.println(curUser);  // Now curUser will have the updated location
+        } else {
+            System.out.println("User is not signed in");
+        }
     }
 
 
