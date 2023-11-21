@@ -60,22 +60,25 @@ public class FirestoreCsvImporter {
                 System.out.println("Error parsing coordinates: " + e.getMessage());
             }
 
-
             try {
                 String lngString = values[8];
                 String[] coords = values[8].split("\\)");
-                latitude = Double.parseDouble(coords[0].trim());
+                longitude = Double.parseDouble(coords[0].trim());
             } catch (Exception e) {
                 System.out.println("Error parsing coordinates: " + e.getMessage());
             }
+            System.out.println("Latitude: " + latitude);
+            System.out.println("Longitude: " + longitude);
 
-            if (latitude == 0 || longitude == 0) {
+            if (latitude != 0 && longitude != 0) {
                 GeoPoint geoPoint = new GeoPoint(latitude, longitude);
                 data.put("coordinates", geoPoint);
+                count ++;
             }
             else{
                 throw new IllegalArgumentException("Invalid coordinates");
             }
+
             int defaultPriceRange = -1;
             float defaultRating = -1;
 
@@ -87,12 +90,19 @@ public class FirestoreCsvImporter {
             // Add data to Firestore
             db.collection("restaurants").document(docId).set(data);
 
-            count++;
         }
-
         br.close();
     }
 
-// Main method for testing purposes
+// Place in MainActivity.java to run
+//FirestoreCsvImporter importer = new FirestoreCsvImporter(this);
+//
+//    // Import CSV data to Firestore
+//        try {
+//        importer.importCsvToFirestore();
+//        System.out.println("Import to Firestore successful");
+//    } catch (Exception e) {
+//        System.out.println("Import to Firestore failed: " + e.getMessage());
+//    }
 
 }

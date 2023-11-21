@@ -1,6 +1,6 @@
 package edu.vassar.cmpu203.lunchbox.model.data_repositories;
 
-public interface FriendsDataRepository {
+public interface IFriendsDataRepository {
 //    void getLatestReviews();
     void getLatestActivity();
     void searchMembers();

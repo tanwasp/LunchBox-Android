@@ -3,15 +3,12 @@ package edu.vassar.cmpu203.lunchbox.controller;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import edu.vassar.cmpu203.lunchbox.model.data_repositories.DataRepositoryCallback;
+import edu.vassar.cmpu203.lunchbox.model.data_repositories.IDataRepositoryCallback;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.FirestoreUserDataRepository;
 import edu.vassar.cmpu203.lunchbox.view.ILoginView;
 import edu.vassar.cmpu203.lunchbox.view.IMainView;
@@ -48,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
 
     public void onSignup(String username, String email, String password) {
         FirestoreUserDataRepository repository = new FirestoreUserDataRepository();
-        repository.createUser(username, email, password, new DataRepositoryCallback() {
+        repository.createUser(username, email, password, new IDataRepositoryCallback() {
             @Override
             public void onSuccess(Object result) {
                 String firebaseUserId = (String) result;
@@ -71,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
 
     public void onLogin(String email, String password) {
         FirestoreUserDataRepository repository = new FirestoreUserDataRepository();
-        repository.loginUser(email, password, new DataRepositoryCallback() {
+        repository.loginUser(email, password, new IDataRepositoryCallback() {
 
             @Override
             public void onSuccess(Object result) {
