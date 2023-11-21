@@ -16,6 +16,10 @@ public class User {
 
     private Location loc;
 
+    private String firebaseUid;
+
+    private String email;
+
     /**
      * Constructs a new User with the given name and location.
      *
@@ -25,10 +29,50 @@ public class User {
      */
     public User(String name, float lat, float lon){
         this.username = name;
-        long millis = System.currentTimeMillis();
-        this.joinedDate = new java.sql.Date(millis);
         this.loc = new Location(lat, lon);
     }
+
+    public User(String name, String firebaseUid, String email){
+        this.username = name;
+        this.firebaseUid = firebaseUid;
+        this.email = email;
+    }
+
+    public User(String name, String firebaseUid, String email, float lat, float lon){
+        this.username = name;
+        this.firebaseUid = firebaseUid;
+        this.email = email;
+        this.loc = new Location(lat, lon);
+    }
+
+    public void setLoc(float lat, float lon){
+        this.loc = new Location(lat, lon);
+    }
+
+    public void setLoc(Location loc){
+        this.loc = loc;
+    }
+
+    public String getFirebaseUid(){
+        return this.firebaseUid;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public void setFirebaseUid(String firebaseUid){
+        this.firebaseUid = firebaseUid;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
+    }
+
 
     /**
      * Gets the username of the user.
@@ -57,4 +101,11 @@ public class User {
         return loc;
     }
 
+    public String toString(){
+        return "Username: " + this.username + "\n" +
+                "Firebase UID: " + this.firebaseUid + "\n" +
+                "Email: " + this.email + "\n" +
+                "Latitude: " + this.loc.getLat() + "\n" +
+                "Longitude: " + this.loc.getLon() + "\n";
+    }
 }
