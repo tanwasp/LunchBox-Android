@@ -66,4 +66,10 @@
     <string name="action_login">Log in</string>
     <string name="search_friends">search friends icon\n</string>
 
+    <string name="profile_username">Username</string>
+    <string name="profile_date">Date Joined</string>
+    <string name="profile_friends_button">Friends</string>
+
+    <string name="notifications_label">Notifications</string>
+
 </resources>
