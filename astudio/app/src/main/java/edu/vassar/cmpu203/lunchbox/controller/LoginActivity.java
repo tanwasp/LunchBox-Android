@@ -10,13 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-
-import java.util.HashMap;
-import java.util.Map;
-
+import edu.vassar.cmpu203.lunchbox.model.data_repositories.DataRepositoryCallback;
+import edu.vassar.cmpu203.lunchbox.model.data_repositories.FirestoreUserDataRepository;
 import edu.vassar.cmpu203.lunchbox.view.ILoginView;
 import edu.vassar.cmpu203.lunchbox.view.IMainView;
 import edu.vassar.cmpu203.lunchbox.view.ISignupView;
@@ -51,116 +47,52 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
     }
 
     public void onSignup(String username, String email, String password) {
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = task.getResult().getUser();
-                        String firebaseUserId = user.getUid();
+        FirestoreUserDataRepository repository = new FirestoreUserDataRepository();
+        repository.createUser(username, email, password, new DataRepositoryCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                String firebaseUserId = (String) result;
+                Intent resultData = new Intent();
+                resultData.putExtra("username", username);
+                resultData.putExtra("email", email);
+                resultData.putExtra("firebaseUserId", firebaseUserId);
+                setResult(Activity.RESULT_OK, resultData);
+                finish();
+            }
 
-                        // Update Firebase profile with username
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(username).build();
+            @Override
+            public void onFailure(Exception e) {
+                signupFragment.onSignupResult(false, "Signup failed: " + e.getMessage());
+            }
+        });
 
-                        user.updateProfile(profileUpdates).addOnCompleteListener(profileTask -> {
-                                    if (profileTask.isSuccessful()) {
-                                        Log.d("Profile Update", "User profile updated.");
 
-                                        storeUserDataInFirestore(user, username, email, firebaseUserId);
-                                    } else {
-                                        // Handle failure in updating Firebase profile
-                                        Log.e("Profile Update", "Failed to update user profile", profileTask.getException());
-                                        signupFragment.onSignupResult(false, "Signup failed: Failed to update user profile");
-                                    }
-                                });
-                    } else {
-                        // Authentication failed
-                        signupFragment.onSignupResult(false, "Signup failed: " + task.getException().getMessage());
-                    }
-                });
     }
 
     public void onLogin(String email, String password) {
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Authentication succeeded
-                        FirebaseUser user = task.getResult().getUser();
-                        String firebaseUserId = user.getUid();
+        FirestoreUserDataRepository repository = new FirestoreUserDataRepository();
+        repository.loginUser(email, password, new DataRepositoryCallback() {
 
-                        Intent resultData = new Intent();
+            @Override
+            public void onSuccess(Object result) {
+                FirebaseUser user = (FirebaseUser) result;
+                String firebaseUserId = user.getUid();
 
-                        resultData.putExtra("email", user.getEmail());
-                        resultData.putExtra("firebaseUserId", firebaseUserId);
+                Intent resultData = new Intent();
 
-                        setResult(Activity.RESULT_OK, resultData);
-                        finish();
-                    } else {
-                        // Authentication failed
-                        loginFragment.onLoginResult(false, "Login failed: " + task.getException().getMessage());
-                    }
-                });
+                resultData.putExtra("username", user.getDisplayName());
+                resultData.putExtra("email", user.getEmail());
+                resultData.putExtra("firebaseUserId", firebaseUserId);
+
+                setResult(Activity.RESULT_OK, resultData);
+                finish();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                loginFragment.onLoginResult(false, "Login failed: " + e.getMessage());
+            }
+        });
+
     }
-
-    private void storeUserDataInFirestore(FirebaseUser user, String username, String email, String firebaseUserId) {
-        // Create a new user map to add to Firestore
-        Map<String, Object> userData = new HashMap<>();
-        userData.put("username", username);
-        userData.put("email", email);
-
-        // Save user info to Firestore
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(firebaseUserId).set(userData)
-                .addOnSuccessListener(aVoid -> {
-                    // Data added successfully
-                    Intent resultData = new Intent();
-                    resultData.putExtra("username", username);
-                    resultData.putExtra("email", email);
-                    resultData.putExtra("firebaseUserId", firebaseUserId);
-                    setResult(Activity.RESULT_OK, resultData);
-                    finish();
-                })
-                .addOnFailureListener(e -> {
-                    // Handle failure
-                    Log.e("Firestore Error", "Error writing document", e);
-                    signupFragment.onSignupResult(false, "Signup failed: Failed to add user details to Firestore");
-                });
-    }
-
-//    Getting the username from the database
-
-//    public void onLogin(String email, String password) {
-//        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
-//                        FirebaseUser user = task.getResult().getUser();
-//                        String firebaseUserId = user.getUid();
-//
-//                        // Fetch username from Firestore
-//                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//                        db.collection("users").document(firebaseUserId).get()
-//                                .addOnSuccessListener(documentSnapshot -> {
-//                                    if (documentSnapshot.exists()) {
-//                                        String username = documentSnapshot.getString("username");
-//
-//                                        Intent resultData = new Intent();
-//                                        resultData.putExtra("username", username);
-//                                        resultData.putExtra("email", user.getEmail());
-//                                        resultData.putExtra("firebaseUserId", firebaseUserId);
-//
-//                                        setResult(Activity.RESULT_OK, resultData);
-//                                        finish();
-//                                    } else {
-//                                        // Handle case where user data is not found in Firestore
-//                                        loginFragment.onLoginResult(false, "User data not found");
-//                                    }
-//                                })
-//                                .addOnFailureListener(e -> {
-//                                    // Handle any errors here
-//                                    loginFragment.onLoginResult(false, "Failed to fetch user data: " + e.getMessage());
-//                                });
-//                    } else {
-//                        // Authentication failed
-//                        loginFragment.onLoginResult(false, "Login failed: " + task.getException().getMessage());
-//                    }
-//                });
-//    }
-
 }

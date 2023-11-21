@@ -111,10 +111,11 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         email = data.getStringExtra("email");
-                        firebaseUid = data.getStringExtra("firebaseUid");
+                        firebaseUid = data.getStringExtra("firebaseUserId");
                         username = data.getStringExtra("username");
                         curUser = new User(username, firebaseUid, email, latitude, longitude);
 
+                        System.out.println(curUser);
                         SearchFragment searchFragment = new SearchFragment(this);
                         this.mainView.displayFragment(searchFragment, false, "search", 0);
                     }
