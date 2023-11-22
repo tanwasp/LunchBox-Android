@@ -109,7 +109,7 @@ public class Restaurant {
         this.loc = new Location(lat, lon);
         this.reviewList = new ArrayList<String>();
         this.priceRange = 0;
-        distanceToUser = -1.0f;
+//        distanceToUser = -1.0f;
     }
 
     /**

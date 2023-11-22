@@ -32,10 +32,13 @@ import edu.vassar.cmpu203.lunchbox.model.LocFilter;
 import edu.vassar.cmpu203.lunchbox.model.PriceFilter;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.model.RestaurantLibrary;
+import edu.vassar.cmpu203.lunchbox.model.RestaurantNames;
 import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.model.ReviewsLibrary;
 import edu.vassar.cmpu203.lunchbox.model.User;
+import edu.vassar.cmpu203.lunchbox.model.data_repositories.FStoreReviewsDataRepo;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.FirestoreCsvImporter;
+import edu.vassar.cmpu203.lunchbox.model.data_repositories.IDataRepositoryCallback;
 import edu.vassar.cmpu203.lunchbox.view.AddRestaurantFragment;
 import edu.vassar.cmpu203.lunchbox.view.HomeFragment;
 import edu.vassar.cmpu203.lunchbox.view.IAddRestaurantView;
@@ -53,6 +56,7 @@ import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
 public class MainActivity extends AppCompatActivity implements IHomeView.Listener,  IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener {
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
+    RestaurantNames restaurantNames;
     private User curUser;
     IMainView mainView;
     String email;
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     String username;
     float latitude;
     float longitude;
+
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     ActivityResultLauncher<Intent> loginActivityResultLauncher;
@@ -113,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         );
 
         System.out.println((curUser));
+//      getRestaurantNames from firestore
+        restaurantNames = new RestaurantNames(new ArrayList<String>());
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
 
@@ -191,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         this.mainView.displaySearchResults(matches);
     }
 
+
     // RestaurantAdapter.OnItemClickListener methods
 
     /**
@@ -201,7 +209,27 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
      */
     @Override
     public void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount) {
-        ArrayList<Review> reviewsList = revLib.getReviews(restaurant.getReviewList());
+        FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
+        repo.getReviews(restaurant.getRestaurantId(), new IDataRepositoryCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                List<Review> reviewsList = (List<Review>) result;
+//                revLib.addReviews(reviews);
+                onNavigateToRestaurant(restaurant, reversible, popCount, reviewsList);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println("Failed to get reviews from Firestore" + e.getMessage());
+            }
+        });
+
+//        ArrayList<Review> reviewsList = revLib.getReviews(restaurant.getReviewList());
+//        RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant, reviewsList);
+//        this.mainView.displayFragment(restaurantFragment, reversible, "restaurant", popCount);
+    }
+
+    public void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount, List<Review> reviewsList) {
         RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant, reviewsList);
         this.mainView.displayFragment(restaurantFragment, reversible, "restaurant", popCount);
     }
@@ -225,14 +253,33 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
      * @param restaurantId
      * @param priceSymbol
      */
-    public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol){
-        String reviewId = revLib.addReview(curUser, restaurantId, rating, comment, priceSymbol);
-        lib.addReviewToRest(restaurantId, reviewId);
-        Restaurant restaurant = lib.getRestaurant(restaurantId);
-        restaurant.computeRating(revLib);
-        restaurant.computePriceRange(revLib);
-        onNavigateToRestaurant(lib.getRestaurant(restaurantId), true, 2);
+    public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol) {
+        // Create the Review object
+        Review newReview = new Review(curUser.getUsername(), restaurantId, rating, comment, priceSymbol);
+        // Use FStoreReviewsDataRepo to add the review
+        FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
+        repo.addReview(newReview, new IDataRepositoryCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                // retrieve the reviewId from the DocumentReference if necessary
+                // String reviewId = ((DocumentReference) result).getId();
+
+                // Update restaurant details after adding the review
+                Restaurant restaurant = lib.getRestaurant(restaurantId);
+                if (restaurant != null) {
+                    restaurant.computeRating(revLib);
+                    restaurant.computePriceRange(revLib);
+                    onNavigateToRestaurant(restaurant, true, 2);
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println("Failed to add review to Firestore" + e.getMessage());
+            }
+        });
     }
+
 
     /**
      * adds review to review library and adds review to restaurant

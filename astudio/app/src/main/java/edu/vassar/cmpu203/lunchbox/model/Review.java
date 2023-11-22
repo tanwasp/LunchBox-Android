@@ -22,6 +22,15 @@ public class Review {
         this.body = body;
         this.priceRange = price;
     }
+    public Review() {}
+    public Review(String username, String restaurantId, float rating, String body, int price) {
+        this.username = username;
+        this.restaurantId = restaurantId;
+        this.rating = rating;
+        this.date = new Date();
+        this.body = body;
+        this.priceRange = price;
+    }
 
     public String getUsername() {
         return username;
@@ -45,6 +54,9 @@ public class Review {
 
     public String getBody() {
         return body;
+    }
+    public int getPriceRange() {
+        return priceRange;
     }
 
     /**
