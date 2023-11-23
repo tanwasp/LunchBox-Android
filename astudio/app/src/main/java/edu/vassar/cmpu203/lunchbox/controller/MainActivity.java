@@ -265,4 +265,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         this.mainView.displayFragment(profileFragment, true, "search", 0);
     }
 
+    public void onNavigateToMyFriends() {
+        FriendsFragment friendsFragment = new FriendsFragment();
+        this.mainView.displayFragment(friendsFragment, true, "friends", 0);
+    }
+
 }
