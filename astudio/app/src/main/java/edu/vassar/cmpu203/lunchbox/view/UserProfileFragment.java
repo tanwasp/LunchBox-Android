@@ -31,10 +31,10 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
     private ReviewAdapter reviewAdapter;
     private List<Review> reviewsList;
 
-    public UserProfileFragment(@NonNull IUserProfileFragment.Listener listener, User user, ReviewsLibrary revLib){
+    public UserProfileFragment(@NonNull IUserProfileFragment.Listener listener, User user, List<Review> reviewsList){
         this.listener = listener;
         this.user = user;
-        this.reviewsList = revLib.getReviewsByUser(user);
+        this.reviewsList = reviewsList;
     }
 
     @Override
@@ -43,6 +43,7 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
         return this.binding.getRoot();
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 

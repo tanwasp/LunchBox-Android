@@ -81,8 +81,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     private FusedLocationProviderClient fusedLocationClient;
     private LocationCallback locationCallback;
     private boolean locationUpdated;
-
-
+    UserProfileFragment profileFragment;
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     ActivityResultLauncher<Intent> loginActivityResultLauncher;
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         super.onCreate(savedInstanceState);
         setupFirebaseAuthListener();
         setupLoginActivityResultLauncher();
-        locationUpdated = false;
+
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -114,30 +113,16 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
     }
 
-//    private void fetchLastLocation() {
-//        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-//        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
-//            if (location != null) {
-//                updateCurrentUserLocation((float) location.getLatitude(), (float) location.getLongitude());
-//            } else {
-//                System.out.println("Location is null from fetchLastLocation");
-//            }
-//        }).addOnFailureListener(this, e -> System.out.println("Failed to get location: " + e.getMessage()));
-//    }
 
     private void fetchLastLocation() {
-        // Check for permissions again
+
+        // Check for permissions again (optional but recommended)
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return; // Handle the lack of permission appropriately.
         }
 
-        // Reset the locationUpdated flag
-        locationUpdated = false;
-
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        // Request a single update
         locationRequest.setNumUpdates(1);
 
         locationCallback = new LocationCallback() {
@@ -150,16 +135,13 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                 for (Location location : locationResult.getLocations()) {
                     if (location != null) {
                         updateCurrentUserLocation((float) location.getLatitude(), (float) location.getLongitude());
-                        locationUpdated = true;
-                        break;
+                        break; // Update with the first valid location
                     }
                 }
             }
         };
-
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
     }
-
 
 
     private void setupFirebaseAuthListener() {
@@ -341,7 +323,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
      */
     public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol) {
         // Create the Review object
-        Review newReview = new Review(curUser.getUid(), restaurantId, rating, comment, priceSymbol);
+        Review newReview = new Review(curUser.getUid(), curUser.getUsername(), restaurantId, rating, comment, priceSymbol, null);
+        System.out.println("New review: " + newReview);
         // Use FStoreReviewsDataRepo to add the review
         FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
         repo.addReview(newReview, new IDataRepositoryCallback() {
@@ -414,14 +397,30 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         this.mainView.displayFragment(homeFragment, false, "home", 0);
     }
 
-    public void onNavigateToMyProfile() {
-        UserProfileFragment profileFragment = new UserProfileFragment(this, curUser, revLib);
+    public void onNavigateToMyProfile(List<Review> reviewsList) {
+        profileFragment = new UserProfileFragment(this, curUser, reviewsList);
         this.mainView.displayFragment(profileFragment, true, "profile", 0);
     }
 
     public void onNavigateToMyFriends() {
         FriendsFragment friendsFragment = new FriendsFragment();
         this.mainView.displayFragment(friendsFragment, true, "friends", 0);
+    }
+
+    public void getUserReviewsNavToProfile() {
+        FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
+        repo.getReviewsByUser(curUser.getUsername(), new IDataRepositoryCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                List<Review> reviewsList = (List<Review>) result;
+                onNavigateToMyProfile(reviewsList);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println("Failed to get reviews from Firestore" + e.getMessage());
+            }
+        });
     }
 
 }

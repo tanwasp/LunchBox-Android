@@ -7,7 +7,8 @@ public interface IHomeView {
         void onNavigateToLogin();
 
         void onNavigateToSignup();
-        void onNavigateToMyProfile();
+
+        void getUserReviewsNavToProfile();
         //void onNavigateToNotifications();
         //void onNavigateToFindFriends();
     }

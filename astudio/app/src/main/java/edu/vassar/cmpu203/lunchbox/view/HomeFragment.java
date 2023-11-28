@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment implements IHomeView{
         this.binding.btnNavigateToMyProfile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                listener.onNavigateToMyProfile();
+                listener.getUserReviewsNavToProfile();
             }
         });
 
