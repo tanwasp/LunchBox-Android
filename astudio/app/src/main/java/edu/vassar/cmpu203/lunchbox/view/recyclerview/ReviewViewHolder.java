@@ -11,6 +11,7 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder{
     TextView usernameView;
     TextView ratingView;
     TextView reviewBodyView;
+    TextView dateView;
 
     /**
      * Constructor for ReviewViewHolder
@@ -21,6 +22,6 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder{
         usernameView = (TextView) itemView.findViewById(R.id.usernameTextView);
         ratingView = (TextView) itemView.findViewById(R.id.ratingTextView);
         reviewBodyView = (TextView) itemView.findViewById(R.id.reviewBodyTextView);
-
+        dateView = (TextView) itemView.findViewById(R.id.dateTextView);
     }
 }

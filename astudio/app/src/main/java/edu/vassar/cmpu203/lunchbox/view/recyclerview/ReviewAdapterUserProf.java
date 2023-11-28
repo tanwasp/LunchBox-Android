@@ -14,7 +14,8 @@ import java.util.List;
 import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.R;
 
-public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder>{
+public class ReviewAdapterUserProf extends RecyclerView.Adapter<ReviewViewHolder>{
+
     private LayoutInflater inflater;
     private List<Review> reviews;
 
@@ -23,7 +24,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder>{
      * @param context
      * @param reviews
      */
-    public ReviewAdapter(Context context, List<Review> reviews) {
+    public ReviewAdapterUserProf(Context context, List<Review> reviews) {
         this.inflater = LayoutInflater.from(context);
         this.reviews = reviews;
     }
@@ -51,7 +52,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder>{
     @Override
     public void onBindViewHolder(ReviewViewHolder holder, int position) {
         Review review = reviews.get(position);
-        holder.usernameView.setText(review.getUsername());
+        holder.usernameView.setText(review.getRestaurantId());
         holder.ratingView.setText(String.valueOf(review.getRating()));
         holder.reviewBodyView.setText(review.getBody());
         String dateToString;
@@ -81,7 +82,4 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder>{
         this.reviews = newReviews;
         notifyDataSetChanged(); // Notify the adapter to refresh the RecyclerView
     }
-
-
-
 }
