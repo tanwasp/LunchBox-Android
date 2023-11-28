@@ -31,9 +31,10 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
     private ReviewAdapter reviewAdapter;
     private List<Review> reviewsList;
 
-    public UserProfileFragment(@NonNull IUserProfileFragment.Listener listener, User user){
+    public UserProfileFragment(@NonNull IUserProfileFragment.Listener listener, User user, ReviewsLibrary revLib){
         this.listener = listener;
         this.user = user;
+        this.reviewsList = revLib.getReviewsByUser(user);
     }
 
     @Override
@@ -52,21 +53,14 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
         binding.dateJoinedTextView.setText(dateToString);
 
         // Initialize your adapter with an empty list or null
-        // Inside SearchFragment onViewCreated method
         reviewsRecyclerView = view.findViewById(R.id.reviewRecyclerView);
+        reviewsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         reviewAdapter = new ReviewAdapter(view.getContext(), new ArrayList<>());
         reviewsRecyclerView.setAdapter(reviewAdapter);
-
-        // Sets restaurant data in the restaurant fragment
-        binding.restaurantName.setText(restaurant.getName());
-        binding.restaurantRating.setText(String.valueOf(restaurant.getRatingDisplay()));
-        binding.priceRange.setText(restaurant.getDollarSigns(restaurant.getPriceRangeDisplay()));
-        binding.address.setText(restaurant.getAddress());
 
         if (reviewsList != null) {
             reviewAdapter.setReviews(reviewsList);
             reviewAdapter.notifyDataSetChanged();
-
         }
 
         binding.button.setOnClickListener(new View.OnClickListener() {

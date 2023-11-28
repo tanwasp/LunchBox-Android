@@ -57,6 +57,20 @@ public class ReviewsLibrary {
         return output;
     }
 
+    public ArrayList<Review> getReviewsByUser(User u){
+        ArrayList<Review> output = new ArrayList<Review>();
+        for (Review rev : data.values()) {
+            if (rev == null){
+                continue;
+            }
+            if (rev.getUsername().equals(u.getUsername())){
+                output.add(rev);
+            }
+        }
+        Collections.sort(output, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
+        return output;
+    }
+
     /**
      * Loads a set of sample reviews into the library.
      */

@@ -261,8 +261,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     public void onNavigateToMyProfile() {
-        UserProfileFragment profileFragment = new UserProfileFragment(this, curUser);
-        this.mainView.displayFragment(profileFragment, true, "search", 0);
+        UserProfileFragment profileFragment = new UserProfileFragment(this, curUser, revLib);
+        this.mainView.displayFragment(profileFragment, true, "profile", 0);
     }
 
     public void onNavigateToMyFriends() {
