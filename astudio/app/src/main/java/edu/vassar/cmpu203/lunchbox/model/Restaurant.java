@@ -198,6 +198,10 @@ public class Restaurant {
      * @return A string of dollar signs representing the price range.
      */
     public String getDollarSigns(int priceRange) {
+        if (priceRange == 0){
+            return "No price info";
+        }
+
         StringBuilder dollarSigns = new StringBuilder();
         for (int i = 0; i < priceRange; i++) {
             dollarSigns.append("$");
@@ -265,10 +269,10 @@ public class Restaurant {
     }
 
     public int getPriceRangeDisplay(){
-        if (priceRange == 0){
+        if (priceRange <= 0){
             return 0;
         }
-        else if (priceRange  < 1.5 ){
+        else if (priceRange < 1.5 ){
             return 1;
         } else if (priceRange < 2.5){
             return 2;
@@ -278,6 +282,9 @@ public class Restaurant {
     }
 
     public String getRatingDisplay(){
+        if (rating < 0){
+            return "NA";
+        }
         return String.format("%.1f", rating);
     }
 
