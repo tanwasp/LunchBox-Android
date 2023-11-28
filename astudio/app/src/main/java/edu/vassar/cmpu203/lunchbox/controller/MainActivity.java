@@ -17,8 +17,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.location.LocationRequest;
@@ -26,9 +24,7 @@ import com.google.android.gms.location.LocationRequest;
 
 import android.location.Location;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -46,7 +42,6 @@ import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.model.ReviewsLibrary;
 import edu.vassar.cmpu203.lunchbox.model.User;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.FStoreReviewsDataRepo;
-import edu.vassar.cmpu203.lunchbox.model.data_repositories.FirestoreCsvImporter;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.IDataRepositoryCallback;
 import edu.vassar.cmpu203.lunchbox.view.AddRestaurantFragment;
 import edu.vassar.cmpu203.lunchbox.view.HomeFragment;
@@ -60,14 +55,11 @@ import edu.vassar.cmpu203.lunchbox.view.RestaurantFragment;
 import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
 import edu.vassar.cmpu203.lunchbox.view.IAddReviewView;
 import edu.vassar.cmpu203.lunchbox.view.AddReviewFragment;
-import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
 import edu.vassar.cmpu203.lunchbox.view.IUserProfileFragment;
 
-import edu.vassar.cmpu203.lunchbox.model.*;
-import edu.vassar.cmpu203.lunchbox.model.data_repositories.FirestoreCsvImporter;
 import edu.vassar.cmpu203.lunchbox.view.*;
 
-public class MainActivity extends AppCompatActivity implements IHomeView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileFragment.Listener {
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileFragment.Listener, ILandingView.Listener {
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
     RestaurantNames restaurantNames;
@@ -99,8 +91,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         this.mainView = new MainView(this);
-        HomeFragment homeFragment = new HomeFragment(this);
-        this.mainView.displayFragment(homeFragment, false, "home", 0);
+        LandingView landingFragment = new LandingView(this);
+        this.mainView.displayFragment(landingFragment, false, "land", 0);
 
         setContentView(this.mainView.getRootView());
     }
@@ -193,8 +185,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         String username = data.getStringExtra("username");
         curUser = new User(username, firebaseUid, email);
         System.out.println("Current user logged in or signed up is " + curUser);
-        SearchFragment searchFragment = new SearchFragment(this);
-        this.mainView.displayFragment(searchFragment, true, "search", 0);
+        HomeFragment homeFragment = new HomeFragment(this);
+        this.mainView.displayFragment(homeFragment, false, "search", 0);
     }
 
     private void updateCurrentUserLocation(float latitude, float longitude) {
