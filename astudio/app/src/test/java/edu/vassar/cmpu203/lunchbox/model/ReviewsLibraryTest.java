@@ -64,4 +64,16 @@ public class ReviewsLibraryTest {
         assertEquals(body, review2.getBody());
         assertEquals(3, review2.priceRange);
     }
+
+    /**
+     * Tests class's ability get all reviews made by a specific user
+     */
+    @Test
+    public void testGetReviewsByUser() {
+        ReviewsLibrary revLib = new ReviewsLibrary();
+        RestaurantLibrary restLib = new RestaurantLibrary();
+        User testUser = new User("default", "12345", "user1@gmail.com", 30, -90);
+
+
+    }
 }

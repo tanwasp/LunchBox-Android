@@ -2,6 +2,7 @@ package edu.vassar.cmpu203.lunchbox.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Date;
 
 /**
  * Represents a user in the system.
@@ -30,12 +31,16 @@ public class User {
     public User(String name, float lat, float lon){
         this.username = name;
         this.loc = new Location(lat, lon);
+        long millis = System.currentTimeMillis();
+        joinedDate = new java.sql.Date(millis);
     }
 
     public User(String name, String firebaseUid, String email){
         this.username = name;
         this.firebaseUid = firebaseUid;
         this.email = email;
+        long millis = System.currentTimeMillis();
+        joinedDate = new java.sql.Date(millis);
     }
 
     public User(String name, String firebaseUid, String email, float lat, float lon){
@@ -43,6 +48,8 @@ public class User {
         this.firebaseUid = firebaseUid;
         this.email = email;
         this.loc = new Location(lat, lon);
+        long millis = System.currentTimeMillis();
+        joinedDate = new java.sql.Date(millis);
     }
 
     public void setLoc(float lat, float lon){
@@ -53,7 +60,7 @@ public class User {
         this.loc = loc;
     }
 
-    public String getFirebaseUid(){
+    public String getUid(){
         return this.firebaseUid;
     }
 

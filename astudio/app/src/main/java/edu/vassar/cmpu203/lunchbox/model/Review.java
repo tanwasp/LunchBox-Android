@@ -59,6 +59,9 @@ public class Review {
     public int getPriceRange() {
         return priceRange;
     }
+    public String getUid() {
+        return firebaseUid;
+    }
 
     /**
      * Generates a string representation of the review for UI to print

@@ -31,9 +31,10 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
     private ReviewAdapter reviewAdapter;
     private List<Review> reviewsList;
 
-    public UserProfileFragment(@NonNull IUserProfileFragment.Listener listener, User user){
+    public UserProfileFragment(@NonNull IUserProfileFragment.Listener listener, User user, ReviewsLibrary revLib){
         this.listener = listener;
         this.user = user;
+        this.reviewsList = revLib.getReviewsByUser(user);
     }
 
     @Override
@@ -47,13 +48,18 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
 
         // set profile details
         binding.usernameTextView.setText(user.getUsername());
-        DateFormat df = new SimpleDateFormat("07-27-2020");
-        String dateToString = df.format(user.getJoinedDate());
+        String dateToString;
+        try {
+            DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+            dateToString = df.format(user.getJoinedDate());
+        } catch (Exception e){
+            dateToString = "";
+        }
         binding.dateJoinedTextView.setText(dateToString);
 
         // Initialize your adapter with an empty list or null
-        // Inside SearchFragment onViewCreated method
-        reviewsRecyclerView = view.findViewById(R.id.reviewRecyclerView);
+        reviewsRecyclerView = view.findViewById(R.id.reviewsRecyclerView);
+        reviewsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         reviewAdapter = new ReviewAdapter(view.getContext(), new ArrayList<>());
         reviewsRecyclerView.setAdapter(reviewAdapter);
 
@@ -66,7 +72,6 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
         if (reviewsList != null) {
             reviewAdapter.setReviews(reviewsList);
             reviewAdapter.notifyDataSetChanged();
-
         }
 
         binding.button.setOnClickListener(new View.OnClickListener() {
