@@ -52,10 +52,10 @@ public class Restaurant {
      */
     private Location loc;
 
-    /**
-     * List of review IDs associated with the restaurant.
-     */
-    private ArrayList<String> reviewList;
+//    /**
+//     * List of review IDs associated with the restaurant.
+//     */
+//    private ArrayList<String> reviewList;
 
     /**
      * Distance of the restaurant from the user.
@@ -66,6 +66,10 @@ public class Restaurant {
      * Price range of the restaurant (represented by the number of dollar signs).
      */
     public int priceRange;
+
+    public Restaurant() {
+        // Default constructor required for calls to DataSnapshot.getValue(Restaurant.class)
+    }
 
     /**
      * Constructs a new Restaurant with the given parameters.
@@ -93,7 +97,7 @@ public class Restaurant {
         this.country = country;
         this.postalCode = postalCode;
         this.loc = new Location (lat, lon);
-        this.reviewList = reviewList;
+//        this.reviewList = reviewList;
         this.priceRange = priceRange;
         distanceToUser = -1.0f;
     }
@@ -107,7 +111,7 @@ public class Restaurant {
         this.country = country;
         this.postalCode = postalCode;
         this.loc = new Location(lat, lon);
-        this.reviewList = new ArrayList<String>();
+//        this.reviewList = new ArrayList<String>();
         this.priceRange = 0;
 //        distanceToUser = -1.0f;
     }
@@ -118,14 +122,15 @@ public class Restaurant {
      * @param revLib The reviews library containing all reviews.
      */
     public void computeRating(ReviewsLibrary revLib) {
-        if (this != null) {
-            ArrayList<Review> reviews = revLib.getReviews(reviewList);
-            float sum = 0;
-            for (Review rev : reviews) {
-                sum += rev.rating;
-            }
-            rating = sum / reviews.size();
-        }
+//        if (this != null) {
+//            ArrayList<Review> reviews = revLib.getReviews(reviewList);
+//            float sum = 0;
+//            for (Review rev : reviews) {
+//                sum += rev.rating;
+//            }
+//            rating = sum / reviews.size();
+//        }
+        rating = -1.0f;
     }
 
     /**
@@ -135,49 +140,55 @@ public class Restaurant {
      */
 
     public void computePriceRange(ReviewsLibrary revLib){
-        ArrayList<Review> reviews = revLib.getReviews(reviewList);
-        int sum = 0;
-        int count = 0;
-        for (Review rev : reviews){
-            if (rev.priceRange != 0){
-                count++;
-            }
-            sum += rev.priceRange;
-        }
-        if (count == 0){
-            priceRange = 0;
-        }
-        else{
-        priceRange = sum / count;}
+//        ArrayList<Review> reviews = revLib.getReviews(reviewList);
+//        int sum = 0;
+//        int count = 0;
+//        for (Review rev : reviews){
+//            if (rev.priceRange != 0){
+//                count++;
+//            }
+//            sum += rev.priceRange;
+//        }
+//        if (count == 0){
+//            priceRange = 0;
+//        }
+//        else{
+//        priceRange = sum / count;}
+        priceRange = -1;
     }
 
-//    /**
-//     * Returns a string representation of the restaurant.
-//     *
-//     * @return A formatted string containing restaurant details.
-//     */
-//    @Override
-//    public String toString() {
-//        StringBuilder output = new StringBuilder();
-//        output.append("Name: ").append(name).append("\n");
-//        output.append("Rating: ").append(String.format("%.1f", rating)).append("\n");
-//        output.append("Price: ").append(getDollarSigns(priceRange)).append("\n");
-//        output.append("Address: ").append(address).append("\n");
-//        output.append("City: ").append(city).append("\n");
-//        output.append("State: ").append(state).append("\n");
-//        if (distanceToUser < 10) {
-//            output.append("Distance: ")
-//                    .append(String.format("%.1f", distanceToUser));
-//        } else {
-//            output.append("Distance: ")
-//                    .append(String.format("%.0f", distanceToUser));
-//
-//        }
-//        output.append(" miles\n");
-//
-//
-//        return output.toString();
-//    }
+    /**
+     * Returns a string representation of the restaurant.
+     *
+     * @return A formatted string containing restaurant details.
+     */
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append("Restaurant ID: ").append(restaurantId).append("\n");
+        output.append("Name: ").append(name).append("\n");
+        output.append("Rating: ").append(String.format("%.1f", rating)).append("\n");
+        output.append("Price: ").append(getDollarSigns(priceRange)).append("\n");
+        output.append("Address: ").append(address).append("\n");
+        output.append("City: ").append(city).append("\n");
+        output.append("State: ").append(state).append("\n");
+        output.append("Country: ").append(country).append("\n");
+        output.append("Postal Code: ").append(postalCode).append("\n");
+        output.append("Price Range: ").append(priceRange).append("\n");
+        if (loc != null){
+        output.append("Location: ").append(loc.toString()).append("\n");
+        }
+        if (distanceToUser < 10) {
+            output.append("Distance: ")
+                    .append(String.format("%.1f", distanceToUser));
+        } else {
+            output.append("Distance: ")
+                    .append(String.format("%.0f", distanceToUser));
+
+        }
+        output.append(" miles\n");
+        return output.toString();
+    }
 
     /**
      * Converts the price range of the restaurant to a string of dollar signs to increase readability.
@@ -237,9 +248,9 @@ public class Restaurant {
      *
      * @return The list of review IDs associated with the restaurant.
      */
-    public ArrayList<String> getReviewList() {
-        return reviewList;
-    }
+//    public ArrayList<String> getReviewList() {
+//        return reviewList;
+//    }
 
     /**
      * Gets the price range of the restaurant.
@@ -268,6 +279,62 @@ public class Restaurant {
 
     public String getRatingDisplay(){
         return String.format("%.1f", rating);
+    }
+
+    public void setRating(float rating){
+        this.rating = rating;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPriceRange(int priceRange) {
+        this.priceRange = priceRange;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setLoc(Location loc) {
+        this.loc = loc;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+    public void setDistanceToUser(float distanceToUser) {
+        this.distanceToUser = distanceToUser;
+    }
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public Location getLoc() {
+        return loc;
     }
 }
 

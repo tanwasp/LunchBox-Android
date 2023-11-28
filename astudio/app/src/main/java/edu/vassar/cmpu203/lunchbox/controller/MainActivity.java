@@ -45,6 +45,7 @@ import edu.vassar.cmpu203.lunchbox.model.RestaurantNames;
 import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.model.ReviewsLibrary;
 import edu.vassar.cmpu203.lunchbox.model.User;
+import edu.vassar.cmpu203.lunchbox.model.data_repositories.FStoreRestaurantDataRepo;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.FStoreReviewsDataRepo;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.FirestoreCsvImporter;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.IDataRepositoryCallback;
@@ -96,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
+        loadRestaurants();
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         this.mainView = new MainView(this);
@@ -104,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
         setContentView(this.mainView.getRootView());
     }
+
+
 
     private void setupLocationService() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -434,4 +439,20 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         });
     }
 
+    private void loadRestaurants(){
+        FStoreRestaurantDataRepo repo = new FStoreRestaurantDataRepo();
+        repo.getAllRestaurants(new IDataRepositoryCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                List<Restaurant> restaurants = (List<Restaurant>) result;
+                lib.loadRestaurants(restaurants);
+                System.out.println("Loaded " + restaurants.size() + " restaurants from Firestore");
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println("Failed to get restaurants from Firestore" + e.getMessage());
+            }
+        });
+    }
 }

@@ -46,8 +46,6 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
         reviewsRecyclerView = view.findViewById(R.id.reviewRecyclerView);
         reviewsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        // Initialize your adapter with an empty list or null
-        // Inside SearchFragment onViewCreated method
         reviewAdapter = new ReviewAdapter(view.getContext(), new ArrayList<>());
         reviewsRecyclerView.setAdapter(reviewAdapter);
 

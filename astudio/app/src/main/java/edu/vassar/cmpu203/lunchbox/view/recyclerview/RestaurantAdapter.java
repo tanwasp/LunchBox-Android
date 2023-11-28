@@ -78,11 +78,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     }
                 }
             });
-
+            String rating = String.valueOf(restaurant.getRating());
+            if (rating.equals("-1.0")) {
+                rating = "No ratings yet";
+            }
+            String priceRange = restaurant.getDollarSigns(restaurant.getPriceRange());
+            if (priceRange == null || priceRange.equals("")) {
+                priceRange = "No price info";
+            }
             restaurantHolder.nameView.setText(restaurant.getName());
-            restaurantHolder.ratingView.setText(String.valueOf(restaurant.getRating()));
-            restaurantHolder.priceRangeView.setText(restaurant.getDollarSigns(restaurant.getPriceRange()));
-            restaurantHolder.addressView.setText(restaurant.getAddress());
+            restaurantHolder.ratingView.setText(String.valueOf(rating));
+            restaurantHolder.priceRangeView.setText(priceRange);
+            restaurantHolder.addressView.setText(restaurant.getAddress() + ", " + restaurant.getCity() + ", " + restaurant.getState() + " " + restaurant.getPostalCode());
         }
         else {
             RestaurantFooterViewHolder footerHolder = (RestaurantFooterViewHolder) holder;

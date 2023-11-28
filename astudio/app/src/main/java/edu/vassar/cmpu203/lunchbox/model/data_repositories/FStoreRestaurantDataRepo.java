@@ -1,6 +1,7 @@
 package edu.vassar.cmpu203.lunchbox.model.data_repositories;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -11,21 +12,38 @@ import java.util.Set;
 
 import edu.vassar.cmpu203.lunchbox.model.FirestoreSingleton;
 import edu.vassar.cmpu203.lunchbox.model.IFilter;
+import edu.vassar.cmpu203.lunchbox.model.Location;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.model.User;
 
-public class FStoreRestaurantDataRepo implements IRestaurantsDataRepository{
+public class FStoreRestaurantDataRepo implements IRestaurantsDataRepository {
     @Override
     public void getAllRestaurants(IDataRepositoryCallback callback) {
         FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
         db.collection("restaurants")
+                .limit(10)
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         List<Restaurant> restaurants = new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            restaurants.add(document.toObject(Restaurant.class));
+                            Restaurant r = (document.toObject(Restaurant.class));
+                            r.setRestaurantId(document.getId());
+                            r.setCity(document.getString("city"));
+                            r.setState(document.getString("state"));
+                            r.setCountry(document.getString("country"));
+                            r.setPostalCode(document.getString("postalCode"));
+                            r.setDistanceToUser(-1.0f);
+                            GeoPoint geoPoint = document.getGeoPoint("coordinates");
+                            if (geoPoint != null) {
+                                // Create Location object and set latitude and longitude
+                                Location loc = new Location((float) geoPoint.getLatitude(), (float) geoPoint.getLongitude());
+                                r.setLoc(loc);
+                            }
+                            restaurants.add(r);
+                            System.out.println(r);
                         }
+                        System.out.println("Got" + restaurants.size() + "restaurants from firestore");
                         callback.onSuccess(restaurants);
                     } else {
                         callback.onFailure(task.getException());

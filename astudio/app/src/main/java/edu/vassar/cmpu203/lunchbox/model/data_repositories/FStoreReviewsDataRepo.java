@@ -65,32 +65,4 @@ public class FStoreReviewsDataRepo implements IReviewsDataRepo{
                     }
                 });
     }
-
-//    @Override
-//    public void getReviewsByUser(String username, IDataRepositoryCallback callback) {
-//        FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
-//        db.collection("reviews")
-//                .whereEqualTo("username", username)
-//                .get()
-//                .addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
-//                        List<Review> reviews = new ArrayList<>();
-//                        for (QueryDocumentSnapshot document : task.getResult()) {
-//                            Review review = document.toObject(Review.class);
-//                            Timestamp timestamp = document.getTimestamp("date");
-//                            if (timestamp != null) {
-//                                review.setDate(timestamp.toDate());
-//                            } else {
-//                                review.setDate(new Date());
-//                            }
-//                            reviews.add(review);
-//                        }
-//
-//                        Collections.sort(reviews, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
-//                        callback.onSuccess(reviews);
-//                    } else {
-//                        callback.onFailure(task.getException());
-//                    }
-//                });
-//    }
 }
