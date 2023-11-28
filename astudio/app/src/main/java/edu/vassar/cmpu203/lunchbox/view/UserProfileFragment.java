@@ -48,15 +48,21 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
 
         // set profile details
         binding.usernameTextView.setText(user.getUsername());
-        DateFormat df = new SimpleDateFormat("07-27-2020");
+        DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
         String dateToString = df.format(user.getJoinedDate());
         binding.dateJoinedTextView.setText(dateToString);
 
         // Initialize your adapter with an empty list or null
-        reviewsRecyclerView = view.findViewById(R.id.reviewRecyclerView);
+        reviewsRecyclerView = view.findViewById(R.id.reviewsRecyclerView);
         reviewsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         reviewAdapter = new ReviewAdapter(view.getContext(), new ArrayList<>());
         reviewsRecyclerView.setAdapter(reviewAdapter);
+
+        // Sets restaurant data in the restaurant fragment
+//        binding.restaurantName.setText(restaurant.getName());
+//        binding.restaurantRating.setText(String.valueOf(restaurant.getRatingDisplay()));
+//        binding.priceRange.setText(restaurant.getDollarSigns(restaurant.getPriceRangeDisplay()));
+//        binding.address.setText(restaurant.getAddress());
 
         if (reviewsList != null) {
             reviewAdapter.setReviews(reviewsList);

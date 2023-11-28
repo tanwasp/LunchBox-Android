@@ -36,6 +36,11 @@ public class RestaurantLibrary {
         return r;
     }
 
+    public void addRestaurant(Restaurant r){
+        String id = r.getRestaurantId();
+        data.put(id, r);
+    }
+
     /**
      * Searches the Restaurant Library for restaurants that match a given search term, applying filters and sorting
      *

@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.databinding.MainBinding;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
@@ -59,7 +60,7 @@ public class MainView implements IMainView{
      * Displays the restaurant details screen.
      * @param searchResults
      */
-    public void displaySearchResults(ArrayList<Restaurant> searchResults) {
+    public void displaySearchResults(List<Restaurant> searchResults) {
         Fragment currentFragment = fmanager.findFragmentByTag("search");
         if (currentFragment instanceof SearchFragment) {
             ((SearchFragment) currentFragment).updateSearchResults(searchResults);
