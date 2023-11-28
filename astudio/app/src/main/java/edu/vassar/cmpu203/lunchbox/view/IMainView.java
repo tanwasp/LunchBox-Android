@@ -4,6 +4,7 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.model.Review;
@@ -29,7 +30,7 @@ public interface IMainView {
      */
     void displayFragment(Fragment fragment, boolean reversible, String name, int popCount);
 
-    void displaySearchResults(ArrayList<Restaurant> searchResults);
+    void displaySearchResults(List<Restaurant> searchResults);
 
 
 }

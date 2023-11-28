@@ -11,7 +11,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -94,7 +96,49 @@ public class FirestoreCsvImporter {
         br.close();
     }
 
+    public void createRestaurantNamesDocument() throws IOException {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        AssetManager assetManager = context.getAssets();
+        InputStream is = assetManager.open("final_processed_restaurants_first_200.csv");
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        String line;
+        List<String> restaurantNames = new ArrayList<>();
+
+        // Skip the header row
+        br.readLine();
+
+        while ((line = br.readLine()) != null) {
+            String[] values = line.split(",");
+            String name = values[1];
+            restaurantNames.add(name);
+        }
+        br.close();
+
+        System.out.println("Restaurant names: " + restaurantNames);
+        // Create a document in the 'restaurantnames' collection with the array of names
+        Map<String, Object> data = new HashMap<>();
+        data.put("names", restaurantNames);
+
+        // You can use a fixed document id or generate a new one
+        db.collection("restaurantnames").document("allNames").set(data)
+                .addOnSuccessListener(aVoid -> System.out.println("Restaurant names successfully uploaded to Firestore"))
+                .addOnFailureListener(e -> System.out.println("Error uploading restaurant names: " + e.getMessage()));
+    }
+
 // Place in MainActivity.java to run
+
+
+
+//FirestoreCsvImporter importer = new FirestoreCsvImporter(this);
+//
+//        try {
+//        importer.createRestaurantNamesDocument();
+//        System.out.println("Restaurant names document creation initiated");
+//    } catch (Exception e) {
+//        System.out.println("Restaurant names document creation failed: " + e.getMessage());
+//    }
+
+
 //FirestoreCsvImporter importer = new FirestoreCsvImporter(this);
 //
 //    // Import CSV data to Firestore

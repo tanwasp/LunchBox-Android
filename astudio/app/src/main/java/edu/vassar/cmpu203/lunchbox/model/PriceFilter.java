@@ -20,7 +20,6 @@ public class PriceFilter implements IFilter{
         }
     }
 
-
     public Collection<Restaurant> filter(Collection<Restaurant> restaurants){
         Collection<Restaurant> filtered = new ArrayList<Restaurant>();
         for (Restaurant res : restaurants){
