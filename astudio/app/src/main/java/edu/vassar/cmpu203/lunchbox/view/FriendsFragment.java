@@ -1,4 +1,6 @@
 package edu.vassar.cmpu203.lunchbox.view;
 
-public class FriendsFragment {
+import androidx.fragment.app.Fragment;
+
+public class FriendsFragment extends Fragment implements IRestaurantView{
 }

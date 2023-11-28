@@ -28,6 +28,7 @@ import java.util.List;
 
 //import edu.vassar.cmpu203.lunchbox.Manifest;
 import android.Manifest;
+
 import edu.vassar.cmpu203.lunchbox.model.IFilter;
 import edu.vassar.cmpu203.lunchbox.model.LocFilter;
 import edu.vassar.cmpu203.lunchbox.model.PriceFilter;
@@ -54,7 +55,11 @@ import edu.vassar.cmpu203.lunchbox.view.IAddReviewView;
 import edu.vassar.cmpu203.lunchbox.view.AddReviewFragment;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
 
-public class MainActivity extends AppCompatActivity implements IHomeView.Listener,  IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener {
+import edu.vassar.cmpu203.lunchbox.model.*;
+import edu.vassar.cmpu203.lunchbox.model.data_repositories.FirestoreCsvImporter;
+import edu.vassar.cmpu203.lunchbox.view.*;
+
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener,  IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileFragment.Listener {
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
     RestaurantNames restaurantNames;
@@ -338,6 +343,16 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onNavigateToHome(){
         HomeFragment homeFragment = new HomeFragment(this);
         this.mainView.displayFragment(homeFragment, false, "home", 0);
+    }
+
+    public void onNavigateToMyProfile() {
+        UserProfileFragment profileFragment = new UserProfileFragment(this, curUser);
+        this.mainView.displayFragment(profileFragment, true, "search", 0);
+    }
+
+    public void onNavigateToMyFriends() {
+        FriendsFragment friendsFragment = new FriendsFragment();
+        this.mainView.displayFragment(friendsFragment, true, "friends", 0);
     }
 
 }

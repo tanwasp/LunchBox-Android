@@ -59,6 +59,27 @@ public class HomeFragment extends Fragment implements IHomeView{
             }
         });
 
+        this.binding.btnSignup.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                listener.onNavigateToMyProfile();
+            }
+        });
+
+//        this.binding.btnSignup.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                listener.onNavigateToNotifications();
+//            }
+//        });
+//
+//        this.binding.btnSignup.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                listener.onNavigateToFindFriends();
+//            }
+//        });
+
     }
 
 }
