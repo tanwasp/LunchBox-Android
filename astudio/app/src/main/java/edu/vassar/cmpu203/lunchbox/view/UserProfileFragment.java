@@ -22,13 +22,14 @@ import edu.vassar.cmpu203.lunchbox.databinding.FragmentRestaurantBinding;
 import edu.vassar.cmpu203.lunchbox.model.*;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.ReviewAdapter;
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentUserProfileBinding;
+import edu.vassar.cmpu203.lunchbox.view.recyclerview.ReviewAdapterUserProf;
 
 public class UserProfileFragment extends Fragment implements IUserProfileFragment{
     private final IUserProfileFragment.Listener listener;
     private FragmentUserProfileBinding binding;
     private User user;
     private RecyclerView reviewsRecyclerView;
-    private ReviewAdapter reviewAdapter;
+    private ReviewAdapterUserProf reviewAdapter;
     private List<Review> reviewsList;
 
     public UserProfileFragment(@NonNull IUserProfileFragment.Listener listener, User user, List<Review> reviewsList){
@@ -61,7 +62,7 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
         // Initialize your adapter with an empty list or null
         reviewsRecyclerView = view.findViewById(R.id.reviewsRecyclerView);
         reviewsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        reviewAdapter = new ReviewAdapter(view.getContext(), new ArrayList<>());
+        reviewAdapter = new ReviewAdapterUserProf(view.getContext(), new ArrayList<>());
         reviewsRecyclerView.setAdapter(reviewAdapter);
 
         // Sets restaurant data in the restaurant fragment
