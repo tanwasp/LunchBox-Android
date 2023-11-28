@@ -1,6 +1,7 @@
 package edu.vassar.cmpu203.lunchbox.view;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -47,8 +49,9 @@ public class SignupFragment extends AuthFragment implements ISignupView {
                 String username = binding.username.getText().toString();
                 String email = binding.email.getText().toString();
                 String password = binding.password.getText().toString();
-//                binding.loading.setVisibility(View.VISIBLE);
-                listener.onSignup(username, email, password);
+                binding.loading.setVisibility(View.VISIBLE);
+                listener.checkUsernameExists(username, email, password);
+                hideKeyboard(v);
             }
         });
     }
@@ -77,12 +80,25 @@ public class SignupFragment extends AuthFragment implements ISignupView {
         String username = binding.username.getText().toString();
         String password = binding.password.getText().toString();
         String email = binding.email.getText().toString();
+
+        if (!isValidEmail(email)) {
+            binding.email.setError("Invalid email address");
+        } else {
+            binding.email.setError(null); // Clears the error
+        }
+
+        if (!isValidPassword(password)) {
+            binding.password.setError("Password must be at least 6 characters");
+        } else {
+            binding.password.setError(null); // Clears the error
+        }
+
         boolean isValid = isValidUsername(username) && isValidPassword(password) && isValidEmail(email);
         binding.signUpButton.setEnabled(isValid);
     }
 
     public void onSignupResult(boolean isSuccess, String message) {
-//        binding.loading.setVisibility(View.GONE);
+        this.binding.loading.setVisibility(View.GONE);
         if (isSuccess) {
             // Handle success
         } else {
@@ -90,4 +106,17 @@ public class SignupFragment extends AuthFragment implements ISignupView {
         }
     }
 
+    public void onUsernameExistsResult(boolean exists, String message) {
+        if (exists) {
+            Snackbar.make(binding.getRoot(), message, Snackbar.LENGTH_LONG).show();
+            this.binding.loading.setVisibility(View.GONE);
+        }
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null && view != null) {
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
 }

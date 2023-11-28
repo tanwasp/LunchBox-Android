@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     float longitude;
     private FusedLocationProviderClient fusedLocationClient;
     private LocationCallback locationCallback;
+    private boolean locationUpdated;
+
 
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         super.onCreate(savedInstanceState);
         setupFirebaseAuthListener();
         setupLoginActivityResultLauncher();
-
+        locationUpdated = false;
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -124,18 +126,21 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 //    }
 
     private void fetchLastLocation() {
-
-        // Check for permissions again (optional but recommended)
+        // Check for permissions again
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return; // Handle the lack of permission appropriately.
         }
 
+        // Reset the locationUpdated flag
+        locationUpdated = false;
+
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(10000);
-        locationRequest.setFastestInterval(5000);
 
-         locationCallback = new LocationCallback() {
+        // Request a single update
+        locationRequest.setNumUpdates(1);
+
+        locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 if (locationResult == null) {
@@ -145,7 +150,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                 for (Location location : locationResult.getLocations()) {
                     if (location != null) {
                         updateCurrentUserLocation((float) location.getLatitude(), (float) location.getLongitude());
-                        break; // Update with the first valid location
+                        locationUpdated = true;
+                        break;
                     }
                 }
             }
@@ -153,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
     }
+
 
 
     private void setupFirebaseAuthListener() {

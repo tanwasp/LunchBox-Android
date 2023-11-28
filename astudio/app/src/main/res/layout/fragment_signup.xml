@@ -68,18 +68,17 @@
         app:layout_constraintTop_toBottomOf="@+id/password"
         app:layout_constraintVertical_bias="0.2" />
 
-<!--    <ProgressBar-->
-<!--        android:id="@+id/loading"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_marginTop="64dp"-->
-<!--        android:layout_marginBottom="64dp"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/sign_up_button"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/password"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/password"-->
-<!--        app:layout_constraintTop_BottomOf="@+id/password"-->
-<!--        app:layout_constraintVertical_bias="0.3" />-->
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="64dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_button"
+        app:layout_constraintVertical_bias="0.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

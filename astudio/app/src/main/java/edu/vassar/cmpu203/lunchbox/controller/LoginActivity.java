@@ -61,8 +61,27 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
                 signupFragment.onSignupResult(false, "Signup failed: " + e.getMessage());
             }
         });
+    }
 
-
+    public void checkUsernameExists(String username, String email, String password) {
+        FirestoreUserDataRepository repository = new FirestoreUserDataRepository();
+        String finalUsername = username.trim().toLowerCase();
+        repository.checkUsernameExists(finalUsername, new IDataRepositoryCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                if ((Boolean) result) {
+                    signupFragment.onUsernameExistsResult(true, "Username already exists");
+                    return;
+                } else {
+                    signupFragment.onUsernameExistsResult(false, null);
+                }
+                onSignup(finalUsername, email, password);
+            }
+            @Override
+            public void onFailure(Exception e) {
+                signupFragment.onUsernameExistsResult(false, null);
+            }
+        });
     }
 
     public void onLogin(String email, String password) {

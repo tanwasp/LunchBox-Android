@@ -66,6 +66,22 @@ public class FirestoreUserDataRepository implements UserDataRepository {
         });
     }
 
+    @Override
+    public void checkUsernameExists(String username, IDataRepositoryCallback callback) {
+        FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
+        db.collection("users").whereEqualTo("username", username).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                if (task.getResult().size() > 0) {
+                    callback.onSuccess(true);
+                } else {
+                    callback.onSuccess(false);
+                }
+            } else {
+                callback.onFailure(task.getException());
+            }
+        });
+    }
+
 //    private void updateFirebaseUsernameOnLogin(FirebaseUser user, String username) {
 //        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(username).build();
 //        user.updateProfile(profileUpdates).addOnCompleteListener(profileTask -> {
