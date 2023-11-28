@@ -54,6 +54,7 @@ import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
 import edu.vassar.cmpu203.lunchbox.view.IAddReviewView;
 import edu.vassar.cmpu203.lunchbox.view.AddReviewFragment;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
+import edu.vassar.cmpu203.lunchbox.view.IUserProfileFragment;
 
 import edu.vassar.cmpu203.lunchbox.model.*;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.FirestoreCsvImporter;
@@ -79,8 +80,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
 
         // Check for location permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -113,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                         System.out.println("Failed to get location: " + e.getMessage());
                     }
                 });
-
 
         // Initialize login launcher
 
@@ -163,8 +161,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
             System.out.println("User is not signed in");
         }
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

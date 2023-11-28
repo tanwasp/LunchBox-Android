@@ -58,10 +58,10 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
         reviewsRecyclerView.setAdapter(reviewAdapter);
 
         // Sets restaurant data in the restaurant fragment
-        binding.restaurantName.setText(restaurant.getName());
-        binding.restaurantRating.setText(String.valueOf(restaurant.getRatingDisplay()));
-        binding.priceRange.setText(restaurant.getDollarSigns(restaurant.getPriceRangeDisplay()));
-        binding.address.setText(restaurant.getAddress());
+//        binding.restaurantName.setText(restaurant.getName());
+//        binding.restaurantRating.setText(String.valueOf(restaurant.getRatingDisplay()));
+//        binding.priceRange.setText(restaurant.getDollarSigns(restaurant.getPriceRangeDisplay()));
+//        binding.address.setText(restaurant.getAddress());
 
         if (reviewsList != null) {
             reviewAdapter.setReviews(reviewsList);
