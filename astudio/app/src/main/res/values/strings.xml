@@ -72,4 +72,9 @@
 
     <string name="notifications_label">Notifications</string>
 
+    <string name="login_label">Log In</string>
+    <string name="signup_label">Sign Up</string>
+    <string name="search_btn">Search Restaurants</string>
+    <string name="profile_btn">My Profile</string>
+
 </resources>

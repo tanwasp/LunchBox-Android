@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="268dp"
-        android:text="Search Restaurants"
+        android:text="@string/search_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,9 +34,10 @@
         android:id="@+id/btnNavigateToMyProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Profile"
+        android:text="@string/profile_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnNavigateToSearch"
         app:layout_constraintVertical_bias="0.0" />
