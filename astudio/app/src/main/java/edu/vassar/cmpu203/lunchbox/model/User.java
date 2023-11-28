@@ -102,10 +102,17 @@ public class User {
     }
 
     public String toString(){
-        return "Username: " + this.username + "\n" +
-                "Firebase UID: " + this.firebaseUid + "\n" +
-                "Email: " + this.email + "\n" +
-                "Latitude: " + this.loc.getLat() + "\n" +
-                "Longitude: " + this.loc.getLon() + "\n";
+        if (this.loc == null){
+            return "Username: " + this.username + "\n" +
+                    "Firebase UID: " + this.firebaseUid + "\n" +
+                    "Email: " + this.email + "\n" +
+                    "Location: null";
+        }
+        else{
+            return "Username: " + this.username + "\n" +
+                    "Firebase UID: " + this.firebaseUid + "\n" +
+                    "Email: " + this.email + "\n" +
+                    "Location: " + this.loc.toString();
+        }
     }
 }

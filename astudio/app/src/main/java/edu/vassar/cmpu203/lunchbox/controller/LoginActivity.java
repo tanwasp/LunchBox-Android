@@ -50,7 +50,6 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
             public void onSuccess(Object result) {
                 String firebaseUserId = (String) result;
                 Intent resultData = new Intent();
-                resultData.putExtra("username", username);
                 resultData.putExtra("email", email);
                 resultData.putExtra("firebaseUserId", firebaseUserId);
                 setResult(Activity.RESULT_OK, resultData);
@@ -77,7 +76,6 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
 
                 Intent resultData = new Intent();
 
-                resultData.putExtra("username", user.getDisplayName());
                 resultData.putExtra("email", user.getEmail());
                 resultData.putExtra("firebaseUserId", firebaseUserId);
 

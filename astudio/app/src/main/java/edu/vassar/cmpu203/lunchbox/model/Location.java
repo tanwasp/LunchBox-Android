@@ -54,4 +54,8 @@ public class Location {
         // Convert distance from kilometers to miles
         return (float) distance * 0.621371f;
     }
+
+    public String toString(){
+        return "(" + this.lat + ", " + this.lon + ")";
+    }
 }
