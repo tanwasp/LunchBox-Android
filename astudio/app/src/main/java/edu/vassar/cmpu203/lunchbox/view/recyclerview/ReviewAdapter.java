@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.model.Review;
@@ -52,6 +54,14 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder>{
         holder.usernameView.setText(review.getUsername());
         holder.ratingView.setText(String.valueOf(review.getRating()));
         holder.reviewBodyView.setText(review.getBody());
+        String dateToString;
+        try {
+            DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+            dateToString = df.format(review.getDate());
+        } catch (Exception e){
+            dateToString = "";
+        }
+        holder.dateView.setText(dateToString);
     }
 
     /**

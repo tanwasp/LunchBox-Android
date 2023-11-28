@@ -52,7 +52,7 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
         binding.usernameTextView.setText(user.getUsername());
         String dateToString;
         try {
-            DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+            DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
             dateToString = df.format(user.getJoinedDate());
         } catch (Exception e){
             dateToString = "";

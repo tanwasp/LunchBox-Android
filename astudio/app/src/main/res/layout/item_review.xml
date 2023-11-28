@@ -35,4 +35,12 @@
         android:textSize="14sp"
         tools:text="Review Body" />
 
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp"
+        tools:text="Date" />
+
 </LinearLayout>
