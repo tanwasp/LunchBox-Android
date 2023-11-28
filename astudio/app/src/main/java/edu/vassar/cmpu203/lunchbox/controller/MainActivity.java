@@ -113,6 +113,16 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
     }
 
+//    private void fetchLastLocation() {
+//        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+//        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+//            if (location != null) {
+//                updateCurrentUserLocation((float) location.getLatitude(), (float) location.getLongitude());
+//            } else {
+//                System.out.println("Location is null from fetchLastLocation");
+//            }
+//        }).addOnFailureListener(this, e -> System.out.println("Failed to get location: " + e.getMessage()));
+//    }
 
     private void fetchLastLocation() {
 
@@ -123,7 +133,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setNumUpdates(1);
+        locationRequest.setInterval(1000);
+//        locationRequest.setNumUpdates(1);
 
         locationCallback = new LocationCallback() {
             @Override
@@ -190,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         if (curUser != null) {
             curUser.setLoc(latitude, longitude);
         }
-        System.out.println("Location updated: " + latitude + ", " + longitude);
+//        System.out.println("Location updated: " + latitude + ", " + longitude);
     }
 
     @Override
@@ -207,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     protected void onStart() {
         super.onStart();
         FirebaseAuth.getInstance().addAuthStateListener(authStateListener);
+        setupLocationService();
     }
 
     @Override
@@ -219,7 +231,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
             FirebaseAuth.getInstance().removeAuthStateListener(authStateListener);
         }
     }
-
 
     // HomeView.Listener methods
 
@@ -276,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     @Override
     public void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount) {
         FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
-        repo.getReviews(restaurant.getRestaurantId(), new IDataRepositoryCallback() {
+        repo.getReviews("restaurantId", restaurant.getRestaurantId(), new IDataRepositoryCallback() {
             @Override
             public void onSuccess(Object result) {
                 List<Review> reviewsList = (List<Review>) result;
@@ -409,7 +420,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     public void getUserReviewsNavToProfile() {
         FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
-        repo.getReviewsByUser(curUser.getUsername(), new IDataRepositoryCallback() {
+        repo.getReviews("username", curUser.getUsername(), new IDataRepositoryCallback() {
             @Override
             public void onSuccess(Object result) {
                 List<Review> reviewsList = (List<Review>) result;
