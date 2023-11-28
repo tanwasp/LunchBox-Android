@@ -40,7 +40,7 @@ public class FStoreReviewsDataRepo implements IReviewsDataRepo{
         reviewData.put("rating", review.getRating());
         reviewData.put("body", review.getBody());
         reviewData.put("priceRange", review.getPriceRange());
-        // Add other fields as necessary, but exclude reviewId
+        reviewData.put("Date", review.getDate());
 
         db.collection("reviews")
                 .add(reviewData)

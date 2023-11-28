@@ -14,6 +14,7 @@ import android.os.Bundle;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -92,10 +93,22 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                         if (androidLocation != null) {
                             latitude = (float) androidLocation.getLatitude();
                             longitude = (float) androidLocation.getLongitude();
+                            System.out.println("Location: " + latitude + ", " + longitude);
                             initializeUser();
+                        } else {
+                            // Handle the situation where location is null
+                            System.out.println("Location was null");
                         }
                     }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle failure in retrieving location
+                        System.out.println("Failed to get location: " + e.getMessage());
+                    }
                 });
+
 
         // Initialize login launcher
 
@@ -109,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                         username = data.getStringExtra("username");
                         curUser = new User(username, firebaseUid, email, latitude, longitude);
 
-                        System.out.println(curUser);
+                        System.out.println("Current user logged in or signed up is " + curUser);
                         SearchFragment searchFragment = new SearchFragment(this);
                         this.mainView.displayFragment(searchFragment, false, "search", 0);
                     }
@@ -117,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                 }
         );
 
-        System.out.println((curUser));
+        System.out.println("Current user is " + (curUser));
 //      getRestaurantNames from firestore
         restaurantNames = new RestaurantNames(new ArrayList<String>());
         lib = new RestaurantLibrary();
@@ -134,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     private void initializeUser() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        System.out.println("Current user from firebase is" + (currentUser));
         if (currentUser != null) {
             username = currentUser.getDisplayName();
             email = currentUser.getEmail();
@@ -181,6 +195,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
      */
     @Override
     public void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption) {
+        System.out.println("Latitude " + curUser.getLoc().getLat() + " Longitude " + curUser.getLoc().getLon());
         HashSet<IFilter> filters = new HashSet<IFilter>();
         if(priceFilter != null && !priceFilter.equals("Price")){
             PriceFilter pf = new PriceFilter(priceFilter);
@@ -195,8 +210,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
             }
         }
         ArrayList<Restaurant> matches = lib.search(searchTerm, filters, sortOption, curUser);
-        this.mainView.displaySearchResults(matches);
-    }
+        this.mainView.displaySearchResults(matches);}
 
 
     // RestaurantAdapter.OnItemClickListener methods
@@ -255,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
      */
     public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol) {
         // Create the Review object
-        Review newReview = new Review(curUser.getUsername(), restaurantId, rating, comment, priceSymbol);
+        Review newReview = new Review(curUser.getFirebaseUid(), restaurantId, rating, comment, priceSymbol);
         // Use FStoreReviewsDataRepo to add the review
         FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
         repo.addReview(newReview, new IDataRepositoryCallback() {

@@ -6,12 +6,13 @@ import java.util.Date;
  */
 public class Review {
     public String reviewId;
-    public String username;
+    public String firebaseUid;
     public String restaurantId;
     public float rating;
     private Date date;
     public String body;
     public int priceRange;
+    public String username;
 
     public Review(String reviewId, String username, String restaurantId, float rating, String body, int price) {
         this.reviewId = reviewId;
@@ -23,8 +24,8 @@ public class Review {
         this.priceRange = price;
     }
     public Review() {}
-    public Review(String username, String restaurantId, float rating, String body, int price) {
-        this.username = username;
+    public Review(String firebaseUid, String restaurantId, float rating, String body, int price) {
+        this.firebaseUid = firebaseUid;
         this.restaurantId = restaurantId;
         this.rating = rating;
         this.date = new Date();

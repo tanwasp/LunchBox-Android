@@ -8,6 +8,9 @@ import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.model.User;
 
 public interface IRestaurantsDataRepository {
-    static void searchRestaurants(List<String> restaurantNames, Set<IFilter> filters, String sort, User curUser) {
-    }
+//    static void searchRestaurants(List<String> restaurantNames, Set<IFilter> filters, String sort, User curUser) {
+//    }
+    void getAllRestaurants(IDataRepositoryCallback callback);
+
+    void addRestaurant(Restaurant restaurant, IDataRepositoryCallback callback);
 }
