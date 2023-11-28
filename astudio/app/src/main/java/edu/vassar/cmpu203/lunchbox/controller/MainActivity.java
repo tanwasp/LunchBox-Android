@@ -110,17 +110,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
     }
 
-//    private void fetchLastLocation() {
-//        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-//        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
-//            if (location != null) {
-//                updateCurrentUserLocation((float) location.getLatitude(), (float) location.getLongitude());
-//            } else {
-//                System.out.println("Location is null from fetchLastLocation");
-//            }
-//        }).addOnFailureListener(this, e -> System.out.println("Failed to get location: " + e.getMessage()));
-//    }
-
     private void fetchLastLocation() {
 
         // Check for permissions again (optional but recommended)
