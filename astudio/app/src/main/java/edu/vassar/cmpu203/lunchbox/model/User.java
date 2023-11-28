@@ -60,7 +60,7 @@ public class User {
         this.loc = loc;
     }
 
-    public String getFirebaseUid(){
+    public String getUid(){
         return this.firebaseUid;
     }
 

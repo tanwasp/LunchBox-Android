@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
      */
     public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol) {
         // Create the Review object
-        Review newReview = new Review(curUser.getFirebaseUid(), restaurantId, rating, comment, priceSymbol);
+        Review newReview = new Review(curUser.getUid(), restaurantId, rating, comment, priceSymbol);
         // Use FStoreReviewsDataRepo to add the review
         FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
         repo.addReview(newReview, new IDataRepositoryCallback() {

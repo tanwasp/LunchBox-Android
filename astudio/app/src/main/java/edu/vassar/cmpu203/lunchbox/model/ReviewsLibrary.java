@@ -63,7 +63,7 @@ public class ReviewsLibrary {
             if (rev == null){
                 continue;
             }
-            if (rev.getUsername().equals(u.getUsername())){
+            if (rev.getUid().equals(u.getUid())){
                 output.add(rev);
             }
         }

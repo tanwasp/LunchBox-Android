@@ -48,8 +48,13 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
 
         // set profile details
         binding.usernameTextView.setText(user.getUsername());
-        DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
-        String dateToString = df.format(user.getJoinedDate());
+        String dateToString;
+        try {
+            DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+            dateToString = df.format(user.getJoinedDate());
+        } catch (Exception e){
+            dateToString = "";
+        }
         binding.dateJoinedTextView.setText(dateToString);
 
         // Initialize your adapter with an empty list or null
