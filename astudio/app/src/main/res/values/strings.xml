@@ -76,5 +76,7 @@
     <string name="signup_label">Sign Up</string>
     <string name="search_btn">Search Restaurants</string>
     <string name="profile_btn">My Profile</string>
+    <string name="find_friends">Find Friends</string>
+    <string name="logout">Logout</string>
 
 </resources>

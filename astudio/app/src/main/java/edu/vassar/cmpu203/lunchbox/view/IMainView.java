@@ -32,5 +32,5 @@ public interface IMainView {
 
     void displaySearchResults(List<Restaurant> searchResults);
 
-
+    void clearBackStack();
 }

@@ -94,13 +94,33 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         this.mainView = new MainView(this);
-        LandingView landingFragment = new LandingView(this);
-        this.mainView.displayFragment(landingFragment, false, "land", 0);
+//        LandingView landingFragment = new LandingView(this);
+//        this.mainView.displayFragment(landingFragment, false, "land", 0);
 
         setContentView(this.mainView.getRootView());
+        navigateBasedOnAuthenticationStatus();
+    }
+    private void navigateBasedOnAuthenticationStatus() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            // User is signed in, navigate to HomeFragment
+            updateCurrentUser(currentUser);
+            HomeFragment homeFragment = new HomeFragment(this);
+            this.mainView.displayFragment(homeFragment, false, "home", 0);
+        } else {
+            // No user is signed in, navigate to LandingView
+            LandingView landingFragment = new LandingView(this);
+            this.mainView.displayFragment(landingFragment, false, "land", 0);
+        }
     }
 
-
+    public void onLogout() {
+        FirebaseAuth.getInstance().signOut();
+        navigateBasedOnAuthenticationStatus();
+        this.mainView.clearBackStack();
+        LandingView landingFragment = new LandingView(this);
+        this.mainView.displayFragment(landingFragment, false, "land", 0);
+    }
 
     private void setupLocationService() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -139,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         };
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
     }
-
 
     private void setupFirebaseAuthListener() {
         authStateListener = firebaseAuth -> {

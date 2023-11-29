@@ -67,6 +67,13 @@ public class HomeFragment extends Fragment implements IHomeView{
 //            }
 //        });
 
+        this.binding.btnLogout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                listener.onLogout();
+            }
+        });
+
     }
 
 }

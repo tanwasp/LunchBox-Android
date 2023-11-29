@@ -68,7 +68,11 @@ public class MainView implements IMainView{
         }
     }
 
-
-
+    /**
+     * Clears the back stack.
+     */
+    public void clearBackStack() {
+        fmanager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
 
 }

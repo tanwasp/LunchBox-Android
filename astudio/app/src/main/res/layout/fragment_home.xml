@@ -58,12 +58,24 @@
         android:id="@+id/btnNavigateToFindFriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find Friends"
+        android:text="@string/find_friends"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnNavigateToNotifications"
         app:layout_constraintVertical_bias="0.0"
         android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNavigateToFindFriends"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
