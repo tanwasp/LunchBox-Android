@@ -1,11 +1,12 @@
 package edu.vassar.cmpu203.lunchbox.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Represents a restaurant with its details and reviews.
  */
-public class Restaurant {
+public class Restaurant implements Serializable {
 
     /**
      * Unique identifier for the restaurant.

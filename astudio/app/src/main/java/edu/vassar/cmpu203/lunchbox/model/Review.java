@@ -1,10 +1,11 @@
 package edu.vassar.cmpu203.lunchbox.model;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Represents a review for a restaurant
  */
-public class Review {
+public class Review implements Serializable {
     public String reviewId;
     public String firebaseUid;
     public String restaurantId;

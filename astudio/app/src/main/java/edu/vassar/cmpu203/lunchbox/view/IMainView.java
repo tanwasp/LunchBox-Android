@@ -1,11 +1,16 @@
 package edu.vassar.cmpu203.lunchbox.view;
 
 import android.view.View;
+
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.vassar.cmpu203.lunchbox.controller.MainActivity;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.model.Review;
 
@@ -33,4 +38,16 @@ public interface IMainView {
     void displaySearchResults(List<Restaurant> searchResults);
 
     void clearBackStack();
+
+    void setupNavigationDrawer(MainActivity mainActivity);
+
+    NavController getNavController();
+
+    AppBarConfiguration getAppBarConfiguration();
+
+    DrawerLayout getDrawerLayout();
+
+    void showAppBar();
+
+    void hideAppBar();
 }

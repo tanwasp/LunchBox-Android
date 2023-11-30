@@ -1,5 +1,6 @@
 package edu.vassar.cmpu203.lunchbox.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.Date;
 /**
  * Represents a user in the system.
  */
-public class User {
+public class User implements Serializable {
 
     /** The username of the user. */
     public String username;

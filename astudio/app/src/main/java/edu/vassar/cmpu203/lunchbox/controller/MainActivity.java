@@ -3,9 +3,19 @@ package edu.vassar.cmpu203.lunchbox.controller;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +27,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.location.LocationRequest;
@@ -31,7 +42,9 @@ import java.util.List;
 //import edu.vassar.cmpu203.lunchbox.Manifest;
 import android.Manifest;
 import android.os.Looper;
+import android.view.MenuItem;
 
+import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.model.IFilter;
 import edu.vassar.cmpu203.lunchbox.model.LocFilter;
 import edu.vassar.cmpu203.lunchbox.model.PriceFilter;
@@ -75,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     private LocationCallback locationCallback;
     private boolean locationUpdated;
     UserProfileFragment profileFragment;
+    private AppBarConfiguration mAppBarConfiguration;
+    private NavController navController;
+
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     ActivityResultLauncher<Intent> loginActivityResultLauncher;
@@ -94,23 +110,48 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         this.mainView = new MainView(this);
-//        LandingView landingFragment = new LandingView(this);
-//        this.mainView.displayFragment(landingFragment, false, "land", 0);
 
         setContentView(this.mainView.getRootView());
+        mainView.setupNavigationDrawer(this);
+
         navigateBasedOnAuthenticationStatus();
     }
+
+    public void updateUIBasedOnCurrentFragment() {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
+        System.out.println("currentFragment is " + currentFragment);
+        if (currentFragment != null) {
+            DrawerLayout drawerLayout = mainView.getDrawerLayout();
+
+            if (currentFragment instanceof HomeFragment) {
+                mainView.showAppBar();
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            } else {
+                mainView.hideAppBar();
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            }
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(this.mainView.getNavController(), this.mainView.getAppBarConfiguration())
+                || super.onSupportNavigateUp();
+    }
+
+
     private void navigateBasedOnAuthenticationStatus() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             // User is signed in, navigate to HomeFragment
             updateCurrentUser(currentUser);
-            HomeFragment homeFragment = new HomeFragment(this);
-            this.mainView.displayFragment(homeFragment, false, "home", 0);
+            onNavigateToHome();
         } else {
             // No user is signed in, navigate to LandingView
             LandingView landingFragment = new LandingView(this);
             this.mainView.displayFragment(landingFragment, false, "land", 0);
+            getSupportFragmentManager().executePendingTransactions();
+            updateUIBasedOnCurrentFragment();
         }
     }
 
@@ -120,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         this.mainView.clearBackStack();
         LandingView landingFragment = new LandingView(this);
         this.mainView.displayFragment(landingFragment, false, "land", 0);
+        getSupportFragmentManager().executePendingTransactions();
+        updateUIBasedOnCurrentFragment();
     }
 
     private void setupLocationService() {
@@ -128,6 +171,14 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         } else {
             fetchLastLocation();
         }
+    }
+    @Override
+    public void onBackPressed() {
+        // Call the super method to handle the back button press as usual
+        super.onBackPressed();
+        getSupportFragmentManager().executePendingTransactions();
+        // Now update the UI based on the current fragment
+        updateUIBasedOnCurrentFragment();
     }
 
     private void fetchLastLocation() {
@@ -198,8 +249,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         String username = data.getStringExtra("username");
         curUser = new User(username, firebaseUid, email);
         System.out.println("Current user logged in or signed up is " + curUser);
-        HomeFragment homeFragment = new HomeFragment(this);
-        this.mainView.displayFragment(homeFragment, false, "search", 0);
+        onNavigateToHome();
     }
 
     private void updateCurrentUserLocation(float latitude, float longitude) {
@@ -246,8 +296,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onNavigateToSearch() {
         SearchFragment searchFragment = new SearchFragment(this);
         this.mainView.displayFragment(searchFragment, true, "search", 0);
+        getSupportFragmentManager().executePendingTransactions();
+        updateUIBasedOnCurrentFragment();
     }
-
 
     // SearchView.Listener methods
 
@@ -306,14 +357,13 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
             }
         });
 
-//        ArrayList<Review> reviewsList = revLib.getReviews(restaurant.getReviewList());
-//        RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant, reviewsList);
-//        this.mainView.displayFragment(restaurantFragment, reversible, "restaurant", popCount);
     }
 
     public void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount, List<Review> reviewsList) {
         RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant, reviewsList);
         this.mainView.displayFragment(restaurantFragment, reversible, "restaurant", popCount);
+        getSupportFragmentManager().executePendingTransactions();
+        updateUIBasedOnCurrentFragment();
     }
 
     // RestaurantView.Listener methods
@@ -327,6 +377,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onNavigateToPostReview(String restaurantId) {
         AddReviewFragment addRevFragment = new AddReviewFragment(this, restaurantId);
         this.mainView.displayFragment(addRevFragment, true, "review form", 0);
+        getSupportFragmentManager().executePendingTransactions();
+        updateUIBasedOnCurrentFragment();
     }
 
     /**
@@ -374,6 +426,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onNavigateToAddRestaurant() {
         AddRestaurantFragment addRestaurantFragment = new AddRestaurantFragment(this);
         this.mainView.displayFragment(addRestaurantFragment, true, "add restaurant", 0);
+        getSupportFragmentManager().executePendingTransactions();
+        updateUIBasedOnCurrentFragment();
     }
 
     /**
@@ -408,19 +462,42 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         loginActivityResultLauncher.launch(signupIntent);
     }
 
+//    public void onNavigateToHome() {
+//        HomeFragment homeFragment = new HomeFragment(this);
+//        this.mainView.displayFragment(homeFragment, false, "home", 0);
+//    }
+
     public void onNavigateToHome() {
-        HomeFragment homeFragment = new HomeFragment(this);
+        HomeFragment homeFragment = new HomeFragment();
         this.mainView.displayFragment(homeFragment, false, "home", 0);
+        getSupportFragmentManager().executePendingTransactions();
+        updateUIBasedOnCurrentFragment();
     }
 
+
+//    public void onNavigateToMyProfile(List<Review> reviewsList) {
+//        profileFragment = new UserProfileFragment(this, curUser, reviewsList);
+//        this.mainView.displayFragment(profileFragment, true, "profile", 0);
+//    }
+
     public void onNavigateToMyProfile(List<Review> reviewsList) {
-        profileFragment = new UserProfileFragment(this, curUser, reviewsList);
+        System.out.println("beginning navigate to user profile");
+        System.out.println("user is " + curUser);
+        System.out.println("num reviews is "+ reviewsList.size());
+        if (reviewsList.size() > 1){
+            System.out.println(reviewsList.get(0));
+        }
+        UserProfileFragment profileFragment = UserProfileFragment.newInstance(curUser, new ArrayList<>(reviewsList));
         this.mainView.displayFragment(profileFragment, true, "profile", 0);
+        getSupportFragmentManager().executePendingTransactions();
+        updateUIBasedOnCurrentFragment();
     }
 
     public void onNavigateToMyFriends() {
         FriendsFragment friendsFragment = new FriendsFragment();
         this.mainView.displayFragment(friendsFragment, true, "friends", 0);
+        getSupportFragmentManager().executePendingTransactions();
+        updateUIBasedOnCurrentFragment();
     }
 
     public void getUserReviewsNavToProfile() {

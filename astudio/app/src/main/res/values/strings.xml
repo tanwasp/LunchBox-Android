@@ -79,4 +79,10 @@
     <string name="find_friends">Find Friends</string>
     <string name="logout">Logout</string>
 
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_profile">Profile</string>
+
 </resources>

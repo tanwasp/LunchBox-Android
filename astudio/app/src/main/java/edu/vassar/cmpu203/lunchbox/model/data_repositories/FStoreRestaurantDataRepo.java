@@ -41,9 +41,7 @@ public class FStoreRestaurantDataRepo implements IRestaurantsDataRepository {
                                 r.setLoc(loc);
                             }
                             restaurants.add(r);
-                            System.out.println(r);
                         }
-                        System.out.println("Got" + restaurants.size() + "restaurants from firestore");
                         callback.onSuccess(restaurants);
                     } else {
                         callback.onFailure(task.getException());

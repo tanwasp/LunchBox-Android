@@ -84,10 +84,8 @@ public class RestaurantLibrary {
     }
 
     public void loadRestaurants(List<Restaurant> restaurants){
-        System.out.println("Loading restaurants into Restaurant Library");
         for (Restaurant r : restaurants){
             data.put(r.getRestaurantId(), r);
-            System.out.println("Loaded " + r + " into library.");
         }
         System.out.println("Loaded " + data.size() + " restaurants.");
     }

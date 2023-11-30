@@ -1,6 +1,8 @@
 package edu.vassar.cmpu203.lunchbox.model;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable {
     /**
      * Latitude of the location.
      */
