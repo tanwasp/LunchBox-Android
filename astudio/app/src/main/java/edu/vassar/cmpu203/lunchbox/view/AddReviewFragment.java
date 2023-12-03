@@ -23,11 +23,12 @@ public class AddReviewFragment extends Fragment implements IAddReviewView {
     private EditText commentEditText;
     private Spinner priceSpinner;
     private Button addReviewButton;
+    private String restaurantName;
 
-    public AddReviewFragment(Listener listener, String restId) {
-
+    public AddReviewFragment(Listener listener, String restId, String restaurantName){
         this.listener = listener;
         this.restId = restId;
+        this.restaurantName = restaurantName;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class AddReviewFragment extends Fragment implements IAddReviewView {
                 String priceSymbol = AddReviewFragment.this.binding.spinnerPrice.getSelectedItem().toString();
 
                 // Pass data to the listener
-                listener.onAddReview(rating, comment, restId, priceSymbol.length());
+                listener.onAddReview(rating, comment, restId, priceSymbol.length(), restaurantName );
             }
         });
     }

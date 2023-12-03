@@ -57,7 +57,7 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
         this.binding.btnNavigateToPostReview.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                listener.onNavigateToPostReview(restaurant.getRestaurantId());
+                listener.onNavigateToPostReview(restaurant.getRestaurantId(), restaurant.getName());
             }
         });
 

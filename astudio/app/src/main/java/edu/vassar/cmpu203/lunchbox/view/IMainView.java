@@ -1,11 +1,14 @@
 package edu.vassar.cmpu203.lunchbox.view;
 
+import android.app.Activity;
 import android.view.View;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +44,6 @@ public interface IMainView {
 
     void setupNavigationDrawer(MainActivity mainActivity);
 
-    NavController getNavController();
 
     AppBarConfiguration getAppBarConfiguration();
 
@@ -50,4 +52,9 @@ public interface IMainView {
     void showAppBar();
 
     void hideAppBar();
+
+    NavController getNavController();
+    NavigationView getNavigationView();
+
+
 }

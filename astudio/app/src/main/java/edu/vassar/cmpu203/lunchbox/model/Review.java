@@ -14,6 +14,7 @@ public class Review implements Serializable {
     public String body;
     public int priceRange;
     public String username;
+    private String restaurantName;
 
 //    public Review(String reviewId, String username, String restaurantId, float rating, String body, int price) {
 //        this.reviewId = reviewId;
@@ -36,7 +37,7 @@ public class Review implements Serializable {
 //        this.priceRange = price;
 //    }
 
-    public Review(String firebaseUid, String username, String restaurantId, float rating, String body, int price, Date date) {
+    public Review(String firebaseUid, String username, String restaurantId, float rating, String body, int price, Date date, String restaurantName) {
         this.firebaseUid = firebaseUid;
         this.username = username;
         this.restaurantId = restaurantId;
@@ -47,6 +48,13 @@ public class Review implements Serializable {
         if (date == null) {
             this.date = new Date();
         }
+        this.restaurantName = restaurantName;
+    }
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+    public void setRestaurantName(String name) {
+        this.restaurantName = name;
     }
     public String getUsername() {
         return username;

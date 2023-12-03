@@ -9,11 +9,13 @@
         android:id="@+id/nav_home"
         android:name="edu.vassar.cmpu203.lunchbox.view.HomeFragment"
         android:label="@string/menu_home"
+        android:checkable="true"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_profile"
         android:name="edu.vassar.cmpu203.lunchbox.view.UserProfileFragment"
         android:label="@string/menu_profile"
+        android:checkable="true"
         tools:layout="@layout/fragment_user_profile" />
 </navigation>

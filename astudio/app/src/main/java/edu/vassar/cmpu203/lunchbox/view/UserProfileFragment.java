@@ -74,9 +74,9 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
         super.onViewCreated(view, savedInstanceState);
 
         if (user != null) {
-            binding.usernameTextView.setText(user.getUsername());
+//            binding.usernameTextView.setText(user.getUsername());
             String dateToString = formatDate(user.getJoinedDate());
-            binding.dateJoinedTextView.setText(dateToString);
+            binding.dateJoinedTextView.setText("Member since "+dateToString);
         }
 
         // Initialize the RecyclerView
@@ -90,12 +90,13 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
 
     private String formatDate(Date date) {
         try {
-            DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+            DateFormat df = new SimpleDateFormat("MMMM yyyy");
             return df.format(date);
         } catch (Exception e) {
             return "";
         }
     }
+
 
     private void setupRecyclerView(View view) {
         reviewsRecyclerView = view.findViewById(R.id.reviewsRecyclerView);

@@ -51,7 +51,6 @@ public class HomeFragment extends Fragment implements IHomeView{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.binding.btnNavigateToSearch.setOnClickListener(v -> listener.onNavigateToSearch());
-        this.binding.btnNavigateToMyProfile.setOnClickListener(v -> listener.getUserReviewsNavToProfile());
         this.binding.btnLogout.setOnClickListener(v -> listener.onLogout());
     }
 

@@ -44,6 +44,33 @@ public class FStoreReviewsDataRepo implements IReviewsDataRepo{
     }
 
     @Override
+    public void getAllReviews(IDataRepositoryCallback callback) {
+        FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
+        db.collection("reviews")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<Review> reviews = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Review review = document.toObject(Review.class);
+                            review.setReviewId(document.getId());
+                            Timestamp timestamp = document.getTimestamp("Date");
+                            if (timestamp != null) {
+                                review.setDate(timestamp.toDate());
+                            } else {
+                                review.setDate(new Date());
+                            }
+                            reviews.add(review);
+                        }
+                        Collections.sort(reviews, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
+                        callback.onSuccess(reviews);
+                    } else {
+                        callback.onFailure(task.getException());
+                    }
+                });
+    }
+
+    @Override
     public void addReview(Review review, IDataRepositoryCallback callback) {
         FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
         Map<String, Object> reviewData = new HashMap<>();
@@ -54,6 +81,7 @@ public class FStoreReviewsDataRepo implements IReviewsDataRepo{
         reviewData.put("body", review.getBody());
         reviewData.put("priceRange", review.getPriceRange());
         reviewData.put("Date", review.getDate());
+        reviewData.put("restaurantName", review.getRestaurantName());
 
         db.collection("reviews")
                 .add(reviewData)

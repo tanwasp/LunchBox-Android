@@ -3,6 +3,6 @@ public interface IRestaurantView {
 
 
     interface Listener {
-        void onNavigateToPostReview(String restaurantId);
+        void onNavigateToPostReview(String restaurantId, String restaurantName);
     }
 }

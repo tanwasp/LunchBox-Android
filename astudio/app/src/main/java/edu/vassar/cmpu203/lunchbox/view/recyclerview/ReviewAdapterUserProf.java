@@ -51,8 +51,9 @@ public class ReviewAdapterUserProf extends RecyclerView.Adapter<ReviewViewHolder
      */
     @Override
     public void onBindViewHolder(ReviewViewHolder holder, int position) {
+
         Review review = reviews.get(position);
-        holder.usernameView.setText(review.getRestaurantId());
+        holder.usernameView.setText(review.getRestaurantName());
         holder.ratingView.setText(String.valueOf(review.getRating()));
         holder.reviewBodyView.setText(review.getBody());
         String dateToString;

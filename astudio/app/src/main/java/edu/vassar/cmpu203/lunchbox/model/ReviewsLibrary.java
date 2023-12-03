@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a library of reviews.
@@ -30,33 +31,49 @@ public class ReviewsLibrary {
      *
      * @return The ID of the newly added review.
      */
-    public String addReview(User curUser, String restaurantId, float rating, String reviewText, int priceRange){
+    public String addReview(User curUser, String restaurantId, float rating, String reviewText, int priceRange, String restaurantName){
         String reviewId = "review" + (this.data.size() + 100);
-        Review newReview = new Review(reviewId, curUser.getUsername(), restaurantId, rating, reviewText, priceRange, null);
+        Review newReview = new Review(reviewId, curUser.getUsername(), restaurantId, rating, reviewText, priceRange, null, restaurantName);
         this.data.put(reviewId, newReview);
         return reviewId;
+    }
+
+    public void addReviewToReviewsLibrary(Review review){
+        this.data.put(review.getReviewId(), review);
     }
 
     /**
      * Retrieves a list of reviews based on their IDs.
      *
-     * @param reviews A list of review IDs.
      *
      * @return A list of Review objects.
      */
-    public ArrayList<Review> getReviews(ArrayList<String> reviews){
+//    public ArrayList<Review> getReviews(ArrayList<String> reviews){
+//        ArrayList<Review> output = new ArrayList<Review>();
+//        for (String reviewId : reviews) {
+//            Review review = this.data.get(reviewId);
+//            if (review == null){
+//                continue;
+//            }
+//            output.add(review);
+//        }
+//        Collections.sort(output, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
+//        return output;
+//    }
+
+    public ArrayList<Review> getReviewsByRestaurant(Restaurant r){
         ArrayList<Review> output = new ArrayList<Review>();
-        for (String reviewId : reviews) {
-            Review review = this.data.get(reviewId);
-            if (review == null){
+        for (Review rev : data.values()) {
+            if (rev == null){
                 continue;
             }
-            output.add(review);
+            if (rev.getRestaurantId().equals(r.getRestaurantId())){
+                output.add(rev);
+            }
         }
         Collections.sort(output, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
         return output;
     }
-
     public ArrayList<Review> getReviewsByUser(User u){
         ArrayList<Review> output = new ArrayList<Review>();
         for (Review rev : data.values()) {
@@ -69,6 +86,13 @@ public class ReviewsLibrary {
         }
         Collections.sort(output, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
         return output;
+    }
+
+    public void loadReviews(List<Review> reviews) {
+        for (Review rev : reviews){
+            this.data.put(rev.getReviewId(), rev);
+        }
+
     }
 
     /**

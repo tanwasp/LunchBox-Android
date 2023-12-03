@@ -90,8 +90,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     UserProfileFragment profileFragment;
     private AppBarConfiguration mAppBarConfiguration;
     private NavController navController;
-
-
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     ActivityResultLauncher<Intent> loginActivityResultLauncher;
 
@@ -105,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
-        loadRestaurants();
+        loadReviews();
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -123,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         if (currentFragment != null) {
             DrawerLayout drawerLayout = mainView.getDrawerLayout();
 
-            if (currentFragment instanceof HomeFragment) {
+            if (currentFragment instanceof HomeFragment || currentFragment instanceof UserProfileFragment) {
                 mainView.showAppBar();
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             } else {
@@ -172,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
             fetchLastLocation();
         }
     }
+
     @Override
     public void onBackPressed() {
         // Call the super method to handle the back button press as usual
@@ -191,7 +190,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(1000);
-//        locationRequest.setNumUpdates(1);
 
         locationCallback = new LocationCallback() {
             @Override
@@ -256,7 +254,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         if (curUser != null) {
             curUser.setLoc(latitude, longitude);
         }
-//        System.out.println("Location updated: " + latitude + ", " + longitude);
     }
 
     @Override
@@ -333,30 +330,11 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     // RestaurantAdapter.OnItemClickListener methods
 
-    /**
-     * navigates to restaurant fragment
-     *
-     * @param restaurant
-     * @param reversible
-     * @param popCount
-     */
+
     @Override
     public void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount) {
-        FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
-        repo.getReviews("restaurantId", restaurant.getRestaurantId(), new IDataRepositoryCallback() {
-            @Override
-            public void onSuccess(Object result) {
-                List<Review> reviewsList = (List<Review>) result;
-//                revLib.addReviews(reviews);
-                onNavigateToRestaurant(restaurant, reversible, popCount, reviewsList);
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                System.out.println("Failed to get reviews from Firestore" + e.getMessage());
-            }
-        });
-
+        List<Review> reviewsList = revLib.getReviewsByRestaurant(restaurant);
+        onNavigateToRestaurant(restaurant, reversible, popCount, reviewsList);
     }
 
     public void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount, List<Review> reviewsList) {
@@ -374,8 +352,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
      * @param restaurantId
      */
     @Override
-    public void onNavigateToPostReview(String restaurantId) {
-        AddReviewFragment addRevFragment = new AddReviewFragment(this, restaurantId);
+    public void onNavigateToPostReview(String restaurantId, String restaurantName) {
+        AddReviewFragment addRevFragment = new AddReviewFragment(this, restaurantId, restaurantName);
         this.mainView.displayFragment(addRevFragment, true, "review form", 0);
         getSupportFragmentManager().executePendingTransactions();
         updateUIBasedOnCurrentFragment();
@@ -389,25 +367,28 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
      * @param restaurantId
      * @param priceSymbol
      */
-    public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol) {
+    public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol, String restaurantName) {
         // Create the Review object
-        Review newReview = new Review(curUser.getUid(), curUser.getUsername(), restaurantId, rating, comment, priceSymbol, null);
+        Review newReview = new Review(curUser.getUid(), curUser.getUsername(), restaurantId, rating, comment, priceSymbol, null, restaurantName);
         System.out.println("New review: " + newReview);
         // Use FStoreReviewsDataRepo to add the review
+        addReviewToFirestore(newReview);
+        // Update restaurant details after adding the review
+        revLib.addReviewToReviewsLibrary(newReview);
+        Restaurant restaurant = lib.getRestaurant(newReview.getRestaurantId());
+        if (restaurant != null) {
+            restaurant.computeRating(revLib);
+            restaurant.computePriceRange(revLib);
+            onNavigateToRestaurant(restaurant, true, 2);
+        }
+    }
+
+    public void addReviewToFirestore(Review newReview) {
         FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
         repo.addReview(newReview, new IDataRepositoryCallback() {
             @Override
             public void onSuccess(Object result) {
-                // retrieve the reviewId from the DocumentReference if necessary
-                // String reviewId = ((DocumentReference) result).getId();
-
-                // Update restaurant details after adding the review
-                Restaurant restaurant = lib.getRestaurant(restaurantId);
-                if (restaurant != null) {
-                    restaurant.computeRating(revLib);
-                    restaurant.computePriceRange(revLib);
-                    onNavigateToRestaurant(restaurant, true, 2);
-                }
+                System.out.println("Successfully added review to Firestore");
             }
 
             @Override
@@ -416,7 +397,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
             }
         });
     }
-
 
     /**
      * adds review to review library and adds review to restaurant
@@ -462,35 +442,28 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         loginActivityResultLauncher.launch(signupIntent);
     }
 
-//    public void onNavigateToHome() {
-//        HomeFragment homeFragment = new HomeFragment(this);
-//        this.mainView.displayFragment(homeFragment, false, "home", 0);
-//    }
-
     public void onNavigateToHome() {
         HomeFragment homeFragment = new HomeFragment();
         this.mainView.displayFragment(homeFragment, false, "home", 0);
         getSupportFragmentManager().executePendingTransactions();
         updateUIBasedOnCurrentFragment();
+        mainView.getDrawerLayout().closeDrawer(GravityCompat.START);
+        getSupportActionBar().setTitle("Home");
     }
-
-
-//    public void onNavigateToMyProfile(List<Review> reviewsList) {
-//        profileFragment = new UserProfileFragment(this, curUser, reviewsList);
-//        this.mainView.displayFragment(profileFragment, true, "profile", 0);
-//    }
 
     public void onNavigateToMyProfile(List<Review> reviewsList) {
         System.out.println("beginning navigate to user profile");
         System.out.println("user is " + curUser);
-        System.out.println("num reviews is "+ reviewsList.size());
-        if (reviewsList.size() > 1){
+        System.out.println("num reviews is " + reviewsList.size());
+        if (reviewsList.size() > 1) {
             System.out.println(reviewsList.get(0));
         }
         UserProfileFragment profileFragment = UserProfileFragment.newInstance(curUser, new ArrayList<>(reviewsList));
-        this.mainView.displayFragment(profileFragment, true, "profile", 0);
+        this.mainView.displayFragment(profileFragment, false, "profile", 0);
         getSupportFragmentManager().executePendingTransactions();
         updateUIBasedOnCurrentFragment();
+        mainView.getDrawerLayout().closeDrawer(GravityCompat.START);
+        getSupportActionBar().setTitle(curUser.getUsername());
     }
 
     public void onNavigateToMyFriends() {
@@ -501,27 +474,24 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     public void getUserReviewsNavToProfile() {
-        FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
-        repo.getReviews("username", curUser.getUsername(), new IDataRepositoryCallback() {
-            @Override
-            public void onSuccess(Object result) {
-                List<Review> reviewsList = (List<Review>) result;
-                onNavigateToMyProfile(reviewsList);
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                System.out.println("Failed to get reviews from Firestore" + e.getMessage());
-            }
-        });
+        List<Review> reviewsList = revLib.getReviewsByUser(curUser);
+        onNavigateToMyProfile(reviewsList);
     }
 
-    private void loadRestaurants(){
+    private void computePriceAndRating(List<Restaurant> restaurants) {
+        for (Restaurant r : restaurants) {
+            r.computePriceRange(revLib);
+            r.computeRating(revLib);
+        }
+    }
+
+    private void loadRestaurants() {
         FStoreRestaurantDataRepo repo = new FStoreRestaurantDataRepo();
         repo.getAllRestaurants(new IDataRepositoryCallback() {
             @Override
             public void onSuccess(Object result) {
                 List<Restaurant> restaurants = (List<Restaurant>) result;
+                computePriceAndRating(restaurants);
                 lib.loadRestaurants(restaurants);
                 System.out.println("Loaded " + restaurants.size() + " restaurants from Firestore");
             }
@@ -529,6 +499,24 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
             @Override
             public void onFailure(Exception e) {
                 System.out.println("Failed to get restaurants from Firestore" + e.getMessage());
+            }
+        });
+    }
+
+    public void loadReviews() {
+        FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
+        repo.getAllReviews(new IDataRepositoryCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                List<Review> reviews = (List<Review>) result;
+                revLib.loadReviews(reviews);
+                System.out.println("Loaded " + reviews.size() + " reviews from Firestore");
+                loadRestaurants();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println("Failed to get reviews from Firestore" + e.getMessage());
             }
         });
     }

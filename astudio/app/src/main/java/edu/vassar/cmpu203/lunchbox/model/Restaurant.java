@@ -123,15 +123,19 @@ public class Restaurant implements Serializable {
      * @param revLib The reviews library containing all reviews.
      */
     public void computeRating(ReviewsLibrary revLib) {
-//        if (this != null) {
-//            ArrayList<Review> reviews = revLib.getReviews(reviewList);
-//            float sum = 0;
-//            for (Review rev : reviews) {
-//                sum += rev.rating;
-//            }
-//            rating = sum / reviews.size();
-//        }
-        rating = -1.0f;
+        ArrayList<Review> reviews = revLib.getReviewsByRestaurant(this);
+        int count = 0;
+        float sum = 0;
+        for (Review rev : reviews) {
+            sum += rev.rating;
+            count ++;
+        }
+        if (count == 0){
+            this.rating = -1; // Set to -1 if there are no reviews
+        } else {
+            this.rating = sum / count; // Average rating
+        }
+
     }
 
     /**
@@ -141,22 +145,22 @@ public class Restaurant implements Serializable {
      */
 
     public void computePriceRange(ReviewsLibrary revLib){
-//        ArrayList<Review> reviews = revLib.getReviews(reviewList);
-//        int sum = 0;
-//        int count = 0;
-//        for (Review rev : reviews){
-//            if (rev.priceRange != 0){
-//                count++;
-//            }
-//            sum += rev.priceRange;
-//        }
-//        if (count == 0){
-//            priceRange = 0;
-//        }
-//        else{
-//        priceRange = sum / count;}
-        priceRange = -1;
+        ArrayList<Review> reviews = revLib.getReviewsByRestaurant(this);
+        int sum = 0;
+        int count = 0;
+        for (Review rev : reviews){
+            if (rev.getPriceRange() != 0){
+                sum += rev.getPriceRange();
+                count++;
+            }
+        }
+        if (count == 0){
+            this.priceRange = -1; // Set to -1 if there are no reviews with a price range
+        } else {
+            this.priceRange = sum / count; // Average price range
+        }
     }
+
 
     /**
      * Returns a string representation of the restaurant.

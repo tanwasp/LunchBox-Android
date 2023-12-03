@@ -1,10 +1,13 @@
 package edu.vassar.cmpu203.lunchbox.view;
 
+import android.content.Context;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -34,6 +37,7 @@ public class MainView implements IMainView{
     MainBinding binding; // gives us access to all the graphical components in res/layout/main.xml
     private AppBarConfiguration appBarConfiguration;
     private NavController navController;
+    NavigationView navigationView;
 
     /**
      * Constructor method.
@@ -60,7 +64,7 @@ public class MainView implements IMainView{
 
         // Initialize DrawerLayout and NavigationView using binding
         DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
+        navigationView = binding.navView;
 
         // Setup AppBarConfiguration
         appBarConfiguration = new AppBarConfiguration.Builder(
@@ -92,7 +96,9 @@ public class MainView implements IMainView{
             if (item.getItemId() == R.id.nav_profile){
                     activity.getUserReviewsNavToProfile();
                     return true;
-                // handle other cases
+            } else if (item.getItemId() == R.id.nav_home){
+                activity.onNavigateToHome();
+                return true;
             }
             return false;
         });
@@ -131,6 +137,40 @@ public class MainView implements IMainView{
 
         if (addToStack) ft.addToBackStack(tag);
         ft.commit();
+        System.out.println("Starting nav drawer update based on fragment: " + fragment);
+        updateNavDrawerSelectionBasedOnFragment(fragment);
+    }
+
+    private void updateNavDrawerSelectionBasedOnFragment(Fragment fragment) {
+        if (navigationView == null) {
+            System.out.println("navigationView is null");
+            return;
+        }
+        int itemId = -1;
+        if (fragment instanceof HomeFragment) {
+            itemId = R.id.nav_home;
+        } else if (fragment instanceof UserProfileFragment) {
+            itemId = R.id.nav_profile;
+        }
+        System.out.println("itemId is " + itemId + " and fragment is " +fragment );
+        Menu menu = navigationView.getMenu();
+        clearMenuSelection(menu);
+        MenuItem menuItem = menu.findItem(itemId);
+        if (menuItem != null) {
+            menuItem.setChecked(true);
+        }
+    }
+    private void clearMenuSelection(Menu menu) {
+        for (int i = 0; i < menu.size(); i++) {
+            MenuItem item = menu.getItem(i);
+            if (item != null) {
+                item.setChecked(false);
+            }
+        }
+    }
+
+    public NavigationView getNavigationView(){
+        return binding.navView;
     }
 
     public void showAppBar() {
