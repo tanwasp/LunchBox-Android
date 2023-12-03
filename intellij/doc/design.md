@@ -229,8 +229,11 @@ skin rose
 'skinparam classAttributeIconSize 0
 
 interface IAddRestaurantView { 
+}
+
+interface IAddRestaurantView.Listener {
     --
-    void addRestaurant(String name, String address, String city, String state, String country, String postalCode, String lat, String lon) in Listener Interface
+    void addRestaurant(String name, String address, String city, String state, String country, String postalCode, String lat, String lon)
 }
 
 interface IAddReviewView { 
@@ -316,23 +319,13 @@ class MainView{
     -fmanager: FragmentManager
 }
 
-package ModelAndController {
-
-}
-
 ISearchView <|.. SearchFragment
 IRestaurantView <|.. RestaurantFragment
 IHomeView <|.. HomeFragment
 IAddRestaurantView <|.. AddRestaurantFragment
+IAddRestaurantView +-- IAddRestaurantView.Listener
 IAddReviewView <|.. AddReviewFragment
 IMainView <|.. MainView
-
-SearchFragment "1" -down- "1" MainView : \tIs displayed by\t\t
-RestaurantFragment "1" -down- "1" MainView : \tIs displayed by\t\t
-HomeFragment "1" -down- "1" MainView : \tIs displayed by\t\t
-AddRestaurantFragment "1" -down- "1" MainView : \tIs displayed by\t\t
-AddReviewFragment "1" -down- "1" MainView : \tIs displayed by\t\t
-MainView "1" -down- "1" ModelAndController : \tReceives commands from\t\t
 
 @enduml
 ```

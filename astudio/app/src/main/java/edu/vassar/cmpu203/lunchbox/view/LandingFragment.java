@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentLandingBinding;
 
-public class LandingView extends Fragment implements ILandingView {
+public class LandingFragment extends Fragment implements ILandingView {
     private FragmentLandingBinding binding;
     private ILandingView.Listener listener;
 
-    public LandingView(@NonNull ILandingView.Listener listener){
+    public LandingFragment(@NonNull ILandingView.Listener listener){
         this.listener = listener;
     }
 

@@ -82,7 +82,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (rating.equals("-1.0")) {
                 rating = "No ratings yet";
             }
-            String priceRange = restaurant.getDollarSigns(restaurant.getPriceRange());
+            String priceRange = restaurant.getDollarSigns(restaurant.getPriceRangeDisplay());
             if (priceRange == null || priceRange.equals("")) {
                 priceRange = "No price info";
             }

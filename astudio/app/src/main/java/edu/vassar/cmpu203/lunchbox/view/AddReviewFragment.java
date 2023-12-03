@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentAddReviewBinding;
 
 public class AddReviewFragment extends Fragment implements IAddReviewView {
@@ -59,6 +61,9 @@ public class AddReviewFragment extends Fragment implements IAddReviewView {
                 float rating = AddReviewFragment.this.binding.ratingBar.getRating();
                 String comment = AddReviewFragment.this.binding.editTextComment.getText().toString();
                 String priceSymbol = AddReviewFragment.this.binding.spinnerPrice.getSelectedItem().toString();
+                if (!(priceSymbol.contains("$"))){
+                    priceSymbol = "";
+                }
 
                 // Pass data to the listener
                 listener.onAddReview(rating, comment, restId, priceSymbol.length(), restaurantName );
