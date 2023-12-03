@@ -33,7 +33,7 @@ public class ReviewsLibrary {
      */
     public String addReview(User curUser, String restaurantId, float rating, String reviewText, int priceRange, String restaurantName){
         String reviewId = "review" + (this.data.size() + 100);
-        Review newReview = new Review(reviewId, curUser.getUsername(), restaurantId, rating, reviewText, priceRange, null, restaurantName);
+        Review newReview = new Review(reviewId, curUser.getUid(), curUser.getUsername(), restaurantId, rating, reviewText, priceRange, null, restaurantName);
         this.data.put(reviewId, newReview);
         return reviewId;
     }

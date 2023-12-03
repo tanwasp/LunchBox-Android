@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
 
         android:allowBackup="true"
@@ -22,6 +21,7 @@
         <activity
             android:name=".controller.MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +31,5 @@
         <activity android:name=".controller.LoginActivity">
             <!-- Intent filters, if any -->
         </activity>
-
     </application>
-
 </manifest>
