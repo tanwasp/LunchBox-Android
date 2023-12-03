@@ -42,6 +42,7 @@ import java.util.List;
 //import edu.vassar.cmpu203.lunchbox.Manifest;
 import android.Manifest;
 import android.os.Looper;
+import android.util.Log;
 import android.view.MenuItem;
 
 import edu.vassar.cmpu203.lunchbox.R;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     ActivityResultLauncher<Intent> loginActivityResultLauncher;
 
     private FirebaseAuth.AuthStateListener authStateListener;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -451,26 +453,48 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         getSupportActionBar().setTitle("Home");
     }
 
+//    public void onNavigateToMyProfile(List<Review> reviewsList) {
+//        System.out.println("beginning navigate to user profile");
+//        System.out.println("user is " + curUser);
+//        System.out.println("num reviews is " + reviewsList.size());
+//        if (reviewsList.size() > 1) {
+//            System.out.println(reviewsList.get(0));
+//        }
+//        UserProfileFragment profileFragment = UserProfileFragment.newInstance(curUser, new ArrayList<>(reviewsList));
+//        this.mainView.displayFragment(profileFragment, false, "profile", 0);
+
+//        getSupportFragmentManager().executePendingTransactions();
+//        updateUIBasedOnCurrentFragment();
+//        mainView.getDrawerLayout().closeDrawer(GravityCompat.START);
+//        getSupportActionBar().setTitle(curUser.getUsername());
+//    }
+
     public void onNavigateToMyProfile(List<Review> reviewsList) {
-        System.out.println("beginning navigate to user profile");
-        System.out.println("user is " + curUser);
-        System.out.println("num reviews is " + reviewsList.size());
-        if (reviewsList.size() > 1) {
-            System.out.println(reviewsList.get(0));
-        }
+        logUserProfileNavigation(reviewsList);
         UserProfileFragment profileFragment = UserProfileFragment.newInstance(curUser, new ArrayList<>(reviewsList));
-        this.mainView.displayFragment(profileFragment, false, "profile", 0);
+        navigateToFragment(profileFragment, "profile", false, 0);
+        closeNavigationDrawer();
+        getSupportActionBar().setTitle(curUser.getUsername());
+    }
+
+    private void logUserProfileNavigation(List<Review> reviewsList) {
+        Log.d(TAG, "Navigating to user profile for user: " + curUser.getUsername() + " with " + reviewsList.size() + " reviews");
+    }
+
+    private void navigateToFragment(Fragment fragment, String tag, boolean addToBackStack, int popCount) {
+        this.mainView.displayFragment(fragment, addToBackStack, tag, popCount);
         getSupportFragmentManager().executePendingTransactions();
         updateUIBasedOnCurrentFragment();
+    }
+
+    private void closeNavigationDrawer() {
         mainView.getDrawerLayout().closeDrawer(GravityCompat.START);
-        getSupportActionBar().setTitle(curUser.getUsername());
     }
 
     public void onNavigateToMyFriends() {
         FriendsFragment friendsFragment = new FriendsFragment();
         this.mainView.displayFragment(friendsFragment, true, "friends", 0);
-        getSupportFragmentManager().executePendingTransactions();
-        updateUIBasedOnCurrentFragment();
+        navigateToFragment(friendsFragment, "friends", true, 0);
     }
 
     public void getUserReviewsNavToProfile() {
