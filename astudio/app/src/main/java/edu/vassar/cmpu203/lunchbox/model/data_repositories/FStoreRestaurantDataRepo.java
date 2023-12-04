@@ -37,7 +37,7 @@ public class FStoreRestaurantDataRepo implements IRestaurantsDataRepository {
                             GeoPoint geoPoint = document.getGeoPoint("coordinates");
                             if (geoPoint != null) {
                                 // Create Location object and set latitude and longitude
-                                Location loc = new Location((float) geoPoint.getLatitude(), (float) geoPoint.getLongitude());
+                                Location loc = new Location((float) geoPoint.getLongitude(), (float) geoPoint.getLatitude());
                                 r.setLoc(loc);
                             }
                             restaurants.add(r);

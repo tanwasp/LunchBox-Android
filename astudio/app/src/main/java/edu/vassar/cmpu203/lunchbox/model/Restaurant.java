@@ -220,6 +220,7 @@ public class Restaurant implements Serializable {
      * @param u The user for whom the distance is to be computed.
      */
     public void setDistToUser(User u) {
+        System.out.println(this.getName()+" coordinates are"+ this.loc.getLat() + " " + this.loc.getLon());
         if (distanceToUser == -1.0f) {
             distanceToUser = u.getLoc().haversine(this.loc);
         }

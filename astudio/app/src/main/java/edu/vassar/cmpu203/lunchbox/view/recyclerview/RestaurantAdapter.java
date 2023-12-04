@@ -78,16 +78,28 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     }
                 }
             });
+//            String rating = String.valueOf(restaurant.getRatingDisplay());
+//            if (rating.equals("-1.0")) {
+//                restaurantHolder.ratingBar.setVisibility(View.GONE);
+//                restaurantHolder.ratingView.setText("No ratings yet");
+//            } else {
+//                float roundedRating = Math.round(Float.parseFloat(rating) * 2) / 2.0f;
+//                restaurantHolder.ratingBar.setVisibility(View.VISIBLE);
+//                restaurantHolder.ratingView.setText(rating);
+//                restaurantHolder.ratingBar.setRating(roundedRating);
+//            }
             String rating = String.valueOf(restaurant.getRatingDisplay());
             if (rating.equals("-1.0")) {
                 rating = "No ratings yet";
             }
+
+
             String priceRange = restaurant.getDollarSigns(restaurant.getPriceRangeDisplay());
             if (priceRange == null || priceRange.equals("")) {
                 priceRange = "No price info";
             }
             restaurantHolder.nameView.setText(restaurant.getName());
-            restaurantHolder.ratingView.setText(String.valueOf(rating));
+            restaurantHolder.ratingView.setText(rating);
             restaurantHolder.priceRangeView.setText(priceRange);
             restaurantHolder.addressView.setText(restaurant.addressDisplay() + " (" + restaurant.getDistDisplay() + " miles away)");
         }
@@ -102,7 +114,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
             });
         }
-
     }
 
     /**
@@ -122,7 +133,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         notifyDataSetChanged(); // Notify the adapter to refresh the RecyclerView
     }
 
-
     /**
      * Returns the view type of the item at position for the purposes of view recycling.
      * @param position position to query
@@ -136,5 +146,4 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             return TYPE_ITEM;
         }
     }
-
 }
