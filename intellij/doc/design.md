@@ -94,8 +94,6 @@ mainView -> user : Display new restaurant profile
 
 # Design Class Diagram
 
-Model and Controller Package:
-
 ```plantuml
 @startuml
 skin rose
@@ -237,13 +235,19 @@ interface IAddRestaurantView.Listener {
 }
 
 interface IAddReviewView { 
+}
+
+interface IAddReviewView.Listener { 
     --
-    void onAddReview(float rating, String comment, String id, int priceSymbol) in Listener Interface
+    void onAddReview(float rating, String comment, String id, int priceSymbol)
 }
 
 interface IHomeView { 
+}
+
+interface IHomeView.Listener { 
     --
-    void onNavigateToSearch() in Listener Interface
+    void onNavigateToSearch()
 }
 
 interface IMainView { 
@@ -255,8 +259,11 @@ interface IMainView {
 }
 
 interface IRestaurantView { 
+}
+
+interface IRestaurantView.Listener { 
     --
-    void onNavigateToPostReview(String restaurantId) in Listener Interface
+    void onNavigateToPostReview(String restaurantId)
 }
 
 interface ISearchView { 
@@ -267,6 +274,13 @@ interface ISearchView {
     void updateSearchResults(List<Restaurant> searchResults)
     void showNoResultsMessage(boolean show)
     void showNoResultsMessage(boolean show)
+}
+
+interface ISearchView.Listener { 
+    --
+    void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption)
+    void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount)
+    void onNavigateToAddRestaurant()
 }
 
 class AddRestaurantFragment{
@@ -320,11 +334,15 @@ class MainView{
 }
 
 ISearchView <|.. SearchFragment
+ISearchView +-- ISearchView.Listener
 IRestaurantView <|.. RestaurantFragment
+IRestaurantView +-- IRestaurantView.Listener
 IHomeView <|.. HomeFragment
+IHomeView +-- IHomeView.Listener
 IAddRestaurantView <|.. AddRestaurantFragment
 IAddRestaurantView +-- IAddRestaurantView.Listener
 IAddReviewView <|.. AddReviewFragment
+IAddReviewView +-- IAddReviewView.Listener
 IMainView <|.. MainView
 
 @enduml

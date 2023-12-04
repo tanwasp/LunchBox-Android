@@ -348,6 +348,21 @@ public class Restaurant implements Serializable {
     public Location getLoc() {
         return loc;
     }
+
+    public String getDistDisplay(){
+        if (distanceToUser < 1){
+            return String.format("%.1f", Math.abs(rating));
+        }
+        return String.valueOf(Math.round(Math.abs(rating)));
+    }
+
+    public String addressDisplay(){
+        String a = address + ", " + city;
+        if (!state.equals("")){
+            a+= ", " + state;
+        }
+        return a;
+    }
 }
 
 

@@ -1,6 +1,7 @@
 package edu.vassar.cmpu203.lunchbox.model.data_repositories;
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -83,8 +84,9 @@ public class FStoreReviewsDataRepo implements IReviewsDataRepo{
         reviewData.put("Date", review.getDate());
         reviewData.put("restaurantName", review.getRestaurantName());
 
-        db.collection("reviews")
-                .add(reviewData)
+        DocumentReference reviewDocRef = db.collection("reviews").document(review.getReviewId());
+
+        reviewDocRef.set(reviewData)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         callback.onSuccess(task.getResult());

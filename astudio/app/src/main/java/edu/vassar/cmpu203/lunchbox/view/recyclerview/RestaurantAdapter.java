@@ -78,7 +78,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     }
                 }
             });
-            String rating = String.valueOf(restaurant.getRating());
+            String rating = String.valueOf(restaurant.getRatingDisplay());
             if (rating.equals("-1.0")) {
                 rating = "No ratings yet";
             }
@@ -89,7 +89,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             restaurantHolder.nameView.setText(restaurant.getName());
             restaurantHolder.ratingView.setText(String.valueOf(rating));
             restaurantHolder.priceRangeView.setText(priceRange);
-            restaurantHolder.addressView.setText(restaurant.getAddress() + ", " + restaurant.getCity() + ", " + restaurant.getState() + " " + restaurant.getPostalCode());
+            restaurantHolder.addressView.setText(restaurant.addressDisplay() + " (" + restaurant.getDistDisplay() + " miles away)");
         }
         else {
             RestaurantFooterViewHolder footerHolder = (RestaurantFooterViewHolder) holder;
@@ -136,6 +136,5 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             return TYPE_ITEM;
         }
     }
-
 
 }

@@ -3,6 +3,8 @@ package edu.vassar.cmpu203.lunchbox.controller;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -14,6 +16,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import androidx.appcompat.app.ActionBar;
+
 
 import android.app.Activity;
 import android.content.Intent;
@@ -35,6 +43,7 @@ import android.location.Location;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
 //import edu.vassar.cmpu203.lunchbox.Manifest;
 import android.Manifest;
@@ -145,9 +154,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         } else {
             // No user is signed in, navigate to LandingView
             LandingFragment landingFragment = new LandingFragment(this);
-            this.mainView.displayFragment(landingFragment, false, "land", 0);
-            getSupportFragmentManager().executePendingTransactions();
-            updateUIBasedOnCurrentFragment();
+            navigateToFragment(landingFragment, false, "land", 0);
         }
     }
 
@@ -290,9 +297,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     @Override
     public void onNavigateToSearch() {
         SearchFragment searchFragment = new SearchFragment(this);
-        this.mainView.displayFragment(searchFragment, true, "search", 0);
-        getSupportFragmentManager().executePendingTransactions();
-        updateUIBasedOnCurrentFragment();
+        navigateToFragment(searchFragment, true, "search", 0);
     }
 
     // SearchView.Listener methods
@@ -337,9 +342,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     public void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount, List<Review> reviewsList) {
         RestaurantFragment restaurantFragment = new RestaurantFragment(this, restaurant, reviewsList);
-        this.mainView.displayFragment(restaurantFragment, reversible, "restaurant", popCount);
-        getSupportFragmentManager().executePendingTransactions();
-        updateUIBasedOnCurrentFragment();
+        navigateToFragment(restaurantFragment, reversible, "restaurant", popCount);
     }
 
     // RestaurantView.Listener methods
@@ -352,9 +355,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     @Override
     public void onNavigateToPostReview(String restaurantId, String restaurantName) {
         AddReviewFragment addRevFragment = new AddReviewFragment(this, restaurantId, restaurantName);
-        this.mainView.displayFragment(addRevFragment, true, "review form", 0);
-        getSupportFragmentManager().executePendingTransactions();
-        updateUIBasedOnCurrentFragment();
+        navigateToFragment(addRevFragment, true, "review form", 0);
     }
 
     /**
@@ -367,7 +368,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
      */
     public void onAddReview(float rating, String comment, String restaurantId, int priceSymbol, String restaurantName) {
         // Create the Review object
-        Review newReview = new Review(curUser.getUid(), curUser.getUsername(), restaurantId, rating, comment, priceSymbol, null, restaurantName);
+        UUID uuid = UUID.randomUUID();
+        String reviewId = uuid.toString();
+        Review newReview = new Review(reviewId, curUser.getUid(), curUser.getUsername(), restaurantId, rating, comment, priceSymbol, null, restaurantName);
         System.out.println("New review: " + newReview);
         // Use FStoreReviewsDataRepo to add the review
         addReviewToFirestore(newReview);
@@ -403,9 +406,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     @Override
     public void onNavigateToAddRestaurant() {
         AddRestaurantFragment addRestaurantFragment = new AddRestaurantFragment(this);
-        this.mainView.displayFragment(addRestaurantFragment, true, "add restaurant", 0);
-        getSupportFragmentManager().executePendingTransactions();
-        updateUIBasedOnCurrentFragment();
+        navigateToFragment(addRestaurantFragment, true, "add restaurant", 0);
     }
 
     /**
@@ -442,42 +443,33 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     public void onNavigateToHome() {
         HomeFragment homeFragment = new HomeFragment();
-        this.mainView.displayFragment(homeFragment, false, "home", 0);
-        getSupportFragmentManager().executePendingTransactions();
-        updateUIBasedOnCurrentFragment();
-        mainView.getDrawerLayout().closeDrawer(GravityCompat.START);
-        getSupportActionBar().setTitle("Home");
+        navigateToFragment(homeFragment, false, "home",0);
+        closeNavigationDrawer();
+        updateActionBarTitle("Home");
     }
-
-//    public void onNavigateToMyProfile(List<Review> reviewsList) {
-//        System.out.println("beginning navigate to user profile");
-//        System.out.println("user is " + curUser);
-//        System.out.println("num reviews is " + reviewsList.size());
-//        if (reviewsList.size() > 1) {
-//            System.out.println(reviewsList.get(0));
-//        }
-//        UserProfileFragment profileFragment = UserProfileFragment.newInstance(curUser, new ArrayList<>(reviewsList));
-//        this.mainView.displayFragment(profileFragment, false, "profile", 0);
-
-//        getSupportFragmentManager().executePendingTransactions();
-//        updateUIBasedOnCurrentFragment();
-//        mainView.getDrawerLayout().closeDrawer(GravityCompat.START);
-//        getSupportActionBar().setTitle(curUser.getUsername());
-//    }
 
     public void onNavigateToMyProfile(List<Review> reviewsList) {
         logUserProfileNavigation(reviewsList);
         UserProfileFragment profileFragment = UserProfileFragment.newInstance(curUser, new ArrayList<>(reviewsList));
-        navigateToFragment(profileFragment, "profile", false, 0);
+        navigateToFragment(profileFragment,  false, "profile",0);
         closeNavigationDrawer();
-        getSupportActionBar().setTitle(curUser.getUsername());
+        updateActionBarTitle(curUser.getUsername());
+    }
+
+    public void updateActionBarTitle(String title) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            SpannableString spannableTitle = new SpannableString(title);
+            spannableTitle.setSpan(new ForegroundColorSpan(Color.WHITE), 0, title.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            actionBar.setTitle(spannableTitle);
+        }
     }
 
     private void logUserProfileNavigation(List<Review> reviewsList) {
         Log.d(TAG, "Navigating to user profile for user: " + curUser.getUsername() + " with " + reviewsList.size() + " reviews");
     }
 
-    private void navigateToFragment(Fragment fragment, String tag, boolean addToBackStack, int popCount) {
+    private void navigateToFragment(Fragment fragment, boolean addToBackStack, String tag, int popCount) {
         this.mainView.displayFragment(fragment, addToBackStack, tag, popCount);
         getSupportFragmentManager().executePendingTransactions();
         updateUIBasedOnCurrentFragment();
@@ -489,8 +481,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     public void onNavigateToMyFriends() {
         FriendsFragment friendsFragment = new FriendsFragment();
-        this.mainView.displayFragment(friendsFragment, true, "friends", 0);
-        navigateToFragment(friendsFragment, "friends", true, 0);
+        navigateToFragment(friendsFragment,  true, "friends",0);
     }
 
     public void getUserReviewsNavToProfile() {

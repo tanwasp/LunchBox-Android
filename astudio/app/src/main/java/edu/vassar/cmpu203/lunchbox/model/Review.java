@@ -37,7 +37,8 @@ public class Review implements Serializable {
 //        this.priceRange = price;
 //    }
 
-    public Review(String firebaseUid, String username, String restaurantId, float rating, String body, int price, Date date, String restaurantName) {
+    public Review(String reviewId, String firebaseUid, String username, String restaurantId, float rating, String body, int price, Date date, String restaurantName) {
+        this.reviewId = reviewId;
         this.firebaseUid = firebaseUid;
         this.username = username;
         this.restaurantId = restaurantId;
