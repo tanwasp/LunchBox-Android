@@ -33,6 +33,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.location.LocationRequest;
@@ -49,6 +50,7 @@ import java.util.UUID;
 import android.Manifest;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 
 import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.model.IFilter;
@@ -328,6 +330,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
         ArrayList<Restaurant> matches = lib.search(searchTerm, filters, sortOption, curUser);
         this.mainView.displaySearchResults(matches);
+        //Snackbar snackbar = Snackbar.make(this.mainView, curUser.getLoc().toString(), Snackbar.LENGTH_LONG);
+        //snackbar.show();
     }
 
 

@@ -72,21 +72,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sortingLabel">
 
-            <RadioButton
-                android:id="@+id/proximityRadioButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:text="@string/prox_sort_label" />
+        <RadioButton
+            android:id="@+id/proximityRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:text="@string/prox_sort_label" />
 
-            <RadioButton
-                android:id="@+id/ratingRadioButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:text="@string/rate_sort_label" />
+        <RadioButton
+            android:id="@+id/ratingRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:text="@string/rate_sort_label" />
 
     </RadioGroup>
 
@@ -122,7 +122,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResultsRecyclerView"
         android:layout_width="356dp"
-        android:layout_height="598dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.531"

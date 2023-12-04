@@ -350,10 +350,10 @@ public class Restaurant implements Serializable {
     }
 
     public String getDistDisplay(){
-        if (distanceToUser < 1){
-            return String.format("%.1f", Math.abs(rating));
+        if (distanceToUser < 10){
+            return String.format("%.1f", Math.abs(distanceToUser));
         }
-        return String.valueOf(Math.round(Math.abs(rating)));
+        return String.format("%.0f", distanceToUser);
     }
 
     public String addressDisplay(){
