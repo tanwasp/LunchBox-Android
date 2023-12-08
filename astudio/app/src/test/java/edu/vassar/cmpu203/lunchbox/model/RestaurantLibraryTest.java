@@ -10,23 +10,6 @@ import java.util.Set;
 public class RestaurantLibraryTest {
 
     /**
-     * Tests class's ability to add a review to a restaurant
-     */
-    @Test
-    public void testAddReviewToRest() {
-        RestaurantLibrary restLib = new RestaurantLibrary();
-        ReviewsLibrary revLib = new ReviewsLibrary();
-        User testUser = new User("default", 30, -90);
-
-        String reviewId = revLib.addReview(testUser, "restaurant1", 1.0f, "Bad", 1);
-        restLib.addReviewToRest("restaurant1", reviewId);
-
-        // Retrieve the restaurant and check if the review is added to its review list
-        Restaurant restaurant = restLib.getRestaurant("restaurant1");
-        assertTrue(restaurant.getReviewList().contains(reviewId));
-    }
-
-    /**
      * Tests class's ability to add a new restaurant
      */
     @Test

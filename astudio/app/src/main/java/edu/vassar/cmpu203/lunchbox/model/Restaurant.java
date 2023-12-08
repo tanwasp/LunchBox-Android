@@ -66,7 +66,7 @@ public class Restaurant implements Serializable {
     /**
      * Price range of the restaurant (represented by the number of dollar signs).
      */
-    public int priceRange;
+    public double priceRange;
 
     public Restaurant() {
         // Default constructor required for calls to DataSnapshot.getValue(Restaurant.class)
@@ -158,7 +158,7 @@ public class Restaurant implements Serializable {
      */
     public void computePriceRange(ReviewsLibrary revLib){
         ArrayList<Review> reviews = revLib.getReviewsByRestaurant(this);
-        int sum = 0;
+        float sum = 0;
         int count = 0;
         for (Review rev : reviews){
             if (rev.getPriceRange() != 0){
@@ -185,7 +185,7 @@ public class Restaurant implements Serializable {
         output.append("Restaurant ID: ").append(restaurantId).append("\n");
         output.append("Name: ").append(name).append("\n");
         output.append("Rating: ").append(String.format("%.1f", rating)).append("\n");
-        output.append("Price: ").append(getDollarSigns(priceRange)).append("\n");
+        output.append("Price: ").append(getDollarSigns(getPriceRangeDisplay())).append("\n");
         output.append("Address: ").append(address).append("\n");
         output.append("City: ").append(city).append("\n");
         output.append("State: ").append(state).append("\n");
@@ -232,7 +232,7 @@ public class Restaurant implements Serializable {
      * @param u The user for whom the distance is to be computed.
      */
     public void setDistToUser(User u) {
-        System.out.println(this.getName()+" coordinates are"+ this.loc.getLat() + " " + this.loc.getLon());
+        //System.out.println(this.getName()+" coordinates are"+ this.loc.getLat() + " " + this.loc.getLon());
         if (distanceToUser == -1.0f) {
             distanceToUser = u.getLoc().haversine(this.loc);
         }
@@ -279,7 +279,7 @@ public class Restaurant implements Serializable {
      *
      * @return The price range of the restaurant.
      */
-    public int getPriceRange() {
+    public double getPriceRange() {
         return priceRange;
     }
 

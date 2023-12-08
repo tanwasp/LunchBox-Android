@@ -16,7 +16,7 @@ public class ReviewsLibraryTest {
         User testUser = new User("default", 30, -90);
 
         // Add a review to the review library
-        String reviewId = revLib.addReview(testUser, "restaurant0", 4.0f, "Delicious!", 2);
+        String reviewId = revLib.addReview(testUser, "restaurant0", 4.0f, "Delicious!", 2, "Molly's Restaurant");
         ArrayList<String> reviews = new ArrayList<>();
         reviews.add(reviewId);
 
