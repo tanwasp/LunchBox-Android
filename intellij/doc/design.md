@@ -1,5 +1,11 @@
 # Sequence Diagrams
 
+## Create Account
+
+## Log In
+
+## View Profile
+
 ## Check Out Restaurant
 
 ```plantuml
@@ -114,13 +120,13 @@ class Restaurant{
     +distanceToUser: float
     +priceRange: int
     --
-    toString(): String
-    getRating(): float
-    getName(): String
-    getRestaurantId(): String
-    getReviewList(): ArrayList<String>
+    getDistDisplay(): String
+    addressDisplay(): String
+    getPriceRangeDisplay(): int
+    getRatingDisplay(): String
     setDistToUser(u: User): void
     computeRating(revLib: ReviewsLibrary): void
+    computePriceRange(revLib: ReviewsLibrary): void
     getDollarSigns(priceRange: int): String
 }
 
@@ -149,6 +155,8 @@ class User{
 class RestaurantLibrary{
     -data: HashMap<String, Restaurant>
     --
+    getRestaurant(id: String): Restaurant
+    loadRestaurants(restaurants: List<Restaurant>): void
     addReviewToRest(restaurantId: String, reviewId: String): void
     search(term: String, filters: Set<IFilter>, sort: String, curUser: User): ArrayList<Restaurant>
     addRestaurant(name: String, address: String, city: String, state: String, country: String, postalCode: String, lat: float, lon: float): Restaurant
@@ -158,7 +166,10 @@ class ReviewsLibrary{
     -data: HashMap<String, Review>
     --
     addReview(curUser: User, restaurantId: String, rating: float, reviewText: String): String
-    displayReviews(reviews : ArrayList<String>): String
+    addReviewToReviewsLibrary(review: Review): void
+    getReviewsByRestaurant(r: Restaurant): ArrayList<Review>
+    getReviewsByUser(u: User): ArrayList<Review>
+    loadReviews(reviews: List<Review>): void
 }
 
 interface IFilter { 

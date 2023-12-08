@@ -29,6 +29,20 @@ public class RestaurantLibrary {
 //        restaurant.getReviewList().add(reviewId);
 //    }
 
+    /**
+     * Adds a new restaurant to the Restaurant Library with the specified details.
+     *
+     * @param name       The name of the restaurant.
+     * @param address    The address of the restaurant.
+     * @param city       The city where the restaurant is located.
+     * @param state      The state where the restaurant is located.
+     * @param country    The country where the restaurant is located.
+     * @param postalCode The postal code of the restaurant.
+     * @param lat        The latitude coordinate of the restaurant's location.
+     * @param lon        The longitude coordinate of the restaurant's location.
+     *
+     * @return The new Restaurant object added to the library.
+     */
     public Restaurant addRestaurant(String name, String address, String city, String state, String country, String postalCode, float lat, float lon){
         String id = "restaurant" + (data.size() + 1);
         Restaurant r = new Restaurant(id,name, address, city, state, country, postalCode, lat, lon);
@@ -36,10 +50,10 @@ public class RestaurantLibrary {
         return r;
     }
 
-    public void addRestaurant(Restaurant r){
-        String id = r.getRestaurantId();
-        data.put(id, r);
-    }
+//    public void addRestaurant(Restaurant r){
+//        String id = r.getRestaurantId();
+//        data.put(id, r);
+//    }
 
     /**
      * Searches the Restaurant Library for restaurants that match a given search term, applying filters and sorting
@@ -75,14 +89,31 @@ public class RestaurantLibrary {
         return matches;
     }
 
+    /**
+     * Gets restaurant from the Restaurant Library that matches the ID
+     *
+     * @param id The unique identifier of the restaurant
+     *
+     * @return The Restaurant object corresponding to the given identifier
+     */
     public Restaurant getRestaurant(String id){
         return data.get(id);
     }
 
+    /**
+     * Retrieves the total number of restaurants in the Restaurant Library.
+     *
+     * @return The number of restaurants in the library.
+     */
     public int getNumRestaurants(){
         return data.size();
     }
 
+    /**
+     * Loads a list of restaurants into the Restaurant Library from Firestore
+     *
+     * @param restaurants The list of Restaurant objects to be loaded
+     */
     public void loadRestaurants(List<Restaurant> restaurants){
         for (Restaurant r : restaurants){
             data.put(r.getRestaurantId(), r);

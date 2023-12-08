@@ -36,6 +36,13 @@ public class User implements Serializable {
         joinedDate = new java.sql.Date(millis);
     }
 
+    /**
+     * Constructs a new User object with the specified details.
+     *
+     * @param name        The username of the user.
+     * @param firebaseUid The Firebase UID of the user.
+     * @param email       The email address of the user.
+     */
     public User(String name, String firebaseUid, String email){
         this.username = name;
         this.firebaseUid = firebaseUid;
@@ -44,6 +51,15 @@ public class User implements Serializable {
         joinedDate = new java.sql.Date(millis);
     }
 
+    /**
+     * Constructs a new User object with additional location details.
+     *
+     * @param name        The username of the user.
+     * @param firebaseUid The Firebase UID of the user.
+     * @param email       The email address of the user.
+     * @param lat         The latitude coordinate of the user's location.
+     * @param lon         The longitude coordinate of the user's location.
+     */
     public User(String name, String firebaseUid, String email, float lat, float lon){
         this.username = name;
         this.firebaseUid = firebaseUid;
@@ -53,30 +69,66 @@ public class User implements Serializable {
         joinedDate = new java.sql.Date(millis);
     }
 
+    /**
+     * Sets the geographical location of the user using latitude and longitude.
+     *
+     * @param lat The new latitude coordinate of the user's location.
+     * @param lon The new longitude coordinate of the user's location.
+     */
     public void setLoc(float lat, float lon){
         this.loc = new Location(lat, lon);
     }
 
+    /**
+     * Sets the geographical location of the user.
+     *
+     * @param loc The Location object representing the user's geographical coordinates.
+     */
     public void setLoc(Location loc){
         this.loc = loc;
     }
 
+    /**
+     * Retrieves the Firebase UID of the user.
+     *
+     * @return The Firebase UID of the user.
+     */
     public String getUid(){
         return this.firebaseUid;
     }
 
+    /**
+     * Retrieves the email address of the user.
+     *
+     * @return The email address of the user.
+     */
     public String getEmail(){
         return this.email;
     }
 
+    /**
+     * Sets the email address of the user.
+     *
+     * @param email The new email address of the user.
+     */
     public void setEmail(String email){
         this.email = email;
     }
 
+    /**
+     * Sets the Firebase UID of the user.
+     *
+     * @param firebaseUid The new Firebase UID of the user.
+     */
     public void setFirebaseUid(String firebaseUid){
         this.firebaseUid = firebaseUid;
     }
 
+    /**
+     * Sets the username of the user.
+     *
+     * @param username The new username of the user.
+     */
     public void setUsername(String username){
         this.username = username;
     }
@@ -109,6 +161,11 @@ public class User implements Serializable {
         return loc;
     }
 
+    /**
+     * Formats the user information into a string
+     *
+     * @return String representing User info
+     */
     public String toString(){
         if (this.loc == null){
             return "Username: " + this.username + "\n" +

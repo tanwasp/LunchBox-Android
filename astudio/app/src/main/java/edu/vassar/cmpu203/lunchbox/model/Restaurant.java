@@ -103,6 +103,19 @@ public class Restaurant implements Serializable {
         distanceToUser = -1.0f;
     }
 
+    /**
+     * Constructs a new Restaurant from Add Restaurant form
+     *
+     * @param restaurantId Unique identifier for the restaurant.
+     * @param name         Name of the restaurant.
+     * @param address      Address of the restaurant.
+     * @param city         City where the restaurant is located.
+     * @param state        State where the restaurant is located.
+     * @param country      Country where the restaurant is located.
+     * @param postalCode   Postal code of the restaurant.
+     * @param lat          Latitude of the restaurant's location.
+     * @param lon          Longitude of the restaurant's location.
+     */
     public Restaurant(String restaurantId, String name, String address, String city, String state, String country, String postalCode, float lat, float lon){
         this.restaurantId = restaurantId;
         this.name = name;
@@ -143,7 +156,6 @@ public class Restaurant implements Serializable {
      *
      * @param revLib The reviews library containing all reviews.
      */
-
     public void computePriceRange(ReviewsLibrary revLib){
         ArrayList<Review> reviews = revLib.getReviewsByRestaurant(this);
         int sum = 0;
@@ -270,10 +282,91 @@ public class Restaurant implements Serializable {
     public int getPriceRange() {
         return priceRange;
     }
+
+    /**
+     * Gets the address of the restaurant.
+     *
+     * @return The restaurant's address attribute
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Gets the city of the restaurant.
+     *
+     * @return The restaurant's city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * Gets the state of the restaurant.
+     *
+     * @return The restaurant's state
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * Gets the country of the restaurant.
+     *
+     * @return The restaurant's country
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * Gets the postal code of the restaurant.
+     *
+     * @return The restaurant's postal code
+     */
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    /**
+     * Gets the location of the restaurant.
+     *
+     * @return The restaurant's location attribute
+     */
+    public Location getLoc() {
+        return loc;
+    }
+
+    /**
+     * Retrieves the display value for the distance to the user.
+     *
+     * @return A formatted string representing the distance to the user
+     */
+    public String getDistDisplay(){
+        if (distanceToUser < 10){
+            return String.format("%.1f", Math.abs(distanceToUser));
+        }
+        return String.format("%.0f", distanceToUser);
+    }
+
+    /**
+     * Makes a formatted address string for display purposes.
+     *
+     * @return A formatted address string
+     */
+    public String addressDisplay(){
+        String a = address + ", " + city;
+        if (!state.equals("")){
+            a+= ", " + state;
+        }
+        return a;
+    }
+
+    /**
+     * Retrieves the display value for the price range.
+     *
+     * @return An integer representing the price range display (0 for unknown, 1 for low, 2 for medium, 3 for high)
+     */
     public int getPriceRangeDisplay(){
         if (priceRange <= 0){
             return 0;
@@ -287,6 +380,11 @@ public class Restaurant implements Serializable {
         }
     }
 
+    /**
+     * Retrieves the display value for the restaurant's rating.
+     *
+     * @return A formatted string representing the rating or "NA" if the rating is unknown
+     */
     public String getRatingDisplay(){
         if (rating < 0){
             return "NA";
@@ -294,75 +392,85 @@ public class Restaurant implements Serializable {
         return String.format("%.1f", rating);
     }
 
+    /**
+     * Sets the rating of the restaurant
+     *
+     * @param rating The new rating to set
+     */
     public void setRating(float rating){
         this.rating = rating;
     }
+
+    /**
+     * Sets the address where the restaurant is located
+     *
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     * Sets the price range of the restaurant
+     *
+     */
     public void setPriceRange(int priceRange) {
         this.priceRange = priceRange;
     }
 
+    /**
+     * Sets the city where the restaurant is located
+     *
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * Sets the restaurant's country
+     *
+     */
     public void setCountry(String country) {
         this.country = country;
     }
 
+    /**
+     * Sets the restaurant's Location
+     *
+     */
     public void setLoc(Location loc) {
         this.loc = loc;
     }
 
+    /**
+     * Sets the restaurant's postal code
+     *
+     */
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
+    /**
+     * Sets the restaurant's state
+     *
+     */
     public void setState(String state) {
         this.state = state;
     }
+
+    /**
+     * Sets the restaurant's ID
+     *
+     */
     public void setRestaurantId(String restaurantId) {
         this.restaurantId = restaurantId;
     }
+
+    /**
+     * Sets the restaurant's distance to a given user
+     *
+     */
     public void setDistanceToUser(float distanceToUser) {
         this.distanceToUser = distanceToUser;
-    }
-    public String getCity() {
-        return city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public Location getLoc() {
-        return loc;
-    }
-
-    public String getDistDisplay(){
-        if (distanceToUser < 10){
-            return String.format("%.1f", Math.abs(distanceToUser));
-        }
-        return String.format("%.0f", distanceToUser);
-    }
-
-    public String addressDisplay(){
-        String a = address + ", " + city;
-        if (!state.equals("")){
-            a+= ", " + state;
-        }
-        return a;
     }
 }
 

@@ -2,6 +2,9 @@ package edu.vassar.cmpu203.lunchbox.model;
 
 import java.io.Serializable;
 
+/**
+ * Represents coordinates
+ */
 public class Location implements Serializable {
     /**
      * Latitude of the location.
@@ -57,6 +60,11 @@ public class Location implements Serializable {
         return (float) distance * 0.621371f;
     }
 
+    /**
+     * Converts Location to String
+     *
+     * @return string representation of the object
+     */
     public String toString(){
         return "(" + this.lat + ", " + this.lon + ")";
     }
