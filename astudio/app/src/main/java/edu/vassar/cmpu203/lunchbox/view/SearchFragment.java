@@ -28,15 +28,12 @@ import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentSearchBinding;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
 
+/**
+ * View fragment that allows users to search restaurants
+ */
 public class SearchFragment extends Fragment implements ISearchView, RestaurantAdapter.OnItemClickListener {
     private FragmentSearchBinding binding;
     private final Listener listener;
-    private View rootView;
-    private EditText searchEditText, distanceFilterEditText;
-    private Spinner priceFilterSpinner;
-    private RadioGroup sortRadioGroup;
-    private Button searchButton;
-
     private RestaurantAdapter restaurantAdapter;
     private RecyclerView searchResultsRecyclerView;
 

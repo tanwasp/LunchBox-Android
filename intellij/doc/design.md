@@ -236,6 +236,21 @@ View Package:
 skin rose
 'skinparam classAttributeIconSize 0
 
+interface IMainView { 
+    --
+    View getRootView()
+    void displayFragment(Fragment fragment, boolean reversible, String name, int popCount)
+    void displaySearchResults(ArrayList<Restaurant> searchResults)
+    void clearBackStack()
+    void setupNavigationDrawer(MainActivity mainActivity)
+    AppBarConfiguration getAppBarConfiguration()
+    DrawerLayout getDrawerLayout()
+    void showAppBar()
+    void hideAppBar()
+    NavController getNavController()
+    NavigationView getNavigationView()
+}
+
 interface IAddRestaurantView { 
 }
 
@@ -258,14 +273,8 @@ interface IHomeView {
 interface IHomeView.Listener { 
     --
     void onNavigateToSearch()
-}
-
-interface IMainView { 
-    --
-    View getRootView()
-    void displayFragment(Fragment fragment, boolean reversible, String name, int popCount)
-    void displaySearchResults(ArrayList<Restaurant> searchResults)
-    
+    void getUserReviewsNavToProfile()
+    void onLogout()
 }
 
 interface IRestaurantView { 
@@ -276,11 +285,61 @@ interface IRestaurantView.Listener {
     void onNavigateToPostReview(String restaurantId)
 }
 
+class MainView{
+    +binding: MainBinding
+    +fmanager: FragmentManager
+    -appBarConfiguration: AppBarConfiguration
+    -navController: NavController
+    +navigationView: NavigationView
+}
+
+class AddRestaurantFragment{
+    -binding: FragmentAddRestaurantBinding 
+    -listener: Listener
+}
+
+class AddReviewFragment{
+    -binding: FragmentAddReviewBinding
+    -listener: Listener
+    -restId: String
+    -restaurantName: String
+}
+
+class HomeFragment{
+    -binding: FragmentHomeBinding 
+    -listener: Listener
+}
+
+class RestaurantFragment{
+    -binding: FragmentRestaurantBinding 
+    -listener: Listener
+    -restaurant: Restaurant
+    -reviewsRecyclerView: RecyclerView
+    -reviewAdapter: ReviewAdapter
+    -reviewsList: List<Review>
+}
+
+
+IMainView <|.. MainView
+IRestaurantView <|.. RestaurantFragment
+IRestaurantView +-- IRestaurantView.Listener
+IHomeView <|.. HomeFragment
+IHomeView +-- IHomeView.Listener
+IAddRestaurantView <|.. AddRestaurantFragment
+IAddRestaurantView +-- IAddRestaurantView.Listener
+IAddReviewView <|.. AddReviewFragment
+IAddReviewView +-- IAddReviewView.Listener
+
+@enduml
+```
+
+```plantuml
+@startuml
+skin rose
+'skinparam classAttributeIconSize 0
+
 interface ISearchView { 
     --
-    void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption) in Listener Interface
-    void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount) in Listener Interface
-    void onNavigateToAddRestaurant() in Listener Interface
     void updateSearchResults(List<Restaurant> searchResults)
     void showNoResultsMessage(boolean show)
     void showNoResultsMessage(boolean show)
@@ -293,67 +352,17 @@ interface ISearchView.Listener {
     void onNavigateToAddRestaurant()
 }
 
-class AddRestaurantFragment{
-    -binding: FragmentAddRestaurantBinding 
-    -listener: Listener
-}
-
-class AddReviewFragment{
-    -binding: FragmentAddReviewBinding
-    -listener: Listener
-    -restId: String
-    -ratingBar: RatingBar
-    -commentEditText: EditText
-    -priceSpinner: Spinner
-    -addReviewButton: Button
-}
-
-class HomeFragment{
-    -binding: FragmentHomeBinding 
-    -listener: Listener
-}
-
-class RestaurantFragment{
-    -binding: FragmentRestaurantBinding 
-    -listener: Listener
-    -restaurant: Resstaurant
-    -reviewsRecyclerView: RecyclerView
-    -reviewAdapter: ReviewAdapter
-    -reviewsList: List<Review>
-}
-
 class SearchFragment{
     -binding: FragmentSearchBinding 
     -listener: Listener
-    -rootView: View
-    -searchEditText: EditText
-    -distanceFilterEditText: EditText
     -searchResultsRecyclerView: RecyclerView
-    -priceFilterSpinner: Spinner
-    -sortRadioGroup: RadioGroup
-    -searchButton: Button
     -restaurantAdapter: RestaurantAdapter
     --
     void onNavigateToRestaurant(Restaurant restaurant)
-    void onNavigateToAddRestaurant()
-}
-
-class MainView{
-    -binding: MainBinding
-    -fmanager: FragmentManager
 }
 
 ISearchView <|.. SearchFragment
 ISearchView +-- ISearchView.Listener
-IRestaurantView <|.. RestaurantFragment
-IRestaurantView +-- IRestaurantView.Listener
-IHomeView <|.. HomeFragment
-IHomeView +-- IHomeView.Listener
-IAddRestaurantView <|.. AddRestaurantFragment
-IAddRestaurantView +-- IAddRestaurantView.Listener
-IAddReviewView <|.. AddReviewFragment
-IAddReviewView +-- IAddReviewView.Listener
-IMainView <|.. MainView
 
 @enduml
 ```

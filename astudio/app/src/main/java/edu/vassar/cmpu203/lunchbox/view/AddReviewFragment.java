@@ -16,15 +16,13 @@ import com.google.android.material.snackbar.Snackbar;
 
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentAddReviewBinding;
 
+/**
+ * View fragment that allows users to add a new review to a restaurant.
+ */
 public class AddReviewFragment extends Fragment implements IAddReviewView {
     private FragmentAddReviewBinding binding;
     private Listener listener;
     private String restId;
-
-    private RatingBar ratingBar;
-    private EditText commentEditText;
-    private Spinner priceSpinner;
-    private Button addReviewButton;
     private String restaurantName;
 
     public AddReviewFragment(Listener listener, String restId, String restaurantName){

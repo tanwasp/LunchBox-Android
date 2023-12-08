@@ -18,6 +18,9 @@ import com.google.android.material.snackbar.Snackbar;
 import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentAddRestaurantBinding;
 
+/**
+ * View fragment that allows users to add a new restaurant to the application.
+ */
 public class AddRestaurantFragment extends Fragment implements IAddRestaurantView{
     private FragmentAddRestaurantBinding binding;
     private Listener listener;
