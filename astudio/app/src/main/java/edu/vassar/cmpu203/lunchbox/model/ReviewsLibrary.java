@@ -49,22 +49,22 @@ public class ReviewsLibrary {
 
     /**
      * Retrieves a list of reviews based on their IDs.
-     *
+     * Only used for testing purposes.
      *
      * @return A list of Review objects.
      */
-//    public ArrayList<Review> getReviews(ArrayList<String> reviews){
-//        ArrayList<Review> output = new ArrayList<Review>();
-//        for (String reviewId : reviews) {
-//            Review review = this.data.get(reviewId);
-//            if (review == null){
-//                continue;
-//            }
-//            output.add(review);
-//        }
-//        Collections.sort(output, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
-//        return output;
-//    }
+    public ArrayList<Review> getReviews(ArrayList<String> reviews){
+        ArrayList<Review> output = new ArrayList<Review>();
+        for (String reviewId : reviews) {
+            Review review = this.data.get(reviewId);
+            if (review == null){
+                continue;
+            }
+            output.add(review);
+        }
+        Collections.sort(output, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
+        return output;
+    }
 
     /**
      * Retrieves a sorted list of reviews associated with a specific restaurant.

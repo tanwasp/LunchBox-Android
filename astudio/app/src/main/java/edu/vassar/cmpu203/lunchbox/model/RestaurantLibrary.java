@@ -110,6 +110,15 @@ public class RestaurantLibrary {
     }
 
     /**
+     * Retrieves the entire restaurant library
+     *
+     * @return The restaurant library
+     */
+    public HashMap<String, Restaurant> getLib(){
+        return data;
+    }
+
+    /**
      * Loads a list of restaurants into the Restaurant Library from Firestore
      *
      * @param restaurants The list of Restaurant objects to be loaded
@@ -118,7 +127,7 @@ public class RestaurantLibrary {
         for (Restaurant r : restaurants){
             data.put(r.getRestaurantId(), r);
         }
-        System.out.println("Loaded " + data.size() + " restaurants.");
+        //System.out.println("Loaded " + data.size() + " restaurants.");
     }
 
     /**
