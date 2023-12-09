@@ -4,7 +4,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -12,15 +11,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import androidx.appcompat.app.ActionBar;
 
 
 import android.app.Activity;
@@ -33,7 +29,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.location.LocationRequest;
@@ -50,7 +45,6 @@ import java.util.UUID;
 import android.Manifest;
 import android.os.Looper;
 import android.util.Log;
-import android.view.View;
 
 import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.model.IFilter;
@@ -77,11 +71,11 @@ import edu.vassar.cmpu203.lunchbox.view.RestaurantFragment;
 import edu.vassar.cmpu203.lunchbox.view.SearchFragment;
 import edu.vassar.cmpu203.lunchbox.view.IAddReviewView;
 import edu.vassar.cmpu203.lunchbox.view.AddReviewFragment;
-import edu.vassar.cmpu203.lunchbox.view.IUserProfileFragment;
+import edu.vassar.cmpu203.lunchbox.view.IUserProfileView;
 
 import edu.vassar.cmpu203.lunchbox.view.*;
 
-public class MainActivity extends AppCompatActivity implements IHomeView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileFragment.Listener, ILandingView.Listener {
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileView.Listener, ILandingView.Listener {
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
     RestaurantNames restaurantNames;

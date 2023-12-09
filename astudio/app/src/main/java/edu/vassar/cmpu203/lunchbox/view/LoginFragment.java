@@ -17,7 +17,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentLoginBinding;
 
-
+/**
+ * View fragment that allows users to log in to their account
+ */
 public class LoginFragment extends AuthFragment implements ILoginView {
     private FragmentLoginBinding binding;
     private Listener listener;

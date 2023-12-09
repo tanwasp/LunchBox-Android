@@ -361,6 +361,83 @@ class SearchFragment{
     void onNavigateToRestaurant(Restaurant restaurant)
 }
 
+abstract class AuthFragment{
+    #EMAIL_PATTERN: String
+    #emailPattern: Pattern
+    --
+    boolean isValidEmail(String email)
+    boolean isValidPassword(String password)
+    boolean isValidUsername(String username)
+}
+
+interface ILandingView { 
+}
+
+interface ILandingView.Listener { 
+    --
+    void onNavigateToLogin()
+    void onNavigateToSignup()
+}
+
+class LandingFragment{
+    -binding: FragmentLandingBinding
+    -listener: ILandingView.Listener
+}
+
+interface ILoginView { 
+}
+
+interface ILoginView.Listener { 
+    --
+    void onLogin(String username, String password)
+}
+
+class LoginFragment{
+    -binding: FragmentLoginBinding
+    -listener: Listener
+}
+
+interface ISignupView { 
+}
+
+interface ISignupView.Listener { 
+    --
+    void onSignup(String username, String email, String password)
+    void checkUsernameExists(String username, String email, String password)
+}
+
+class SignupFragment{
+    -binding: FragmentSignupBinding
+    -listener: Listener
+    --
+    TextWatcher createTextWatcher()
+    void validateInput()
+    void onSignupResult(boolean isSuccess, String message)
+    void onUsernameExistsResult(boolean exists, String message)
+    void hideKeyboard(View view)
+}
+
+interface IUserProfileView { 
+}
+
+interface IUserProfileView.Listener { 
+    --
+    void onNavigateToMyFriends()
+}
+
+class UserProfileFragment{
+    -binding: FragmentUserProfileBinding
+    -user: User
+    -reviewsRecyclerView: RecyclerView
+    -reviewAdapter: ReviewAdapterUserProf
+    -reviewsList: List<Review>
+    -listener: Listener
+    --
+    void setupRecyclerView(View view)
+    void onAttach(Context context)
+    void onDetach()
+}
+
 ISearchView <|.. SearchFragment
 ISearchView +-- ISearchView.Listener
 

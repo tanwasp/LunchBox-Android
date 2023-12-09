@@ -20,13 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.R;
-import edu.vassar.cmpu203.lunchbox.databinding.FragmentRestaurantBinding;
 import edu.vassar.cmpu203.lunchbox.model.*;
-import edu.vassar.cmpu203.lunchbox.view.recyclerview.ReviewAdapter;
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentUserProfileBinding;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.ReviewAdapterUserProf;
 
-public class UserProfileFragment extends Fragment implements IUserProfileFragment{
+/**
+ * View fragment that allows users to view their profile information
+ */
+public class UserProfileFragment extends Fragment implements IUserProfileView {
 //    private final IUserProfileFragment.Listener listener;
     private FragmentUserProfileBinding binding;
     private User user;
@@ -109,8 +110,8 @@ public class UserProfileFragment extends Fragment implements IUserProfileFragmen
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof IUserProfileFragment.Listener) {
-            listener = (IUserProfileFragment.Listener) context;
+        if (context instanceof IUserProfileView.Listener) {
+            listener = (IUserProfileView.Listener) context;
         } else {
             throw new RuntimeException(context.toString() + " must implement IUserProfileFragment.Listener");
         }

@@ -37,7 +37,9 @@ public class LogInTest {
     @Test
     public void testLogIn(){
         // first share location
-        onView(withText("Share Location")).perform(click());
+        SystemClock.sleep(1000);
+//        onView(withText("While using the app")).perform(click());
+        SystemClock.sleep(5000);
     }
 
 

@@ -93,7 +93,6 @@ android {
         implementation("com.google.firebase:firebase-core:21.1.1") // Firebase Core
         implementation("com.google.firebase:firebase-firestore:24.9.1")
         implementation("com.google.android.gms:play-services-location:17.0.0")
-
     }
 
     // Add the dependencies for any other desired Firebase products
