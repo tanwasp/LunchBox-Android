@@ -84,6 +84,8 @@ android {
             exclude("com.google.protobuf","protobuf-lite");
         }
         androidTestImplementation("androidx.test:rules:1.4.0")
+        androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+
 
         // Import the Firebase BoM
         implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
