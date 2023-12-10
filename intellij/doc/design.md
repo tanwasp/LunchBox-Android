@@ -214,16 +214,15 @@ package view{
 ' associations
 IFilter <|.. PriceFilter
 IFilter <|.. LocFilter
-PriceFilter "0..1" -- "1" RestaurantLibrary: Helps-filter
-LocFilter "0..1" -- "1" RestaurantLibrary
+PriceFilter "0..1" .. "1" RestaurantLibrary: Helps filter
+LocFilter "0..1" .. "1" RestaurantLibrary
 RestaurantLibrary "1" - "1..*" Restaurant : \tIs-information-expert-of\t\t
 Review "*" -down- "1" ReviewsLibrary: \tIs managed by\t\t
 Restaurant "1" -right- "*" Review: Can have\t\t
-User "1" -down- "*" Review : Creates\t\t
-Location "1" - "1" Restaurant : Is an attribute of\t
-Location "1" - "1" User: \tIs an attribute of\t
+Location "1" -down- "1" Restaurant : Is an attribute of\t
 RestaurantLibrary "1" -down- "1" ControllerActivity: Provides information to\t
 ReviewsLibrary "1" -down- "1" ControllerActivity: \tProvides information to\t
+User "1" -right- "1" ControllerActivity : \tIs an attribute of\t\t
 ControllerActivity "1" -down- "1" view: \tCommunicates with user using
 
 @enduml
@@ -440,6 +439,16 @@ class UserProfileFragment{
 
 ISearchView <|.. SearchFragment
 ISearchView +-- ISearchView.Listener
+ILandingView <|.. LandingFragment
+ILandingView +-- ILandingView.Listener
+IUserProfileView <|.. UserProfileFragment
+IUserProfileView +-- IUserProfileView.Listener
+ILoginView <|.. LoginFragment
+AuthFragment <|- LoginFragment
+ILoginView +-- ILoginView.Listener
+ISignupView <|.. SignupFragment
+AuthFragment <|- SignupFragment
+ISignupView +-- ISignupView.Listener
 
 @enduml
 ```
