@@ -18,7 +18,6 @@ public class ReviewsLibrary {
      */
     public ReviewsLibrary(){
         this.data = new HashMap<String, Review>();
-        this.loadReviews();
     }
 
     /**
@@ -121,7 +120,7 @@ public class ReviewsLibrary {
     /**
      * Loads a set of sample reviews into the library.
      */
-    private void loadReviews() {
+//    private void loadReviews() {
         // Sample reviews are added here
 
 //        Review rev1 = new Review("review1", "burchdanielle", "restaurant6", 2.5f, "A me try writer off enough. Road hope wall onto foot. Better require until peace. Half official always why who body take. That rate region over task.", 1);
@@ -264,8 +263,6 @@ public class ReviewsLibrary {
 //
 //        Review rev67 = new Review("review67", "gibarra", "restaurant16", 3.5f, "Type industry reveal billion. North keep set skin. Girl animal hear television. Shake check story company. Page street land first attention certain soon. Per popular your.", 3);
 //        this.data.put("review67", rev67);
-    }
-
-
+//    }
 
 }
