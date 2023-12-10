@@ -8,6 +8,8 @@ import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.GrantPermissionRule;
+
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,18 +30,18 @@ import android.os.SystemClock;
 
 @RunWith(AndroidJUnit4.class)
 public class LogInTest {
-
     @Rule
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
+    @Rule
+    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
+
     /**
      * Tests signing in to an account
      */
     @Test
     public void testLogIn(){
         // first share location
-//        onView(withText("While using the app")).perform(click());
+        onView(withText("Log In")).perform(click());
     }
-
-
 }

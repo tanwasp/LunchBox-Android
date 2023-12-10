@@ -83,8 +83,11 @@ android {
         androidTestImplementation ("androidx.test.espresso:espresso-contrib:3.5.1"){
             exclude("com.google.protobuf","protobuf-lite");
         }
+        androidTestImplementation("androidx.test:rules:1.4.0")
+
         // Import the Firebase BoM
         implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
+
 
         // TODO: Add the dependencies for Firebase products you want to use
         // When using the BoM, don't specify versions in Firebase dependencies
