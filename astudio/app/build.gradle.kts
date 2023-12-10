@@ -80,7 +80,9 @@ android {
         androidTestImplementation("androidx.compose.ui:ui-test-junit4")
         debugImplementation("androidx.compose.ui:ui-tooling")
         debugImplementation("androidx.compose.ui:ui-test-manifest")
-        androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+        androidTestImplementation ("androidx.test.espresso:espresso-contrib:3.5.1"){
+            exclude("com.google.protobuf","protobuf-lite");
+        }
         // Import the Firebase BoM
         implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
 

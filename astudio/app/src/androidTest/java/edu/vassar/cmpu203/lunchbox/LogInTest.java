@@ -1,5 +1,6 @@
 package edu.vassar.cmpu203.lunchbox;
 
+import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -37,9 +38,7 @@ public class LogInTest {
     @Test
     public void testLogIn(){
         // first share location
-        SystemClock.sleep(1000);
 //        onView(withText("While using the app")).perform(click());
-        SystemClock.sleep(5000);
     }
 
 
