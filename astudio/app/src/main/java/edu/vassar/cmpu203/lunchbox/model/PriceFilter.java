@@ -20,6 +20,11 @@ public class PriceFilter implements IFilter{
         }
     }
 
+    /**
+     * Filters restaurants to only the ones within a certain price category
+     *
+     * @return Collection of the restaurants fitting criteria
+     */
     public Collection<Restaurant> filter(Collection<Restaurant> restaurants){
         Collection<Restaurant> filtered = new ArrayList<Restaurant>();
         for (Restaurant res : restaurants){

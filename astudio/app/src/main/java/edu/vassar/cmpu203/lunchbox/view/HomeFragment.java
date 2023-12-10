@@ -21,7 +21,9 @@ import com.google.android.material.snackbar.Snackbar;
 //import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentHomeBinding;
 
-
+/**
+ * View fragment that allows users to navigate the app through the home screen.
+ */
 public class HomeFragment extends Fragment implements IHomeView{
     private FragmentHomeBinding binding;
     private Listener listener;

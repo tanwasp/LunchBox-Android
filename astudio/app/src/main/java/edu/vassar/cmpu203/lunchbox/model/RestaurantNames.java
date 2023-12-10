@@ -3,6 +3,10 @@ package edu.vassar.cmpu203.lunchbox.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is an class representing all of the restaurant names for easier searching.
+ * It is not used in this iteration.
+ */
 public class RestaurantNames {
     private List<String> names;
 

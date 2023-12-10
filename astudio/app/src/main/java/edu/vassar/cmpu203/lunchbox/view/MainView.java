@@ -32,6 +32,9 @@ import edu.vassar.cmpu203.lunchbox.databinding.ContentMainBinding;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.model.Review;
 
+/**
+ * View fragment that allows users navigate between fragments.
+ */
 public class MainView implements IMainView{
 
     FragmentManager fmanager; // lets us perform fragment transactions

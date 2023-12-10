@@ -37,6 +37,19 @@ public class Review implements Serializable {
 //        this.priceRange = price;
 //    }
 
+    /**
+     * Constructs a new Review object with the specified details.
+     *
+     * @param reviewId       The unique identifier of the review.
+     * @param firebaseUid    The Firebase UID of the user submitting the review.
+     * @param username       The username of the user submitting the review.
+     * @param restaurantId   The unique identifier of the reviewed restaurant.
+     * @param rating         The numeric rating given in the review.
+     * @param body           The textual content of the review.
+     * @param price          The price range rating given in the review.
+     * @param date           The date when the review was submitted.
+     * @param restaurantName The name of the reviewed restaurant.
+     */
     public Review(String reviewId, String firebaseUid, String username, String restaurantId, float rating, String body, int price, Date date, String restaurantName) {
         this.reviewId = reviewId;
         this.firebaseUid = firebaseUid;
@@ -51,49 +64,120 @@ public class Review implements Serializable {
         }
         this.restaurantName = restaurantName;
     }
+
+    /**
+     * Retrieves the name of the restaurant associated with the review.
+     *
+     * @return The name of the reviewed restaurant.
+     */
     public String getRestaurantName() {
         return restaurantName;
     }
+
+    /**
+     * Sets the name of the restaurant associated with the review.
+     *
+     * @param name The new name of the restaurant in the review
+     */
     public void setRestaurantName(String name) {
         this.restaurantName = name;
     }
+
+    /**
+     * Retrieves the username of the user who made the review.
+     *
+     * @return The username of the reviewer
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Retrieves the ID of the review.
+     *
+     * @return The review ID
+     */
     public String getReviewId() {
         return reviewId;
     }
 
+    /**
+     * Retrieves the ID of the restaurant the review is made for
+     *
+     * @return The restaurant ID associated with the review
+     */
     public String getRestaurantId() {
         return restaurantId;
     }
 
+    /**
+     * Retrieves the rating given in the review
+     *
+     * @return The review rating
+     */
     public float getRating() {
         return rating;
     }
 
+    /**
+     * Retrieves the date the review was made
+     *
+     * @return The review date
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Retrieves the written comment given in the review
+     *
+     * @return The text body of the review
+     */
     public String getBody() {
         return body;
     }
+
+    /**
+     * Retrieves the price assignment given in the review
+     *
+     * @return The price assignment
+     */
     public int getPriceRange() {
         return priceRange;
     }
+
+    /**
+     * Retrieves the Firebase UID of the user who submitted the review.
+     *
+     * @return The Firebase UID of the reviewer.
+     */
     public String getUid() {
         return firebaseUid;
     }
+
+    /**
+     * Sets the unique identifier of the review.
+     *
+     * @param reviewId The new unique identifier for the review.
+     */
     public void setReviewId(String reviewId) {
         this.reviewId = reviewId;
     }
 
+    /**
+     * Sets the Firebase UID of the user who submitted the review.
+     *
+     * @param firebaseUid The new Firebase UID for the reviewer.
+     */
     public void setUid(String firebaseUid) {
         this.firebaseUid = firebaseUid;
     }
 
+    /**
+     * Sets the date when the review was submitted.
+     *
+     * @param date The new date for the review.
+     */
     public void setDate(Date date) {
         this.date = date;
     }

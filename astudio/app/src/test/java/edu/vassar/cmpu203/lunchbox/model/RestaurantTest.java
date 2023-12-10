@@ -29,12 +29,9 @@ ReviewsLibrary revLib;
         Restaurant r = lib.addRestaurant("Gordon Commons", "124 Raymond Ave", "Poughkeepsie", "NY", "India", "12604", floatLat, floatLon);
 
 
-        String reviewId = revLib.addReview(testUser, r.getRestaurantId(), 3.0f, "Okay", 1);
-        lib.addReviewToRest(r.getRestaurantId(), reviewId);
-        reviewId = revLib.addReview(testUser, r.getRestaurantId(), 4.0f, "Good", 2);
-        lib.addReviewToRest(r.getRestaurantId(), reviewId);
-        reviewId = revLib.addReview(testUser, r.getRestaurantId(), 5.0f, "Excellent", 3);
-        lib.addReviewToRest(r.getRestaurantId(), reviewId);
+        revLib.addReview(testUser, r.getRestaurantId(), 3.0f, "Okay", 1, "Gordon Commons");
+        revLib.addReview(testUser, r.getRestaurantId(), 4.0f, "Good", 1, "Gordon Commons");
+        revLib.addReview(testUser, r.getRestaurantId(), 5.0f, "Excellent", 3, "Gordon Commons");
         return r;
 
     }
@@ -54,6 +51,12 @@ ReviewsLibrary revLib;
 
         // test correct distance was assigned to the restaurant's field
         assertEquals(expected, r.distanceToUser, 0.05f);
+
+        r = new Restaurant("restaurant2", "Charlie's Pizza", 4f, "737 W Brandon Blvd", "Brandon", "FL", "US", "33511", 30f, -90f, new ArrayList<>(Arrays.asList("review2", "review21", "review37", "review62", "review64")), 2);
+        r.setDistToUser(testUser);
+
+        // test distance to a resraurant with the same coordinates is 0
+        assertEquals(0.0f, r.distanceToUser, 0.05f);
     }
 
     /**
@@ -67,7 +70,14 @@ ReviewsLibrary revLib;
         restaurant.computePriceRange(revLib);
 
         // check if the correct price category is computed
-        assertEquals(2, restaurant.getPriceRange());
+        assertEquals(2, restaurant.getPriceRangeDisplay());
+
+        // add new reviews and recalculate
+        revLib.addReview(testUser, r.getRestaurantId(), 2.0f, "Pretty Bad", 1, "Gordon Commons");
+        revLib.addReview(testUser, r.getRestaurantId(), 4.0f, "", 1, "Gordon Commons");
+
+        restaurant.computePriceRange(revLib);
+        assertEquals(1, restaurant.getPriceRangeDisplay());
     }
 
     /**
@@ -82,5 +92,11 @@ ReviewsLibrary revLib;
 
         // check if the correct rating is computed
         assertEquals(4.0f, restaurant.getRating(), 0.01f);
+
+        // add a new review and recalculate
+        revLib.addReview(testUser, r.getRestaurantId(), 2.0f, "Pretty Bad", 1, "Gordon Commons");
+
+        restaurant.computeRating(revLib);
+        assertEquals(3.5f, restaurant.getRating(), 0.01f);
     }
 }

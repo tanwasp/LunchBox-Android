@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentLandingBinding;
 
+/**
+ * View fragment that displays the landing page, allowing users to log into or sign up for the app.
+ */
 public class LandingFragment extends Fragment implements ILandingView {
     private FragmentLandingBinding binding;
     private ILandingView.Listener listener;

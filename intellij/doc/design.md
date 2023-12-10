@@ -1,5 +1,11 @@
 # Sequence Diagrams
 
+## Create Account
+
+## Log In
+
+## View Profile
+
 ## Check Out Restaurant
 
 ```plantuml
@@ -114,13 +120,13 @@ class Restaurant{
     +distanceToUser: float
     +priceRange: int
     --
-    toString(): String
-    getRating(): float
-    getName(): String
-    getRestaurantId(): String
-    getReviewList(): ArrayList<String>
+    getDistDisplay(): String
+    addressDisplay(): String
+    getPriceRangeDisplay(): int
+    getRatingDisplay(): String
     setDistToUser(u: User): void
     computeRating(revLib: ReviewsLibrary): void
+    computePriceRange(revLib: ReviewsLibrary): void
     getDollarSigns(priceRange: int): String
 }
 
@@ -149,7 +155,8 @@ class User{
 class RestaurantLibrary{
     -data: HashMap<String, Restaurant>
     --
-    addReviewToRest(restaurantId: String, reviewId: String): void
+    getRestaurant(id: String): Restaurant
+    loadRestaurants(restaurants: List<Restaurant>): void
     search(term: String, filters: Set<IFilter>, sort: String, curUser: User): ArrayList<Restaurant>
     addRestaurant(name: String, address: String, city: String, state: String, country: String, postalCode: String, lat: float, lon: float): Restaurant
 }
@@ -158,7 +165,10 @@ class ReviewsLibrary{
     -data: HashMap<String, Review>
     --
     addReview(curUser: User, restaurantId: String, rating: float, reviewText: String): String
-    displayReviews(reviews : ArrayList<String>): String
+    addReviewToReviewsLibrary(review: Review): void
+    getReviewsByRestaurant(r: Restaurant): ArrayList<Review>
+    getReviewsByUser(u: User): ArrayList<Review>
+    loadReviews(reviews: List<Review>): void
 }
 
 interface IFilter { 
@@ -204,16 +214,15 @@ package view{
 ' associations
 IFilter <|.. PriceFilter
 IFilter <|.. LocFilter
-PriceFilter "0..1" -- "1" RestaurantLibrary: Helps-filter
-LocFilter "0..1" -- "1" RestaurantLibrary
+PriceFilter "0..1" .. "1" RestaurantLibrary: Helps filter
+LocFilter "0..1" .. "1" RestaurantLibrary
 RestaurantLibrary "1" - "1..*" Restaurant : \tIs-information-expert-of\t\t
 Review "*" -down- "1" ReviewsLibrary: \tIs managed by\t\t
 Restaurant "1" -right- "*" Review: Can have\t\t
-User "1" -down- "*" Review : Creates\t\t
-Location "1" - "1" Restaurant : Is an attribute of\t
-Location "1" - "1" User: \tIs an attribute of\t
+Location "1" -down- "1" Restaurant : Is an attribute of\t
 RestaurantLibrary "1" -down- "1" ControllerActivity: Provides information to\t
 ReviewsLibrary "1" -down- "1" ControllerActivity: \tProvides information to\t
+User "1" -right- "1" ControllerActivity : \tIs an attribute of\t\t
 ControllerActivity "1" -down- "1" view: \tCommunicates with user using
 
 @enduml
@@ -225,6 +234,21 @@ View Package:
 @startuml
 skin rose
 'skinparam classAttributeIconSize 0
+
+interface IMainView { 
+    --
+    View getRootView()
+    void displayFragment(Fragment fragment, boolean reversible, String name, int popCount)
+    void displaySearchResults(ArrayList<Restaurant> searchResults)
+    void clearBackStack()
+    void setupNavigationDrawer(MainActivity mainActivity)
+    AppBarConfiguration getAppBarConfiguration()
+    DrawerLayout getDrawerLayout()
+    void showAppBar()
+    void hideAppBar()
+    NavController getNavController()
+    NavigationView getNavigationView()
+}
 
 interface IAddRestaurantView { 
 }
@@ -248,14 +272,8 @@ interface IHomeView {
 interface IHomeView.Listener { 
     --
     void onNavigateToSearch()
-}
-
-interface IMainView { 
-    --
-    View getRootView()
-    void displayFragment(Fragment fragment, boolean reversible, String name, int popCount)
-    void displaySearchResults(ArrayList<Restaurant> searchResults)
-    
+    void getUserReviewsNavToProfile()
+    void onLogout()
 }
 
 interface IRestaurantView { 
@@ -266,11 +284,61 @@ interface IRestaurantView.Listener {
     void onNavigateToPostReview(String restaurantId)
 }
 
+class MainView{
+    +binding: MainBinding
+    +fmanager: FragmentManager
+    -appBarConfiguration: AppBarConfiguration
+    -navController: NavController
+    +navigationView: NavigationView
+}
+
+class AddRestaurantFragment{
+    -binding: FragmentAddRestaurantBinding 
+    -listener: Listener
+}
+
+class AddReviewFragment{
+    -binding: FragmentAddReviewBinding
+    -listener: Listener
+    -restId: String
+    -restaurantName: String
+}
+
+class HomeFragment{
+    -binding: FragmentHomeBinding 
+    -listener: Listener
+}
+
+class RestaurantFragment{
+    -binding: FragmentRestaurantBinding 
+    -listener: Listener
+    -restaurant: Restaurant
+    -reviewsRecyclerView: RecyclerView
+    -reviewAdapter: ReviewAdapter
+    -reviewsList: List<Review>
+}
+
+
+IMainView <|.. MainView
+IRestaurantView <|.. RestaurantFragment
+IRestaurantView +-- IRestaurantView.Listener
+IHomeView <|.. HomeFragment
+IHomeView +-- IHomeView.Listener
+IAddRestaurantView <|.. AddRestaurantFragment
+IAddRestaurantView +-- IAddRestaurantView.Listener
+IAddReviewView <|.. AddReviewFragment
+IAddReviewView +-- IAddReviewView.Listener
+
+@enduml
+```
+
+```plantuml
+@startuml
+skin rose
+'skinparam classAttributeIconSize 0
+
 interface ISearchView { 
     --
-    void onPerformSearch(String searchTerm, String priceFilter, String distanceFilter, String sortOption) in Listener Interface
-    void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount) in Listener Interface
-    void onNavigateToAddRestaurant() in Listener Interface
     void updateSearchResults(List<Restaurant> searchResults)
     void showNoResultsMessage(boolean show)
     void showNoResultsMessage(boolean show)
@@ -283,67 +351,104 @@ interface ISearchView.Listener {
     void onNavigateToAddRestaurant()
 }
 
-class AddRestaurantFragment{
-    -binding: FragmentAddRestaurantBinding 
-    -listener: Listener
-}
-
-class AddReviewFragment{
-    -binding: FragmentAddReviewBinding
-    -listener: Listener
-    -restId: String
-    -ratingBar: RatingBar
-    -commentEditText: EditText
-    -priceSpinner: Spinner
-    -addReviewButton: Button
-}
-
-class HomeFragment{
-    -binding: FragmentHomeBinding 
-    -listener: Listener
-}
-
-class RestaurantFragment{
-    -binding: FragmentRestaurantBinding 
-    -listener: Listener
-    -restaurant: Resstaurant
-    -reviewsRecyclerView: RecyclerView
-    -reviewAdapter: ReviewAdapter
-    -reviewsList: List<Review>
-}
-
 class SearchFragment{
     -binding: FragmentSearchBinding 
     -listener: Listener
-    -rootView: View
-    -searchEditText: EditText
-    -distanceFilterEditText: EditText
     -searchResultsRecyclerView: RecyclerView
-    -priceFilterSpinner: Spinner
-    -sortRadioGroup: RadioGroup
-    -searchButton: Button
     -restaurantAdapter: RestaurantAdapter
     --
     void onNavigateToRestaurant(Restaurant restaurant)
-    void onNavigateToAddRestaurant()
 }
 
-class MainView{
-    -binding: MainBinding
-    -fmanager: FragmentManager
+abstract class AuthFragment{
+    #EMAIL_PATTERN: String
+    #emailPattern: Pattern
+    --
+    boolean isValidEmail(String email)
+    boolean isValidPassword(String password)
+    boolean isValidUsername(String username)
+}
+
+interface ILandingView { 
+}
+
+interface ILandingView.Listener { 
+    --
+    void onNavigateToLogin()
+    void onNavigateToSignup()
+}
+
+class LandingFragment{
+    -binding: FragmentLandingBinding
+    -listener: ILandingView.Listener
+}
+
+interface ILoginView { 
+}
+
+interface ILoginView.Listener { 
+    --
+    void onLogin(String username, String password)
+}
+
+class LoginFragment{
+    -binding: FragmentLoginBinding
+    -listener: Listener
+}
+
+interface ISignupView { 
+}
+
+interface ISignupView.Listener { 
+    --
+    void onSignup(String username, String email, String password)
+    void checkUsernameExists(String username, String email, String password)
+}
+
+class SignupFragment{
+    -binding: FragmentSignupBinding
+    -listener: Listener
+    --
+    TextWatcher createTextWatcher()
+    void validateInput()
+    void onSignupResult(boolean isSuccess, String message)
+    void onUsernameExistsResult(boolean exists, String message)
+    void hideKeyboard(View view)
+}
+
+interface IUserProfileView { 
+}
+
+interface IUserProfileView.Listener { 
+    --
+    void onNavigateToMyFriends()
+}
+
+class UserProfileFragment{
+    -binding: FragmentUserProfileBinding
+    -user: User
+    -reviewsRecyclerView: RecyclerView
+    -reviewAdapter: ReviewAdapterUserProf
+    -reviewsList: List<Review>
+    -listener: Listener
+    --
+    void setupRecyclerView(View view)
+    void onAttach(Context context)
+    void onDetach()
 }
 
 ISearchView <|.. SearchFragment
 ISearchView +-- ISearchView.Listener
-IRestaurantView <|.. RestaurantFragment
-IRestaurantView +-- IRestaurantView.Listener
-IHomeView <|.. HomeFragment
-IHomeView +-- IHomeView.Listener
-IAddRestaurantView <|.. AddRestaurantFragment
-IAddRestaurantView +-- IAddRestaurantView.Listener
-IAddReviewView <|.. AddReviewFragment
-IAddReviewView +-- IAddReviewView.Listener
-IMainView <|.. MainView
+ILandingView <|.. LandingFragment
+ILandingView +-- ILandingView.Listener
+IUserProfileView <|.. UserProfileFragment
+IUserProfileView +-- IUserProfileView.Listener
+ILoginView <|.. LoginFragment
+AuthFragment <|- LoginFragment
+ILoginView +-- ILoginView.Listener
+ISignupView <|.. SignupFragment
+AuthFragment <|- SignupFragment
+ISignupView +-- ISignupView.Listener
 
 @enduml
 ```

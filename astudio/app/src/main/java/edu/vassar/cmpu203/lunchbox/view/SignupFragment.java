@@ -18,7 +18,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentSignupBinding;
 
-
+/**
+ * View fragment that allows users to sign up for an account
+ */
 public class SignupFragment extends AuthFragment implements ISignupView {
     private FragmentSignupBinding binding;
     private Listener listener;

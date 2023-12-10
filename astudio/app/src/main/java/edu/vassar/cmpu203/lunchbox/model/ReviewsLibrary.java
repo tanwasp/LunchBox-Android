@@ -38,29 +38,40 @@ public class ReviewsLibrary {
         return reviewId;
     }
 
+    /**
+     * Adds a review to the Reviews Library.
+     *
+     * @param review The Review object to be added to the library.
+     */
     public void addReviewToReviewsLibrary(Review review){
         this.data.put(review.getReviewId(), review);
     }
 
     /**
      * Retrieves a list of reviews based on their IDs.
-     *
+     * Only used for testing purposes.
      *
      * @return A list of Review objects.
      */
-//    public ArrayList<Review> getReviews(ArrayList<String> reviews){
-//        ArrayList<Review> output = new ArrayList<Review>();
-//        for (String reviewId : reviews) {
-//            Review review = this.data.get(reviewId);
-//            if (review == null){
-//                continue;
-//            }
-//            output.add(review);
-//        }
-//        Collections.sort(output, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
-//        return output;
-//    }
+    public ArrayList<Review> getReviews(ArrayList<String> reviews){
+        ArrayList<Review> output = new ArrayList<Review>();
+        for (String reviewId : reviews) {
+            Review review = this.data.get(reviewId);
+            if (review == null){
+                continue;
+            }
+            output.add(review);
+        }
+        Collections.sort(output, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
+        return output;
+    }
 
+    /**
+     * Retrieves a sorted list of reviews associated with a specific restaurant.
+     *
+     * @param r The Restaurant object for which reviews are to be retrieved.
+     * @return An ArrayList of Review objects sorted by submission date for the specified restaurant.
+     */
     public ArrayList<Review> getReviewsByRestaurant(Restaurant r){
         ArrayList<Review> output = new ArrayList<Review>();
         for (Review rev : data.values()) {
@@ -74,6 +85,13 @@ public class ReviewsLibrary {
         Collections.sort(output, (r1, r2) -> r2.getDate().compareTo(r1.getDate()));
         return output;
     }
+
+    /**
+     * Retrieves a sorted list of reviews submitted by a specific user.
+     *
+     * @param u The User object for whom reviews are to be retrieved.
+     * @return An ArrayList of Review objects sorted by submission date for the specified user.
+     */
     public ArrayList<Review> getReviewsByUser(User u){
         ArrayList<Review> output = new ArrayList<Review>();
         for (Review rev : data.values()) {
@@ -88,6 +106,11 @@ public class ReviewsLibrary {
         return output;
     }
 
+    /**
+     * Loads a list of reviews (from Firestore) into the Reviews Library.
+     *
+     * @param reviews The list of Review objects to be loaded into the library.
+     */
     public void loadReviews(List<Review> reviews) {
         for (Review rev : reviews){
             this.data.put(rev.getReviewId(), rev);

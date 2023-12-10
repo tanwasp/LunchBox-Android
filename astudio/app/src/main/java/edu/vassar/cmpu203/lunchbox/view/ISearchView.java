@@ -4,8 +4,9 @@ import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 
-
-
+/**
+ * Interface defining functionality of SearchFragment
+ */
 public interface ISearchView {
 
     /* interface for contract that listener to view events must fulfill. */

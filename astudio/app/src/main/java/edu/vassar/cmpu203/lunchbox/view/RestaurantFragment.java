@@ -20,6 +20,9 @@ import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.ReviewAdapter;
 
+/**
+ * View fragment that allows users to view a restaurant's profile
+ */
 public class RestaurantFragment extends Fragment implements IRestaurantView{
     private final Listener listener;
     private FragmentRestaurantBinding binding;

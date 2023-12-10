@@ -38,9 +38,18 @@ public interface IMainView {
      */
     void displayFragment(Fragment fragment, boolean reversible, String name, int popCount);
 
+    /**
+     * Display search results on the screen.
+     *
+     * @param searchResults The restaurants to be displayed
+     */
     void displaySearchResults(List<Restaurant> searchResults);
 
     void clearBackStack();
+
+    /**
+     * The following are to use the pop-out navigation bar.
+     */
 
     void setupNavigationDrawer(MainActivity mainActivity);
 
