@@ -7,6 +7,7 @@ import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.GrantPermissionRule;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,11 +32,22 @@ public class AddRestaurantTest {
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
+    @Rule
+    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
+
+
     /**
      * Tests the functionality of adding a restaurant.
      */
     @Test
     public void testAddRestaurantFunctionality() {
+        // log in to app
+        onView(withId(R.id.btnLogin)).perform(click());
+        onView(withId(R.id.email)).perform(typeText("johndoe@gmail.com"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(typeText("abc123"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.login_button)).perform(click());
+        SystemClock.sleep(1000);
+
         // Navigate to Add Restaurant
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
 
@@ -60,6 +72,7 @@ public class AddRestaurantTest {
 
         onView(withId(R.id.searchTermText)).perform(typeText("magic"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
+        SystemClock.sleep(1000);
 
       // Check that the restaurant was added
         onView(withText("Magic Bowl")).check(matches(isDisplayed()));

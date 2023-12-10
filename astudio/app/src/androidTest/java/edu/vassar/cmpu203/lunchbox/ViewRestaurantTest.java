@@ -7,6 +7,7 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.rule.GrantPermissionRule;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,11 +34,21 @@ public class ViewRestaurantTest {
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
+    @Rule
+    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
+
     /**
      * Tests that the restaurant details are displayed when a restaurant is clicked on
      */
     @Test
     public void testViewRestaurantDetails() {
+        // log in to app
+        onView(withId(R.id.btnLogin)).perform(click());
+        onView(withId(R.id.email)).perform(typeText("johndoe@gmail.com"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(typeText("abc123"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.login_button)).perform(click());
+        SystemClock.sleep(1000);
+
         // Navigate to Search
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
 

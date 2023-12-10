@@ -6,6 +6,8 @@ import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.GrantPermissionRule;
+import androidx.test.espresso.NoMatchingViewException;
 
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -23,11 +25,13 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.action.ViewActions.clearText;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.instanceOf;
 
+import android.os.SystemClock;
 import android.view.View;
 
 @RunWith(AndroidJUnit4.class)
@@ -37,19 +41,31 @@ public class SearchRestaurantTest {
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
+    @Rule
+    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
+
+
     /**
      * Tests the search restaurants functionality of the app
      */
     @Test
     public void testSearchFunctionality() {
+        // log in if necessary
+        try {
+            onView(withText("Log In")).check(matches(isDisplayed()));
+            onView(withId(R.id.btnLogin)).perform(click());
+            onView(withId(R.id.email)).perform(typeText("johndoe@gmail.com"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password)).perform(typeText("abc123"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.login_button)).perform(click());
+            SystemClock.sleep(1000);
+        } catch (NoMatchingViewException e) {}
+
         // Assuming you have a search input field and a search button in your SearchFragment
         Espresso.onView(withId(R.id.btnNavigateToSearch)).perform(click());
+        SystemClock.sleep(1000);
         Espresso.onView(withId(R.id.searchTermText)).perform(typeText("Test Restaurant"), ViewActions.closeSoftKeyboard());
         Espresso.onView(withId(R.id.searchButton)).perform(click());
         Espresso.onView(withId(R.id.searchResultsRecyclerView)).check(matches(isDisplayed()));
-        onView(withId(R.id.searchTermText)).perform(typeText("Test Restaurant"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.searchButton)).perform(click());
-        onView(withId(R.id.searchResultsRecyclerView)).check(matches(isDisplayed()));
     }
 
     /**
@@ -57,13 +73,25 @@ public class SearchRestaurantTest {
      */
     @Test
     public void testSpecificSearchFunctionality(){
+        // log in if necessary
+        try {
+            onView(withText("Log In")).check(matches(isDisplayed()));
+            onView(withId(R.id.btnLogin)).perform(click());
+            onView(withId(R.id.email)).perform(typeText("johndoe@gmail.com"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password)).perform(typeText("abc123"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.login_button)).perform(click());
+            SystemClock.sleep(1000);
+        } catch (NoMatchingViewException e) {}
+
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
-        onView(withId(R.id.searchTermText)).perform(typeText("SUSHI"), ViewActions.closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.searchTermText)).perform(typeText("p"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
-        // Check if all the sushi restaurants appear
-        onView(withText("Sushi Train")).check(matches(isDisplayed()));
-        onView(withText("WIN Bubble Tea and Sushi")).check(matches(isDisplayed()));
-        onView(withText("Sushi Kingdom")).check(matches(isDisplayed()));
+        SystemClock.sleep(1000);
+        // Check if all restaurants with 'p' in the name appear
+        onView(withText("Maggies Place")).check(matches(isDisplayed()));
+        onView(withText("Le Perigord")).check(matches(isDisplayed()));
+        onView(withText("Parkside Restaurant")).check(matches(isDisplayed()));
     }
 
     /**
@@ -71,7 +99,18 @@ public class SearchRestaurantTest {
      */
     @Test
     public void testEmptySearchFunctionality(){
+        // log in if necessary
+        try {
+            onView(withText("Log In")).check(matches(isDisplayed()));
+            onView(withId(R.id.btnLogin)).perform(click());
+            onView(withId(R.id.email)).perform(typeText("johndoe@gmail.com"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password)).perform(typeText("abc123"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.login_button)).perform(click());
+            SystemClock.sleep(1000);
+        } catch (NoMatchingViewException e) {}
+
         Espresso.onView(ViewMatchers.withId(R.id.btnNavigateToSearch)).perform(ViewActions.click());
+        SystemClock.sleep(1000);
         onView(withId(R.id.searchButton)).perform(click());
 
         onView(withId(R.id.searchResultsRecyclerView)).check(matches(isDisplayed()));
@@ -83,7 +122,18 @@ public class SearchRestaurantTest {
 
     @Test
     public void testNoResultsSearchFunctionality(){
+        // log in if necessary
+        try {
+            onView(withText("Log In")).check(matches(isDisplayed()));
+            onView(withId(R.id.btnLogin)).perform(click());
+            onView(withId(R.id.email)).perform(typeText("johndoe@gmail.com"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password)).perform(typeText("abc123"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.login_button)).perform(click());
+            SystemClock.sleep(1000);
+        } catch (NoMatchingViewException e) {}
+
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
+        SystemClock.sleep(1000);
         onView(withId(R.id.searchTermText)).perform(typeText("I just really really like food, dude"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
         // Testing for no results message
@@ -95,8 +145,19 @@ public class SearchRestaurantTest {
      */
     @Test
     public void testSearchByPrice() {
+        // log in if necessary
+        try {
+            onView(withText("Log In")).check(matches(isDisplayed()));
+            onView(withId(R.id.btnLogin)).perform(click());
+            onView(withId(R.id.email)).perform(typeText("johndoe@gmail.com"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password)).perform(typeText("abc123"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.login_button)).perform(click());
+            SystemClock.sleep(1000);
+        } catch (NoMatchingViewException e) {}
+
         // Navigate to search
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
+        SystemClock.sleep(2000);
 
         // Open spinner and select "$$"
         onView(withId(R.id.priceFilterSpinner)).perform(click());
@@ -105,9 +166,9 @@ public class SearchRestaurantTest {
         onView(withId(R.id.searchButton)).perform(click());
 
         // Check if restaurants with "$$" are displayed and those with "$$$", "$" are not
-        onView(withText("Biscuit Love: Hillsboro Village")).check(matches(isDisplayed()));
-        onView(withText("El Merkury")).check(matches(isDisplayed()));
-        onView(withText("Sushi")).check(doesNotExist());
+        onView(withText("Mezzaluna")).check(matches(isDisplayed()));
+        onView(withText("Parkside Restaurant")).check(matches(isDisplayed()));
+        onView(withText("cafe")).check(doesNotExist());
 
         // Check if RecyclerView is displayed
         onView(withId(R.id.searchResultsRecyclerView)).check(matches(isDisplayed()));
@@ -118,13 +179,26 @@ public class SearchRestaurantTest {
      */
     @Test
     public void testSearchByDistance(){
+        // log in if necessary
+        try {
+            onView(withText("Log In")).check(matches(isDisplayed()));
+            onView(withId(R.id.btnLogin)).perform(click());
+            onView(withId(R.id.email)).perform(typeText("johndoe@gmail.com"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password)).perform(typeText("abc123"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.login_button)).perform(click());
+            SystemClock.sleep(1000);
+        } catch (NoMatchingViewException e) {}
+
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
-        onView(withId(R.id.distanceFilterEditText)).perform(typeText("100"), ViewActions.closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.distanceFilterEditText)).perform(typeText("5380"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
-        onView(withText("McDonald's")).check(matches(isDisplayed()));
-        onView(withId(R.id.distanceFilterEditText)).perform(typeText("1000"), ViewActions.closeSoftKeyboard());
+        onView(withText("Tov Kosher Kitchen")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.distanceFilterEditText)).perform(clearText());
+        onView(withId(R.id.distanceFilterEditText)).perform(typeText("5385"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
-        onView(withText("WIN Bubble Tea and Sushi")).check(matches(isDisplayed()));
+        onView(withText("Viand Cafe")).check(matches(isDisplayed()));
     }
 
     /**
@@ -132,12 +206,24 @@ public class SearchRestaurantTest {
      */
     @Test
     public void testSearchSortByProximity(){
+        // log in if necessary
+        try {
+            onView(withText("Log In")).check(matches(isDisplayed()));
+            onView(withId(R.id.btnLogin)).perform(click());
+            onView(withId(R.id.email)).perform(typeText("johndoe@gmail.com"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password)).perform(typeText("abc123"), ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.login_button)).perform(click());
+            SystemClock.sleep(1000);
+        } catch (NoMatchingViewException e) {}
+
         onView(withId(R.id.btnNavigateToSearch)).perform(click());
+        SystemClock.sleep(2000);
         onView(withId(R.id.proximityRadioButton)).perform(click());
         onView(withId(R.id.searchButton)).perform(click());
+        SystemClock.sleep(1000);
 
-        onView(withText("McDonald's")).check(matches(isDisplayed()));
-        onView(withText("Sushi Train")).check(matches(isDisplayed()));
+        onView(withText("La Mangeoire")).check(matches(isDisplayed()));
+        onView(withText("Viand Cafe")).check(matches(isDisplayed()));
     }
 
 
