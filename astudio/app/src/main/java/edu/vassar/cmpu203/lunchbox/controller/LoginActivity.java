@@ -24,6 +24,10 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
     private SignupFragment signupFragment;
     private LoginFragment loginFragment;
 
+    /**
+     * Called when the login activity is first created.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,12 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
 
         setContentView(this.mainView.getRootView());
     }
+    /**
+     * Called once the user signs up. Creates a new user in the database and sends data to main activity to create new user for the session
+     * @param username
+     * @param email
+     * @param password
+     */
 
     public void onSignup(String username, String email, String password) {
         FirestoreUserDataRepository repository = new FirestoreUserDataRepository();
@@ -63,6 +73,12 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
         });
     }
 
+    /**
+     * Checks if the username already exists in the database. If it does, it returns an error message. If not, it calls onSignup
+     * @param username
+     * @param email
+     * @param password
+     */
     public void checkUsernameExists(String username, String email, String password) {
         FirestoreUserDataRepository repository = new FirestoreUserDataRepository();
         String finalUsername = username.trim().toLowerCase();
@@ -84,6 +100,11 @@ public class LoginActivity extends AppCompatActivity implements ISignupView.List
         });
     }
 
+    /**
+     * Called once the user logs in. Sends data to main activity to create new user for the session
+     * @param email
+     * @param password
+     */
     public void onLogin(String email, String password) {
         FirestoreUserDataRepository repository = new FirestoreUserDataRepository();
         repository.loginUser(email, password, new IDataRepositoryCallback() {

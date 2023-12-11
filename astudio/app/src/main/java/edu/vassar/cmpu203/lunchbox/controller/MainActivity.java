@@ -98,6 +98,11 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     private FirebaseAuth.AuthStateListener authStateListener;
     private static final String TAG = "MainActivity";
 
+    /**
+     * creates main activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +123,11 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         navigateBasedOnAuthenticationStatus();
     }
 
+    /**
+     * updates UI based on current fragment
+     * responsible for hiding and showing app bar and locking and unlocking navigation drawer
+     */
+
     public void updateUIBasedOnCurrentFragment() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
         System.out.println("currentFragment is " + currentFragment);
@@ -134,11 +144,20 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
     }
 
+    /**
+     * responsible for navigating between navigation drawer fragments
+     */
+
     @Override
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(this.mainView.getNavController(), this.mainView.getAppBarConfiguration())
                 || super.onSupportNavigateUp();
     }
+
+    /**
+     * navigates to home fragment if firebase user is signed in
+     * navigates to landing fragment if firebase user is not signed in
+     */
 
 
     private void navigateBasedOnAuthenticationStatus() {
@@ -154,6 +173,10 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
     }
 
+    /**
+     * signs out firebase user and navigates to landing fragment
+     */
+
     public void onLogout() {
         FirebaseAuth.getInstance().signOut();
         navigateBasedOnAuthenticationStatus();
@@ -164,6 +187,10 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         updateUIBasedOnCurrentFragment();
     }
 
+    /**
+     * sets up location service
+     */
+
     private void setupLocationService() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
@@ -172,6 +199,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
     }
 
+    /**
+     * overrides onbackepressed to update ui based on current fragment
+     */
     @Override
     public void onBackPressed() {
         // Call the super method to handle the back button press as usual
@@ -181,6 +211,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         updateUIBasedOnCurrentFragment();
     }
 
+    /**
+     * fetches last location
+     */
     private void fetchLastLocation() {
 
         // Check for permissions again (optional but recommended)
@@ -210,6 +243,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
     }
 
+    /**
+     * sets up firebase auth listener
+     */
     private void setupFirebaseAuthListener() {
         authStateListener = firebaseAuth -> {
             FirebaseUser currentUser = firebaseAuth.getCurrentUser();
@@ -221,6 +257,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         FirebaseAuth.getInstance().addAuthStateListener(authStateListener);
     }
 
+    /**
+     * sets up login activity result launcher
+     */
     private void setupLoginActivityResultLauncher() {
         loginActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
@@ -232,6 +271,11 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         });
     }
 
+    /**
+     * updates current user
+     *
+     * @param firebaseUser
+     */
     private void updateCurrentUser(FirebaseUser firebaseUser) {
         if (curUser == null || curUser.getLoc() == null) {
             curUser = new User(firebaseUser.getDisplayName(), firebaseUser.getUid(), firebaseUser.getEmail(), 0, 0);
@@ -241,7 +285,10 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         System.out.println("User is signed in: " + curUser);
     }
 
-
+    /**
+     * updates current user
+     * @param data
+     */
     private void updateCurrentUser(Intent data) {
         String email = data.getStringExtra("email");
         String firebaseUid = data.getStringExtra("firebaseUserId");
@@ -251,12 +298,21 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         onNavigateToHome();
     }
 
+    /**
+     * updates current user location
+     *
+     * @param latitude
+     * @param longitude
+     */
     private void updateCurrentUserLocation(float latitude, float longitude) {
         if (curUser != null) {
             curUser.setLoc(latitude, longitude);
         }
     }
 
+    /**
+     * requests location permission
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -267,6 +323,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
     }
 
+    /**
+     * starts location updates
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -274,6 +333,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         setupLocationService();
     }
 
+    /**
+     * stops location updates and removes auth state listener
+     */
     @Override
     protected void onStop() {
         super.onStop();
@@ -331,6 +393,11 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     // RestaurantAdapter.OnItemClickListener methods
 
+    /**
+     * navigates to restaurant fragment
+     *
+     * @param restaurant
+     */
 
     @Override
     public void onNavigateToRestaurant(Restaurant restaurant, boolean reversible, int popCount) {
@@ -382,6 +449,12 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
     }
 
+    /**
+     * adds review to firestore
+     *
+     * @param newReview
+     */
+
     public void addReviewToFirestore(Review newReview) {
         FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
         repo.addReview(newReview, new IDataRepositoryCallback() {
@@ -430,18 +503,27 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         onNavigateToRestaurant(r, true, 1);
     }
 
+    /**
+     * navigates to login fragment by launching the login activity result launcher
+     */
     public void onNavigateToLogin() {
         Intent loginIntent = new Intent(this, LoginActivity.class);
         loginIntent.putExtra("action", "login");
         loginActivityResultLauncher.launch(loginIntent);
     }
 
+    /**
+     * navigates to signup fragment by launching the login activity result launcher
+     */
     public void onNavigateToSignup() {
         Intent signupIntent = new Intent(this, LoginActivity.class);
         signupIntent.putExtra("action", "signup");
         loginActivityResultLauncher.launch(signupIntent);
     }
 
+    /**
+     * navigates to home fragment
+     */
     public void onNavigateToHome() {
         HomeFragment homeFragment = new HomeFragment();
         navigateToFragment(homeFragment, false, "home",0);
@@ -449,6 +531,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         updateActionBarTitle("Home");
     }
 
+    /**
+     * navigates to user profile fragment
+     */
     public void onNavigateToMyProfile(List<Review> reviewsList) {
         logUserProfileNavigation(reviewsList);
         UserProfileFragment profileFragment = UserProfileFragment.newInstance(curUser, new ArrayList<>(reviewsList));
@@ -457,6 +542,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         updateActionBarTitle(curUser.getUsername());
     }
 
+    /**
+     * updates action bar title for home and user profile fragments
+     */
     public void updateActionBarTitle(String title) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -466,36 +554,55 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
     }
 
+    /**
+     * logs user profile navigation
+     */
     private void logUserProfileNavigation(List<Review> reviewsList) {
         Log.d(TAG, "Navigating to user profile for user: " + curUser.getUsername() + " with " + reviewsList.size() + " reviews");
     }
 
+    /**
+     * general navigate to fragment function
+     */
     private void navigateToFragment(Fragment fragment, boolean addToBackStack, String tag, int popCount) {
         this.mainView.displayFragment(fragment, addToBackStack, tag, popCount);
         getSupportFragmentManager().executePendingTransactions();
         updateUIBasedOnCurrentFragment();
     }
 
+    /**
+     * closes navigation drawer
+     */
     private void closeNavigationDrawer() {
         mainView.getDrawerLayout().closeDrawer(GravityCompat.START);
     }
 
+    /**
+     * navigates to friends fragment
+     */
     public void onNavigateToMyFriends() {
         FriendsFragment friendsFragment = new FriendsFragment();
         navigateToFragment(friendsFragment,  true, "friends",0);
     }
 
+    /**
+     * navigates to user profile fragment
+     */
     public void getUserReviewsNavToProfile() {
         List<Review> reviewsList = revLib.getReviewsByUser(curUser);
         onNavigateToMyProfile(reviewsList);
     }
 
+    /**
+     * call computes price and rating methods for the restaurants
+     */
     private void computePriceAndRating(List<Restaurant> restaurants) {
         for (Restaurant r : restaurants) {
             r.computePriceRange(revLib);
             r.computeRating(revLib);
         }
     }
+
 
     private void loadRestaurants() {
         FStoreRestaurantDataRepo repo = new FStoreRestaurantDataRepo();

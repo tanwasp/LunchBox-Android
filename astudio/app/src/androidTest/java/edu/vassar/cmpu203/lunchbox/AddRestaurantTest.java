@@ -74,7 +74,7 @@ public class AddRestaurantTest {
 
         Espresso.pressBack();
 
-        onView(withId(R.id.searchTermText)).perform(typeText("magic"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.searchTermText)).perform(typeText(restaurantName), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
         SystemClock.sleep(1000);
 
