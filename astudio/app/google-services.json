@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1011976165321",
+    "project_id": "lunchbox-1134d",
+    "storage_bucket": "lunchbox-1134d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011976165321:android:9b38e645b21f9d53983a18",
+        "android_client_info": {
+          "package_name": "edu.vassar.cmpu203.lunchbox"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYDOzyy4e-3Sg7JbtQ_EtNu0ZIBa6kvhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
