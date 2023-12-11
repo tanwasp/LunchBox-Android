@@ -17,6 +17,13 @@ import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.model.User;
 
 public class FStoreReviewsDataRepo implements IReviewsDataRepo{
+    /**
+     * Gets all reviews for a given restaurant
+     * @param field the field to search by
+     * @param id the id of the restaurant
+     * @param callback the callback to call when the operation is complete
+     */
+
     @Override
     public void getReviews(String field, String id, IDataRepositoryCallback callback) {
         FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
@@ -44,6 +51,10 @@ public class FStoreReviewsDataRepo implements IReviewsDataRepo{
                 });
     }
 
+    /**
+     * Gets all reviews for a given user
+     * @param callback the callback to call when the operation is complete
+     */
     @Override
     public void getAllReviews(IDataRepositoryCallback callback) {
         FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
@@ -70,7 +81,11 @@ public class FStoreReviewsDataRepo implements IReviewsDataRepo{
                     }
                 });
     }
-
+    /**
+     * adds review to database
+     * @param review the review to add
+     * @param callback the callback to call when the operation is complete
+     */
     @Override
     public void addReview(Review review, IDataRepositoryCallback callback) {
         FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();

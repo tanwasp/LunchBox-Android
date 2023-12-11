@@ -18,6 +18,10 @@ import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.model.User;
 
 public class FStoreRestaurantDataRepo implements IRestaurantsDataRepository {
+    /**
+     * Gets all restaurants from Firestore
+     * @param callback
+     */
     @Override
     public void getAllRestaurants(IDataRepositoryCallback callback) {
         FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
@@ -49,6 +53,11 @@ public class FStoreRestaurantDataRepo implements IRestaurantsDataRepository {
                 });
     }
 
+    /**
+     * add restaurant
+     * @param restaurant
+     * @param callback
+     */
     @Override
     public void addRestaurant(Restaurant restaurant, IDataRepositoryCallback callback) {
         FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
