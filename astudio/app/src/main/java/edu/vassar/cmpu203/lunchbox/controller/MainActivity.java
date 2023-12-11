@@ -422,8 +422,11 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void addRestaurant(String name, String address, String city, String state, String country, String postalCode, String lat, String lon) {
         float floatLat = Float.parseFloat(lat);
         float floatLon = Float.parseFloat(lon);
-
-        Restaurant r = lib.addRestaurant(name, address, city, state, country, postalCode, floatLat, floatLon);
+        UUID uuid = UUID.randomUUID();
+        String restaurantId = uuid.toString();
+        Restaurant r = new Restaurant(restaurantId, name, address, city, state, country, postalCode, floatLat, floatLon);
+        lib.addRestaurant(r, restaurantId);
+        addRestaurantToFirestore(r);
         onNavigateToRestaurant(r, true, 1);
     }
 
@@ -526,6 +529,21 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
             @Override
             public void onFailure(Exception e) {
                 System.out.println("Failed to get reviews from Firestore" + e.getMessage());
+            }
+        });
+    }
+
+    public void addRestaurantToFirestore(Restaurant newRestaurant) {
+        FStoreRestaurantDataRepo repo = new FStoreRestaurantDataRepo();
+        repo.addRestaurant(newRestaurant, new IDataRepositoryCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                System.out.println("Successfully added restaurant to Firestore");
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println("Failed to add restaurant to Firestore" + e.getMessage());
             }
         });
     }

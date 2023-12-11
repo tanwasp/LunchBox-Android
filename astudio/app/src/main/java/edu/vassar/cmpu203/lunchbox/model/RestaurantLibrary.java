@@ -50,6 +50,11 @@ public class RestaurantLibrary {
         return r;
     }
 
+    public Restaurant addRestaurant(Restaurant r, String id){
+        data.put(id, r);
+        return r;
+    }
+
 //    public void addRestaurant(Restaurant r){
 //        String id = r.getRestaurantId();
 //        data.put(id, r);

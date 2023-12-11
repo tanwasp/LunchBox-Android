@@ -32,6 +32,8 @@ public class Location implements Serializable {
         return this.lon;
     }
 
+    public Location (){}
+
     /**
      * Computes the distance between two points using the Haversine formula.
      *
