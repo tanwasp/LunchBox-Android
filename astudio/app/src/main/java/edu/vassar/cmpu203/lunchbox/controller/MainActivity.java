@@ -604,6 +604,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
 
+    /**
+     * loads restaurants from firestore
+     */
     private void loadRestaurants() {
         FStoreRestaurantDataRepo repo = new FStoreRestaurantDataRepo();
         repo.getAllRestaurants(new IDataRepositoryCallback() {
@@ -622,6 +625,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         });
     }
 
+    /**
+     * loads reviews from firestore
+     */
     public void loadReviews() {
         FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
         repo.getAllReviews(new IDataRepositoryCallback() {
@@ -640,6 +646,11 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         });
     }
 
+    /**
+     * adds restaurant to firestore
+     *
+     * @param newRestaurant
+     */
     public void addRestaurantToFirestore(Restaurant newRestaurant) {
         FStoreRestaurantDataRepo repo = new FStoreRestaurantDataRepo();
         repo.addRestaurant(newRestaurant, new IDataRepositoryCallback() {

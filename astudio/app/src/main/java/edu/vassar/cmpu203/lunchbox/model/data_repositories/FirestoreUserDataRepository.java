@@ -12,7 +12,19 @@ import java.util.Map;
 
 import edu.vassar.cmpu203.lunchbox.model.FirestoreSingleton;
 
+/**
+ * This class is responsible for handling all user data related operations.
+ * It is a singleton class.
+ */
 public class FirestoreUserDataRepository implements UserDataRepository {
+
+    /**
+     * Creates user in Firebase Authentication and Firestore.
+     * @param username The username of the user.
+     * @param email The email of the user.
+     * @param password The password of the user.
+     * @param callback The callback to be called when the operation is complete.
+     */
     @Override
     public void createUser(String username, String email, String password, IDataRepositoryCallback callback) {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
@@ -41,6 +53,12 @@ public class FirestoreUserDataRepository implements UserDataRepository {
         });
     }
 
+    /**
+     * Logs in user.
+     * @param email The email of the user.
+     * @param password The password of the user.
+     * @param callback The callback to be called when the operation is complete.
+     */
     @Override
     public void loginUser(String email, String password, IDataRepositoryCallback callback) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
@@ -53,6 +71,9 @@ public class FirestoreUserDataRepository implements UserDataRepository {
         });
     }
 
+    /**
+     * stores user data in Firestore.
+     */
     private void storeUserDataInFirestore(String username, String email, String firebaseUserId, IDataRepositoryCallback callback) {
         Map<String, Object> userData = new HashMap<>();
         userData.put("username", username);
