@@ -2,9 +2,81 @@
 
 ## Create Account
 
+```plantuml
+@startuml
+hide footbox
+skin rose
+
+actor User as user
+participant " : SignupFragment" as signupFrag
+participant " : MainView" as mainView
+participant " : LandingFragment" as landFrag
+participant " : Controller" as controller
+participant " : LoginActivity" as loginAct
+participant " : FireStore" as fs
+
+landFrag -> controller : onNavigateToSignup()
+controller -> loginAct : launch(signupIntent)
+loginAct -> mainView : displayFragment(signupFragment)
+mainView -> user : Display Signup page
+user -> signupFrag : Enter new account info
+signupFrag -> loginAct : onSignup(username,email,password)
+loginAct -> fs : Save user
+loginAct -> mainView : updateCurrentUser(user)
+mainView -> user : Display Home page
+
+@enduml
+```
+
 ## Log In
 
+```plantuml
+@startuml
+hide footbox
+skin rose
+
+actor User as user
+participant " : LoginFragment" as loginFrag
+participant " : MainView" as mainView
+participant " : LandingFragment" as landFrag
+participant " : Controller" as controller
+participant " : LoginActivity" as loginAct
+participant " : FireStore" as fs
+
+landFrag -> controller : onNavigateToLogin()
+controller -> loginAct : launch(loginIntent)
+loginAct -> mainView : displayFragment(loginFragment)
+mainView -> user : Display Login page
+user -> loginFrag : Enter log in info
+loginFrag -> loginAct : onLogin(email,password)
+loginAct -> fs : Verify user
+loginAct -> mainView : updateCurrentUser(user)
+mainView -> user : Display Home page
+
+@enduml
+```
+
 ## View Profile
+
+```plantuml
+@startuml
+hide footbox
+skin rose
+
+actor User as user
+participant " : NavigationDrawer" as navDrawer
+participant " : MainView" as mainView
+participant " : Controller" as controller
+participant "revLib : ReviewsLibrary" as revLib
+
+user -> navDrawer : Select Profile page
+navDrawer -> controller : onNavigateToMyProfile()
+controller -> revLib : getReviewsByUser(User)
+controller -> mainView: displayFragment(profileFragment)
+mainView -> user : Display User's profile
+
+@enduml
+```
 
 ## Check Out Restaurant
 
@@ -192,6 +264,16 @@ class Location{
     haversine(loc: Location) : float
 }
 
+class LoginActivity{
+    -mainView: IMainView
+    -signupFragment: SignupFragment
+    -loginFragment: LoginFragment
+    --
+    onSignup(username: String, email: String, password: String): void
+    checkUsernameExists(username: String, email: String, password: String): void
+    onLogin(email: String, password: String): void
+}
+
 class ControllerActivity{
     {static} -lib: RestaurantLibrary
     {static} -revLib: ReviewsLibrary
@@ -223,6 +305,7 @@ Location "1" -down- "1" Restaurant : Is an attribute of\t
 RestaurantLibrary "1" -down- "1" ControllerActivity: Provides information to\t
 ReviewsLibrary "1" -down- "1" ControllerActivity: \tProvides information to\t
 User "1" -right- "1" ControllerActivity : \tIs an attribute of\t\t
+ControllerActivity "1" - "1" LoginActivity: \tDisplays screens for\t
 ControllerActivity "1" -down- "1" view: \tCommunicates with user using
 
 @enduml
