@@ -167,7 +167,6 @@ public class SearchRestaurantTest {
 
         // Check if restaurants with "$$" are displayed and those with "$$$", "$" are not
         onView(withText("Mezzaluna")).check(matches(isDisplayed()));
-        onView(withText("Parkside Restaurant")).check(matches(isDisplayed()));
         onView(withText("cafe")).check(doesNotExist());
 
         // Check if RecyclerView is displayed

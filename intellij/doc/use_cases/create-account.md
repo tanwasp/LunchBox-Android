@@ -83,33 +83,6 @@ stop
 
 @enduml
 ```
-```plantuml
-@startuml
-
-skin rose
-
-title Log In
-
-'define the lanes
-|#wheat|User|
-|#pink|App|
-
-|App|
-start
-:Bring up log in page;
-
-|User|
-:Enter username and password;
-
-while (Is valid?) is (No)
-|App|
-:Prompt user to try again;
-endwhile (Yes)
-:Bring user into their account;
-
-stop
-@enduml
-```
 
 ## Notes
 * Established Username Requirements:
