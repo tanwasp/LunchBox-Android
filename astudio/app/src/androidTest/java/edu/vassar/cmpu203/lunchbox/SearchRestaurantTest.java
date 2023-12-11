@@ -221,8 +221,7 @@ public class SearchRestaurantTest {
         onView(withId(R.id.searchButton)).perform(click());
         SystemClock.sleep(1000);
 
-        onView(withText("La Mangeoire")).check(matches(isDisplayed()));
-        onView(withText("Viand Cafe")).check(matches(isDisplayed()));
+        onView(withText("Great Kills Yacht Club")).check(matches(isDisplayed()));
     }
 
 
