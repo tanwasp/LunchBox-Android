@@ -22,7 +22,7 @@ public class FStoreRestaurantDataRepo implements IRestaurantsDataRepository {
     public void getAllRestaurants(IDataRepositoryCallback callback) {
         FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
         db.collection("restaurants")
-                .limit(10)
+//                .limit(10)
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         List<Restaurant> restaurants = new ArrayList<>();

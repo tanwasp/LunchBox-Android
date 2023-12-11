@@ -54,8 +54,12 @@ public class AddRestaurantTest {
         onView(withId(R.id.searchResultsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         SystemClock.sleep(1000);
 
+
+        String randomNumber = String.valueOf((int) (Math.random() * 10000));
+        String restaurantName = "Magic Bowl" + randomNumber;
+
         // Input restaurant details
-        onView(withId(R.id.editTextRestaurantName)).perform(typeText("Magic Bowl"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.editTextRestaurantName)).perform(typeText(restaurantName), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editTextAddress)).perform(typeText("123 MG Street"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editTextCity)).perform(typeText("Test City"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editTextState)).perform(typeText("Test State"), ViewActions.closeSoftKeyboard());
@@ -66,7 +70,7 @@ public class AddRestaurantTest {
 
         // Click the Add Restaurant button
         onView(withId(R.id.buttonAddRestaurant)).perform(click());
-        onView(withText("Magic Bowl")).check(matches(isDisplayed()));
+        onView(withText(restaurantName)).check(matches(isDisplayed()));
 
         Espresso.pressBack();
 
@@ -75,6 +79,6 @@ public class AddRestaurantTest {
         SystemClock.sleep(1000);
 
       // Check that the restaurant was added
-        onView(withText("Magic Bowl")).check(matches(isDisplayed()));
+        onView(withText(restaurantName)).check(matches(isDisplayed()));
     }
 }
