@@ -75,7 +75,7 @@ import edu.vassar.cmpu203.lunchbox.view.IUserProfileView;
 
 import edu.vassar.cmpu203.lunchbox.view.*;
 
-public class MainActivity extends AppCompatActivity implements IHomeView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileView.Listener, ILandingView.Listener {
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchLocationView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileView.Listener, ILandingView.Listener {
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
     RestaurantNames restaurantNames;
@@ -679,5 +679,18 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     public User getCurrentUser() {
         return curUser;
+    }
+
+    public void onNavigateToSearchLocation() {
+        SearchLocationFragment searchLocationFragment = new SearchLocationFragment(this, new ArrayList<String>());
+        navigateToFragment(searchLocationFragment, true, "search location", 0);
+    }
+
+    public void onUseGivenLocation(String location) {
+        System.out.println("Using given location: " + location);
+    }
+
+    public void onUseCurrentLocation() {
+        System.out.println("Using current location");
     }
 }

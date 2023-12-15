@@ -15,5 +15,7 @@ public interface IHomeView {
         //void onNavigateToNotifications();
         //void onNavigateToFindFriends();
         void onLogout();
+
+        void onNavigateToSearchLocation();
     }
 }

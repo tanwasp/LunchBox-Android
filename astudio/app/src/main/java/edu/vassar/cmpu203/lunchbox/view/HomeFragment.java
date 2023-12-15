@@ -39,7 +39,7 @@ import edu.vassar.cmpu203.lunchbox.model.Coordinate;
 public class HomeFragment extends Fragment implements IHomeView{
     private FragmentHomeBinding binding;
     private Listener listener;
-    
+
     public HomeFragment() {
     }
 
@@ -64,14 +64,20 @@ public class HomeFragment extends Fragment implements IHomeView{
         super.onViewCreated(view, savedInstanceState);
         this.binding.btnNavigateToSearch.setOnClickListener(v -> listener.onNavigateToSearch());
         this.binding.btnLogout.setOnClickListener(v -> listener.onLogout());
+
         MainActivity activity = (MainActivity) getActivity();
         float lat = 41.694003f;
         float lon = -73.901670f;
         Coordinate coordinate = new Coordinate(lat, lon);
         // Get address from coordinates
         String address = coordinate.getAddress(getContext());
-        updateLocationInView(address);
-
+        Toolbar toolbar = activity.findViewById(R.id.toolbar);
+        TextView tvLocation = toolbar.findViewById(R.id.tvLocation);
+        updateLocationInView(tvLocation, address);
+        tvLocation.setOnClickListener(v -> {
+            // Handle TextView click
+            listener.onNavigateToSearchLocation();
+        });
 
 //        if (activity.getCurrentUser().getLoc().getLat() != 0 && activity.getCurrentUser().getLoc().getLon() != 0) {
 ////            float lat = activity.getCurrentUser().getLoc().getLat();
@@ -103,14 +109,11 @@ public class HomeFragment extends Fragment implements IHomeView{
         listener = null;
     }
 
-    private void updateLocationInView(String location) {
+    private void updateLocationInView(TextView tvLocation, String location) {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null) {
-            Toolbar toolbar = activity.findViewById(R.id.toolbar);
-            TextView tvLocation = toolbar.findViewById(R.id.tvLocation);
             tvLocation.setText(location);
             tvLocation.setVisibility(View.VISIBLE);
         }
     }
-
 }
