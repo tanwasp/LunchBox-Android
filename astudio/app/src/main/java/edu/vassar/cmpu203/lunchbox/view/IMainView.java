@@ -64,6 +64,4 @@ public interface IMainView {
 
     NavController getNavController();
     NavigationView getNavigationView();
-
-
 }

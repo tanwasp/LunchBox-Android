@@ -4,9 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="56dp"
     android:id="@+id/home_fragment"
+    android:layout_marginTop="56dp"
     tools:context=".view.HomeFragment">
+
+
+
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/homeToolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:background="?attr/colorPrimary"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+<!--    </androidx.appcompat.widget.Toolbar>-->
 
 
     <TextView

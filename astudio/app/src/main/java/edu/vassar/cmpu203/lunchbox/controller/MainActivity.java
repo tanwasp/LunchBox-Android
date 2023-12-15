@@ -205,10 +205,21 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     @Override
     public void onBackPressed() {
         // Call the super method to handle the back button press as usual
-        super.onBackPressed();
-        getSupportFragmentManager().executePendingTransactions();
-        // Now update the UI based on the current fragment
-        updateUIBasedOnCurrentFragment();
+        Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("profile");
+        if (currentFragment != null && currentFragment.isVisible()) {
+            onBackToHome();
+        }
+        else {
+            super.onBackPressed();
+            getSupportFragmentManager().executePendingTransactions();
+            // Now update the UI based on the current fragment
+            updateUIBasedOnCurrentFragment();
+        }
+    }
+
+    private void onBackToHome() {
+        mainView.clearBackStack();
+        onNavigateToHome();
     }
 
     /**
@@ -537,7 +548,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onNavigateToMyProfile(List<Review> reviewsList) {
         logUserProfileNavigation(reviewsList);
         UserProfileFragment profileFragment = UserProfileFragment.newInstance(curUser, new ArrayList<>(reviewsList));
-        navigateToFragment(profileFragment,  false, "profile",0);
+        navigateToFragment(profileFragment,  true, "profile",0);
         closeNavigationDrawer();
         updateActionBarTitle(curUser.getUsername());
     }
@@ -664,5 +675,9 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                 System.out.println("Failed to add restaurant to Firestore" + e.getMessage());
             }
         });
+    }
+
+    public User getCurrentUser() {
+        return curUser;
     }
 }

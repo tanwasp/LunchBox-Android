@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class RestaurantTest {
 User testUser;
-Location loc;
+Coordinate loc;
 Restaurant r;
 RestaurantLibrary lib;
 ReviewsLibrary revLib;
@@ -18,7 +18,7 @@ ReviewsLibrary revLib;
      */
     public Restaurant setupDatabase(){
         testUser = new User("default", 30f, -90f);
-        loc = new Location(40.7128f, -74.006f);
+        loc = new Coordinate(40.7128f, -74.006f);
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
 
@@ -42,7 +42,7 @@ ReviewsLibrary revLib;
     @Test
     public void testSetDistToUser(){
         testUser = new User("default", 30f, -90f);
-        loc = new Location(40.7128f, -74.006f);
+        loc = new Coordinate(40.7128f, -74.006f);
         r = new Restaurant("restaurant1", "Moreno Bakery", 3.25f, "737 W Brandon Blvd", "Brandon", "FL", "US", "33511", 40.7128f, -74.006f, new ArrayList<>(Arrays.asList("review2", "review21", "review37", "review62", "review64")), 2);
 
         // find distance between locations

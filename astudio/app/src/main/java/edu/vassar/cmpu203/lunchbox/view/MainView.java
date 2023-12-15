@@ -1,36 +1,27 @@
 package edu.vassar.cmpu203.lunchbox.view;
 
-import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.controller.MainActivity;
 import edu.vassar.cmpu203.lunchbox.databinding.MainBinding;
-import edu.vassar.cmpu203.lunchbox.databinding.ContentMainBinding;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
-import edu.vassar.cmpu203.lunchbox.model.Review;
 
 /**
  * View fragment that allows users navigate between fragments.
@@ -51,6 +42,7 @@ public class MainView implements IMainView{
         this.fmanager = activity.getSupportFragmentManager();
         this.binding = MainBinding.inflate(activity.getLayoutInflater());
     }
+
 
     /**
      * Retrieve the graphical widget (android view) at the root of the screen hierarchy/
@@ -106,7 +98,6 @@ public class MainView implements IMainView{
             }
             return false;
         });
-
     }
 
     public AppBarConfiguration getAppBarConfiguration() {

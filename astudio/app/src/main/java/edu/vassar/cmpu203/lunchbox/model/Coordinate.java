@@ -1,11 +1,18 @@
 package edu.vassar.cmpu203.lunchbox.model;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
+
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Represents coordinates
  */
-public class Location implements Serializable {
+public class Coordinate implements Serializable {
     /**
      * Latitude of the location.
      */
@@ -19,7 +26,7 @@ public class Location implements Serializable {
     /**
      * Creates a location with the given latitude and longitude.
      */
-    public Location (float lat, float lon){
+    public Coordinate(float lat, float lon){
         this.lat = lat;
         this.lon = lon;
     }
@@ -32,7 +39,7 @@ public class Location implements Serializable {
         return this.lon;
     }
 
-    public Location (){}
+    public Coordinate(){}
 
     /**
      * Computes the distance between two points using the Haversine formula.
@@ -41,7 +48,7 @@ public class Location implements Serializable {
      *
      * @return The distance between the two points in miles.
      */
-    public float haversine(Location loc){
+    public float haversine(Coordinate loc){
 
         double earthRadius = 6371.0;
 
@@ -69,5 +76,19 @@ public class Location implements Serializable {
      */
     public String toString(){
         return "(" + this.lat + ", " + this.lon + ")";
+    }
+
+    public String getAddress(Context context) {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(this.lat, this.lon, 1);
+            if (!addresses.isEmpty()) {
+                Address address = addresses.get(0);
+                return address.getLocality(); // Or other parts of the address
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "Unknown Location";
     }
 }

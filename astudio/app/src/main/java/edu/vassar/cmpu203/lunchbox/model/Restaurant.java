@@ -51,7 +51,7 @@ public class Restaurant implements Serializable {
     /**
      * Latitude of the restaurant's location.
      */
-    private Location loc;
+    private Coordinate loc;
 
 //    /**
 //     * List of review IDs associated with the restaurant.
@@ -97,7 +97,7 @@ public class Restaurant implements Serializable {
         this.state = state;
         this.country = country;
         this.postalCode = postalCode;
-        this.loc = new Location (lat, lon);
+        this.loc = new Coordinate(lat, lon);
 //        this.reviewList = reviewList;
         this.priceRange = priceRange;
         distanceToUser = -1.0f;
@@ -124,7 +124,7 @@ public class Restaurant implements Serializable {
         this.state = state;
         this.country = country;
         this.postalCode = postalCode;
-        this.loc = new Location(lat, lon);
+        this.loc = new Coordinate(lat, lon);
 //        this.reviewList = new ArrayList<String>();
         this.priceRange = 0;
 //        distanceToUser = -1.0f;
@@ -333,7 +333,7 @@ public class Restaurant implements Serializable {
      *
      * @return The restaurant's location attribute
      */
-    public Location getLoc() {
+    public Coordinate getLoc() {
         return loc;
     }
 
@@ -437,7 +437,7 @@ public class Restaurant implements Serializable {
      * Sets the restaurant's Location
      *
      */
-    public void setLoc(Location loc) {
+    public void setLoc(Coordinate loc) {
         this.loc = loc;
     }
 

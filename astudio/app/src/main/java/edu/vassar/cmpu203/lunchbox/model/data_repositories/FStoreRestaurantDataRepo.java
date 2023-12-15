@@ -5,17 +5,11 @@ import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 import edu.vassar.cmpu203.lunchbox.model.FirestoreSingleton;
-import edu.vassar.cmpu203.lunchbox.model.IFilter;
-import edu.vassar.cmpu203.lunchbox.model.Location;
+import edu.vassar.cmpu203.lunchbox.model.Coordinate;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
-import edu.vassar.cmpu203.lunchbox.model.Review;
-import edu.vassar.cmpu203.lunchbox.model.User;
 
 public class FStoreRestaurantDataRepo implements IRestaurantsDataRepository {
     /**
@@ -26,7 +20,7 @@ public class FStoreRestaurantDataRepo implements IRestaurantsDataRepository {
     public void getAllRestaurants(IDataRepositoryCallback callback) {
         FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
         db.collection("restaurants")
-//                .limit(10)
+                .limit(10)
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         List<Restaurant> restaurants = new ArrayList<>();
@@ -41,7 +35,7 @@ public class FStoreRestaurantDataRepo implements IRestaurantsDataRepository {
                             GeoPoint geoPoint = document.getGeoPoint("coordinates");
                             if (geoPoint != null) {
                                 // Create Location object and set latitude and longitude
-                                Location loc = new Location((float) geoPoint.getLongitude(), (float) geoPoint.getLatitude());
+                                Coordinate loc = new Coordinate((float) geoPoint.getLongitude(), (float) geoPoint.getLatitude());
                                 r.setLoc(loc);
                             }
                             restaurants.add(r);

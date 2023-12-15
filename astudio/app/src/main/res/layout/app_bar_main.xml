@@ -14,12 +14,27 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="?attr/colorPrimary" />
+            android:background="?attr/colorPrimary">
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+
+                android:drawablePadding="8dp"
+                android:text="Location"
+                android:clickable="true"
+                android:focusable="true"
+                android:textColor="@android:color/white"
+                android:padding="16dp" />
+
+        </androidx.appcompat.widget.Toolbar>
 
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,8 +1,6 @@
 package edu.vassar.cmpu203.lunchbox.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Date;
 
 /**
@@ -16,11 +14,13 @@ public class User implements Serializable {
     /** The date the user joined. */
     private Date joinedDate;
 
-    private Location loc;
+    private Coordinate loc;
 
     private String firebaseUid;
 
     private String email;
+    private Coordinate defaultCoordinate;
+    private Coordinate lastCoordinate;
 
     /**
      * Constructs a new User with the given name and location.
@@ -31,7 +31,7 @@ public class User implements Serializable {
      */
     public User(String name, float lat, float lon){
         this.username = name;
-        this.loc = new Location(lat, lon);
+        this.loc = new Coordinate(lat, lon);
         long millis = System.currentTimeMillis();
         joinedDate = new java.sql.Date(millis);
     }
@@ -64,7 +64,7 @@ public class User implements Serializable {
         this.username = name;
         this.firebaseUid = firebaseUid;
         this.email = email;
-        this.loc = new Location(lat, lon);
+        this.loc = new Coordinate(lat, lon);
         long millis = System.currentTimeMillis();
         joinedDate = new java.sql.Date(millis);
     }
@@ -76,7 +76,7 @@ public class User implements Serializable {
      * @param lon The new longitude coordinate of the user's location.
      */
     public void setLoc(float lat, float lon){
-        this.loc = new Location(lat, lon);
+        this.loc = new Coordinate(lat, lon);
     }
 
     /**
@@ -84,7 +84,7 @@ public class User implements Serializable {
      *
      * @param loc The Location object representing the user's geographical coordinates.
      */
-    public void setLoc(Location loc){
+    public void setLoc(Coordinate loc){
         this.loc = loc;
     }
 
@@ -157,7 +157,7 @@ public class User implements Serializable {
      *
      * @return The Location object representing the user's location
      */
-    public Location getLoc() {
+    public Coordinate getLoc() {
         return loc;
     }
 
@@ -179,5 +179,28 @@ public class User implements Serializable {
                     "Email: " + this.email + "\n" +
                     "Location: " + this.loc.toString();
         }
+    }
+
+    /**
+     * Gets the default coordinate of the user.
+     *
+     * @return The default coordinate of the user.
+     */
+    public Coordinate getDefaultCoordinate() {
+        return defaultCoordinate;
+    }
+    public void setDefaultCoordinate(Coordinate defaultCoordinate) {
+        this.defaultCoordinate = defaultCoordinate;
+    }
+    /**
+     * Gets the last coordinate of the user.
+     *
+     * @return The last coordinate of the user.
+     */
+    public Coordinate getLastCoordinate() {
+        return lastCoordinate;
+    }
+    public void setLastCoordinate(Coordinate lastCoordinate) {
+        this.lastCoordinate = lastCoordinate;
     }
 }
