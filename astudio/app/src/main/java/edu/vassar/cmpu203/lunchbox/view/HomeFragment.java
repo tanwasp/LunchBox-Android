@@ -63,31 +63,35 @@ public class HomeFragment extends Fragment implements IHomeView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        MainActivity activity = (MainActivity) getActivity();
-        Toolbar toolbar = activity.findViewById(R.id.toolbar);
-        TextView tvLocation = toolbar.findViewById(R.id.tvLocation);
+        if (getActivity() instanceof MainActivity) {
+            MainActivity activity = (MainActivity) getActivity();
 
-        this.binding.btnNavigateToSearch.setOnClickListener(v -> {
-            tvLocation.setVisibility(View.GONE);
-            listener.onNavigateToSearch();
-        });
-        this.binding.btnLogout.setOnClickListener(v -> {
-            tvLocation.setVisibility(View.GONE);
-            listener.onLogout();
-        });
+            Toolbar toolbar = activity.findViewById(R.id.toolbar);
+            TextView tvLocation = toolbar.findViewById(R.id.tvLocation);
+
+            this.binding.btnNavigateToSearch.setOnClickListener(v -> {
+                tvLocation.setVisibility(View.GONE);
+                listener.onNavigateToSearch();
+            });
+            this.binding.btnLogout.setOnClickListener(v -> {
+                tvLocation.setVisibility(View.GONE);
+                listener.onLogout();
+            });
 
 
-        float lat = 41.694003f;
-        float lon = -73.901670f;
-        Coordinate coordinate = new Coordinate(lat, lon);
-        // Get address from coordinates
-        String address = coordinate.getAddress(getContext());
+            float lat = 41.694003f;
+            float lon = -73.901670f;
+            Coordinate coordinate = new Coordinate(lat, lon);
+            // Get address from coordinates
+            String address = coordinate.getAddress(getContext());
 
-        updateLocationInView(tvLocation, address);
-        tvLocation.setOnClickListener(v -> {
-            // Handle TextView click
-            listener.onNavigateToSearchLocation();
-        });
+            updateLocationInView(tvLocation, address);
+            tvLocation.setOnClickListener(v -> {
+                // Handle TextView click
+                listener.onNavigateToSearchLocation();
+            });
+        }
+
 
 //        if (activity.getCurrentUser().getLoc().getLat() != 0 && activity.getCurrentUser().getLoc().getLon() != 0) {
 ////            float lat = activity.getCurrentUser().getLoc().getLat();

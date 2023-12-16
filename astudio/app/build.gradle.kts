@@ -1,8 +1,18 @@
+import java.util.*
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
 }
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
+}
+
+
 
 android {
     namespace = "edu.vassar.cmpu203.lunchbox"
@@ -11,6 +21,8 @@ android {
     testOptions {
         animationsDisabled = true
     }
+
+
 
     defaultConfig {
         applicationId = "edu.vassar.cmpu203.lunchbox"
@@ -23,6 +35,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+//        buildConfigField("String", "PLACES_API_KEY", "\"${localProperties.getProperty("PLACES_API_KEY")}\"")
+        buildConfigField("String", "PLACES_API_KEY", "\"${localProperties.getProperty("PLACES_API_KEY")}\"")
     }
 
     buildTypes {
@@ -32,6 +47,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "PLACES_API_KEY", "\"${localProperties.getProperty("PLACES_API_KEY")}\"")
+        }
+
+        debug {
+//            buildConfigField("String", "PLACES_API_KEY", "PLACES_API_KEY")
+            buildConfigField("String", "PLACES_API_KEY", "\"${localProperties.getProperty("PLACES_API_KEY")}\"")
         }
     }
     compileOptions {
@@ -44,6 +65,7 @@ android {
     buildFeatures {
         compose = true
         viewBinding = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -57,6 +79,7 @@ android {
 
     dependencies {
         implementation("com.google.android.libraries.places:places:2.4.0")
+        implementation("com.android.volley:volley:1.2.1")
         implementation("androidx.appcompat:appcompat:1.6.1")
         implementation("com.google.android.material:material:1.10.0")
         implementation("androidx.constraintlayout:constraintlayout:2.1.4")

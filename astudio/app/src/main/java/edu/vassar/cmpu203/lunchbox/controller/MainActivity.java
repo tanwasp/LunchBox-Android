@@ -29,6 +29,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.libraries.places.api.Places;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.location.LocationRequest;
@@ -46,6 +47,7 @@ import android.Manifest;
 import android.os.Looper;
 import android.util.Log;
 
+import edu.vassar.cmpu203.lunchbox.BuildConfig;
 import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.model.IFilter;
 import edu.vassar.cmpu203.lunchbox.model.LocFilter;
@@ -112,6 +114,11 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
         loadReviews();
+
+        System.out.println("API Key from build config is" + BuildConfig.PLACES_API_KEY);
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), BuildConfig.PLACES_API_KEY);
+        }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
