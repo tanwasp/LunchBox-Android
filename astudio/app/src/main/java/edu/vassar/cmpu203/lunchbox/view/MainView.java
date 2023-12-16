@@ -3,8 +3,10 @@ package edu.vassar.cmpu203.lunchbox.view;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -91,6 +93,9 @@ public class MainView implements IMainView{
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_profile){
                     activity.getUserReviewsNavToProfile();
+                    Toolbar toolbar = activity.findViewById(R.id.toolbar);
+                    TextView tvLocation = toolbar.findViewById(R.id.tvLocation);
+                    tvLocation.setVisibility(View.GONE);
                     return true;
             } else if (item.getItemId() == R.id.nav_home){
                 activity.onNavigateToHome();

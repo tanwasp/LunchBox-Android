@@ -36,8 +36,6 @@ public class SearchLocationFragment extends Fragment implements ISearchLocationV
         this.locationList = locationList;
     }
 
-
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         this.binding = FragmentSearchLocationBinding.inflate(inflater);
@@ -53,7 +51,6 @@ public class SearchLocationFragment extends Fragment implements ISearchLocationV
         locationRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         ArrayList<String> locations = new ArrayList<>();
         locations.add("Current Location");
-        locations.add("Poughkeepsie, NY");
         locationAdapter = new LocationAdapter(view.getContext(), locations, this);
         locationRecyclerView.setAdapter(locationAdapter);
     }

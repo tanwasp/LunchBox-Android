@@ -35,13 +35,29 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder> {
         return new LocationViewHolder(view);
     }
 
+//    @Override
+//    public void onBindViewHolder(LocationViewHolder holder, int position) {
+//        String location = locations.get(position);
+//        holder.locationView.setText(location);
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                listener.onUseGivenLocation(location);
+//            }
+//        });
+//    }
+
     @Override
     public void onBindViewHolder(LocationViewHolder holder, int position) {
         String location = locations.get(position);
-        holder.locationView.setText(location);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        boolean isCurrentLocation = position == 0; // True if it's the first item
+
+        holder.bind(location, isCurrentLocation);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (isCurrentLocation) {
+                listener.onUseCurrentLocation();
+            } else {
                 listener.onUseGivenLocation(location);
             }
         });
@@ -52,8 +68,15 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder> {
         return locations.size();
     }
 
+//    public void setLocations(List<String> locations) {
+//        this.locations.clear();
+//        this.locations.addAll(locations);
+//        notifyDataSetChanged();
+//    }
+
     public void setLocations(List<String> locations) {
         this.locations.clear();
+        this.locations.add(0, "Current Location"); // Always keep this at the top
         this.locations.addAll(locations);
         notifyDataSetChanged();
     }

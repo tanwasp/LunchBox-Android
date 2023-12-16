@@ -36,7 +36,7 @@ import edu.vassar.cmpu203.lunchbox.model.Coordinate;
 /**
  * View fragment that allows users to navigate the app through the home screen.
  */
-public class HomeFragment extends Fragment implements IHomeView{
+public class HomeFragment extends Fragment implements IHomeView {
     private FragmentHomeBinding binding;
     private Listener listener;
 
@@ -62,17 +62,27 @@ public class HomeFragment extends Fragment implements IHomeView{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.binding.btnNavigateToSearch.setOnClickListener(v -> listener.onNavigateToSearch());
-        this.binding.btnLogout.setOnClickListener(v -> listener.onLogout());
 
         MainActivity activity = (MainActivity) getActivity();
+        Toolbar toolbar = activity.findViewById(R.id.toolbar);
+        TextView tvLocation = toolbar.findViewById(R.id.tvLocation);
+
+        this.binding.btnNavigateToSearch.setOnClickListener(v -> {
+            tvLocation.setVisibility(View.GONE);
+            listener.onNavigateToSearch();
+        });
+        this.binding.btnLogout.setOnClickListener(v -> {
+            tvLocation.setVisibility(View.GONE);
+            listener.onLogout();
+        });
+
+
         float lat = 41.694003f;
         float lon = -73.901670f;
         Coordinate coordinate = new Coordinate(lat, lon);
         // Get address from coordinates
         String address = coordinate.getAddress(getContext());
-        Toolbar toolbar = activity.findViewById(R.id.toolbar);
-        TextView tvLocation = toolbar.findViewById(R.id.tvLocation);
+
         updateLocationInView(tvLocation, address);
         tvLocation.setOnClickListener(v -> {
             // Handle TextView click
