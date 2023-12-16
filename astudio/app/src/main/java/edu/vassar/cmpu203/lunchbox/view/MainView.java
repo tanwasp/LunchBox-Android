@@ -1,11 +1,16 @@
 package edu.vassar.cmpu203.lunchbox.view;
 
+
+import static android.app.PendingIntent.getActivity;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -35,6 +40,7 @@ public class MainView implements IMainView{
     private AppBarConfiguration appBarConfiguration;
     private NavController navController;
     NavigationView navigationView;
+    private ActionBarDrawerToggle toggle;
 
     /**
      * Constructor method.
@@ -84,11 +90,13 @@ public class MainView implements IMainView{
         }
 
         // Setup ActionBarDrawerToggle
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 activity, drawer, binding.appBarMain.toolbar,
                 R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
 
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_profile){
@@ -100,10 +108,16 @@ public class MainView implements IMainView{
             } else if (item.getItemId() == R.id.nav_home){
                 activity.onNavigateToHome();
                 return true;
+            } else if (item.getItemId() == R.id.nav_logout){
+                activity.onLogout();
+                return true;
             }
             return false;
         });
     }
+
+
+
 
     public AppBarConfiguration getAppBarConfiguration() {
         return appBarConfiguration;
@@ -184,6 +198,7 @@ public class MainView implements IMainView{
     }
 
 
+
     /**
      * Displays the restaurant details screen.
      * @param searchResults
@@ -201,6 +216,10 @@ public class MainView implements IMainView{
      */
     public void clearBackStack() {
         fmanager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+    public Toolbar getToolbar() {
+        return binding.appBarMain.toolbar;
     }
 
 }

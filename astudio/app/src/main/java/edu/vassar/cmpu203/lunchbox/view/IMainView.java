@@ -3,6 +3,7 @@ package edu.vassar.cmpu203.lunchbox.view;
 import android.app.Activity;
 import android.view.View;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -60,8 +61,9 @@ public interface IMainView {
 
     void showAppBar();
 
-    void hideAppBar();
 
     NavController getNavController();
     NavigationView getNavigationView();
+
+    void hideAppBar();
 }

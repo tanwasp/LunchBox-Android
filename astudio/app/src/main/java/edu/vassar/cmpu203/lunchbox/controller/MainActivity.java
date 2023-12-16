@@ -4,7 +4,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -13,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -143,13 +146,66 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
             if (currentFragment instanceof HomeFragment || currentFragment instanceof UserProfileFragment) {
                 mainView.showAppBar();
+//                mainView.showHamburgerIcon(this);
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-            } else {
+            }
+//            else {
+//                mainView.showBackButton(this);
+//                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//            }
+            else {
                 mainView.hideAppBar();
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             }
         }
     }
+
+//    public void updateToolbarForFragment() {
+//        mainView.disableToggle();
+//        ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setHomeButtonEnabled(true);
+//        }
+//    }
+
+//    public void showBackButton() {
+//        if (this instanceof AppCompatActivity) {
+//            Toolbar toolbar = this.findViewById(R.id.toolbar);
+//            this.setSupportActionBar(toolbar);
+//
+//            // Optional: if you want to handle the back button in the toolbar
+//            ActionBar actionBar = this.getSupportActionBar();
+//            if (actionBar != null) {
+//                actionBar.setDisplayHomeAsUpEnabled(true);
+//                actionBar.setDisplayShowHomeEnabled(true);
+//            }
+//        }
+//    }
+
+//    public void showBackButton() {
+//        ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setHomeButtonEnabled(true);
+//
+//            // Disable the ActionBarDrawerToggle
+//            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                    this, mainView.getDrawerLayout(), mainView.getToolbar(),
+//                    R.string.open, R.string.close);
+//            toggle.setDrawerIndicatorEnabled(false);
+//            mainView.getDrawerLayout().removeDrawerListener(toggle);
+//        }
+//    }
+
+//    public void hideBackButton() {
+//        ActionBar actionBar = this.getSupportActionBar();
+//        if (actionBar != null) {
+//            actionBar.setDisplayHomeAsUpEnabled(false);
+//            actionBar.setHomeButtonEnabled(false);
+//        }
+//    }
+
 
     /**
      * responsible for navigating between navigation drawer fragments
@@ -215,8 +271,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("profile");
         if (currentFragment != null && currentFragment.isVisible()) {
             onBackToHome();
-        }
-        else {
+        } else {
             super.onBackPressed();
             getSupportFragmentManager().executePendingTransactions();
             // Now update the UI based on the current fragment
@@ -305,6 +360,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     /**
      * updates current user
+     *
      * @param data
      */
     private void updateCurrentUser(Intent data) {
@@ -544,7 +600,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
      */
     public void onNavigateToHome() {
         HomeFragment homeFragment = new HomeFragment();
-        navigateToFragment(homeFragment, false, "home",0);
+        navigateToFragment(homeFragment, false, "home", 0);
         closeNavigationDrawer();
         updateActionBarTitle("Home");
     }
@@ -555,7 +611,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onNavigateToMyProfile(List<Review> reviewsList) {
         logUserProfileNavigation(reviewsList);
         UserProfileFragment profileFragment = UserProfileFragment.newInstance(curUser, new ArrayList<>(reviewsList));
-        navigateToFragment(profileFragment,  true, "profile",0);
+        navigateToFragment(profileFragment, true, "profile", 0);
         closeNavigationDrawer();
         updateActionBarTitle(curUser.getUsername());
     }
@@ -600,7 +656,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
      */
     public void onNavigateToMyFriends() {
         FriendsFragment friendsFragment = new FriendsFragment();
-        navigateToFragment(friendsFragment,  true, "friends",0);
+        navigateToFragment(friendsFragment, true, "friends", 0);
     }
 
     /**

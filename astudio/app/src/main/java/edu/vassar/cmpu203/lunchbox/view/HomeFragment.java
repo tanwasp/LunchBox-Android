@@ -73,10 +73,6 @@ public class HomeFragment extends Fragment implements IHomeView {
                 tvLocation.setVisibility(View.GONE);
                 listener.onNavigateToSearch();
             });
-            this.binding.btnLogout.setOnClickListener(v -> {
-                tvLocation.setVisibility(View.GONE);
-                listener.onLogout();
-            });
 
 
             float lat = 41.694003f;
