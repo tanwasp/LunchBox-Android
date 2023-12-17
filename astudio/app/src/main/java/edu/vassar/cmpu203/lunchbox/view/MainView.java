@@ -1,36 +1,34 @@
 package edu.vassar.cmpu203.lunchbox.view;
 
-import android.content.Context;
+
+import static android.app.PendingIntent.getActivity;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.controller.MainActivity;
 import edu.vassar.cmpu203.lunchbox.databinding.MainBinding;
-import edu.vassar.cmpu203.lunchbox.databinding.ContentMainBinding;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
-import edu.vassar.cmpu203.lunchbox.model.Review;
 
 /**
  * View fragment that allows users navigate between fragments.
@@ -42,6 +40,7 @@ public class MainView implements IMainView{
     private AppBarConfiguration appBarConfiguration;
     private NavController navController;
     NavigationView navigationView;
+    private ActionBarDrawerToggle toggle;
 
     /**
      * Constructor method.
@@ -51,6 +50,7 @@ public class MainView implements IMainView{
         this.fmanager = activity.getSupportFragmentManager();
         this.binding = MainBinding.inflate(activity.getLayoutInflater());
     }
+
 
     /**
      * Retrieve the graphical widget (android view) at the root of the screen hierarchy/
@@ -90,24 +90,34 @@ public class MainView implements IMainView{
         }
 
         // Setup ActionBarDrawerToggle
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 activity, drawer, binding.appBarMain.toolbar,
                 R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
+
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_profile){
                     activity.getUserReviewsNavToProfile();
+                    Toolbar toolbar = activity.findViewById(R.id.toolbar);
+                    TextView tvLocation = toolbar.findViewById(R.id.tvLocation);
+                    tvLocation.setVisibility(View.GONE);
                     return true;
             } else if (item.getItemId() == R.id.nav_home){
                 activity.onNavigateToHome();
                 return true;
+            } else if (item.getItemId() == R.id.nav_logout){
+                activity.onLogout();
+                return true;
             }
             return false;
         });
-
     }
+
+
+
 
     public AppBarConfiguration getAppBarConfiguration() {
         return appBarConfiguration;
@@ -188,6 +198,7 @@ public class MainView implements IMainView{
     }
 
 
+
     /**
      * Displays the restaurant details screen.
      * @param searchResults
@@ -205,6 +216,10 @@ public class MainView implements IMainView{
      */
     public void clearBackStack() {
         fmanager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+    public Toolbar getToolbar() {
+        return binding.appBarMain.toolbar;
     }
 
 }

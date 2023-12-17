@@ -4,9 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="56dp"
     android:id="@+id/home_fragment"
+    android:layout_marginTop="56dp"
     tools:context=".view.HomeFragment">
+
+
+
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/homeToolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:background="?attr/colorPrimary"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+<!--    </androidx.appcompat.widget.Toolbar>-->
 
 
     <TextView
@@ -17,12 +27,14 @@
         android:text="@string/welcome_to_lunchbox"
         android:textStyle="bold"
         android:textSize="20sp"
+        app:layout_constraintVertical_bias="0.945"
         app:layout_constraintBottom_toTopOf="@+id/btnNavigateToSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.945" />
+         />
+
 
     <Button
         android:id="@+id/btnNavigateToSearch"
@@ -70,16 +82,6 @@
 <!--        app:layout_constraintVertical_bias="0.0"-->
 <!--        android:visibility="invisible"/>-->
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnNavigateToSearch"
-        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

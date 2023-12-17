@@ -14,6 +14,9 @@ import android.view.inputmethod.InputMethodManager;
 
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import androidx.annotation.NonNull;
@@ -24,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.R;
+import edu.vassar.cmpu203.lunchbox.controller.MainActivity;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentSearchBinding;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.RestaurantAdapter;
@@ -51,6 +55,7 @@ public class SearchFragment extends Fragment implements ISearchView, RestaurantA
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+
 
         // Set up the RecyclerView
         searchResultsRecyclerView = view.findViewById(R.id.searchResultsRecyclerView);
