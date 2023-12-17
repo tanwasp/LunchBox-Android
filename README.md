@@ -25,4 +25,4 @@ Current simplifications include a limited built-in set of existing restaurants a
 
 The team is currently working on finishing Manage Account and Manage Reviews functionality.
 
-Target launch date: June 1 2024
+Target launch date: June 1 2024 
