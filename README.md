@@ -1,29 +1,28 @@
-# LunchBox Prototype #2
+# LunchBox Prototype
 
-The final iteration of the project focuses on users being able to create and access personal account info.
-In addition to searching restaurants, viewing a restaurant's profile, leaving reviews, and adding restaurants, users can now create their own account, 
-log into it, view their profile (with their reviews), and log out. We also improved some aspects from the previous iteration, such as 
-collecting and displaying review dates and adding distance to the search results.
-We also implemented data persistence and account authentication in Firebase.
+## Description
 
-## Limitations and Simplifications 
-One limitation is that some functionality doesn't work if you click the buttons too fast. 
-For example, if you click the search button too fast after enter the page, it says no results are found because the restaurants aren't loaded yet.
-This makes some of the tests finicky because they rely on the system sleep pauses to pass.
-We cache-sort ahead of time to speed up later actions, but this means it takes a while to load up. 
-Additionally, system tests would sometimes fail, but then later pass when run again immediately after even when nothing was changed.
-Lastly, the accuracy of the restaurant data is limited because it relies on unverified user input. 
-The Add Restaurant form itself is also not very practical because it is rather extensive and requires information (like coordinates) that the user that the user would not have easy access to.
+Welcome to Lunch Box!
 
-Some simplifications we made are the built-in inclusion of very limited set of existing restaurants and fake reviews. We use only a section of the restaurants in Firestore to avoid the
-risk of surpassing the daily call limit.
+Lunch Box is a restaurant reviewing app that allows users to record, rate, and share their dining experiences while discovering new restaurants approved by other users. It is ideal for food enthusiasts, travelers, and individuals looking to explore new dining experiences. 
 
-## Running the App
+**TL;DR** It's like Letterboxd for restaurants :)
+
+## Project Status
+
+Current functioality includes searching restaurants, viewing a restaurant's profile, leaving reviews, adding restaurants, creating an account, logging into it, viewing your profile (with your reviews), and log out. Data persistence and account authentication is implemented using Firebase.
+
+Current simplifications include a limited built-in set of existing restaurants and fake reviews.
+
+## Running the Prototype
 * Clone the repository
 * Start Android Studio
 * Open /astudio
 * Build and run in android studio
 * Enjoy!
 
-The app can be navigated using the screen-specific buttons and Android's back arrow button.
+## Roadmap
 
+The team is currently working on finishing Manage Account and Manage Reviews functionality.
+
+Target launch date: June 1 2024
