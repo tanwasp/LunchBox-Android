@@ -4,20 +4,21 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textViewHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_review_heading"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp"/>
+<!--    <TextView-->
+<!--        android:id="@+id/textViewHeading"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/add_review_heading"-->
+<!--        android:textSize="24sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginBottom="16dp"/>-->
 
     <TextView
         android:id="@+id/textViewRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_bar_height"
         android:text="@string/rating_label"
         android:textSize="18sp"
         android:layout_marginBottom="8dp"/>

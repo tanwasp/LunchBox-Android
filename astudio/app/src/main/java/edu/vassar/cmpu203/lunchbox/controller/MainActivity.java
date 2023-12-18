@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void updateUIBasedOnCurrentFragment() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
         System.out.println("currentFragment is " + currentFragment);
+        mainView.customizeAppBar(this);
         if (currentFragment != null) {
             DrawerLayout drawerLayout = mainView.getDrawerLayout();
 
@@ -154,57 +155,31 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 //                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 //            }
             else {
-                mainView.hideAppBar();
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                mainView.showInnerAppBar(this);
+//                mainView.hideAppBar();
             }
         }
+    if (currentFragment instanceof HomeFragment) {
+        updateActionBarTitle("Home");
+    } else if (currentFragment instanceof UserProfileFragment){
+        updateActionBarTitle(curUser.getUsername());
+    } else if (currentFragment instanceof SearchFragment){
+        updateActionBarTitle("");
+    } else if (currentFragment instanceof RestaurantFragment){
+//        updateActionBarTitle(((RestaurantFragment) currentFragment).getRestaurant().getName());
+    } else if (currentFragment instanceof AddReviewFragment){
+        updateActionBarTitle("Add Review");
+    } else if (currentFragment instanceof AddRestaurantFragment){
+        updateActionBarTitle("Add Restaurant");
+    } else if (currentFragment instanceof LandingFragment){
+        updateActionBarTitle("Landing");
+    } else if (currentFragment instanceof SearchLocationFragment){
+        updateActionBarTitle("Location");
+//    } else if (currentFragment instanceof FriendsFragment){
+//        updateActionBarTitle("Friends");
     }
-
-//    public void updateToolbarForFragment() {
-//        mainView.disableToggle();
-//        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//            actionBar.setHomeButtonEnabled(true);
-//        }
-//    }
-
-//    public void showBackButton() {
-//        if (this instanceof AppCompatActivity) {
-//            Toolbar toolbar = this.findViewById(R.id.toolbar);
-//            this.setSupportActionBar(toolbar);
-//
-//            // Optional: if you want to handle the back button in the toolbar
-//            ActionBar actionBar = this.getSupportActionBar();
-//            if (actionBar != null) {
-//                actionBar.setDisplayHomeAsUpEnabled(true);
-//                actionBar.setDisplayShowHomeEnabled(true);
-//            }
-//        }
-//    }
-
-//    public void showBackButton() {
-//        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//            actionBar.setHomeButtonEnabled(true);
-//
-//            // Disable the ActionBarDrawerToggle
-//            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                    this, mainView.getDrawerLayout(), mainView.getToolbar(),
-//                    R.string.open, R.string.close);
-//            toggle.setDrawerIndicatorEnabled(false);
-//            mainView.getDrawerLayout().removeDrawerListener(toggle);
-//        }
-//    }
-
-//    public void hideBackButton() {
-//        ActionBar actionBar = this.getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(false);
-//            actionBar.setHomeButtonEnabled(false);
-//        }
-//    }
+    }
 
 
     /**
@@ -430,6 +405,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onNavigateToSearch() {
         SearchFragment searchFragment = new SearchFragment(this);
         navigateToFragment(searchFragment, true, "search", 0);
+//        updateActionBarTitle("");
     }
 
     // SearchView.Listener methods
@@ -602,7 +578,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         HomeFragment homeFragment = new HomeFragment();
         navigateToFragment(homeFragment, false, "home", 0);
         closeNavigationDrawer();
-        updateActionBarTitle("Home");
+//        updateActionBarTitle("Home");
     }
 
     /**
@@ -613,7 +589,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         UserProfileFragment profileFragment = UserProfileFragment.newInstance(curUser, new ArrayList<>(reviewsList));
         navigateToFragment(profileFragment, true, "profile", 0);
         closeNavigationDrawer();
-        updateActionBarTitle(curUser.getUsername());
+//        updateActionBarTitle(curUser.getUsername());
     }
 
     /**
@@ -747,6 +723,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onNavigateToSearchLocation() {
         SearchLocationFragment searchLocationFragment = new SearchLocationFragment(this, new ArrayList<String>());
         navigateToFragment(searchLocationFragment, true, "search location", 0);
+//        updateActionBarTitle("Location");
     }
 
     public void onUseGivenLocation(String location) {

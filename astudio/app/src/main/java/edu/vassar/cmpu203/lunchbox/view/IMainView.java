@@ -1,9 +1,7 @@
 package edu.vassar.cmpu203.lunchbox.view;
 
-import android.app.Activity;
 import android.view.View;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -11,12 +9,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.controller.MainActivity;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
-import edu.vassar.cmpu203.lunchbox.model.Review;
 
 /**
  * An interface for the application screen template.
@@ -66,4 +62,8 @@ public interface IMainView {
     NavigationView getNavigationView();
 
     void hideAppBar();
+
+    void showInnerAppBar(MainActivity activity);
+
+    void customizeAppBar(MainActivity activity);
 }

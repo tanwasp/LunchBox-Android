@@ -7,6 +7,18 @@
     android:visibility="visible"
     tools:context=".view.RestaurantFragment">
 
+    <TextView
+        android:id="@+id/restaurantRating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:layout_marginEnd="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:text="@string/rest_rating"
+        android:textSize="25sp" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="fill_parent"
@@ -18,38 +30,39 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024">
 
-        <LinearLayout
-            android:id="@+id/restaurantTitle_linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/restaurantTitle_linearLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:weightSum="1">-->
 
-            <TextView
-                android:id="@+id/restaurantName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10sp"
-                android:layout_weight="0.85"
-                android:text="@string/rest_name"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/restaurantName"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginStart="10sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_weight="0.85"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="@string/rest_name"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="25sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textStyle="bold" />&ndash;&gt;-->
 
-            <TextView
-                android:id="@+id/restaurantRating"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15sp"
-                android:layout_marginEnd="10sp"
-                android:layout_weight="0.15"
-                android:text="@string/rest_rating"
-                android:textSize="25sp" />
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/restaurantRating"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="15sp"-->
+<!--                android:layout_marginEnd="10sp"-->
+<!--                android:layout_weight="0.15"-->
+<!--                android:text="@string/rest_rating"-->
+<!--                android:textSize="25sp" />-->
+<!--        </LinearLayout>-->
 
         <TextView
             android:id="@+id/priceRange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_bar_height"
             android:layout_marginStart="10sp"
             android:text="@string/rest_price" />
 

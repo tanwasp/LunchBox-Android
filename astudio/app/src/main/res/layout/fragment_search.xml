@@ -10,15 +10,43 @@
     android:paddingBottom="10dp"
     tools:context=".view.SearchFragment">
 
-    <EditText
-        android:id="@+id/searchTermText"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:hint="@string/search_hint"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="?attr/colorPrimary" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchRestaurantView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:theme="@style/WhiteCursorSearchView"
+            style="@style/CustomSearchView"
+            app:iconifiedByDefault="false" />
+
+        </LinearLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+<!--    <EditText-->
+<!--        android:id="@+id/searchTermText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginTop="@dimen/app_bar_height"-->
+<!--        android:hint="@string/search_hint"-->
+<!--        android:inputType="text"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@id/toolbar_search" />-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -26,7 +54,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
-
 
     <!-- Price Filter Dropdown -->
     <Spinner
@@ -36,7 +63,7 @@
         android:entries="@array/price_filter_options"
         app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchTermText" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_search" />
 
     <!-- Distance Filter Input -->
     <EditText
@@ -48,7 +75,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/searchTermText" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_search" />
 
     <TextView
         android:id="@+id/sortingLabel"
@@ -88,15 +115,15 @@
 
     </RadioGroup>
 
-    <!-- Search Button -->
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_button_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sortRadioGroup" />
+<!--    &lt;!&ndash; Search Button &ndash;&gt;-->
+<!--    <Button-->
+<!--        android:id="@+id/searchButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/search_button_label"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/sortRadioGroup" />-->
 
 
     <!-- Search Results -->
@@ -114,7 +141,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchButton"
+        app:layout_constraintTop_toBottomOf="@id/sortRadioGroup"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView

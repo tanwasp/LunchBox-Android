@@ -3,9 +3,12 @@ package edu.vassar.cmpu203.lunchbox.view;
 
 import static android.app.PendingIntent.getActivity;
 
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -51,7 +54,6 @@ public class MainView implements IMainView{
         this.binding = MainBinding.inflate(activity.getLayoutInflater());
     }
 
-
     /**
      * Retrieve the graphical widget (android view) at the root of the screen hierarchy/
      * @return the screen's root android view (widget)
@@ -76,7 +78,6 @@ public class MainView implements IMainView{
                 .setOpenableLayout(drawer)
                 .build();
 
-
         // Setup NavController
         System.out.println("fragment container id is: " + R.id.nav_host_fragment_content_main);
 
@@ -89,21 +90,16 @@ public class MainView implements IMainView{
             throw new IllegalStateException("NavHostFragment not found!");
         }
 
-        // Setup ActionBarDrawerToggle
-        toggle = new ActionBarDrawerToggle(
-                activity, drawer, binding.appBarMain.toolbar,
-                R.string.open, R.string.close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-
+//        // Setup ActionBarDrawerToggle
+//        toggle = new ActionBarDrawerToggle(
+//                activity, drawer, binding.appBarMain.toolbar,
+//                R.string.open, R.string.close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_profile){
                     activity.getUserReviewsNavToProfile();
-                    Toolbar toolbar = activity.findViewById(R.id.toolbar);
-                    TextView tvLocation = toolbar.findViewById(R.id.tvLocation);
-                    tvLocation.setVisibility(View.GONE);
                     return true;
             } else if (item.getItemId() == R.id.nav_home){
                 activity.onNavigateToHome();
@@ -115,8 +111,6 @@ public class MainView implements IMainView{
             return false;
         });
     }
-
-
 
 
     public AppBarConfiguration getAppBarConfiguration() {
@@ -190,11 +184,36 @@ public class MainView implements IMainView{
     public void showAppBar() {
         // Make the AppBarLayout visible
         binding.appBarMain.toolbar.setVisibility(View.VISIBLE);
+        binding.appBarMain.toolbar.setNavigationIcon(R.drawable.baseline_menu_24);
+        binding.appBarMain.toolbar.setNavigationOnClickListener(v -> {
+            binding.drawerLayout.open();
+        });
     }
+
+    public void customizeAppBar(MainActivity activity){
+        Toolbar toolbar = activity.findViewById(R.id.toolbar);
+
+        TextView tvLocation = toolbar.findViewById(R.id.tvLocation);
+        ImageButton imageBtnNavigateToSearch = toolbar.findViewById(R.id.imageBtnNavigateToSearch);
+
+        Fragment currentFragment = fmanager.findFragmentById(R.id.nav_host_fragment_content_main);
+        // Customize toolbar based on current fragment
+        tvLocation.setVisibility(currentFragment instanceof HomeFragment ? View.VISIBLE : View.GONE);
+        imageBtnNavigateToSearch.setVisibility(currentFragment instanceof HomeFragment ? View.VISIBLE : View.GONE);
+    }
+
 
     public void hideAppBar() {
         // Hide the AppBarLayout
         binding.appBarMain.toolbar.setVisibility(View.GONE);
+    }
+
+    public void showInnerAppBar(MainActivity activity) {
+        binding.appBarMain.toolbar.setVisibility(View.VISIBLE);
+        binding.appBarMain.toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_ios_24);
+        binding.appBarMain.toolbar.setNavigationOnClickListener(v -> {
+            activity.onBackPressed();
+        });
     }
 
 
