@@ -8,4 +8,34 @@
         <item name="actionBarStyle">@style/AppTheme.AppBarOverlay</item>
         ...
     </style>
+
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="autoCompleteTextViewStyle">@style/cursorColor</item>
+    </style>
+
+    <style name="cursorColor" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="autoCompleteTextViewStyle">@style/cursorColor</item>
+    </style>
+
+    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:inputType">textCapWords</item>
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="submitBackground">@android:color/transparent</item>
+        <item name="closeIcon">@drawable/baseline_close_24</item>
+        <item name="searchIcon">@drawable/baseline_search_24</item>
+        <item name="searchHintIcon">@drawable/baseline_search_24</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="autoCompleteTextViewStyle">@drawable/custom_cursor</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="android:editTextColor">@android:color/white</item>
+    </style>
+
+    <style name="WhiteCursorSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="colorControlActivated">#FFFFFF</item>
+    </style>
+
 </resources>

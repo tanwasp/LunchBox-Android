@@ -72,6 +72,7 @@ public class HomeFragment extends Fragment implements IHomeView {
             this.binding.btnNavigateToSearch.setOnClickListener(v -> {
                 tvLocation.setVisibility(View.GONE);
                 listener.onNavigateToSearch();
+
             });
 
 
@@ -88,29 +89,6 @@ public class HomeFragment extends Fragment implements IHomeView {
             });
         }
 
-
-//        if (activity.getCurrentUser().getLoc().getLat() != 0 && activity.getCurrentUser().getLoc().getLon() != 0) {
-////            float lat = activity.getCurrentUser().getLoc().getLat();
-////            float lon = activity.getCurrentUser().getLoc().getLon();
-//            float lat = 41.694003f;
-//            float lon = -73.901670f;
-////            updateLocationInView(activity.getCurrentUser().getLoc().getCity());
-//            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
-//            List<Address> addresses = null;
-//            try {
-//                addresses = geocoder.getFromLocation(lat, lat, 1);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            if (addresses != null && !addresses.isEmpty()) {
-//                Address address = addresses.get(0);
-//                String addressText = address.getLocality(); // Or other parts of the address
-//                updateLocationInView(addressText);
-//            }
-//
-//        }else {
-//            System.out.println("lat and lon are 0");
-//        }
     }
 
     @Override

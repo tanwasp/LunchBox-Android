@@ -27,20 +27,20 @@
             android:text="@string/profile_date"
             android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/profile_friends_button"
-            android:visibility="invisible" />
+<!--        <Button-->
+<!--            android:id="@+id/button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:text="@string/profile_friends_button"-->
+<!--            android:visibility="invisible" />-->
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reviewsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="654dp"
+        android:layout_height="match_parent"
         android:layout_below="@id/profileLayout"
         android:layout_marginTop="5dp"
         android:padding="16dp" />

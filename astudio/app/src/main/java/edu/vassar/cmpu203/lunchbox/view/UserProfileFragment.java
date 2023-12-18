@@ -84,7 +84,7 @@ public class UserProfileFragment extends Fragment implements IUserProfileView {
         setupRecyclerView(view);
 
         // Set up button click listeners
-        this.binding.button.setOnClickListener(v -> listener.onNavigateToMyFriends());
+//        this.binding.button.setOnClickListener(v -> listener.onNavigateToMyFriends());
     }
 
     private String formatDate(Date date) {

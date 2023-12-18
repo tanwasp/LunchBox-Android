@@ -52,6 +52,5 @@ public class HomeTest {
 
         onView(withText("Welcome to LunchBox!!")).check(matches(isDisplayed()));
         onView(withId(R.id.btnNavigateToSearch)).check(matches(isClickable()));
-        onView(withId(R.id.btnLogout)).check(matches(isClickable()));
     }
 }

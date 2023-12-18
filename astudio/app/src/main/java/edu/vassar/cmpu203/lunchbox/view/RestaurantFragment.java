@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import edu.vassar.cmpu203.lunchbox.controller.MainActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,6 +46,8 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.updateActionBarTitle(restaurant.getName());
 
         reviewsRecyclerView = view.findViewById(R.id.reviewRecyclerView);
         reviewsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -53,7 +56,7 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
         reviewsRecyclerView.setAdapter(reviewAdapter);
 
         // Sets restaurant data in the restaurant fragment
-        binding.restaurantName.setText(restaurant.getName());
+//        binding.restaurantName.setText(restaurant.getName());
         binding.restaurantRating.setText(String.valueOf(restaurant.getRatingDisplay()));
         binding.priceRange.setText(restaurant.getDollarSigns(restaurant.getPriceRangeDisplay()));
         binding.address.setText(restaurant.getAddress());

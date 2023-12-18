@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,35 +9,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- Toolbar 1 -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="?attr/colorPrimary">
-
-            <ImageButton
-                android:id="@+id/btnNavigateToSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/baseline_search_24"/>
+            <!-- Toolbar 1 contents -->
 
             <TextView
                 android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
                 android:visibility="gone"
-
                 android:drawablePadding="8dp"
                 android:text="Location"
+                android:textSize="16sp"
                 android:clickable="true"
                 android:focusable="true"
                 android:textColor="@android:color/white"
-                android:padding="16dp" />
+                android:padding="16dp"/>
 
-
+            <ImageButton
+                android:id="@+id/imageBtnNavigateToSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:padding="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/baseline_search_24"/>
         </androidx.appcompat.widget.Toolbar>
 
 
