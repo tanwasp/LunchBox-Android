@@ -11,21 +11,33 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import edu.vassar.cmpu203.lunchbox.model.Restaurant;
 import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.R;
+import edu.vassar.cmpu203.lunchbox.view.IAddReviewView;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder>{
     private LayoutInflater inflater;
     private List<Review> reviews;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onNavigateToReview(Review review);
+    }
 
     /**
      * Constructor for ReviewAdapter
      * @param context
      * @param reviews
      */
-    public ReviewAdapter(Context context, List<Review> reviews) {
+    public ReviewAdapter(Context context, List<Review> reviews, ReviewAdapter.OnItemClickListener listener) {
         this.inflater = LayoutInflater.from(context);
         this.reviews = reviews;
+        this.listener = listener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     /**
@@ -58,10 +70,21 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder>{
         try {
             DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
             dateToString = df.format(review.getDate());
-        } catch (Exception e){
+        } catch (Exception e) {
             dateToString = "";
         }
         holder.dateView.setText(dateToString);
+
+        Review reviewSelect = reviews.get(position);
+        ReviewViewHolder reviewHolder = (ReviewViewHolder) holder;
+        reviewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onNavigateToReview(reviewSelect);
+                }
+            }
+        });
     }
 
     /**

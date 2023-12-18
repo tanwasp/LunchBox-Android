@@ -80,7 +80,7 @@ import edu.vassar.cmpu203.lunchbox.view.IUserProfileView;
 
 import edu.vassar.cmpu203.lunchbox.view.*;
 
-public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchLocationView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileView.Listener, ILandingView.Listener {
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchLocationView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileView.Listener, ILandingView.Listener, IReviewView.Listener {
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
     RestaurantNames restaurantNames;
@@ -755,5 +755,10 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     public void onUseCurrentLocation() {
         System.out.println("Using current location");
+    }
+
+    public void onNavigateToReview(Review rev){
+        ReviewFragment revFragment = new ReviewFragment();
+        navigateToFragment(revFragment, true, "review", 1);
     }
 }

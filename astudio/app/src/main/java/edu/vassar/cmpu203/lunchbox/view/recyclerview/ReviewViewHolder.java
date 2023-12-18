@@ -12,6 +12,7 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder{
     TextView ratingView;
     TextView reviewBodyView;
     TextView dateView;
+    private ReviewAdapter.OnItemClickListener listener;
 
     /**
      * Constructor for ReviewViewHolder

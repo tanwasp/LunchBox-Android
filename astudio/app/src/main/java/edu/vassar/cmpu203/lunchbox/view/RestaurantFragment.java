@@ -23,7 +23,7 @@ import edu.vassar.cmpu203.lunchbox.view.recyclerview.ReviewAdapter;
 /**
  * View fragment that allows users to view a restaurant's profile
  */
-public class RestaurantFragment extends Fragment implements IRestaurantView{
+public class RestaurantFragment extends Fragment implements IRestaurantView, ReviewAdapter.OnItemClickListener{
     private final Listener listener;
     private FragmentRestaurantBinding binding;
     private final Restaurant restaurant;
@@ -49,7 +49,7 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
         reviewsRecyclerView = view.findViewById(R.id.reviewRecyclerView);
         reviewsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        reviewAdapter = new ReviewAdapter(view.getContext(), new ArrayList<>());
+        reviewAdapter = new ReviewAdapter(view.getContext(), new ArrayList<>(), this);
         reviewsRecyclerView.setAdapter(reviewAdapter);
 
         // Sets restaurant data in the restaurant fragment
@@ -71,6 +71,9 @@ public class RestaurantFragment extends Fragment implements IRestaurantView{
         }
     }
 
-
+    @Override
+    public void onNavigateToReview(Review review){
+        listener.onNavigateToReview(review);
+    }
 
 }
