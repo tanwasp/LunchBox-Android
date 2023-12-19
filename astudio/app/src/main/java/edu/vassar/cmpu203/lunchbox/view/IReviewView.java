@@ -4,6 +4,7 @@ import edu.vassar.cmpu203.lunchbox.model.Review;
 
 public interface IReviewView {
     interface Listener {
-        public void onManageReview(Review rev);
+        public void onNavigateToEditReview(Review rev);
+        public void onDeleteReview(Review rev);
     }
 }

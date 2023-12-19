@@ -41,24 +41,30 @@
         android:textColor="@android:color/darker_gray"
         android:textSize="14sp" />
 
-    <!-- Edit Button -->
-    <ImageButton
-        android:id="@+id/editButton"
+    <!-- Horizontal LinearLayout for Icons -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_marginTop="16dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:src="@android:drawable/ic_menu_edit" />
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
 
-    <!-- Delete Button -->
-    <ImageButton
-        android:id="@+id/deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_marginTop="16dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:src="@android:drawable/ic_menu_delete" />
+        <!-- Edit Button -->
+        <ImageButton
+            android:id="@+id/editButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@android:drawable/ic_menu_edit" />
+
+        <!-- Delete Button -->
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@android:drawable/ic_menu_delete"
+            android:layout_marginStart="16dp" />
+
+    </LinearLayout>
 
 </LinearLayout>

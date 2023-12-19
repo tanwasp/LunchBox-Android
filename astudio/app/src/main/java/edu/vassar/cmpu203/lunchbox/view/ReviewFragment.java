@@ -56,46 +56,31 @@ public class ReviewFragment extends Fragment implements IReviewView {
         String formattedDate = dateFormat.format(review.getDate());
         binding.dateView.setText(formattedDate);
 
+
+        // Check if the current user's ID matches the user ID that made the review
+        if (user != null && user.getUid().equals(review.getUid())) {
+            // User's ID matches, so set the edit and delete buttons visible
+            binding.editButton.setVisibility(View.VISIBLE);
+            binding.deleteButton.setVisibility(View.VISIBLE);
         // Set onClickListener for the edit button
         binding.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Show the bottom sheet dialog with edit/delete options
-                showOptionsBottomSheet();
+                listener.onNavigateToEditReview(review);
             }
         });
-    }
 
-    private void showOptionsBottomSheet() {
-        // Create an instance of the BottomSheetDialog
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
-
-        // Inflate the bottom sheet layout
-        View bottomSheetView = getLayoutInflater().inflate(R.layout.fragment_manage_review, null);
-
-        // Set onClickListeners for the options (Edit and Delete)
-        bottomSheetView.findViewById(R.id.editOption).setOnClickListener(new View.OnClickListener() {
+        binding.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bottomSheetDialog.dismiss(); // Dismiss the bottom sheet
-                // Call the listener method for editing the review
-                listener.onManageReview(review);
+                listener.onDeleteReview(review);
             }
         });
+        } else {
+            // User's ID does not match, so hide the edit and delete buttons
+            binding.editButton.setVisibility(View.GONE);
+            binding.deleteButton.setVisibility(View.GONE);
+        }
 
-        bottomSheetView.findViewById(R.id.deleteOption).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomSheetDialog.dismiss(); // Dismiss the bottom sheet
-                // You can implement the logic for deleting the review here
-                Toast.makeText(requireContext(), "Review deleted", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Set the inflated view to the bottom sheet
-        bottomSheetDialog.setContentView(bottomSheetView);
-
-        // Show the bottom sheet dialog
-        bottomSheetDialog.show();
     }
 }

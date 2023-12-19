@@ -80,7 +80,7 @@ import edu.vassar.cmpu203.lunchbox.view.IUserProfileView;
 
 import edu.vassar.cmpu203.lunchbox.view.*;
 
-public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchLocationView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileView.Listener, ILandingView.Listener, IReviewView.Listener, IManageReviewView.Listener {
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchLocationView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileView.Listener, ILandingView.Listener, IReviewView.Listener {
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
     RestaurantNames restaurantNames;
@@ -739,12 +739,14 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         navigateToFragment(revFragment, true, "review", 1);
     }
 
-    public void onManageReview(Review rev){
+    public void onNavigateToEditReview(Review review){
+        ManageReviewFragment revEditFragment = new ManageReviewFragment();
+        navigateToFragment(revEditFragment, true, "edit review", 1);
     }
-    public void onEditReviewSelected(){
 
+    public void onDeleteReview(Review review){
+        //deletes the review from everywhere
+        //ideally ask confirmation
     }
-    public void onDeleteReviewSelected(){
 
-    }
 }
