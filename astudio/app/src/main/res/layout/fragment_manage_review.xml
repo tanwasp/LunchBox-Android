@@ -1,0 +1,29 @@
+<!-- res/layout/bottom_sheet_review_options.xml -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/editOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Edit Review"
+        android:gravity="center"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground"/>
+
+    <TextView
+        android:id="@+id/deleteOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Delete Review"
+        android:gravity="center"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground"/>
+
+</LinearLayout>
