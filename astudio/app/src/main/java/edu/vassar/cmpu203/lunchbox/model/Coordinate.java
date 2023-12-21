@@ -79,9 +79,11 @@ public class Coordinate implements Serializable {
     }
 
     public String getAddress(Context context) {
+        System.out.println("Getting address from coordinates: " + this.toString());
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocation(this.lat, this.lon, 1);
+            System.out.println("Got addresses: " + addresses);
             if (!addresses.isEmpty()) {
                 Address address = addresses.get(0);
                 return address.getLocality(); // Or other parts of the address

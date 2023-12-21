@@ -76,19 +76,26 @@ public class HomeFragment extends Fragment implements IHomeView {
             });
 
 
-            float lat = 41.694003f;
-            float lon = -73.901670f;
+
+            float lat = 37.421997f;
+            float lon = -122.084f;
+
             Coordinate coordinate = new Coordinate(lat, lon);
             // Get address from coordinates
-            String address = coordinate.getAddress(getContext());
-
+//            Coordinate coordinate = activity.getUserCoordinates();
+            String address;
+            if (coordinate == null) {
+                Snackbar.make(view, "Location not found", Snackbar.LENGTH_LONG).show();
+                address = "Location not found";
+            } else {
+                address = coordinate.getAddress(getContext());
+            }
             updateLocationInView(tvLocation, address);
             tvLocation.setOnClickListener(v -> {
                 // Handle TextView click
                 listener.onNavigateToSearchLocation();
             });
         }
-
     }
 
     @Override

@@ -52,6 +52,7 @@ import android.util.Log;
 
 import edu.vassar.cmpu203.lunchbox.BuildConfig;
 import edu.vassar.cmpu203.lunchbox.R;
+import edu.vassar.cmpu203.lunchbox.model.Coordinate;
 import edu.vassar.cmpu203.lunchbox.model.IFilter;
 import edu.vassar.cmpu203.lunchbox.model.LocFilter;
 import edu.vassar.cmpu203.lunchbox.model.PriceFilter;
@@ -134,80 +135,51 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     /**
-     * updates UI based on current fragment
-     * responsible for hiding and showing app bar and locking and unlocking navigation drawer
+     * updates current user location
+     *
+     * @param latitude
+     * @param longitude
      */
-
-    public void updateUIBasedOnCurrentFragment() {
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
-        System.out.println("currentFragment is " + currentFragment);
-        mainView.customizeAppBar(this);
-        if (currentFragment != null) {
-            DrawerLayout drawerLayout = mainView.getDrawerLayout();
-
-            if (currentFragment instanceof HomeFragment || currentFragment instanceof UserProfileFragment) {
-                mainView.showAppBar();
-//                mainView.showHamburgerIcon(this);
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-            }
-//            else {
-//                mainView.showBackButton(this);
-//                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-//            }
-            else {
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                mainView.showInnerAppBar(this);
-//                mainView.hideAppBar();
-            }
+    private void updateCurrentUserLocation(float latitude, float longitude) {
+        if (curUser != null) {
+            curUser.setLoc(latitude, longitude);
         }
-    if (currentFragment instanceof HomeFragment) {
-        updateActionBarTitle("Home");
-    } else if (currentFragment instanceof UserProfileFragment){
-        updateActionBarTitle(curUser.getUsername());
-    } else if (currentFragment instanceof SearchFragment){
-        updateActionBarTitle("");
-    } else if (currentFragment instanceof RestaurantFragment){
-//        updateActionBarTitle(((RestaurantFragment) currentFragment).getRestaurant().getName());
-    } else if (currentFragment instanceof AddReviewFragment){
-        updateActionBarTitle("Add Review");
-    } else if (currentFragment instanceof AddRestaurantFragment){
-        updateActionBarTitle("Add Restaurant");
-    } else if (currentFragment instanceof LandingFragment){
-        updateActionBarTitle("Landing");
-    } else if (currentFragment instanceof SearchLocationFragment){
-        updateActionBarTitle("Location");
-//    } else if (currentFragment instanceof FriendsFragment){
-//        updateActionBarTitle("Friends");
     }
-    }
-
 
     /**
-     * responsible for navigating between navigation drawer fragments
+     * requests location permission
      */
-
     @Override
-    public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(this.mainView.getNavController(), this.mainView.getAppBarConfiguration())
-                || super.onSupportNavigateUp();
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            fetchLastLocation();
+        } else {
+            System.out.println("Location permission denied");
+        }
     }
 
     /**
-     * navigates to home fragment if firebase user is signed in
-     * navigates to landing fragment if firebase user is not signed in
+     * starts location updates
      */
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseAuth.getInstance().addAuthStateListener(authStateListener);
+        setupLocationService();
+    }
 
-
-    private void navigateBasedOnAuthenticationStatus() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            // User is signed in, navigate to HomeFragment
-            updateCurrentUser(currentUser);
-            onNavigateToHome();
-        } else {
-            // No user is signed in, navigate to LandingView
-            LandingFragment landingFragment = new LandingFragment(this);
-            navigateToFragment(landingFragment, false, "land", 0);
+    /**
+     * stops location updates and removes auth state listener
+     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (fusedLocationClient != null && locationCallback != null) {
+            fusedLocationClient.removeLocationUpdates(locationCallback);
+        }
+        if (authStateListener != null) {
+            FirebaseAuth.getInstance().removeAuthStateListener(authStateListener);
         }
     }
 
@@ -237,27 +209,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         }
     }
 
-    /**
-     * overrides onbackepressed to update ui based on current fragment
-     */
-    @Override
-    public void onBackPressed() {
-        // Call the super method to handle the back button press as usual
-        Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("profile");
-        if (currentFragment != null && currentFragment.isVisible()) {
-            onBackToHome();
-        } else {
-            super.onBackPressed();
-            getSupportFragmentManager().executePendingTransactions();
-            // Now update the UI based on the current fragment
-            updateUIBasedOnCurrentFragment();
-        }
-    }
 
-    private void onBackToHome() {
-        mainView.clearBackStack();
-        onNavigateToHome();
-    }
 
     /**
      * fetches last location
@@ -348,53 +300,27 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     /**
-     * updates current user location
-     *
-     * @param latitude
-     * @param longitude
-     */
-    private void updateCurrentUserLocation(float latitude, float longitude) {
-        if (curUser != null) {
-            curUser.setLoc(latitude, longitude);
-        }
-    }
-
-    /**
-     * requests location permission
+     * overrides onbackepressed to update ui based on current fragment
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            fetchLastLocation();
+    public void onBackPressed() {
+        // Call the super method to handle the back button press as usual
+        Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("profile");
+        if (currentFragment != null && currentFragment.isVisible()) {
+            onBackToHome();
         } else {
-            System.out.println("Location permission denied");
+            super.onBackPressed();
+            getSupportFragmentManager().executePendingTransactions();
+            // Now update the UI based on the current fragment
+            updateUIBasedOnCurrentFragment();
         }
     }
 
-    /**
-     * starts location updates
-     */
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseAuth.getInstance().addAuthStateListener(authStateListener);
-        setupLocationService();
+    private void onBackToHome() {
+        mainView.clearBackStack();
+        onNavigateToHome();
     }
 
-    /**
-     * stops location updates and removes auth state listener
-     */
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (fusedLocationClient != null && locationCallback != null) {
-            fusedLocationClient.removeLocationUpdates(locationCallback);
-        }
-        if (authStateListener != null) {
-            FirebaseAuth.getInstance().removeAuthStateListener(authStateListener);
-        }
-    }
 
     // HomeView.Listener methods
 
@@ -406,6 +332,93 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
         SearchFragment searchFragment = new SearchFragment(this);
         navigateToFragment(searchFragment, true, "search", 0);
 //        updateActionBarTitle("");
+    }
+
+    /**
+     * updates UI based on current fragment
+     * responsible for hiding and showing app bar and locking and unlocking navigation drawer
+     */
+
+    public void updateUIBasedOnCurrentFragment() {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
+        System.out.println("currentFragment is " + currentFragment);
+        mainView.customizeAppBar(this);
+        if (currentFragment != null) {
+            DrawerLayout drawerLayout = mainView.getDrawerLayout();
+
+            if (currentFragment instanceof HomeFragment || currentFragment instanceof UserProfileFragment) {
+                mainView.showAppBar();
+//                mainView.showHamburgerIcon(this);
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            }
+//            else {
+//                mainView.showBackButton(this);
+//                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//            }
+            else if (currentFragment instanceof LandingFragment) {
+                mainView.hideAppBar();
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            }
+            else {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                mainView.showInnerAppBar(this);
+//                mainView.hideAppBar();
+            }
+        }
+        if (currentFragment instanceof HomeFragment) {
+            updateActionBarTitle("Home");
+        } else if (currentFragment instanceof UserProfileFragment){
+            updateActionBarTitle(curUser.getUsername());
+        } else if (currentFragment instanceof SearchFragment){
+            updateActionBarTitle("");
+        } else if (currentFragment instanceof RestaurantFragment){
+//        updateActionBarTitle(((RestaurantFragment) currentFragment).getRestaurant().getName());
+        } else if (currentFragment instanceof AddReviewFragment){
+            updateActionBarTitle("Add Review");
+        } else if (currentFragment instanceof AddRestaurantFragment){
+            updateActionBarTitle("Add Restaurant");
+        } else if (currentFragment instanceof LandingFragment){
+            updateActionBarTitle("");
+        } else if (currentFragment instanceof SearchLocationFragment){
+            updateActionBarTitle("Location");
+//    } else if (currentFragment instanceof FriendsFragment){
+//        updateActionBarTitle("Friends");
+        } else if (currentFragment instanceof ReviewFragment) {
+            updateActionBarTitle("Review");
+        }
+//    } else if (currentFragment instanceof ManageReviewFragment){
+//        updateActionBarTitle("Edit Review");
+//    }
+    }
+
+
+    /**
+     * responsible for navigating between navigation drawer fragments
+     */
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(this.mainView.getNavController(), this.mainView.getAppBarConfiguration())
+                || super.onSupportNavigateUp();
+    }
+
+    /**
+     * navigates to home fragment if firebase user is signed in
+     * navigates to landing fragment if firebase user is not signed in
+     */
+
+
+    private void navigateBasedOnAuthenticationStatus() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            // User is signed in, navigate to HomeFragment
+            updateCurrentUser(currentUser);
+            onNavigateToHome();
+        } else {
+            // No user is signed in, navigate to LandingView
+            LandingFragment landingFragment = new LandingFragment(this);
+            navigateToFragment(landingFragment, false, "land", 0);
+        }
     }
 
     // SearchView.Listener methods
@@ -736,7 +749,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
     public void onNavigateToReview(Review rev){
         ReviewFragment revFragment = new ReviewFragment(this, rev, curUser);
-        navigateToFragment(revFragment, true, "review", 1);
+        navigateToFragment(revFragment, true, "review", 0);
     }
 
     public void onNavigateToEditReview(Review review){
@@ -747,6 +760,10 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     public void onDeleteReview(Review review){
         //deletes the review from everywhere
         //ideally ask confirmation
+    }
+
+    public Coordinate getUserCoordinates(){
+        return curUser.getLoc();
     }
 
 }
