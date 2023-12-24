@@ -47,6 +47,7 @@
     <string name="comment_hint">Enter your review here</string>
     <string name="price_symbol_label">Price Symbol</string>
     <string name="add_review_button">Add Review</string>
+    <string name="update_review_button">Update Review</string>
 
     <string name="add_restaurant_heading">Add Restaurant</string>
     <string name="restaurant_name_label">Restaurant Name</string>
