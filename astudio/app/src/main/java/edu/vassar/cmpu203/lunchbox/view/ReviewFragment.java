@@ -73,7 +73,7 @@ public class ReviewFragment extends Fragment implements IReviewView {
         binding.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onDeleteReview(review);
+                showDeleteConfirmationDialog();
             }
         });
         } else {
@@ -82,5 +82,35 @@ public class ReviewFragment extends Fragment implements IReviewView {
             binding.deleteButton.setVisibility(View.GONE);
         }
 
+    }
+
+    // Method to show delete confirmation dialog
+    private void showDeleteConfirmationDialog() {
+        View bottomSheetView = LayoutInflater.from(getContext()).inflate(R.layout.bottom_sheet_delete_confirmation, null);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
+        bottomSheetDialog.setContentView(bottomSheetView);
+
+        // Set onClickListener for the confirm delete button
+        bottomSheetView.findViewById(R.id.confirmDeleteButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dismiss the dialog
+                bottomSheetDialog.dismiss();
+                // Notify the listener to delete the review
+                listener.onDeleteReview(review);
+            }
+        });
+
+        // Set onClickListener for the cancel button
+        bottomSheetView.findViewById(R.id.cancelDeleteButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dismiss the dialog
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        // Show the bottom sheet dialog
+        bottomSheetDialog.show();
     }
 }

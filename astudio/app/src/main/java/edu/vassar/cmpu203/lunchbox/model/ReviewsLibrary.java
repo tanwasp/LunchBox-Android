@@ -118,6 +118,35 @@ public class ReviewsLibrary {
     }
 
     /**
+     * Updates a review in the Reviews Library.
+     *
+     * @param updatedReview The updated Review object.
+     */
+    public void updateReviewInReviewsLibrary(Review updatedReview) {
+        String reviewId = updatedReview.getReviewId();
+        if (data.containsKey(reviewId)) {
+            // Remove the existing review
+            data.remove(reviewId);
+            // Add the updated review
+            data.put(reviewId, updatedReview);
+        } else {
+            // Handle the case where the review doesn't exist in the library
+            System.out.println("Review with ID " + reviewId + " not found in the library.");
+        }
+    }
+
+    /**
+     * Removes a review from the Reviews Library.
+     *
+     * @param review The Review object to be removed.
+     */
+    public void removeReviewFromReviewsLibrary(Review review) {
+        String reviewId = review.getReviewId();
+        this.data.remove(reviewId);
+    }
+
+
+    /**
      * Loads a set of sample reviews into the library.
      */
 //    private void loadReviews() {

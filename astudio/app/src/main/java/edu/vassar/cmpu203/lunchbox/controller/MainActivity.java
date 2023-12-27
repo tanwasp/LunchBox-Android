@@ -753,17 +753,87 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     public void onNavigateToEditReview(Review review){
-        ManageReviewFragment revEditFragment = new ManageReviewFragment(this);
+        ManageReviewFragment revEditFragment = new ManageReviewFragment(this, review);
         navigateToFragment(revEditFragment, true, "edit review", 1);
-    }
-
-    public void onDeleteReview(Review review){
-        //deletes the review from everywhere
-        //ideally ask confirmation
     }
 
     public Coordinate getUserCoordinates(){
         return curUser.getLoc();
     }
+
+    /**
+     * Updates review in review library and updates review in Firestore
+     *
+     * @param existingReview The existing review to be updated.
+     * @param updatedRating  The updated rating.
+     * @param updatedComment The updated comment.
+     * @param updatedPrice   The updated price symbol.
+     */
+    public void onUpdateReview(Review existingReview, float updatedRating, String updatedComment, int updatedPrice) {
+        // Update the existing review with new data
+        existingReview.setRating(updatedRating);
+        existingReview.setBody(updatedComment);
+        existingReview.setPriceRange(updatedPrice);
+
+        // Use FStoreReviewsDataRepo to update the review in Firestore
+        updateReviewInFirestore(existingReview);
+
+        // Update restaurant details after updating the review
+        revLib.updateReviewInReviewsLibrary(existingReview);
+        Restaurant restaurant = lib.getRestaurant(existingReview.getRestaurantId());
+        if (restaurant != null) {
+            restaurant.computeRating(revLib);
+            restaurant.computePriceRange(revLib);
+            onNavigateToRestaurant(restaurant, true, 2);
+        }
+    }
+
+    /**
+     * Updates review in Firestore
+     *
+     * @param updatedReview The updated review.
+     */
+    public void updateReviewInFirestore(Review updatedReview) {
+        FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
+        repo.updateReview(updatedReview, new IDataRepositoryCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                System.out.println("Successfully updated review in Firestore");
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println("Failed to update review in Firestore: " + e.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void onDeleteReview(Review review) {
+        // Remove the review from the ReviewsLibrary
+        revLib.removeReviewFromReviewsLibrary(review);
+
+        // Remove the review from Firestore
+        deleteReviewFromFirestore(review);
+
+        // Navigate back to the restaurant's page
+        onNavigateToRestaurant(lib.getRestaurant(review.getRestaurantId()), true, 1);
+    }
+
+    private void deleteReviewFromFirestore(Review review) {
+        FStoreReviewsDataRepo repo = new FStoreReviewsDataRepo();
+        repo.deleteReview(review, new IDataRepositoryCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                Log.d(TAG, "Successfully deleted review from Firestore");
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.e(TAG, "Failed to delete review from Firestore: " + e.getMessage());
+            }
+        });
+    }
+
 
 }

@@ -86,4 +86,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_profile">Profile</string>
 
+    <string name="confirm_delete_message">Are you sure you want to delete this item?</string>
+    <string name="confirm_delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
 </resources>

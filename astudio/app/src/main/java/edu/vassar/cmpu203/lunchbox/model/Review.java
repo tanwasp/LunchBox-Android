@@ -137,6 +137,10 @@ public class Review implements Serializable {
         return body;
     }
 
+    public void setBody(String newBody){
+        this.body = newBody;
+    }
+
     /**
      * Retrieves the price assignment given in the review
      *
@@ -202,5 +206,12 @@ public class Review implements Serializable {
         return output.toString();
     }
 
+    public void setRating(float updatedRating) {
+        this.rating = updatedRating;
+    }
+
+    public void setPriceRange(int updatedPrice) {
+        this.priceRange = updatedPrice;
+    }
 }
 

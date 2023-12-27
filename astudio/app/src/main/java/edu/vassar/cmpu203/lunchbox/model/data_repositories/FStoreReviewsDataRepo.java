@@ -110,4 +110,49 @@ public class FStoreReviewsDataRepo implements IReviewsDataRepo{
                     }
                 });
     }
+
+    public void updateReview(Review updatedReview, IDataRepositoryCallback callback) {
+        FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
+        DocumentReference reviewDocRef = db.collection("reviews").document(updatedReview.getReviewId());
+
+        Map<String, Object> reviewData = new HashMap<>();
+        reviewData.put("firebaseUid", updatedReview.getUid());
+        reviewData.put("username", updatedReview.getUsername());
+        reviewData.put("restaurantId", updatedReview.getRestaurantId());
+        reviewData.put("rating", updatedReview.getRating());
+        reviewData.put("body", updatedReview.getBody());
+        reviewData.put("priceRange", updatedReview.getPriceRange());
+        reviewData.put("Date", updatedReview.getDate());
+        reviewData.put("restaurantName", updatedReview.getRestaurantName());
+
+        reviewDocRef.set(reviewData)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        callback.onSuccess(task.getResult());
+                    } else {
+                        callback.onFailure(task.getException());
+                    }
+                });
+    }
+
+    /**
+     * Deletes a review from the database.
+     *
+     * @param review   The review to delete.
+     * @param callback The callback to call when the operation is complete.
+     */
+    public void deleteReview(Review review, IDataRepositoryCallback callback) {
+        FirebaseFirestore db = FirestoreSingleton.getInstance().getFirestore();
+        DocumentReference reviewDocRef = db.collection("reviews").document(review.getReviewId());
+
+        reviewDocRef.delete()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        callback.onSuccess(task.getResult());
+                    } else {
+                        callback.onFailure(task.getException());
+                    }
+                });
+    }
+
 }

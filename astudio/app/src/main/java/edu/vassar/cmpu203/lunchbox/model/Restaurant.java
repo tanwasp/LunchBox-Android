@@ -472,6 +472,7 @@ public class Restaurant implements Serializable {
     public void setDistanceToUser(float distanceToUser) {
         this.distanceToUser = distanceToUser;
     }
+
 }
 
 
