@@ -852,7 +852,14 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
     }
 
     public void onNavigateToUserProfile(User u){
-
+        List<Review> reviewsList = revLib.getReviewsByUser(u);
+        logUserProfileNavigation(reviewsList);
+        UserProfileFragment profileFragment = UserProfileFragment.newInstance(u, new ArrayList<>(reviewsList));
+        navigateToFragment(profileFragment, true, "user profile", 0);
+        updateActionBarTitle(u.getUsername());
+        mainView.getDrawerLayout().setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        mainView.showInnerAppBar(this);
+        closeNavigationDrawer();
     }
 
 
