@@ -20,6 +20,7 @@ import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.databinding.FragmentSearchBinding;
+import edu.vassar.cmpu203.lunchbox.databinding.FragmentSearchUsersBinding;
 import edu.vassar.cmpu203.lunchbox.model.User;
 import edu.vassar.cmpu203.lunchbox.view.recyclerview.UserAdapter;
 
@@ -28,7 +29,7 @@ import edu.vassar.cmpu203.lunchbox.view.recyclerview.UserAdapter;
  */
 public class SearchUsersFragment extends Fragment implements ISearchUsersView, UserAdapter.OnItemClickListener {
 
-    private FragmentSearchBinding binding;
+    private FragmentSearchUsersBinding binding;
     private final Listener listener;
     private UserAdapter userAdapter;
     private RecyclerView searchResultsRecyclerView;
@@ -39,7 +40,7 @@ public class SearchUsersFragment extends Fragment implements ISearchUsersView, U
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.binding = FragmentSearchBinding.inflate(inflater);
+        this.binding = FragmentSearchUsersBinding.inflate(inflater);
         return this.binding.getRoot();
 
     }
@@ -55,7 +56,7 @@ public class SearchUsersFragment extends Fragment implements ISearchUsersView, U
         searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         // Initialize your adapter with an empty list or null
-        UserAdapter userAdapter = new UserAdapter(view.getContext(), new ArrayList<>(), this);
+        userAdapter = new UserAdapter(view.getContext(), new ArrayList<>(), this);
         searchResultsRecyclerView.setAdapter(userAdapter);
     }
 
@@ -105,7 +106,7 @@ public class SearchUsersFragment extends Fragment implements ISearchUsersView, U
             }
         });
 
-        SearchView searchUserView = toolbarSearch.findViewById(R.id.searchRestaurantView);
+        SearchView searchUserView = toolbarSearch.findViewById(R.id.searchUserView);
         int searchEditTextId = androidx.appcompat.R.id.search_src_text;
         SearchView.SearchAutoComplete searchEditText = (SearchView.SearchAutoComplete) searchUserView.findViewById(searchEditTextId);
         searchEditText.setTextColor(getResources().getColor(android.R.color.white));

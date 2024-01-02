@@ -17,6 +17,7 @@ public class UserLibrary {
      */
     public UserLibrary() {
         this.data = new HashMap<>();
+        this.loadUsers();
     }
 
     /**
@@ -81,14 +82,24 @@ public class UserLibrary {
     }
 
     /**
-     * Loads a list of users into the User Library.
+     * Loads sample users into the User Library.
      *
-     * @param users The list of User objects to be loaded.
      */
-    public void loadUsers(List<User> users) {
-        for (User user : users) {
-            data.put(user.getUid(), user);
-        }
-        //System.out.println("Loaded " + data.size() + " users.");
-    }
+     private void loadUsers() {
+         User u1 = new User("John", -90, 30);
+         this.data.put("user1", u1);
+
+         User u2 = new User("Mary", -90, 30);
+         this.data.put("user2", u2);
+
+         User u3 = new User("kitty123", -90, 30);
+         this.data.put("user3", u3);
+
+         User u4 = new User("sexy456", -90, 30);
+         this.data.put("user4", u4);
+
+         User u5 = new User("moxy789", -90, 30);
+         this.data.put("user5", u5);
+     }
+
 }

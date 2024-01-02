@@ -388,6 +388,8 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 //        updateActionBarTitle("Friends");
         } else if (currentFragment instanceof ReviewFragment) {
             updateActionBarTitle("Review");
+        } else if (currentFragment instanceof SearchUsersFragment) {
+            updateActionBarTitle("");
         }
 //    } else if (currentFragment instanceof ManageReviewFragment){
 //        updateActionBarTitle("Edit Review");
