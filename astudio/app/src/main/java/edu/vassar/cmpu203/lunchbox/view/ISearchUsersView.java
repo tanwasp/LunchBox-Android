@@ -25,10 +25,6 @@ public interface ISearchUsersView {
          */
         void onNavigateToUserProfile(User user);
 
-        /**
-         * Navigates to add user fragment.
-         */
-        void onNavigateToAddUser();
     }
 
     /**

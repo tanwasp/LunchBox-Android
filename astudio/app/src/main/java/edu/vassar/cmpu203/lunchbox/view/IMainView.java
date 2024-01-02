@@ -13,6 +13,7 @@ import java.util.List;
 
 import edu.vassar.cmpu203.lunchbox.controller.MainActivity;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
+import edu.vassar.cmpu203.lunchbox.model.User;
 
 /**
  * An interface for the application screen template.
@@ -41,6 +42,8 @@ public interface IMainView {
      * @param searchResults The restaurants to be displayed
      */
     void displaySearchResults(List<Restaurant> searchResults);
+
+    void displayUserSearchResults(List<User> searchResults);
 
     void clearBackStack();
 

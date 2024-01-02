@@ -83,11 +83,6 @@ public class SearchUsersFragment extends Fragment implements ISearchUsersView, U
         listener.onNavigateToUserProfile(user);
     }
 
-    @Override
-    public void onNavigateToAddUser() {
-        listener.onNavigateToAddUser();
-    }
-
     private void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (inputMethodManager != null && view != null) {

@@ -62,6 +62,7 @@ import edu.vassar.cmpu203.lunchbox.model.RestaurantNames;
 import edu.vassar.cmpu203.lunchbox.model.Review;
 import edu.vassar.cmpu203.lunchbox.model.ReviewsLibrary;
 import edu.vassar.cmpu203.lunchbox.model.User;
+import edu.vassar.cmpu203.lunchbox.model.UserLibrary;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.FStoreRestaurantDataRepo;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.FStoreReviewsDataRepo;
 import edu.vassar.cmpu203.lunchbox.model.data_repositories.IDataRepositoryCallback;
@@ -81,9 +82,10 @@ import edu.vassar.cmpu203.lunchbox.view.IUserProfileView;
 
 import edu.vassar.cmpu203.lunchbox.view.*;
 
-public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchLocationView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileView.Listener, ILandingView.Listener, IReviewView.Listener, IManageReviewView.Listener {
+public class MainActivity extends AppCompatActivity implements IHomeView.Listener, ISearchLocationView.Listener, IAddRestaurantView.Listener, ISearchView.Listener, IRestaurantView.Listener, IAddReviewView.Listener, IUserProfileView.Listener, ILandingView.Listener, IReviewView.Listener, IManageReviewView.Listener, ISearchUsersView.Listener {
     private static RestaurantLibrary lib;
     private static ReviewsLibrary revLib;
+    private static UserLibrary uLib;
     RestaurantNames restaurantNames;
     private User curUser;
     IMainView mainView;
@@ -117,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
 
         lib = new RestaurantLibrary();
         revLib = new ReviewsLibrary();
+        uLib = new UserLibrary();
         loadReviews();
 
         System.out.println("API Key from build config is" + BuildConfig.PLACES_API_KEY);
@@ -833,6 +836,21 @@ public class MainActivity extends AppCompatActivity implements IHomeView.Listene
                 Log.e(TAG, "Failed to delete review from Firestore: " + e.getMessage());
             }
         });
+    }
+
+    public void onNavigateToSearchUsers(){
+        SearchUsersFragment searchUsersFragment = new SearchUsersFragment(this);
+        navigateToFragment(searchUsersFragment, true, "search users", 0);
+    }
+
+    @Override
+    public void onPerformUserSearch(String searchTerm) {
+        ArrayList<User> matches = uLib.search(searchTerm);
+        this.mainView.displayUserSearchResults(matches);
+    }
+
+    public void onNavigateToUserProfile(User u){
+
     }
 
 

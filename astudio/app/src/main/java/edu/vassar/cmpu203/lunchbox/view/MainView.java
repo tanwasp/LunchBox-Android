@@ -32,6 +32,7 @@ import edu.vassar.cmpu203.lunchbox.R;
 import edu.vassar.cmpu203.lunchbox.controller.MainActivity;
 import edu.vassar.cmpu203.lunchbox.databinding.MainBinding;
 import edu.vassar.cmpu203.lunchbox.model.Restaurant;
+import edu.vassar.cmpu203.lunchbox.model.User;
 
 /**
  * View fragment that allows users navigate between fragments.
@@ -227,6 +228,18 @@ public class MainView implements IMainView{
         if (currentFragment instanceof SearchFragment) {
             ((SearchFragment) currentFragment).updateSearchResults(searchResults);
             ((SearchFragment)currentFragment).showNoResultsMessage(searchResults.isEmpty());
+        }
+    }
+
+    /**
+     * Displays the user details screen.
+     * @param searchResults
+     */
+    public void displayUserSearchResults(List<User> searchResults) {
+        Fragment currentFragment = fmanager.findFragmentByTag("search users");
+        if (currentFragment instanceof SearchUsersFragment) {
+            ((SearchUsersFragment) currentFragment).updateSearchResults(searchResults);
+            ((SearchUsersFragment)currentFragment).showNoResultsMessage(searchResults.isEmpty());
         }
     }
 

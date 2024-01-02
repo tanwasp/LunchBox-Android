@@ -17,7 +17,6 @@ public class UserLibrary {
      */
     public UserLibrary() {
         this.data = new HashMap<>();
-        // Load users if needed
     }
 
     /**

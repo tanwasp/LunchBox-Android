@@ -11,6 +11,8 @@ public interface IHomeView {
     interface Listener{
         void onNavigateToSearch();
 
+        void onNavigateToSearchUsers();
+
         void getUserReviewsNavToProfile();
         //void onNavigateToNotifications();
         //void onNavigateToFindFriends();

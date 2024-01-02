@@ -72,10 +72,11 @@ public class HomeFragment extends Fragment implements IHomeView {
             this.binding.btnNavigateToSearch.setOnClickListener(v -> {
                 tvLocation.setVisibility(View.GONE);
                 listener.onNavigateToSearch();
-
             });
 
-
+            this.binding.btnSearchUsers.setOnClickListener(v -> {
+                listener.onNavigateToSearchUsers();
+            });
 
             float lat = 37.421997f;
             float lon = -122.084f;

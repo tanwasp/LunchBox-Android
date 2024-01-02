@@ -21,7 +21,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private final OnItemClickListener listener;
 
     public interface OnItemClickListener {
-        void onItemClick(User user);
+        void onNavigateToUserProfile(User user);
     }
 
     public UserAdapter(Context context, List<User> userList, OnItemClickListener listener) {
@@ -68,7 +68,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(user);
+                    listener.onNavigateToUserProfile(user);
                 }
             });
         }
