@@ -1,0 +1,95 @@
+package edu.vassar.cmpu203.lunchbox.model;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * Represents all users stored in the app.
+ */
+public class UserLibrary {
+
+    private HashMap<String, User> data;
+
+    /**
+     * Constructor for UserLibrary.
+     * Initializes the data map and loads users.
+     */
+    public UserLibrary() {
+        this.data = new HashMap<>();
+        // Load users if needed
+    }
+
+    /**
+     * Adds a new user to the User Library with the specified details.
+     *
+     * @param name The username of the user.
+     * @param lat  The latitude of the user's location.
+     * @param lon  The longitude of the user's location.
+     * @return The new User object added to the library.
+     */
+    public User addUser(String name, float lat, float lon) {
+        String uid = "user" + (data.size() + 1);
+        User user = new User(name, lat, lon);
+        data.put(uid, user);
+        return user;
+    }
+
+    /**
+     * Searches the User Library for users that match a given search term.
+     *
+     * @param term     The search term to match against user names.
+     * @return An ArrayList of User objects that match the search criteria.
+     */
+    public ArrayList<User> search(String term) {
+        ArrayList<User> matches = new ArrayList<>();
+
+        for (User user : data.values()) {
+            if (user.getUsername().toLowerCase().contains(term.toLowerCase())) {
+                matches.add(user);
+            }
+        }
+
+        return matches;
+    }
+
+    /**
+     * Gets a user from the User Library that matches the ID.
+     *
+     * @param uid The unique identifier of the user.
+     * @return The User object corresponding to the given identifier.
+     */
+    public User getUser(String uid) {
+        return data.get(uid);
+    }
+
+    /**
+     * Retrieves the total number of users in the User Library.
+     *
+     * @return The number of users in the library.
+     */
+    public int getNumUsers() {
+        return data.size();
+    }
+
+    /**
+     * Retrieves the entire user library.
+     *
+     * @return The user library.
+     */
+    public HashMap<String, User> getLib() {
+        return data;
+    }
+
+    /**
+     * Loads a list of users into the User Library.
+     *
+     * @param users The list of User objects to be loaded.
+     */
+    public void loadUsers(List<User> users) {
+        for (User user : users) {
+            data.put(user.getUid(), user);
+        }
+        //System.out.println("Loaded " + data.size() + " users.");
+    }
+}
