@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
-        android:text="@string/no_results_message"
+        android:text="@string/no_user_results_message"
         android:textSize="16sp"
         android:visibility="gone"
 

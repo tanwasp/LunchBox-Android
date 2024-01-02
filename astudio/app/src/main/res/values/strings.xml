@@ -39,6 +39,7 @@
     <string name="welcome_to_lunchbox">Welcome to LunchBox!!</string>
     <string name="sort_label">Sort by</string>
     <string name="no_results_message">Sorry, no restaurants match the given criteria</string>
+    <string name="no_user_results_message">Sorry, no users match the given username</string>
     <string name="navigateToPostReview_button_label">Add Review</string>
 
     <string name="add_review_heading">Add Review</string>
@@ -69,7 +70,8 @@
 
     <string name="profile_username">Username</string>
     <string name="profile_date">Date Joined</string>
-    <string name="profile_friends_button">Friends</string>
+    <string name="profile_friends_button">See Friends</string>
+    <string name="add_friends_button">Add Friend</string>
 
     <string name="notifications_label">Notifications</string>
 
