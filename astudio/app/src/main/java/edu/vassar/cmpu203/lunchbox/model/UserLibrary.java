@@ -86,19 +86,19 @@ public class UserLibrary {
      *
      */
      private void loadUsers() {
-         User u1 = new User("John", -90, 30);
+         User u1 = new User("tantan", "8RnivNWBJaXuuJuxmjUBDs135k22", "tantan@vassar.edu");
          this.data.put("user1", u1);
 
-         User u2 = new User("Mary", -90, 30);
+         User u2 = new User("john315", "3JArusqULKYOhCNymKnEQl1fW343", "john315@gmail.com");
          this.data.put("user2", u2);
 
-         User u3 = new User("kitty123", -90, 30);
+         User u3 = new User("caroline", "9QglEotpA9M3WFusfVnQ2HZsZFT2", "caroak@gmail.com");
          this.data.put("user3", u3);
 
-         User u4 = new User("sexy456", -90, 30);
+         User u4 = new User("sexy", "mW9ywJovzpeW65xfhRo0NBbwCDp1", "sexy@gmail.com");
          this.data.put("user4", u4);
 
-         User u5 = new User("moxy789", -90, 30);
+         User u5 = new User("kitty", "m3RvxYAgpKMGrTukwzhgvmN3HwU2", "kittykat@gmail.com");
          this.data.put("user5", u5);
      }
 
