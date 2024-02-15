@@ -10,7 +10,7 @@ Lunch Box is a restaurant reviewing app that allows users to record, rate, and s
 
 ## Project Status
 
-Current functioality includes searching restaurants, viewing a restaurant's profile, leaving reviews, adding restaurants, creating an account, logging into it, viewing your profile (with your reviews), and log out. Data persistence and account authentication is implemented using Firebase.
+Current functionality includes searching restaurants, viewing a restaurant's profile, leaving reviews, adding restaurants, creating an account, logging into it, viewing your profile (with your reviews), and log out. Data persistence and account authentication is implemented using Firebase.
 
 Current simplifications include a limited built-in set of existing restaurants and fake reviews.
 
@@ -21,8 +21,8 @@ Current simplifications include a limited built-in set of existing restaurants a
 * Build and run in android studio
 * Enjoy!
 
+Primary code can be found in astudio/app/src/main/java/edu/vassar/cmpu203/lunchbox
+
 ## Roadmap
 
-The team is currently working on finishing Manage Account and Manage Reviews functionality.
-
-Target launch date: June 1 2024 
+The team is currently working on adapting the project to Kotlin and JetpackCompose.
