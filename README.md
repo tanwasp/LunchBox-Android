@@ -1,12 +1,12 @@
 # LunchBox Prototype
 
+Website: https://www.thelunchboxapp.com
+
 ## Description
 
 Welcome to Lunch Box!
 
 Lunch Box is a restaurant reviewing app that allows users to record, rate, and share their dining experiences while discovering new restaurants approved by other users. It is ideal for food enthusiasts, travelers, and individuals looking to explore new dining experiences. 
-
-**TL;DR** It's like Letterboxd for restaurants :)
 
 ## Project Status
 
