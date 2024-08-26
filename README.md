@@ -6,10 +6,10 @@ Welcome to Lunch Box!
 
 Lunch Box is a restaurant reviewing app that allows users to record, rate, and share their dining experiences while discovering new restaurants approved by other users. It is ideal for food enthusiasts, travelers, and individuals looking to explore new dining experiences. 
 
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/834884ef-d253-4bd8-a272-646ae01f6955" alt="App Demo" width="300" height="auto"/>
-  <p>Website: https://www.thelunchboxapp.com</p>
-</div>
+## Demo
+
+<img src="https://github.com/user-attachments/assets/834884ef-d253-4bd8-a272-646ae01f6955" alt="App Demo" width="300" height="auto"/>
+<p>Website: https://www.thelunchboxapp.com</p>
 
 ## Project Status
 
